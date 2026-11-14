@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "1.0.0",
+  "entries": {
+    "PSI-117": {
+      "fuelPhase": {
+        "value": ["liquid-droplet"],
+        "source": "Objectives text: n-alkane droplet cool flames",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals", "modeling"],
+        "source": "Objectives and Approach text: cool-flame stability, CFD model",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "ignition delay",
+          "oscillation frequency and amplitude",
+          "stand-off and extinction diameters"
+        ],
+        "source": "Approach text: observables extracted from simulations and compared with FLEX",
+        "reviewed": false
+      }
+    },
+    "PSI-159": {
+      "fuelPhase": {
+        "value": ["gas"],
+        "source": "Objectives text: propane, n-butane and n-pentane flames",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals", "modeling"],
+        "source": "Objectives text: cool diffusion flames, CFD and chemical kinetics",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": ["cameras", "radiometers", "photomultiplier tubes", "thermocouples"],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-10": {
+      "fuelPhase": {
+        "value": ["gas"],
+        "source": "Objectives text: C2H4 and CH4 flames",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals"],
+        "source": "Objectives text: soot inception, flame temperature and extinction limits",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": ["cameras", "radiometers", "photomultiplier tubes", "thermocouples"],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-62": {
+      "fuelPhase": {
+        "value": ["solid"],
+        "source": "Approach text: PMMA samples and wax cylinders",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["material-flammability", "modeling"],
+        "source": "Objectives text: flammability limits and FGM flame-spread modeling",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "two-color tomography with DSLR cameras",
+          "flame geometry and spread rate",
+          "temperature and soot volume fraction"
+        ],
+        "source": "Approach text: evaluation metrics",
+        "reviewed": false
+      }
+    },
+    "PSI-60": {
+      "fuelPhase": {
+        "value": ["gas"],
+        "source": "Sub-research area: Gaseous; Approach text: coflow flames",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals", "modeling"],
+        "source": "Objectives text: soot formation and computational modeling",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "color-ratio pyrometry",
+          "DSLR imaging",
+          "soot volume fraction"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-181": {
+      "fuelPhase": {
+        "value": ["not-combustion"],
+        "source": "Research area: Materials Science; Approach text: solder alloys",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["not-fire-safety"],
+        "source": "Research area: Materials Science; objectives address solder-joint reliability",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "microstructural characterization",
+          "micromechanical testing",
+          "thermal cycling"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-142": {
+      "fuelPhase": {
+        "value": ["gas"],
+        "source": "Objectives text: ozone-sensitized counterflow flames",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals", "modeling"],
+        "source": "Objectives text: cool-flame flammability and extinction limits",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "flame temperature",
+          "species distribution",
+          "extinction limits"
+        ],
+        "source": "Objectives text: quantitative data for model validation",
+        "reviewed": false
+      }
+    },
+    "PSI-108": {
+      "fuelPhase": {
+        "value": ["not-combustion"],
+        "source": "Research area: Fluid Physics; Approach text: thermocapillary flow",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["not-fire-safety"],
+        "source": "Research area: Fluid Physics; no fire-safety objective stated",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": ["flow visualization", "temperature measurements"],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-101": {
+      "fuelPhase": {
+        "value": ["aerosol-dust"],
+        "source": "Approach text: smoke from Pyrell foam samples",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["detection"],
+        "source": "Objectives text: smoke particle size and detector response",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "M-pass instrument",
+          "commercial diagnostic enclosure (DustTrak and ionization detector)",
+          "transmission electron microscopy (TEM)"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-115": {
+      "fuelPhase": {
+        "value": ["aerosol-dust"],
+        "source": "Approach text: DBP smoke particles from a heated sample",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["detection", "modeling"],
+        "source": "Objectives text: smoke growth simulation and detection context",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": ["direct numerical simulation outputs"],
+        "source": "Approach text: no experimental instruments named",
+        "reviewed": false
+      }
+    },
+    "PSI-98": {
+      "fuelPhase": {
+        "value": ["solid"],
+        "source": "Approach text: Sibal cotton and fiberglass fabric sample",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["material-flammability"],
+        "source": "Objectives text: large-scale fire growth and flammability limits",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "cameras",
+          "thermocouples",
+          "radiometers",
+          "pressure, CO2 and O2 sensors",
+          "anemometers"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-39": {
+      "fuelPhase": {
+        "value": ["liquid-droplet"],
+        "source": "Objectives text: n-dodecane droplets",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["flame-fundamentals", "suppression"],
+        "source": "Objectives text: cool flames and helium dilution effects",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "black-and-white camera",
+          "UV camera",
+          "high-resolution cameras",
+          "narrow-band and wide-band radiometers"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    },
+    "PSI-102": {
+      "fuelPhase": {
+        "value": ["aerosol-dust"],
+        "source": "Objectives text: smoke from overheated spacecraft materials",
+        "reviewed": false
+      },
+      "topics": {
+        "value": ["detection"],
+        "source": "Objectives text: smoke particle size and detector response",
+        "reviewed": false
+      },
+      "measurements": {
+        "value": [
+          "smoke detectors",
+          "video cameras",
+          "thermophoretic soot samplers",
+          "transmission electron microscopy (TEM)"
+        ],
+        "source": "Approach text",
+        "reviewed": false
+      }
+    }
+  }
+}
