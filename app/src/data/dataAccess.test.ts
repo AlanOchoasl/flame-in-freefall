@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getCatalog, getExperiments, parseMajorVersion } from './dataAccess';
 
@@ -9,6 +10,21 @@ function stubFetch(response: Partial<Response> | Error) {
 }
 
 afterEach(() => vi.unstubAllGlobals());
+
+describe('committed data files', () => {
+  const readCommitted = (file: string) =>
+    JSON.parse(readFileSync(new URL(`../../../data/processed/${file}`, import.meta.url), 'utf8'));
+
+  it('loads the real catalog and experiments through the loader', async () => {
+    stubFetch({ ok: true, json: async () => readCommitted('catalog.json') });
+    const catalog = await getCatalog();
+    expect(catalog.status).toBe('ok');
+    if (catalog.status === 'ok') expect(catalog.data.records).toHaveLength(catalog.data.recordCount);
+
+    stubFetch({ ok: true, json: async () => readCommitted('experiments.json') });
+    expect((await getExperiments()).status).toBe('ok');
+  });
+});
 
 describe('parseMajorVersion', () => {
   it('reads the major from numbers and semantic strings', () => {

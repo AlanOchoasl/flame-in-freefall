@@ -1,6 +1,5 @@
 // Experiments follow the contract in openspec/changes/data-pipeline/design.md.
-// Catalog and summaries are typed minimally until their owners publish the record types
-// (investigation-catalog task 1.1, ai-summaries); replace these two when they exist.
+// Summaries are typed minimally until ai-summaries publishes its record type; replace it then.
 
 export interface VersionedFile {
   schemaVersion: number | string;
@@ -33,9 +32,8 @@ export interface ExperimentsFile extends VersionedFile {
   records: ExperimentRecord[];
 }
 
-export interface CatalogFile extends VersionedFile {
-  records: unknown[];
-}
+// The catalog types are owned by the build script; importing them keeps one source of truth.
+export type { CatalogDataset as CatalogFile, CatalogRecord } from '../../../scripts/catalog/types';
 
 export interface SummariesFile extends VersionedFile {
   summaries: unknown[];
