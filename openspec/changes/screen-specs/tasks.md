@@ -6,7 +6,7 @@ Tasks are **not pre-assigned**. Each person claims a module (a numbered group) i
 
 Depends on: `app-shell` 1.2 (scaffold) and 2.1 (router).
 
-- [ ] 1.1 (by 19:00, ≤2h) Build the common frame (skip link, header with current-item marker and the 640 px Menu collapse from `design-system` 3.1, title, footer with PSI link and notice) and set the document title and heading focus on route change; verify with Tab only and by checking the title on each route.
+- [x] 1.1 (by 19:00, ≤2h) Build the common frame (skip link, header with current-item marker and the 640 px Menu collapse from `design-system` 3.1, title, footer with PSI link and notice) and set the document title and heading focus on route change; verify with Tab only and by checking the title on each route.
 - [x] 1.2 (by 19:30, ≤1.5h) Build the state helper (loading, failed naming the file, empty with clear-filters action, normal); verify by removing one data file locally and by forcing an empty filter result.
 - [x] 1.3 (by 19:30, ≤30 min) Add the `#/` redirect to `#/ranking` and the `#/about` route; verify opening the bare URL lands on `#/ranking`.
 
@@ -15,7 +15,7 @@ Depends on: `app-shell` 1.2 (scaffold) and 2.1 (router).
 Depends on: 1. Uses stub `catalog.json`, `experiments.json`, `summaries.json`.
 
 - [x] 2.1 (Sun by 09:30, ≤2h) Build Investigation detail in spec order with reasoned dashes and AI/PSI labels; verify one investigation with test rows and one without, and a related accession missing from the catalog.
-- [ ] 2.2 (Sun by 10:30, ≤1h) Add ranking position per profile to Detail as "#n of N" for every profile in the profiles file, using the ranking function; verify it matches the Ranking screen for the same profile and that two profiles can show different positions. Plan B: omit the block.
+- [x] 2.2 (Sun by 10:30, ≤1h) Add ranking position per profile to Detail as "#n of N" for every profile in the profiles file, using the ranking function; verify it matches the Ranking screen for the same profile and that two profiles can show different positions. Plan B: omit the block.
 - [x] 2.3 (Sun by 10:30, ≤1h) Build About with the AI-use facts read from `summaries.json` and the limits list; verify values equal the file and that a missing file shows the fallback message.
 - [x] 2.4 (Sun by 10:30, ≤30 min) Build Not found showing the requested address; verify with an unknown hash and an unknown accession.
 
