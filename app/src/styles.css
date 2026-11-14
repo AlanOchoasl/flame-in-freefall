@@ -1,24 +1,24 @@
 /* Cached research console. All faces are system fonts; no runtime font request. */
 :root {
   color-scheme: dark;
-  /* Blue-gray dark scale (design.md 2.1 alternates), not pure black. */
-  --canvas: #0d1114;
-  --surface-1: #151c20;
-  --surface-2: #1a2328;
-  --surface-hover: #243038;
-  --line: #2b383e;
-  --line-strong: #5f7078;
-  --text-primary: #e8eeeb;
-  --text-secondary: #bcc8ca;
-  --text-muted: #95a4a5;
+  /* Slate blue-gray dark scale: lighter and bluer than design.md's alternates, never near-black. */
+  --canvas: #1b2331;
+  --surface-1: #242e3d;
+  --surface-2: #2b3647;
+  --surface-hover: #37445a;
+  --line: #3c4960;
+  --line-strong: #6d7c95;
+  --text-primary: #eaeff6;
+  --text-secondary: #c3ccda;
+  --text-muted: #9aa6ba;
   --action: #0099ff;
   --brand: #0b3d91;
   --zone: #ffbb00;
   --zone-fill-opacity: 0.16;
   --accent-red: #fc3d21;
-  --logo-ring: #2b383e;
-  --plot-grid: #2b383e;
-  --canvas-mark: #0d1114;
+  --logo-ring: #3c4960;
+  --plot-grid: #3c4960;
+  --canvas-mark: #1b2331;
   /* Existing component aliases keep route styles in the same palette. */
   --text: var(--text-primary);
   --background: var(--canvas);
@@ -30,16 +30,16 @@
   --accent-strong: var(--action);
   --accent-weak: var(--surface-2);
   --ai: #b5caff;
-  --ai-weak: #18233a;
+  --ai-weak: #2d3a5c;
   --psi: #c6d3d7;
-  --psi-weak: #20292d;
+  --psi-weak: #2f3b4d;
   --status-unreviewed: #ffd17d;
-  --status-unreviewed-weak: #2b2517;
+  --status-unreviewed-weak: #3b3626;
   --status-approx: #8dd9eb;
   --status-same: #9ce3ba;
   --status-differs: #ffc185;
   --status-error: #ffb0aa;
-  --status-error-weak: #351a1d;
+  --status-error-weak: #4a2d36;
   --status-na: var(--text-muted);
   --outcome-yes: var(--action);
   --outcome-no: var(--action);
