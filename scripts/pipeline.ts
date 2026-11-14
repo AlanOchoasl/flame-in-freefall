@@ -1,4 +1,6 @@
+import { readFileSync } from 'node:fs';
 import { buildExperiments, type ExperimentsDataset } from './build-experiments.ts';
+import { parseCitations, type DatasetCitations } from './dataset-citations.ts';
 import { mapCsvFile } from './map-file.ts';
 
 // Must set. PSI-10 normal flames (Nice-to-have, task 3.3) is not included yet.
@@ -8,9 +10,16 @@ export const MUST_FILES = [
   'PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv',
 ];
 
-export function runPipeline(sampleDir: string, now: Date): ExperimentsDataset {
+export const CITATIONS_FILE = 'data/curation/dataset-citations.json';
+
+export function readCitations(root: string): DatasetCitations {
+  return parseCitations(JSON.parse(readFileSync(`${root}${CITATIONS_FILE}`, 'utf8')));
+}
+
+export function runPipeline(sampleDir: string, now: Date, citations: DatasetCitations): ExperimentsDataset {
   return buildExperiments(
     MUST_FILES.map((file) => mapCsvFile(`${sampleDir}${file}`)),
     now,
+    citations,
   );
 }

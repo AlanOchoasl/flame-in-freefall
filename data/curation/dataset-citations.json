@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkedOn": "2026-11-14",
+  "provenance": "DOI and license of each dataset, captured by hand on checkedOn from the DataCite record of the DOI (https://api.datacite.org/dois/<doi>). PSI's own investigation service (https://psi.nasa.gov/geode-py/ws/repo/investigations/<accession>) answered HTTP 500 on that day, so the PSI page could not be read. DataCite lists NASA PSI as the publisher and the PSI investigation page as the DOI target of both datasets.",
+  "entries": {
+    "PSI-159": {
+      "doi": "10.60555/cyt1-kh64",
+      "publisher": "NASA PSI",
+      "license": {
+        "spdx": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+      },
+      "licenseNote": null
+    },
+    "PSI-10": {
+      "doi": "10.60555/w4zy-bt45",
+      "publisher": "NASA PSI",
+      "license": null,
+      "licenseNote": "No license is declared: the DataCite record of this DOI has an empty rightsList and PSI's investigation record has none either. It is not assumed to be CC0. Confirm with PSI (msfc-psi-help@mail.nasa.gov) before submission."
+    }
+  }
+}
