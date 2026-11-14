@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
+import type { CsvRow } from './csv-row.ts';
 
-export type CsvRow = Record<string, string>;
+export type { CsvRow };
 
 export interface CsvTable {
   rows: CsvRow[];
