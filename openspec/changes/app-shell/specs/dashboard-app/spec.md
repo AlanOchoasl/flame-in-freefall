@@ -7,7 +7,7 @@ Defines the web app frame that hosts the four dashboard views, so the data loads
 ## ADDED Requirements
 
 ### Requirement: Four views reachable by navigation
-The app SHALL provide navigation to Ranking, Compare, Coverage map and Investigation detail, each with its own URL. Unknown URLs SHALL show a not-found message with a link home.
+The app SHALL provide navigation to Ranking, Compare, Coverage map and Investigation detail, each with its own URL, and to an About screen at `#/about`. The bare address SHALL redirect to Ranking. Unknown URLs SHALL show a not-found message with a link home.
 
 #### Scenario: Direct link
 - **WHEN** a user opens the URL of the Coverage map view
@@ -60,7 +60,7 @@ The app MUST NOT show an empty cell or a zero for missing data. It SHALL show a 
 - **THEN** the date shows a dash with "not in the PSI record"
 
 ### Requirement: About and disclaimer
-The app SHALL include an About section stating that it was made for NASA Space Apps Challenge 2026, is not an official NASA product, how AI was used, the data sources and the third-party license list.
+The app SHALL include an About screen, reachable at `#/about` and from the footer, stating that it was made for NASA Space Apps Challenge 2026, is not an official NASA product, how AI was used, the data sources and the third-party license list.
 
 #### Scenario: Reading About
 - **WHEN** a user opens About
