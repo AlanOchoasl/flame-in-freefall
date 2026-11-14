@@ -23,7 +23,7 @@ Depends on: 2.2.
 
 - [x] 3.1 (Sun by 12:00, ≤1h) Add "Show as table" reachable by keyboard; verify it shows the same filtered records.
 - [x] 3.2 (Nice, Sun by 13:30, ≤1h) Add the filtered-data download (CSV or JSON) with source links; verify the file has exactly the filtered rows.
-- [ ] 3.3 (Sun by 13:30, ≤45 min) Give the plot a 480 px minimum inside a focusable scroll region and check the map in grayscale and at 360 px; verify the four outcomes are distinguishable by shape, ticks stay readable and the page has no horizontal scroll.
+- [x] 3.3 (Sun by 13:30, ≤45 min) Give the plot a 480 px minimum inside a focusable scroll region and check the map in grayscale and at 360 px; verify the four outcomes are distinguishable by shape, ticks stay readable and the page has no horizontal scroll.
 - [x] 3.4 (Sun by 13:30, ≤30 min) Page the table (50 rows, "Show 50 more rows", "showing N of M"); verify the download still has every filtered record.
 - [ ] 3.5 (Nice, Sun by 14:00, ≤1h) Add arrow-key stepping with a live-region details panel; verify Escape clears the selection.
 - [ ] 3.6 (Nice, Sun by 14:00, ≤30 min) Read the `investigation` address parameter and add the "See on the Coverage map" link in Detail for investigations with plotted tests; verify the link from PSI-159 and that PSI-25 shows no link.
