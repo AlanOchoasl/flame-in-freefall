@@ -6,8 +6,8 @@ Tasks are **not pre-assigned**. Each person claims a module (a numbered group) i
 
 Depends on: `investigation-catalog` types (task 1.1) for the record shape.
 
-- [ ] 1.1 (by 17:00, ≤1h) Write `data/ranking/profiles.json` with the four profiles, factors, maximum points, rationale and source (quote the statement); verify the build fails when a weight is removed.
-- [ ] 1.2 (by 18:30, ≤2h) Implement the pure scoring function with breakdown, "not assessed" handling, non-combustion-last rule, unreviewed marker and ordering with accession tie-break; verify unit tests cover each factor, the not-assessed case, the tie-break and a changed weight.
+- [x] 1.1 (by 17:00, ≤1h) Write `data/ranking/profiles.json` with the four profiles, factors, maximum points, rationale and source (quote the statement); verify the build fails when a weight is removed.
+- [x] 1.2 (by 18:30, ≤2h) Implement the pure scoring function with breakdown, "not assessed" handling, non-combustion-last rule, unreviewed marker and ordering with accession tie-break; verify unit tests cover each factor, the not-assessed case, the tie-break and a changed weight.
 
 ## 2. Ranking view
 

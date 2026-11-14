@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "name": "Flame in Freefall official challenge statement",
+    "url": "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+  },
+  "profiles": [
+    {
+      "id": "crew-cabin",
+      "label": "Crew cabin",
+      "factors": {
+        "topicMatch": {
+          "maxPoints": 3,
+          "primaryTopic": "material-flammability",
+          "primaryPoints": 3,
+          "otherFireSafetyPoints": 1,
+          "rationale": "Material flammability is a core prevention measure for spacecraft crew environments.",
+          "sourceQuote": "Prevention is achieved by controlling ignition sources and through material selection, which depends on understanding flammability limits."
+        },
+        "solidFuelFlammability": {
+          "maxPoints": 2,
+          "fuelPhases": ["solid"],
+          "points": 2,
+          "rationale": "The challenge identifies solid-material flammability studies as relevant to spacecraft fire safety.",
+          "sourceQuote": "Flammability studies focus on solid materials such as fabrics and plastics"
+        },
+        "nasaFireSafetyLabel": {
+          "maxPoints": 2,
+          "labels": ["spacecraft fire safety", "fire safety", "spacecraft fire, smoke distribution"],
+          "points": 2,
+          "rationale": "PSI's normalized fire-safety sub-area labels are a direct catalog signal of relevance.",
+          "sourceQuote": "NASA's spacecraft fire safety work is focused on prevention, detection, and suppression."
+        },
+        "microgravityProjectType": {
+          "maxPoints": 1,
+          "projectType": "Microgravity Investigation",
+          "points": 1,
+          "rationale": "The challenge concerns low-gravity combustion investigations.",
+          "sourceQuote": "Results from low-gravity combustion experiments, conducted for example on the International Space Station (ISS)"
+        }
+      }
+    },
+    {
+      "id": "lunar-base-rover",
+      "label": "Lunar base / pressurized rover",
+      "factors": {
+        "topicMatch": {
+          "maxPoints": 3,
+          "primaryTopic": "material-flammability",
+          "primaryPoints": 3,
+          "otherFireSafetyPoints": 1,
+          "rationale": "Material flammability is especially relevant in the planned higher-oxygen, lower-pressure lunar environment.",
+          "sourceQuote": "To facilitate spacesuit use, an atmosphere with increased oxygen and reduced pressure compared to Earth's is expected within the planned Moon Base and pressurized rovers."
+        },
+        "solidFuelFlammability": {
+          "maxPoints": 2,
+          "fuelPhases": ["solid"],
+          "points": 2,
+          "rationale": "The statement connects lunar habitat safety to flammability of solid materials.",
+          "sourceQuote": "Flammability studies focus on solid materials such as fabrics and plastics"
+        },
+        "nasaFireSafetyLabel": {
+          "maxPoints": 2,
+          "labels": ["spacecraft fire safety", "fire safety", "spacecraft fire, smoke distribution"],
+          "points": 2,
+          "rationale": "PSI's normalized fire-safety sub-area labels are a direct catalog signal of relevance.",
+          "sourceQuote": "NASA's spacecraft fire safety work is focused on prevention, detection, and suppression."
+        },
+        "moonBaseAtmosphere": {
+          "maxPoints": 3,
+          "pointsAtTenOrMore": 3,
+          "pointsAtOneToNine": 2,
+          "pointsAtZeroWithRows": 0,
+          "rationale": "This rewards investigations with measured tests in the challenge's expected lunar atmosphere zone; absence of test rows is not evidence against relevance.",
+          "sourceQuote": "The intermediate oxygen concentration used on the Moon will likely be 30% or greater, with a corresponding pressure of 10.2 psi or less."
+        },
+        "microgravityProjectType": {
+          "maxPoints": 1,
+          "projectType": "Microgravity Investigation",
+          "points": 1,
+          "rationale": "The challenge concerns low-gravity combustion investigations.",
+          "sourceQuote": "Results from low-gravity combustion experiments, conducted for example on the International Space Station (ISS)"
+        }
+      }
+    },
+    {
+      "id": "detection",
+      "label": "Fire detection",
+      "factors": {
+        "topicMatch": {
+          "maxPoints": 3,
+          "primaryTopic": "detection",
+          "primaryPoints": 3,
+          "otherFireSafetyPoints": 1,
+          "rationale": "Smoke and aerosol measurement experiments are the challenge's named microgravity fire-detection work.",
+          "sourceQuote": "Fire detection was tested in microgravity through the Smoke and Aerosol Measurement Experiment studies (SAME and SAME-R)."
+        },
+        "solidFuelFlammability": {
+          "maxPoints": 1,
+          "fuelPhases": ["solid", "aerosol-dust"],
+          "points": 1,
+          "rationale": "Solid samples and aerosols connect combustion investigations to smoke and particle detection.",
+          "sourceQuote": "One of the instruments used for smoke detection in the SAME and SAME-R studies was instead used to detect dust in the Dust and Aerosol Measurement Feasibility Test (DAFT and DAFT-2) studies."
+        },
+        "nasaFireSafetyLabel": {
+          "maxPoints": 2,
+          "labels": ["spacecraft fire safety", "fire safety", "spacecraft fire, smoke distribution"],
+          "points": 2,
+          "rationale": "PSI's normalized fire-safety sub-area labels are a direct catalog signal of relevance.",
+          "sourceQuote": "NASA's spacecraft fire safety work is focused on prevention, detection, and suppression."
+        },
+        "microgravityProjectType": {
+          "maxPoints": 1,
+          "projectType": "Microgravity Investigation",
+          "points": 1,
+          "rationale": "The challenge names fire detection work conducted in microgravity.",
+          "sourceQuote": "Fire detection was tested in microgravity through the Smoke and Aerosol Measurement Experiment studies (SAME and SAME-R)."
+        }
+      }
+    },
+    {
+      "id": "suppression",
+      "label": "Fire suppression",
+      "factors": {
+        "topicMatch": {
+          "maxPoints": 3,
+          "primaryTopic": "suppression",
+          "primaryPoints": 3,
+          "otherFireSafetyPoints": 1,
+          "rationale": "The challenge names FLEX as its microgravity fire-suppression investigation.",
+          "sourceQuote": "Suppression was studied in the Flame Extinguishment Experiment (FLEX) through dilution of the chamber atmosphere with carbon dioxide and helium, both of which suppress fire."
+        },
+        "solidFuelFlammability": {
+          "maxPoints": 0,
+          "fuelPhases": [],
+          "points": 0,
+          "rationale": "The suppression profile focuses on suppressant effectiveness rather than fuel phase.",
+          "sourceQuote": "Suppression was studied in the Flame Extinguishment Experiment (FLEX) through dilution of the chamber atmosphere with carbon dioxide and helium, both of which suppress fire."
+        },
+        "nasaFireSafetyLabel": {
+          "maxPoints": 2,
+          "labels": ["spacecraft fire safety", "fire safety", "spacecraft fire, smoke distribution"],
+          "points": 2,
+          "rationale": "PSI's normalized fire-safety sub-area labels are a direct catalog signal of relevance.",
+          "sourceQuote": "NASA's spacecraft fire safety work is focused on prevention, detection, and suppression."
+        },
+        "microgravityProjectType": {
+          "maxPoints": 1,
+          "projectType": "Microgravity Investigation",
+          "points": 1,
+          "rationale": "The challenge names suppression work conducted in microgravity.",
+          "sourceQuote": "Suppression was studied in the Flame Extinguishment Experiment (FLEX) through dilution of the chamber atmosphere with carbon dioxide and helium, both of which suppress fire."
+        }
+      }
+    }
+  ]
+}
