@@ -141,3 +141,45 @@ The "MOCKUP STATES" bar, sample placeholder texts and the mockup's runtime scrip
 #### Scenario: Searching the build
 - **WHEN** the built app is searched for "MOCKUP", "sample-placeholder" and "Sample summary text"
 - **THEN** none is found
+
+### Requirement: Readable labels instead of slugs
+The UI SHALL show the human label of every vocabulary value (fuel phase, topic, hardware group, fire-safety goal) taken from the `labels` map in the vocabularies file, never the raw slug. A value without a label SHALL fail the build.
+
+#### Scenario: Topic chip
+- **WHEN** an investigation has the topic `material-flammability`
+- **THEN** its chip reads "Prevent · material flammability" and not the slug
+
+### Requirement: Scenario picker cards
+The scenario picker SHALL render each scenario as a card containing a native radio input, the scenario label and its one-line atmosphere summary. The selected card SHALL differ from the others by border width and background, not only by color, and each card SHALL be at least `--target-size` high.
+
+#### Scenario: Selected card in grayscale
+- **WHEN** the screen is viewed in grayscale
+- **THEN** the selected card is still identifiable by its thicker border and checked radio
+
+### Requirement: Evidence-gap card
+The gap card SHALL show a glyph and a severity word for each kind: major gap (`⚠`, solid border, warning color pair), partial evidence (`◑`, solid border, warning color pair) and no data (`∅`, dashed border, PSI color pair), followed by the title, the evidence sentence and the source.
+
+#### Scenario: No-data card
+- **WHEN** a gap has severity `no-data`
+- **THEN** the card has a dashed border, the `∅` glyph and the words "No data"
+
+### Requirement: Pillar card
+The pillar card SHALL show the pillar name with its inline-SVG icon and subtitle, the optional fact with the "From PSI test tables" label, an ordered list of up to three investigations (acronym, accession, title) as links at least `--target-size` high, and a footer link "All n <pillar> investigations".
+
+#### Scenario: Pillar without fact
+- **WHEN** a pillar has no fact for the scenario
+- **THEN** the card shows the list and footer with no empty fact area
+
+### Requirement: Compact table rows
+List tables SHALL use rows about 56 px high with the title on one line truncated with an ellipsis and the full title available to assistive technology. The table SHALL scroll horizontally only inside its own container.
+
+#### Scenario: Long title
+- **WHEN** a title is longer than its column
+- **THEN** it is cut with an ellipsis on screen and read in full by a screen reader
+
+### Requirement: Programmatic heading focus shows no ring
+When the app moves focus to a screen heading after navigation, the heading SHALL NOT show the focus ring unless it was reached by keyboard. Interactive elements keep the visible focus rule.
+
+#### Scenario: Navigating by mouse
+- **WHEN** a user clicks a navigation item
+- **THEN** the new screen's heading receives focus without a visible ring
