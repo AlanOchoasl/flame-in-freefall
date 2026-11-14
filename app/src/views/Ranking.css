@@ -1,0 +1,93 @@
+.ranking > p:first-of-type {
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.ranking-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.ranking-controls label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.ranking-controls select {
+  min-height: var(--target-size);
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--background);
+  color: var(--text);
+  font: inherit;
+}
+
+.ranking-count {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-list {
+  padding-left: 2rem;
+  margin: 0;
+}
+
+.ranking-list li::marker {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-list > li {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+}
+
+.ranking-item-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ranking-item-heading h2 {
+  margin: 0 0 4px;
+  font-size: 1.125rem;
+}
+
+.ranking-score {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-list details {
+  margin-top: 12px;
+}
+
+.ranking-list summary {
+  width: fit-content;
+  min-height: var(--target-size);
+  cursor: pointer;
+  color: var(--accent);
+  padding: 8px 0;
+}
+
+.ranking-breakdown {
+  padding-left: 24px;
+}
+
+.ranking-breakdown li + li {
+  margin-top: 12px;
+}
+
+.ranking-breakdown p {
+  margin: 2px 0 0;
+  color: var(--muted);
+}

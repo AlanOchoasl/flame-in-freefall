@@ -1,5 +1,6 @@
 import { About } from './About';
-import { Compare, CoverageMap, InvestigationDetail, Ranking } from './placeholders';
+import { Compare, CoverageMap, InvestigationDetail } from './placeholders';
+import { Ranking } from './Ranking';
 import type { View } from './types';
 
 // The single list of screens. Adding an entry adds the route and, with inNav, the menu item.

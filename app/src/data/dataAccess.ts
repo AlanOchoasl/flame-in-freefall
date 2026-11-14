@@ -1,4 +1,6 @@
 import type { CatalogFile, ExperimentsFile, SummariesFile, VersionedFile } from './types';
+import profilesFile from '../../../data/ranking/profiles.json';
+import type { RankingProfilesFile } from '../lib/ranking';
 
 // The only place that knows where data comes from. A future API replaces this module only.
 
@@ -51,3 +53,6 @@ async function loadDataFile<T extends VersionedFile>(file: string): Promise<Data
 export const getCatalog = () => loadDataFile<CatalogFile>('catalog.json');
 export const getExperiments = () => loadDataFile<ExperimentsFile>('experiments.json');
 export const getSummaries = () => loadDataFile<SummariesFile>('summaries.json');
+
+// Ranking profiles are bundled with the app so they remain available offline.
+export const getRankingProfiles = (): RankingProfilesFile => profilesFile;
