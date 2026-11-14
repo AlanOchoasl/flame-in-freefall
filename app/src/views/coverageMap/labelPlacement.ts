@@ -22,8 +22,9 @@ export interface LabelPlacement {
 }
 
 export const LABEL_GAP = 10;
-export const LABEL_LINE_HEIGHT = 13;
-const TEXT_ASCENT = 4; // half the x-height of the 11 px text, so a `middle` label is centered on the overlay
+export const LABEL_FONT_SIZE = 12;
+export const LABEL_LINE_HEIGHT = 15;
+const TEXT_ASCENT = 4.5; // half the x-height of the 12 px text, so a `middle` label is centered on the overlay
 const TOP_INSET = 12;
 
 /** Reads the box recharts passes to a label; anything that is not a box with numbers gives `null`. */

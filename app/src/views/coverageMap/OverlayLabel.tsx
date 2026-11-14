@@ -1,4 +1,4 @@
-import { LABEL_LINE_HEIGHT, placeMarginLabel, toLabelBox, type LabelAnchor } from './labelPlacement';
+import { LABEL_FONT_SIZE, LABEL_LINE_HEIGHT, placeMarginLabel, toLabelBox, type LabelAnchor } from './labelPlacement';
 
 interface LabelContentProps {
   viewBox?: unknown;
@@ -16,7 +16,7 @@ export function marginLabel(lines: string[], anchor: LabelAnchor, color: string)
     return (
       <g className="map-overlay-label">
         <line x1={edgeX} x2={textX - 3} y1={leaderY} y2={leaderY} stroke={color} strokeWidth={1.5} />
-        <text x={textX} y={textY} fontSize={11} fill="var(--text)">
+        <text x={textX} y={textY} fontSize={LABEL_FONT_SIZE} fill="var(--text)">
           {lines.map((line, index) => (
             <tspan key={line} x={textX} dy={index === 0 ? 0 : LABEL_LINE_HEIGHT}>
               {line}
