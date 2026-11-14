@@ -1,11 +1,64 @@
 /* Base layout. System fonts only: the app must not load anything from outside its own origin. */
 :root {
-  --text: #1a1a1a;
-  --background: #ffffff;
-  --muted: #555555;
-  --accent: #0b5cad;
-  --border: #d0d0d0;
-  --gutter: 16px;
+  /* Surface and text */
+  --text: #1c1e22;
+  --background: #f7f7f5;
+  --surface: #ffffff;
+  --muted: #575d66;
+  --border: #d4d6da;
+  --border-strong: #838992;
+  /* Accent */
+  --accent: #a63d02;
+  --accent-strong: #842c00;
+  --accent-weak: #ffede5;
+  /* Provenance */
+  --ai: #513f91;
+  --ai-weak: #f3f1ff;
+  --psi: #3d4450;
+  --psi-weak: #eef0f3;
+  /* Status */
+  --status-unreviewed: #7b5100;
+  --status-unreviewed-weak: #fff0d0;
+  --status-approx: #005e82;
+  --status-same: #206133;
+  --status-differs: #913100;
+  --status-error: #a92227;
+  --status-error-weak: #ffefed;
+  --status-na: #575d66;
+  /* Map outcomes and overlays */
+  --outcome-yes: #c94e0c;
+  --outcome-no: #065da0;
+  --outcome-flash: #982f93;
+  --outcome-nr: #7a8089;
+  --zone-moon: #b7e5bf;
+  --zone-moon-edge: #236436;
+  --zone-earth: #1c1e22;
+  --zone-suit: #513f91;
+  /* Focus */
+  --focus: #1a56c4;
+  --focus-width: 3px;
+  /* Spacing, radius */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --gutter: clamp(16px, 4vw, 32px);
+  /* Type */
+  --fs-xs: 13px;
+  --fs-sm: 14px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 28px;
+  --lh: 1.5;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Targets */
   --target-size: 44px;
 }
 
@@ -19,8 +72,9 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--background);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: var(--lh);
 }
 
 header {
@@ -110,7 +164,7 @@ dl.facts dd {
   left: var(--gutter);
   top: -100px;
   padding: 8px 12px;
-  background: var(--background);
+  background: var(--surface);
   border: 2px solid var(--accent);
   z-index: 10;
 }
@@ -125,7 +179,7 @@ input:focus-visible,
 select:focus-visible,
 summary:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: var(--focus-width) solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -143,8 +197,104 @@ h3 {
   overflow-wrap: anywhere;
 }
 
-/* Compare: the table scrolls inside its own area and the first column stays visible. */
-.table-scroll { overflow-x: auto; max-width: 100%; }
-.table-scroll table { border-collapse: collapse; min-width: 640px; }
-.table-scroll th, .table-scroll td { text-align: left; vertical-align: top; padding: 0.5rem; border-bottom: 1px solid #ccc; }
-.table-scroll tbody th { position: sticky; left: 0; background: var(--bg, #fff); }
+header { background: var(--surface); }
+
+a { color: var(--accent-strong); }
+
+h1 { font-size: var(--fs-2xl); margin: var(--space-5) 0 var(--space-4); }
+h2 { font-size: var(--fs-xl); margin: var(--space-5) 0 var(--space-3); }
+h3 { font-size: var(--fs-lg); margin: 0 0 var(--space-2); }
+
+button,
+select,
+input {
+  min-height: var(--target-size);
+  padding: 0 var(--space-3);
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-1);
+}
+
+button { cursor: pointer; }
+button:disabled { color: var(--muted); cursor: not-allowed; }
+button[aria-pressed='true'] { background: var(--accent-weak); border-color: var(--accent); }
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  background: var(--surface);
+}
+
+summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-size); }
+
+/* Provenance labels: AI is a dashed violet box, PSI text a solid left rule. */
+.label {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-sm);
+}
+.label-ai {
+  color: var(--ai);
+  background: var(--ai-weak);
+  border: 1px dashed var(--ai);
+  border-radius: var(--radius-1);
+}
+.label-ai::before { content: '✦ '; }
+.label-psi {
+  color: var(--psi);
+  background: var(--psi-weak);
+  border-left: 4px solid var(--psi);
+}
+.label-psi::before { content: '▤ '; }
+
+.not-available { color: var(--status-na); }
+
+[role='alert'] {
+  padding: var(--space-3);
+  color: var(--status-error);
+  background: var(--status-error-weak);
+  border-left: 4px solid var(--status-error);
+}
+
+/* Ranking list: one card per investigation. */
+.ranking-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-4); }
+.ranking-list > li {
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+}
+
+/* Tables scroll inside their own area; the first column stays visible. */
+.table-scroll { overflow-x: auto; max-width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-2); }
+.table-scroll table { border-collapse: collapse; min-width: 640px; width: 100%; }
+.table-scroll th,
+.table-scroll td { text-align: left; vertical-align: top; padding: var(--space-3); border-bottom: 1px solid var(--border); }
+.table-scroll thead th { background: var(--psi-weak); }
+.table-scroll tbody th { position: sticky; left: 0; background: var(--surface); }
+
+/* Menu button: below 640 px the navigation collapses behind it. */
+.menu-button { display: none; }
+
+@media (max-width: 640px) {
+  .menu-button { display: inline-flex; align-items: center; }
+  header nav { display: none; width: 100%; }
+  header nav.open { display: block; }
+  nav ul { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

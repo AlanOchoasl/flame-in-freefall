@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { matchRoute } from './router/matchRoute';
@@ -12,6 +12,7 @@ export function App() {
   const match = matchRoute(hash, views);
   const currentPath = match?.view.path;
   const mainRef = useRef<HTMLElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const accession = match?.params.accession;
   const screenTitle = match ? [match.view.title, accession].filter(Boolean).join(' ') : 'Not found';
@@ -30,7 +31,10 @@ export function App() {
       </a>
       <header>
         <strong>Flame in Freefall</strong>
-        <nav aria-label="Main">
+        <button type="button" className="menu-button" aria-expanded={menuOpen} aria-controls="main-nav" onClick={() => setMenuOpen(!menuOpen)}>
+          Menu
+        </button>
+        <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={() => setMenuOpen(false)}>
           <ul>
             {views
               .filter((view) => view.inNav)
