@@ -81,9 +81,9 @@
 :root[data-theme='light'] {
   color-scheme: light;
   --canvas: #e6e9ef;
-  --surface-1: #f8efe6;
-  --surface-2: #efe2d4;
-  --surface-hover: #e6d5c3;
+  --surface-1: #eef0f5;
+  --surface-2: #e1e5ec;
+  --surface-hover: #d5dae4;
   --line: #bcc3d0;
   --line-strong: #6b7385;
   --text-primary: #0a0f1a;
@@ -96,11 +96,11 @@
   --accent-red: #c8321b;
   --logo-ring: #b5bcc9;
   --plot-grid: #bcc3d0;
-  --canvas-mark: #f8efe6;
+  --canvas-mark: #eef0f5;
   --ai: #3b3179;
   --ai-weak: #e8e6f6;
   --psi: #3d4450;
-  --psi-weak: #eadfd2;
+  --psi-weak: #dfe4eb;
   --status-unreviewed: #7b5100;
   --status-unreviewed-weak: #f1e4c6;
   --status-approx: #005e82;
@@ -114,9 +114,9 @@
   :root:not([data-theme]) {
     color-scheme: light;
     --canvas: #e6e9ef;
-    --surface-1: #f8efe6;
-    --surface-2: #efe2d4;
-    --surface-hover: #e6d5c3;
+    --surface-1: #eef0f5;
+    --surface-2: #e1e5ec;
+    --surface-hover: #d5dae4;
     --line: #bcc3d0;
     --line-strong: #6b7385;
     --text-primary: #0a0f1a;
@@ -129,11 +129,11 @@
     --accent-red: #c8321b;
     --logo-ring: #b5bcc9;
     --plot-grid: #bcc3d0;
-    --canvas-mark: #f8efe6;
+    --canvas-mark: #eef0f5;
     --ai: #3b3179;
     --ai-weak: #e8e6f6;
     --psi: #3d4450;
-    --psi-weak: #eadfd2;
+    --psi-weak: #dfe4eb;
     --status-unreviewed: #7b5100;
     --status-unreviewed-weak: #f1e4c6;
     --status-approx: #005e82;
