@@ -8,6 +8,15 @@ The interface opens on the investigation ranking in a console frame. An optional
 
 The reference image's node-link style is adapted as an optional **investigation topology** view. It answers which investigations share a curated hardware group and which PSI records explicitly list one another as related. It is a different question from the quantitative O2/pressure coverage map, so both views are kept.
 
+### How the topology is read
+
+- The center hub is a hardware group, not an experiment. The current example shows ACME/CIR and its six investigations.
+- Each outer circle is one investigation. Circle size indicates how many normalized test rows are available; PSI-159 has 333, PSI-10 has 120, and the other four ACME/CIR studies have none in the current normalized test file.
+- Solid spokes mean the studies belong to the same reviewed hardware group. The dashed PSI-22–PSI-23 link means PSI explicitly lists those two as related.
+- Other/unknown hardware records are not linked as a shared group. They remain in the catalog and can be opened through Ranking/search; explicit PSI related-investigation links can still connect records.
+- A future interactive view could let the user choose a hardware group, select a study to open its detail, or add it to Compare. The current HTML is static: its graph nodes and group list are not clickable.
+- The O2 × pressure map below answers a separate question: the experimental conditions and their coverage. It remains required and is not replaced by the topology.
+
 ## Palette and theme control
 
 The HTML concept implements both palettes in the root palette.md:

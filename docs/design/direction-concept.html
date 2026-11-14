@@ -244,17 +244,19 @@
       <div class="workspace">
         <div class="main-column">
           <section class="panel" aria-labelledby="network-heading">
-            <div class="panel-head"><div><div class="panel-title" id="network-heading">Investigation topology</div><div class="panel-sub">How studies connect through shared hardware and PSI-listed relationships</div></div><span class="count-tag">26 STUDIES · 5 HARDWARE GROUP LABELS</span></div>
+            <div class="panel-head"><div><div class="panel-title" id="network-heading">Investigation connections</div><div class="panel-sub">This relationship view is separate from the O₂ × pressure test map below.</div></div><span class="count-tag">SHOWING 6 OF 26 · ACME / CIR</span></div>
+            <div class="network-legend" aria-label="How to read this diagram"><span class="legend-item"><strong>Center hub</strong> = shared hardware group</span><span class="legend-item"><strong>Circle</strong> = one investigation</span><span class="legend-item"><i class="line-key" aria-hidden="true"></i>Same curated hardware group</span><span class="legend-item"><i class="line-key dashed" aria-hidden="true"></i>PSI explicitly lists a related study</span></div>
             <div class="network-layout">
               <div class="network-field" role="region" aria-label="Investigation topology diagram; scrolls horizontally on narrow screens" tabindex="0">
                 <svg viewBox="0 0 760 300" role="img" aria-labelledby="network-title network-desc">
-                  <title id="network-title">ACME/CIR investigation hardware group</title>
-                  <desc id="network-desc">Six investigation nodes share the curated ACME/CIR hardware group. PSI-22 and PSI-23 also have an explicit related-investigation link in PSI. Circle size indicates normalized test-row coverage: PSI-159 has 333 rows, PSI-10 has 120, and the other four studies have no normalized rows in this dataset.</desc>
+                  <title id="network-title">Six investigations in the ACME/CIR shared hardware group</title>
+                  <desc id="network-desc">The center is a hardware group, not an experiment. Each outer circle is one investigation. Solid lines connect studies assigned to the same curated hardware group. The dashed line means PSI explicitly lists PSI-22 and PSI-23 as related. Larger circles indicate more normalized test rows: PSI-159 has 333 and PSI-10 has 120; the other four have none in this dataset.</desc>
                   <g class="shared-link"><path d="M380 151L115 66"/><path d="M380 151L255 40"/><path d="M380 151L510 47"/><path d="M380 151L655 99"/><path d="M380 151L620 238"/><path d="M380 151L270 252"/></g>
                   <path class="psi-link" d="M655 99L620 238"/>
                   <circle class="hub-ring" cx="380" cy="151" r="47"/>
-                  <text class="hub-label" x="380" y="146" text-anchor="middle">ACME / CIR</text>
-                  <text class="hub-meta" x="380" y="164" text-anchor="middle">6 STUDIES</text>
+                  <text class="hub-meta" x="380" y="137" text-anchor="middle">SHARED HARDWARE</text>
+                  <text class="hub-label" x="380" y="155" text-anchor="middle">ACME / CIR</text>
+                  <text class="hub-meta" x="380" y="173" text-anchor="middle">6 INVESTIGATIONS</text>
                   <g><circle class="study-node" cx="115" cy="66" r="12"/><text class="node-label" x="135" y="62">PSI-10</text><text class="node-meta" x="135" y="76">120 test rows</text></g>
                   <g><circle class="study-node" cx="255" cy="40" r="8"/><text class="node-label" x="268" y="37">PSI-20</text><text class="node-meta" x="268" y="50">no normalized rows</text></g>
                   <g><circle class="study-node" cx="510" cy="47" r="8"/><text class="node-label" x="523" y="44">PSI-21</text><text class="node-meta" x="523" y="57">no normalized rows</text></g>
@@ -275,8 +277,8 @@
                 <p>Other/unknown studies stay unlinked unless PSI lists a relationship. No shared hardware is inferred for them.</p>
               </aside>
             </div>
-            <div class="network-legend"><span class="legend-item"><i class="line-key" aria-hidden="true"></i>Same curated hardware group</span><span class="legend-item"><i class="line-key dashed" aria-hidden="true"></i>PSI-listed related investigation</span><span class="legend-item"><i class="node-key" aria-hidden="true"></i>Study with no normalized test rows</span><span class="legend-item"><i class="node-key large" aria-hidden="true"></i>Study with normalized test rows; node size is illustrative of row count</span></div>
-            <div class="selected-study"><strong>Selected example · PSI-159:</strong> 333 normalized tests, including 48 inside the expected lunar range. Select a node in a future interactive version to open its record or add it to Compare.</div>
+            <div class="network-legend"><span class="legend-item"><i class="node-key" aria-hidden="true"></i>Small circle: no normalized test rows</span><span class="legend-item"><i class="node-key large" aria-hidden="true"></i>Larger circle: more normalized test rows</span></div>
+            <div class="selected-study"><strong>Example reading · PSI-159:</strong> this study belongs to ACME/CIR and has 333 normalized test rows, 48 inside the expected lunar range. In an implemented version, selecting a study would open its record or add it to Compare. These nodes are not clickable in this static concept.</div>
           </section>
           <section class="panel" id="coverage" aria-labelledby="chart-heading">
             <div class="panel-head"><div><div class="panel-title" id="chart-heading">Test conditions · O₂ × pressure</div><div class="panel-sub">The quantitative coverage map · one point per plottable test</div></div><span class="count-tag">442 / 453 PLOTTABLE</span></div>
