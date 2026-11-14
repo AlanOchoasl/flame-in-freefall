@@ -1,55 +1,61 @@
-# Visual direction concept — Flame in Freefall
+# Monitoring console design proposal
 
-## Purpose
+## Proposal
 
-This concept proposes a more memorable, story-led visual direction for the project. It is a discussion artifact for the team, not a replacement for the current app or its scientific specifications.
+Present Flame in Freefall as a **PSI research console**: an interactive way to monitor the coverage and evidence in a cached experimental catalog. The console is not a live spacecraft monitor, a fire alarm, or an operational risk predictor.
 
-## The idea
+The interface opens on the investigation ranking with the experimental envelope as its main instrument. It then exposes the four challenge capabilities: rank, compare, map test conditions, and interpret PSI records with reviewed, labeled AI summaries.
 
-**Fire behaves differently up here.** Start with the scientific contrast that makes the challenge distinctive: in microgravity, flames do not rise in the familiar way. Then let people explore the PSI investigations and the test conditions that inform fire safety for crewed spacecraft and lunar habitats.
+## Palette
 
-The interface should feel like an editorial science feature connected to a working research tool: dramatic in its opening, precise in its data views. Avoid institutional portal styling and avoid generic science-fiction decoration.
+The HTML concept uses the dark tokens proposed in the root `palette.md`:
 
-## Visual language
+- Black canvas and charcoal surfaces for console hierarchy.
+- NASA blue `#0099FF` for links, focus, selection, and data marks.
+- Brand blue `#0B3D91` for selected controls.
+- Amber `#FFBB00` only for the expected Moon-base range.
+- Red stays unused in scientific outcome encoding; reserve it for brand or error states.
+- Outcomes share the blue and use distinct marker shapes, so hue does not carry the result.
 
-- Deep charcoal opening section, warm paper-like data surfaces, ember orange for emphasis, and cool blue for selected measurement references.
-- Large editorial headline and short explanatory copy, balanced with a clear path into the investigation catalog.
-- Original CSS or inline-SVG flame motif, abstract and clearly decorative. No NASA logo, NASA imagery, stock photo, external font, or third-party asset.
-- Use the existing system font stack and current accessible focus treatment.
-- Motion is optional and restrained; honor `prefers-reduced-motion`.
-- Keep all interface copy in English. Preserve source links, AI labels, uncertainty markers, and the disclaimer that the project is not an official NASA product.
+This is a proposal, not an adopted product theme. The current `docs/DESIGN_PROMPT.md` and OpenSpec design-system change require a light theme. The team must revise those specs before implementing the dark palette in the app. The palette's NASA logo guidance is intentionally not applied; keep the interface's text source citation and do not add the insignia.
 
-## Suggested opening screen
+## Does the direction cover the challenge?
 
-1. Compact project identity and navigation.
-2. Dark feature panel: **“Fire behaves differently up here.”**
-3. One sentence: explore NASA PSI combustion investigations and the conditions they tested to support fire-safety research for human space exploration.
-4. Primary action: **Explore investigations**. Secondary action: **See the test conditions**.
-5. A real-data preview of oxygen fraction versus pressure. Mark the expected Moon-base zone as described by the challenge statement; label it as an expected range, not a habitat recommendation.
-6. A compact evidence strip with counts only after verifying them against the loaded dataset. Link directly to NASA PSI.
+The challenge statement asks for an SI-powered web dashboard that summarizes, ranks, and interprets combustion investigations, and specifically suggests finding relevant studies, comparing them, and surfacing data for fire-safety insights. This console composition covers those needs when treated as a shared shell around the project's existing routes:
 
-## Data views
+| Challenge capability | Console treatment | Existing project route/data |
+| --- | --- | --- |
+| Find relevant investigations | Explainable ranking by crew cabin, lunar base/rover, detection, and suppression profiles | Ranking; curated catalog + ranking profiles |
+| Compare investigations | Side-by-side evidence, conditions, and explicit missing/not-reported values | Compare; catalog + normalized tests |
+| Explore test conditions | O2 × pressure map, filters, overlays, table alternative, point details, visible gaps | Coverage map; 453 test rows, 442 plottable, 66 in expected lunar zone |
+| Summarize and interpret | Precomputed AI summary, fire-safety note, provenance label, and human-review state | Detail/About and summary file; 13 reviewed entries in current `main` |
+| Trace evidence | PSI links and DOI citations at investigation/test level | Detail, comparison, About |
 
-- **Explore:** investigation list with searchable/filterable study metadata and a clear route to detail pages.
-- **Compare:** preserve the side-by-side comparison because the challenge asks users to interpret similarities and differences.
-- **Test conditions:** give the oxygen-versus-pressure chart more visual prominence. One point represents one test; retain filters, keyboard-accessible table alternative, and visible data gaps.
-- **Investigation detail:** tell each study's story with its PSI objective, approach, conditions, measurements, source link, and DOI.
-- Keep ranking as an explainable exploration aid. Label the score as a team-built heuristic, not a NASA assessment.
+The previous console sketch was incomplete: it showed a map and a small ranking list but did not make comparison or AI interpretation part of the screen system. This revision adds previews of all four capabilities and identifies the investigation detail/About drill-downs. A single screenshot still cannot replace the separate routes and states already required by OpenSpec.
 
-## Guardrails
+## Verified facts used in the mockup
 
-- The challenge asks for an SI-powered dashboard that summarizes, ranks, and interprets PSI findings. This concept changes presentation and narrative, not that product scope.
-- Never imply that tests cover materials or gravity conditions they do not cover. State the limits next to the visualization and insight.
-- Distinguish measured PSI data from challenge-statement reference conditions and team-derived interpretations.
-- Cite PSI investigations and DOIs in the product. AI-generated text remains labeled and grounded in source text.
-- Reuse existing project dependencies and assets. This concept adds no packages or external resources.
+- The current processed catalog contains 26 investigations.
+- The current normalized test file contains 453 rows; 442 have both O2 and pressure; 66 fall in the challenge-statement lunar range.
+- PSI-159 has 333 normalized rows, all plottable, with 48 in that range. PSI-10 has 120 rows, 109 plottable, with 18 in that range.
+- PSI-159 tests use butane, ethane, and propane. PSI-10's ethylene fuel label is inferred from table columns; its table has no hot-ignition outcome field.
+- The current lunar ranking's first three positions are PSI-25, PSI-26, and PSI-98, each 8/11 points. These studies have no rows in the normalized test set. That distinction is useful: relevance ranking and experimental coverage answer different questions.
+- There are 13 precomputed, human-reviewed AI summaries in `data/processed/summaries.json`; the mockup uses PSI-10's reviewed label and a shortened paraphrase of its stored summary.
 
-## Team review questions
+**The scatter coordinates in the HTML are placeholders**, not measured PSI points. Replace them with data-driven marks before the design is presented as a working product. Counts, study metadata and the ranking values above are from the current processed files and ranking function.
 
-1. Does the editorial opening make the microgravity-fire problem clearer than the current dashboard-first entry?
-2. Should the first action lead to the investigation catalog or the test-condition chart?
-3. Does the visual direction feel distinctive while remaining credible for researchers and students?
+## Scientific and product guardrails
 
-## Status
+- Label the lunar range as expected per the challenge statement, not a final habitat requirement or hazard zone.
+- Keep the limits visible: mapped tests use gaseous fuels; they do not test spacecraft materials, and the current PSI set has no partial-gravity combustion data.
+- Distinguish PSI measurements, challenge-statement reference atmospheres, curated tags, ranking heuristics, and AI-generated text.
+- AI summaries remain precomputed, source-grounded, labeled, and marked as human-reviewed. No runtime AI claims.
+- Keep loading, error, empty, and missing-data states; table and keyboard access; PSI citations and DOI; accessible names and contrast.
+- Show Earth-air and spacesuit references alongside the lunar range on the coverage map.
+- Keep the notice: **Not an official NASA product.** Do not add NASA imagery or insignia without checking the event and NASA rules.
 
-Proposed direction for team feedback. Do not treat the static concept page as implementation approval; follow the project's OpenSpec workflow before changing the product UI.
+## Scope for implementation
+
+This is a visual direction proposal only. It does not authorize replacing the app or dropping any Must route. If the team accepts it, update the OpenSpec `design-system` and `screen-specs` changes first, then implement the tokens and shared shell incrementally on the existing Ranking, Compare, Coverage map, Detail, and About routes.
+
+Review the static example at `direction-concept.html`. Its controls and navigation are illustrative and do not function.
