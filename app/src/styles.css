@@ -81,10 +81,10 @@
 :root[data-theme='light'] {
   color-scheme: light;
   --canvas: #e6e9ef;
-  --surface-1: #eef0f5;
-  --surface-2: #e1e5ec;
-  --surface-hover: #d5dae4;
-  --line: #bcc3d0;
+  --surface-1: #e9eff8;
+  --surface-2: #dbe4f1;
+  --surface-hover: #cdd9ea;
+  --line: #b6c3d8;
   --line-strong: #6b7385;
   --text-primary: #0a0f1a;
   --text-secondary: #3c4556;
@@ -95,12 +95,12 @@
   --zone-fill-opacity: 0.12;
   --accent-red: #c8321b;
   --logo-ring: #b5bcc9;
-  --plot-grid: #bcc3d0;
-  --canvas-mark: #eef0f5;
+  --plot-grid: #b6c3d8;
+  --canvas-mark: #e9eff8;
   --ai: #3b3179;
   --ai-weak: #e8e6f6;
   --psi: #3d4450;
-  --psi-weak: #dfe4eb;
+  --psi-weak: #d9e3f0;
   --status-unreviewed: #7b5100;
   --status-unreviewed-weak: #f1e4c6;
   --status-approx: #005e82;
@@ -114,10 +114,10 @@
   :root:not([data-theme]) {
     color-scheme: light;
     --canvas: #e6e9ef;
-    --surface-1: #eef0f5;
-    --surface-2: #e1e5ec;
-    --surface-hover: #d5dae4;
-    --line: #bcc3d0;
+    --surface-1: #e9eff8;
+    --surface-2: #dbe4f1;
+    --surface-hover: #cdd9ea;
+    --line: #b6c3d8;
     --line-strong: #6b7385;
     --text-primary: #0a0f1a;
     --text-secondary: #3c4556;
@@ -128,12 +128,12 @@
     --zone-fill-opacity: 0.12;
     --accent-red: #c8321b;
     --logo-ring: #b5bcc9;
-    --plot-grid: #bcc3d0;
-    --canvas-mark: #eef0f5;
+    --plot-grid: #b6c3d8;
+    --canvas-mark: #e9eff8;
     --ai: #3b3179;
     --ai-weak: #e8e6f6;
     --psi: #3d4450;
-    --psi-weak: #dfe4eb;
+    --psi-weak: #d9e3f0;
     --status-unreviewed: #7b5100;
     --status-unreviewed-weak: #f1e4c6;
     --status-approx: #005e82;
