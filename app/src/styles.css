@@ -456,7 +456,22 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .compare-picker { padding: var(--space-4); margin-bottom: var(--space-4); border: 1px solid var(--line); background: var(--surface-1); border-radius: var(--radius-2); }
 .compare-picker h2 { margin-top: 0; }
 .compare-picker input { max-width: 100%; }
-.compare-picker .compare-search { display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
+.search-field { position: relative; display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
+/* Magnifier drawn as an inline SVG mask so it follows the theme's muted text color (no icon dependency). */
+.search-field::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: var(--text-muted);
+  pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.compare-picker .compare-search { width: 100%; padding-left: 40px; }
 .compare-selected, .compare-options { list-style: none; padding: 0; }
 .compare-selected li, .compare-options li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2); border-bottom: 1px solid var(--line); }
 .compare-picker button { flex: none; }
