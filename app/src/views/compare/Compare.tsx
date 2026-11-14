@@ -61,10 +61,14 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
           </li>
         ))}
       </ul>
-      <label>
-        Search by title, acronym or accession{' '}
-        <input type="search" value={text} onChange={(event) => setText(event.target.value)} />
-      </label>
+      <input
+        type="search"
+        className="compare-search"
+        aria-label="Search by title, acronym or accession"
+        placeholder="Search by title, acronym or accession"
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
       {message ? <p role="alert">{message}</p> : null}
       <ul className="compare-options" aria-label="Investigations to add">
         {matches.slice(0, 8).map((record) => (
