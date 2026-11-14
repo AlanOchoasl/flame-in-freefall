@@ -80,10 +80,10 @@ describe('buildCatalog on the cached PSI data', () => {
     expect(dataset.records.every((r) => r.curated.hardwareGroup.reviewed)).toBe(true);
   });
   it('counts unreviewed values and lists the accessions that still have some', () => {
-    // hardwareGroup is reviewed for all 26; fuelPhase, topics and measurements are reviewed for
-    // PSI-10, PSI-39, PSI-60 and PSI-62 only and are still being curated for the other 22.
-    expect(dataset.unreviewedCount).toBe(22 * 3);
-    expect(accessionsWithUnreviewed(dataset)).toHaveLength(22);
+    // hardwareGroup is reviewed for all 26; fuelPhase, topics and measurements are reviewed for 22.
+    // PSI-99, PSI-100, PSI-106 and PSI-107 are curated but still wait for a human to read them.
+    expect(dataset.unreviewedCount).toBe(4 * 3);
+    expect(accessionsWithUnreviewed(dataset)).toEqual(['PSI-99', 'PSI-100', 'PSI-106', 'PSI-107']);
   });
   it('reports no warnings on the real data', () => {
     expect(warnings).toEqual([]);
