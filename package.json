@@ -10,6 +10,7 @@
     "csv-parse": "^7.0.3"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "vitest": "^5.1.0"
   }
 }
