@@ -14,6 +14,7 @@ import { OutcomeLegend } from './OutcomeLegend';
 import { OverlayList } from './OverlayList';
 import { pointsByOutcome, type PlotPoint } from './plotPoints';
 import { downloadCsv, ResultsTable } from './ResultsTable';
+import './coverageMap.css';
 
 // One shape component per outcome (own color and own shape, see outcomeStyle.ts), created once so
 // recharts does not remount the markers on every render.
@@ -24,10 +25,15 @@ const ZONE_LABEL = marginLabel(['Expected', 'Moon-base zone'], 'top', OVERLAY_CO
 const EARTH_LABEL = marginLabel(['Earth air'], 'middle', OVERLAY_COLORS.earth);
 const SUIT_LABEL = marginLabel(['Spacesuit'], 'middle', OVERLAY_COLORS.suit);
 
+// Round ticks (at most six per axis); the zone edge at 0.70 bar is labeled on the chart itself.
+const O2_TICKS = [0, 20, 40, 60, 80, 100];
+const PRESSURE_TICKS = [0, 1, 2, 3];
+const PLOT_HEIGHT = 480;
+
 function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
   return (
-    <label>
-      {label}{' '}
+    <label className="map-field">
+      <span>{label}</span>
       <select value={value ?? ''} onChange={(event) => onChange(event.target.value || null)}>
         <option value="">All</option>
         {options.map((option) => (
@@ -43,7 +49,7 @@ function FilterSelect({ label, value, options, onChange }: { label: string; valu
 function PointDetails({ record }: { record: ExperimentRecord | null }) {
   if (!record) return <p>Select a point on the map to see its test.</p>;
   return (
-    <dl>
+    <dl className="facts">
       <dt>Test</dt>
       <dd>
         {record.id} ({record.accession}, {record.flameType} flame)
@@ -71,21 +77,28 @@ function PointDetails({ record }: { record: ExperimentRecord | null }) {
 function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (record: ExperimentRecord) => void }) {
   const series = pointsByOutcome(records);
   return (
-    <div className="table-scroll" tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens">
-      <div style={{ width: '100%', minWidth: 480, height: 420 }}>
+    <div className="map-plot-region" tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens">
+      <div style={{ width: '100%', minWidth: 480, height: PLOT_HEIGHT }}>
         <ResponsiveContainer>
-          <ScatterChart margin={{ top: 24, right: 112, bottom: 36, left: 12 }}>
+          <ScatterChart margin={{ top: 24, right: 128, bottom: 40, left: 12 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
             <XAxis
               type="number"
               dataKey="x"
               name="O2"
               domain={[0, O2_AXIS_MAX_PERCENT]}
-              ticks={[0, 20, 40, 60, 80, 100]}
+              ticks={O2_TICKS}
               tickFormatter={(value: number) => `${value} %`}
-              label={{ value: 'O2 (% of the atmosphere)', position: 'insideBottom', offset: -20 }}
+              label={{ value: 'O2 (% of the atmosphere)', position: 'insideBottom', offset: -22 }}
             />
-            <YAxis type="number" dataKey="y" name="Pressure" domain={[0, PRESSURE_AXIS_MAX_BAR]} tickCount={6} label={{ value: 'Pressure (bar)', angle: -90, position: 'insideLeft' }} />
+            <YAxis
+              type="number"
+              dataKey="y"
+              name="Pressure"
+              domain={[0, PRESSURE_AXIS_MAX_BAR]}
+              ticks={PRESSURE_TICKS}
+              label={{ value: 'Pressure (bar)', angle: -90, position: 'insideLeft' }}
+            />
             <ReferenceArea
               x1={MOON_BASE_ZONE.o2Percent}
               x2={O2_AXIS_MAX_PERCENT}
@@ -141,13 +154,14 @@ function Map({ records, initialAccession }: { records: ExperimentRecord[]; initi
   const options = filterOptions(records);
   const matching = applyFilters(records, filters);
   const counts = countPlotted(matching);
-  const insight = describeInsight(computeInsight(matching));
+  const insightData = computeInsight(matching);
+  const insight = describeInsight(insightData);
   const set = (key: keyof MapFilters) => (value: string | null) => setFilters({ ...filters, [key]: value });
 
   return (
     <>
-      <p>Each point is one PSI test: O2 fraction on the x axis, pressure on the y axis.</p>
-      <fieldset>
+      <p className="map-lead">Each dot is one real test from NASA PSI, placed by its O2 (%) and its pressure (bar).</p>
+      <fieldset className="map-filters">
         <legend>Filters</legend>
         <FilterSelect label="Investigation" value={filters.accession} options={options.accessions} onChange={set('accession')} />
         <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
@@ -159,48 +173,70 @@ function Map({ records, initialAccession }: { records: ExperimentRecord[]; initi
           </button>
         ) : null}
       </fieldset>
-      <p role="status">
-        {counts.plotted} of {counts.total} tests plotted
-        {counts.notPlotted > 0 ? ` (${counts.notPlotted} not plotted: O2 or pressure missing)` : ''}
-      </p>
-      <div>
-        <button type="button" aria-pressed={asTable} onClick={() => setAsTable(!asTable)}>
-          {asTable ? 'Show as chart' : 'Show as table'}
-        </button>{' '}
-        <button type="button" onClick={() => downloadCsv(matching)} disabled={matching.length === 0}>
-          Download filtered data (CSV)
-        </button>
-      </div>
-      {counts.total === 0 ? (
-        <div role="status">
-          <p>No test matches the filters.</p>
-          <button type="button" onClick={() => setFilters(NO_FILTERS)}>
-            Clear filters
-          </button>
+
+      <div className="map-layout">
+        <div className="map-primary">
+          <div className="map-toolbar">
+            <p role="status" className="map-count">
+              <strong>
+                {counts.plotted} of {counts.total} tests plotted
+              </strong>
+              {counts.notPlotted > 0 ? <span> · {counts.notPlotted} not plotted: O2 or pressure missing</span> : null}
+            </p>
+            <div className="map-actions">
+              <button type="button" aria-pressed={asTable} onClick={() => setAsTable(!asTable)}>
+                {asTable ? 'Show as chart' : 'Show as table'}
+              </button>
+              <button type="button" onClick={() => downloadCsv(matching)} disabled={matching.length === 0}>
+                Download filtered data (CSV)
+              </button>
+            </div>
+          </div>
+
+          {counts.total === 0 ? (
+            <div role="status" className="map-card">
+              <p>No test matches the filters.</p>
+              <button type="button" onClick={() => setFilters(NO_FILTERS)}>
+                Clear filters
+              </button>
+            </div>
+          ) : asTable ? (
+            <ResultsTable key={JSON.stringify(filters)} records={matching} />
+          ) : (
+            <div className="map-card">
+              <OutcomeLegend />
+              <Chart records={matching} onSelect={setSelected} />
+            </div>
+          )}
+
+          <OverlayList />
         </div>
-      ) : asTable ? (
-        <ResultsTable key={JSON.stringify(filters)} records={matching} />
-      ) : (
-        <Chart records={matching} onSelect={setSelected} />
-      )}
-      <OutcomeLegend />
-      <OverlayList />
-      <section aria-labelledby="insight-title">
-        <h2 id="insight-title">What the data shows</h2>
-        <p>{insight.headline}</p>
-        {insight.details.map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-        <ul>
-          {insight.limits.map((limit) => (
-            <li key={limit}>{limit}</li>
-          ))}
-        </ul>
-      </section>
-      <section aria-labelledby="details-title">
-        <h2 id="details-title">Selected test</h2>
-        <PointDetails record={selected} />
-      </section>
+
+        <aside className="map-side" aria-label="What the map shows">
+          <section className="map-card" aria-labelledby="insight-title">
+            <h2 id="insight-title">What the data shows</h2>
+            {insightData.sharePercent !== null ? (
+              <p className="map-stat" aria-hidden="true">
+                <strong>{insightData.inZone}</strong>
+                <span> of {insightData.plotted} plotted tests</span>
+              </p>
+            ) : null}
+            <p>{insight.headline}</p>
+            {insight.details.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+            <ul className="map-limits">
+              {insight.limits.map((limit) => (
+                <li key={limit}>{limit}</li>
+              ))}
+            </ul>
+          </section>
+          <section className="map-card" aria-labelledby="details-title">
+            <h2 id="details-title">Selected test</h2>
+            <PointDetails record={selected} />
+          </section>
+        </aside>
+      </div>
     </>
   );
 }
