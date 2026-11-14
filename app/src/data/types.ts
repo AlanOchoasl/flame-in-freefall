@@ -3,7 +3,7 @@
 // (investigation-catalog task 1.1, ai-summaries); replace these two when they exist.
 
 export interface VersionedFile {
-  schemaVersion: number;
+  schemaVersion: number | string;
 }
 
 export interface ExperimentRecord {

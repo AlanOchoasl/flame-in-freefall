@@ -1,4 +1,4 @@
-import type { CatalogFile, ExperimentsFile, SummariesFile } from './types';
+import type { CatalogFile, ExperimentsFile, SummariesFile, VersionedFile } from './types';
 
 // The only place that knows where data comes from. A future API replaces this module only.
 
@@ -8,7 +8,17 @@ export type DataResult<T> =
   | { status: 'ok'; data: T }
   | { status: 'error'; file: string; message: string };
 
-async function loadDataFile<T extends { schemaVersion: number }>(file: string): Promise<DataResult<T>> {
+// Data specs declare "1.0.0"; a bare number (e.g. 1) is accepted too. Anything else has no major version.
+export function parseMajorVersion(schemaVersion: unknown): number | null {
+  if (typeof schemaVersion === 'number') return Math.floor(schemaVersion);
+  if (typeof schemaVersion === 'string') {
+    const match = /^(\d+)(\.|$)/.exec(schemaVersion);
+    if (match) return Number(match[1]);
+  }
+  return null;
+}
+
+async function loadDataFile<T extends VersionedFile>(file: string): Promise<DataResult<T>> {
   const url = `${import.meta.env.BASE_URL}data/${file}`;
   let response: Response;
   try {
@@ -27,12 +37,12 @@ async function loadDataFile<T extends { schemaVersion: number }>(file: string): 
     return { status: 'error', file, message: `${file} is not valid JSON.` };
   }
 
-  const major = Math.floor(data.schemaVersion);
+  const major = parseMajorVersion(data.schemaVersion);
   if (major !== SUPPORTED_SCHEMA_MAJOR) {
     return {
       status: 'error',
       file,
-      message: `${file} has schemaVersion ${data.schemaVersion}, but this app supports major version ${SUPPORTED_SCHEMA_MAJOR}.`,
+      message: `${file} has schemaVersion ${String(data.schemaVersion)}, but this app supports major version ${SUPPORTED_SCHEMA_MAJOR}.`,
     };
   }
   return { status: 'ok', data };

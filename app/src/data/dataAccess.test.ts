@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getCatalog, getExperiments } from './dataAccess';
+import { getCatalog, getExperiments, parseMajorVersion } from './dataAccess';
 
 function stubFetch(response: Partial<Response> | Error) {
   vi.stubGlobal(
@@ -10,10 +10,43 @@ function stubFetch(response: Partial<Response> | Error) {
 
 afterEach(() => vi.unstubAllGlobals());
 
+describe('parseMajorVersion', () => {
+  it('reads the major from numbers and semantic strings', () => {
+    expect(parseMajorVersion(1)).toBe(1);
+    expect(parseMajorVersion('1.0.0')).toBe(1);
+    expect(parseMajorVersion('12.3.4')).toBe(12);
+    expect(parseMajorVersion('2')).toBe(2);
+  });
+
+  it('returns null when there is no major version', () => {
+    expect(parseMajorVersion(undefined)).toBeNull();
+    expect(parseMajorVersion('v1')).toBeNull();
+    expect(parseMajorVersion('abc')).toBeNull();
+  });
+});
+
 describe('data access', () => {
   it('returns the data when the file loads and the version is supported', async () => {
     stubFetch({ ok: true, json: async () => ({ schemaVersion: 1, records: [] }) });
     expect(await getCatalog()).toEqual({ status: 'ok', data: { schemaVersion: 1, records: [] } });
+  });
+
+  it('accepts a semantic schemaVersion as declared by the data specs', async () => {
+    stubFetch({ ok: true, json: async () => ({ schemaVersion: '1.0.0', records: [] }) });
+    expect((await getCatalog()).status).toBe('ok');
+  });
+
+  it('rejects a semantic schemaVersion with an unsupported major', async () => {
+    stubFetch({ ok: true, json: async () => ({ schemaVersion: '2.0.0' }) });
+    const result = await getCatalog();
+    expect(result.status === 'error' && result.message).toMatch(/catalog\.json.*2\.0\.0.*1/);
+  });
+
+  it('rejects a file with a missing or malformed schemaVersion', async () => {
+    stubFetch({ ok: true, json: async () => ({ records: [] }) });
+    expect((await getCatalog()).status).toBe('error');
+    stubFetch({ ok: true, json: async () => ({ schemaVersion: 'abc' }) });
+    expect((await getCatalog()).status).toBe('error');
   });
 
   it('names the file when it cannot be loaded', async () => {
