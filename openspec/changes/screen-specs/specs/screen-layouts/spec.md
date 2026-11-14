@@ -64,6 +64,17 @@ The Coverage map screen SHALL show, in order: a one-sentence explanation of the 
 - **WHEN** the viewport is 360 px wide
 - **THEN** the filters, chart, insight and details stack in one column in that order
 
+### Requirement: Compare picker interaction
+The Compare picker SHALL list matching investigations (by title, acronym or accession) each with an "Add" button, SHALL show the selected investigations as removable chips, and SHALL give each remove button an accessible name that includes the accession (for example "Remove PSI-159"). Adding beyond three SHALL show the limit message and leave the selection unchanged.
+
+#### Scenario: Removing a selection
+- **WHEN** a user activates "Remove PSI-159" on its chip
+- **THEN** it leaves the selection, the count and the address update, and the table is replaced by the instruction if fewer than two remain
+
+#### Scenario: Searching
+- **WHEN** a user types "SAFFIRE" in the picker
+- **THEN** only investigations whose title, acronym or accession contain it are listed
+
 ### Requirement: Investigation detail screen content
 The Investigation detail screen SHALL show, in order: accession, title and acronym; the AI-labeled summary and fire-safety note (or the PSI objectives labeled as PSI text); the curated facts (platform, hardware group, fuel phase, topics, measurements) with unreviewed markers; the objectives, approach, hypothesis and earth-benefits text labeled as PSI text; the test-condition ranges (O2, pressure, fuels) or "no normalized test data"; the ranking position per profile; related investigations as links; and the citation block with the PSI link and DOI when known. Every missing value SHALL follow the app-shell missing-value rule.
 
@@ -120,3 +131,21 @@ Screen copy SHALL NOT state facts about fire safety that are not in the challeng
 #### Scenario: Reviewing copy
 - **WHEN** the team reviews the screen texts
 - **THEN** each factual sentence cites the challenge statement or a PSI field
+
+### Requirement: Ranking position format
+The ranking position block on the Investigation detail screen SHALL list every profile in the profiles file, each with its label and the position as "#n of N" computed by the ranking function for that profile, so the values differ where the ranking differs. Non-combustion records SHALL show their position after all combustion records.
+
+#### Scenario: Positions differ by profile
+- **WHEN** PSI-159 ranks differently under Crew cabin and Lunar base
+- **THEN** each profile row shows its own position and total
+
+#### Scenario: New profile added in data
+- **WHEN** a profile is added to the profiles file
+- **THEN** the block shows it with no code change
+
+### Requirement: Screens use the design system
+Every screen SHALL use the tokens and shared components of `design-system` (labels, markers, missing value, data state, count line, citation) instead of local styles.
+
+#### Scenario: Consistent labels
+- **WHEN** the AI label appears on Ranking, Compare and Detail
+- **THEN** it looks and reads the same on all three
