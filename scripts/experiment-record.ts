@@ -23,6 +23,11 @@ export interface ExperimentRecord {
   dataQuality: DataQualityEntry[];
 }
 
+export interface FlaggedRecord extends ExperimentRecord {
+  isPlottable: boolean;
+  inMoonBaseZone: boolean;
+}
+
 export interface Mapper {
   accession: string;
   filePattern: RegExp;
