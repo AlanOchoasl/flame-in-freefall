@@ -125,14 +125,15 @@ describe('hasActiveFilters and labels', () => {
   });
 });
 
-describe('the committed Must dataset', () => {
+describe('the committed dataset', () => {
   const file = JSON.parse(
     readFileSync(new URL('../../../../data/processed/experiments.json', import.meta.url), 'utf8'),
   ) as ExperimentsFile;
   const records = file.records;
 
-  it('plots 442 of 453 tests and reports 11 as not plotted', () => {
-    expect(countPlotted(applyFilters(records, NO_FILTERS))).toEqual({ total: 453, plotted: 442, notPlotted: 11 });
+  it('plots 629 of 660 tests and reports 31 as not plotted', () => {
+    // 453 of the Must set + 207 of PSI-10 normal flames; 11 + 20 lack O2 or pressure.
+    expect(countPlotted(applyFilters(records, NO_FILTERS))).toEqual({ total: 660, plotted: 629, notPlotted: 31 });
   });
 
   it('updates the counts when filtering by inverse flames', () => {
@@ -141,9 +142,14 @@ describe('the committed Must dataset', () => {
     expect(countPlotted(inverse)).toEqual({ total: 274, plotted: 263, notPlotted: 11 });
   });
 
-  it('PSI-10 has 120 tests, 109 plotted, all with outcome not-reported', () => {
-    expect(countPlotted(applyFilters(records, filters({ accession: 'PSI-10' })))).toEqual({ total: 120, plotted: 109, notPlotted: 11 });
-    expect(applyFilters(records, filters({ outcome: 'not-reported' }))).toHaveLength(120);
+  it('counts the normal flames of both investigations', () => {
+    const normal = applyFilters(records, filters({ flameType: 'normal' }));
+    expect(countPlotted(normal)).toEqual({ total: 386, plotted: 366, notPlotted: 20 }); // 179 PSI-159 + 207 PSI-10
+  });
+
+  it('PSI-10 has 327 tests (120 inverse + 207 normal), 296 plotted, all with outcome not-reported', () => {
+    expect(countPlotted(applyFilters(records, filters({ accession: 'PSI-10' })))).toEqual({ total: 327, plotted: 296, notPlotted: 31 });
+    expect(applyFilters(records, filters({ outcome: 'not-reported' }))).toHaveLength(327);
   });
 
   it('offers the investigations, fuels and outcomes that exist', () => {

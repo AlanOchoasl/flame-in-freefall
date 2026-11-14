@@ -42,10 +42,10 @@ One record per real test row of the **Must set**: PSI-159 normal flames, PSI-159
 
 ```bash
 npm run build:data    # rebuild data/processed/experiments.json (offline)
-npm run smoke:data    # offline check: two runs are identical, 453 / 442 / 66, committed file is up to date
+npm run smoke:data    # offline check: two runs are identical, 660 / 629 / 66, committed file is up to date
 ```
 
-Regenerating changes only `generatedAt` when the inputs did not change. PSI-10 normal flames (Nice-to-have) are not included.
+Regenerating changes only `generatedAt` when the inputs did not change. The file holds the four tables of PSI-159 and PSI-10: the Must set (453 records) plus PSI-10 normal flames (Nice, task 3.3; 207 records).
 
 Top level: `schemaVersion` (`1.1.0`; a removed or renamed field raises the major version; `1.1.0` added `datasets`), `generatedAt`, `sources`, `datasets`, `plottableCount`, `investigations`, `records`.
 
@@ -71,8 +71,9 @@ Every file reports `read` (rows parsed), `kept` (rows with a test id) and `skipp
 | `PSI-159_..._CFI-G_Normal_Flames.csv` | 179 | 179 | 0 |
 | `PSI-159_..._CFI-G_Inverse_Flames.csv` | 1015 | 154 | 861 |
 | `PSI-10_..._Flame_Design_Inverse_Flame.csv` | 120 | 120 | 0 |
+| `PSI-10_..._Flame_Design_Normal_Flame.csv` | 207 | 207 | 0 |
 
-Totals: **453 records, 442 plottable, 66 in the Moon-base zone** (20 + 28 + 18).
+Totals: **660 records, 629 plottable, 66 in the Moon-base zone** (20 + 28 + 18 + 0). PSI-10 normal flames add 207 records, 187 of them plottable and none in the zone; the other 20 are propane rows with no pressure.
 
 ### Record
 | Field | Meaning |
@@ -99,21 +100,22 @@ A row is never dropped or invented because of a bad cell. The cell becomes `null
 | `reason` | Raw cell | Where it happens today |
 |---|---|---|
 | `spreadsheet-error` | `#DIV/0!`, `#VALUE!` | 2 PSI-159 normal rows (`tadK`, `zst`) |
-| `ramped-condition` | `RAMP`, `RAMPED` | 9 PSI-10 inverse rows (`o2Fraction`, `tadK`, `zst`) |
+| `ramped-condition` | `RAMP`, `RAMPED` | 9 PSI-10 inverse rows (`o2Fraction`, `tadK`, `zst`) and 60 PSI-10 normal rows (`tadK`, `zst`; their O2 and pressure are valid) |
 | `low-o2-note` | `LOW O2` | 2 PSI-10 inverse rows (`o2Fraction`, `tadK`, `zst`) |
-| `no-value` | `-` | none in the Must set |
-| `empty` | empty cell in a numeric column | none in the Must set |
-| `not-numeric` | any other text | none in the Must set |
-| `not-recognized` | an outcome other than `yes`, `no`, `flash` (field `outcome`) | none in the Must set |
+| `empty` | empty cell in a numeric column | 20 PSI-10 normal rows (`pressureBar`, `o2FractionAfterTest`), all propane |
+| `no-value` | `-` | none |
+| `not-numeric` | any other text | none |
+| `not-recognized` | an outcome other than `yes`, `no`, `flash` (field `outcome`) | none |
 
-13 records carry entries. The 11 PSI-10 rows with a null O2 are the ones that are not plottable. The reason names are ours: the PSI tables do not define them.
+93 records carry entries. The rows that are not plottable are the 11 PSI-10 inverse rows with a null O2 and the 20 PSI-10 normal rows with no pressure (31 in all). The reason names are ours: the PSI tables do not define them.
 
 ### Summary (`investigations[]`)
 Per investigation: `accession`, `records`, `plottable`, `inMoonBaseZone`, `o2Range` and `pressureBarRange` (`[min, max]`, ignoring nulls, or `[null, null]`) and `fuels` (sorted species names).
 
 ### Known limits
 - PSI-159 fuel labels such as `30% butane` map to `species: "butane"`; the percentage is not interpreted and the raw label is kept.
-- PSI-10 inverse has no fuel column (ethylene is inferred from the `XC2H4` headers) and no outcome column.
+- PSI-10 inverse has no fuel column (ethylene is inferred from the `XC2H4` headers) and no outcome column. PSI-10 normal names its fuel by formula (`C2H4` is ethylene, `C3H8` is propane) and has no outcome column either: both PSI-10 tables are `not-reported`.
+- PSI-10 normal reports O2 at the start (`XO2 (init)`, used as `o2Fraction`) and at the end of the test (`XO2 (final)`, kept as `o2FractionAfterTest`).
 - Pressures reach about 3.3 bar; the Moon-base zone covers only the low-pressure end.
 - PSI has no partial-gravity data (per the challenge statement), so none is in this file.
 
