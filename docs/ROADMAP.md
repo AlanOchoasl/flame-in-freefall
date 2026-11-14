@@ -53,7 +53,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 
 *Rough size guess, not an estimate.
 
-**Status (2026-11-14):** specs written and validated for changes 1–7 (`openspec validate --all --strict`); `ask-the-data` (8) is not specced yet. Tasks are in each change's `tasks.md` (58 tasks). The sum of the per-task **caps** is about 72 h for Must work (caps are upper bounds, not estimates). It probably does not fit with every investigation curated and summarized; see the scope levers below.
+**Status (2026-11-14):** specs written and validated for changes 1–7 (`openspec validate --all --strict`); `ask-the-data` (8) is not specced yet. Tasks are in each change's `tasks.md` (59 tasks). The sum of the per-task **caps** is about 74 h for Must work (caps are upper bounds, not estimates). It probably does not fit with every investigation curated and summarized; see the scope levers below.
 
 ### Scope levers if time runs short (apply in this order)
 1. Curate tags and write AI summaries only for a **core set** (the investigations the statement names); the rest keep the PSI-text fallback, which the specs already support.
