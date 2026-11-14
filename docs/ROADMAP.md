@@ -63,10 +63,10 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 
 ## Open items
 - [x] No pre-assigned owners: tasks come from the specs and each person claims the module they want (decided 2026-11-14)
-- [ ] Confirm stack: React + TypeScript + Vite (default) or Angular
+- [x] Stack: React + TypeScript + Vite (team, 2026-11-14). [ ] Nest backend: deferred; only for `ask-the-data` after milestone 2
 - [ ] Verify 2026 judging criteria (Judging & Awards Guide)
 - [ ] Choose license (recommended Apache-2.0; see `AGENTS.md`)
 - [ ] Capture DOI of each investigation used ("Cite this Investigation" on its PSI page)
 - [ ] Decide who curates the tags for the 26 investigations (needs science reading)
-- [ ] Do we have access to an AI API and budget? (needed for summaries and ask-the-data)
+- [x] AI access: Gemini via API key (team, 2026-11-14). Still to verify: model, limits, structured-output style (in Google's docs)
 - [ ] Verify the meaning of `SE`, `FT`, `TFP`, `Zst` in the PSI-159 Read Me

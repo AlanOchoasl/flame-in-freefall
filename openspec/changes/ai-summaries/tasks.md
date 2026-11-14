@@ -9,6 +9,8 @@ Depends on: `investigation-catalog` types and stub (task 1.1).
 - [ ] 1.1 (by 17:00, ≤1h) Write `prompts/summary.md` (grounding rules, length limits, output format, version) and the draft file format; verify by running it by hand on two investigations and reading both against the source.
 - [ ] 1.2 (by 18:30, ≤2h) Write the check script (schema, word limits, unknown accession, numeric guard, strict mode) with unit tests for an invented number, an over-length text and an unknown accession; verify all tests pass and strict mode fails on an unreviewed entry.
 
+- [ ] 1.3 (by 18:30, ≤1.5h) Read Google's current Gemini API documentation, choose the model and the structured-output style, and write the generation script (API key read from the environment, `.env` ignored by git, one investigation per call, output to the draft file, prompt version recorded); verify it produces a valid draft for two investigations and that `node scripts/check-licenses.mjs` still passes with `@google/genai` installed. Plan B: draft by hand in the Gemini app.
+
 ## 2. Drafting and review
 
 Depends on: 1.1. Tasks 2.1 and 2.2 are independent; split by accession range.
