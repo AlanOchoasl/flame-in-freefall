@@ -6,7 +6,7 @@
   --surface-2: #171717;
   --surface-hover: #242424;
   --line: #383838;
-  --line-strong: #777777;
+  --line-strong: #6b6b6b;
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
   --text-muted: #aaaaaa;
@@ -14,8 +14,8 @@
   --brand: #0b3d91;
   --zone: #ffbb00;
   --zone-fill-opacity: 0.16;
-  --accent-red: #ff6b59;
-  --logo-ring: #555555;
+  --accent-red: #fc3d21;
+  --logo-ring: #383838;
   --plot-grid: #383838;
   --canvas-mark: #000000;
   /* Existing component aliases keep route styles in the same palette. */
@@ -544,7 +544,10 @@ main:has(> .console-page) { max-width: none; padding: 0; }
 .show-all { margin-top: var(--space-3); }
 
 .progress-row { display: flex; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-2); font-size: var(--fs-sm); }
-progress { width: 100%; height: 10px; accent-color: var(--zone); }
+progress { width: 100%; height: 8px; appearance: none; border: 0; border-radius: 2px; background: var(--surface-2); accent-color: var(--zone); }
+progress::-webkit-progress-bar { background: var(--surface-2); border-radius: 2px; box-shadow: inset 0 0 0 1px var(--line); }
+progress::-webkit-progress-value { background: var(--zone); border-radius: 2px; }
+progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
 .bottom-line { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
 
 /* Inside a panel the embedded views drop their own card chrome and stack their side column. */

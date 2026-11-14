@@ -15,16 +15,20 @@ export function MarkerPath({ outcome, radius, inZone = false, opacity = 1 }: Mar
   const { color, shape, filled } = OUTCOME_STYLE[outcome];
   const outline = inZone ? 2.5 : 1;
   return (
-    <path
-      d={markerPath(shape, radius)}
-      fill={filled ? color : 'none'}
-      fillOpacity={filled ? opacity : undefined}
-      stroke={filled ? (inZone ? 'var(--canvas-mark)' : color) : color}
-      strokeOpacity={filled && !inZone ? 0.9 : 1}
-      strokeWidth={filled ? outline : inZone ? 3.5 : 2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <g>
+      {/* Concentric halo (design.md 4.3): faint, so overlapping tests stay readable. */}
+      <circle r={radius * 1.9} fill={color} fillOpacity={0.12} stroke={color} strokeOpacity={0.35} strokeWidth={1} />
+      <path
+        d={markerPath(shape, radius)}
+        fill={filled ? color : 'none'}
+        fillOpacity={filled ? opacity : undefined}
+        stroke={filled ? (inZone ? 'var(--canvas-mark)' : color) : color}
+        strokeOpacity={filled && !inZone ? 0.9 : 1}
+        strokeWidth={filled ? outline : inZone ? 3.5 : 2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
   );
 }
 
