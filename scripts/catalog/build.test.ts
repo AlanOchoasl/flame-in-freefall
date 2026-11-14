@@ -80,9 +80,20 @@ describe('buildCatalog on the cached PSI data', () => {
     expect(dataset.records.every((r) => r.curated.hardwareGroup.reviewed)).toBe(true);
   });
   it('counts unreviewed values and lists the accessions that still have some', () => {
-    // hardwareGroup is reviewed for all 26; fuelPhase, topics and measurements are still being curated.
-    expect(dataset.unreviewedCount).toBe(26 * 3);
-    expect(accessionsWithUnreviewed(dataset)).toHaveLength(26);
+    // The last 13 accessions are reviewed; the first 13 remain another owner's curation task.
+    expect(dataset.unreviewedCount).toBe(13 * 3);
+    expect(accessionsWithUnreviewed(dataset)).toEqual([
+      'PSI-10', 'PSI-20', 'PSI-21', 'PSI-22', 'PSI-23', 'PSI-25', 'PSI-26',
+      'PSI-39', 'PSI-47', 'PSI-60', 'PSI-62', 'PSI-68', 'PSI-69',
+    ]);
+  });
+  it('passes strict review for the last 13 accessions in ascending order', () => {
+    const lastThirteen = dataset.records.slice(13);
+    expect(lastThirteen.map((record) => record.accession)).toEqual([
+      'PSI-98', 'PSI-99', 'PSI-100', 'PSI-101', 'PSI-102', 'PSI-106', 'PSI-107',
+      'PSI-108', 'PSI-115', 'PSI-117', 'PSI-142', 'PSI-159', 'PSI-181',
+    ]);
+    expect(accessionsWithUnreviewed({ ...dataset, records: lastThirteen })).toEqual([]);
   });
   it('reports no warnings on the real data', () => {
     expect(warnings).toEqual([]);
