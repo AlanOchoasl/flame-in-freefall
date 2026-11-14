@@ -23,7 +23,7 @@ All checklist items passed except those listed below. After the PSI-10 normal fl
 ## Known gaps (found in this run)
 
 1. **Offline:** no service worker, so the app does not work offline after a reload (`app-shell` requires it).
-2. **Compare formats numbers differently from Detail:** "0.12 to 0.85 fraction" and "0.4953817 to 3.3099 bar" against Detail's "12–85 % O2" and "0.50–3.31 bar". Reuse `formatO2Range` and `formatPressureRange` (`app/src/views/detailModel.ts`).
+2. **Compare number format (fixed):** Compare now shows "12–85 % O2" and "0.50–3.31 bar" like Detail, using `formatO2Range` and `formatPressureRange`. Ranges are rounded, so two ranges that differ only beyond the rounding show as the same.
 3. **Map points are not keyboard-focusable;** the table is the keyboard alternative.
 4. **Ranking panel copy:** "Weights and wording come from the official challenge statement" overstates it: the rationales quote the statement, the point values are the team's judgment. Also "up to 1 points".
 5. **About** shows the AI-use error until `summaries.json` exists.
