@@ -26,7 +26,7 @@ const MARKER_TEXT: Record<RowMarker, (count: number) => string> = {
   'all-missing': (count) => (count === 2 ? 'both missing' : 'all missing'),
 };
 
-function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
+export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
   const [text, setText] = useState('');
   const [message, setMessage] = useState<string | null>(null);
 
@@ -127,7 +127,7 @@ function SummaryCell({ record, entry }: { record: CatalogRecord; entry: SummaryE
   );
 }
 
-function ComparisonTable({ records, summaries }: { records: CatalogRecord[]; summaries: SummaryEntry[] }) {
+export function ComparisonTable({ records, summaries }: { records: CatalogRecord[]; summaries: SummaryEntry[] }) {
   const experiments = useDataResult(getExperiments);
   return (
     <DataState state={experiments} label="The test conditions">
@@ -179,14 +179,12 @@ function ComparisonTable({ records, summaries }: { records: CatalogRecord[]; sum
   );
 }
 
-export function Compare({ query }: ViewProps) {
+export function CompareBody({ query }: { query: URLSearchParams }) {
   const catalog = useDataResult(getCatalog);
   const summaries = useDataResult(getSummaries);
 
   return (
     <>
-      <h1>Compare</h1>
-      <p className="view-intro">Compare recorded conditions and source text side by side. Missing values stay visible.</p>
       <DataState state={catalog} label="The list of investigations">
         {(file) => {
           const ids = parseSelection(query, file.records.map((record) => record.accession));
@@ -203,6 +201,16 @@ export function Compare({ query }: ViewProps) {
           );
         }}
       </DataState>
+    </>
+  );
+}
+
+export function Compare({ query }: ViewProps) {
+  return (
+    <>
+      <h1>Compare</h1>
+      <p className="view-intro">Compare recorded conditions and source text side by side. Missing values stay visible.</p>
+      <CompareBody query={query} />
     </>
   );
 }

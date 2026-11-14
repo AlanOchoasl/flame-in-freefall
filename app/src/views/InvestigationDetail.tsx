@@ -231,6 +231,9 @@ export function InvestigationDetail({ params }: ViewProps) {
   return (
     <>
       <h1>Investigation {accession}</h1>
+      <p className="back-link">
+        <a href="#/ranking">← Back to the explorer</a>
+      </p>
       <DataState state={catalog} label="The catalog">
         {(file) => <DetailBody record={record as CatalogRecord} records={file.records} />}
       </DataState>
