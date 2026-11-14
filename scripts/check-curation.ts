@@ -12,14 +12,14 @@ Options:
   --help     show this message`;
 
 interface CuratedValue {
-  value: string[];
+  value: string | string[];
   source: string;
   reviewed: boolean;
 }
 
 interface CurationFile {
   schemaVersion?: string;
-  entries?: Record<string, Record<string, CuratedValue>>;
+  entries?: Record<string, Record<string, CuratedValue | string>>;
 }
 
 interface Vocabularies {
@@ -30,7 +30,6 @@ interface Vocabularies {
 
 const SINGLE_VALUE_FIELDS = new Set(["hardwareGroup"]);
 const LIST_VALUE_FIELDS = new Set(["fuelPhase", "topics"]);
-const OPTIONAL_FIELDS = new Set(["hardwareGroup"]);
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T;
@@ -76,6 +75,12 @@ function main(): number {
     }
 
     for (const [field, curated] of Object.entries(fields)) {
+      if (field === "doi") {
+        if (typeof curated !== "string" || curated.trim().length === 0) {
+          errors.push(`${accession}.doi: must be a non-empty string`);
+        }
+        continue;
+      }
       if (!SINGLE_VALUE_FIELDS.has(field) && !LIST_VALUE_FIELDS.has(field) && field !== "measurements") {
         errors.push(`${accession}: unknown field "${field}"`);
         continue;
@@ -97,6 +102,15 @@ function main(): number {
       if (typeof curated.source !== "string" || curated.source.trim().length === 0) {
         errors.push(`${label}: source must say which text the value came from`);
       }
+      if (SINGLE_VALUE_FIELDS.has(field)) {
+        if (typeof curated.value !== "string") {
+          errors.push(`${label}: value must be a single string`);
+        } else if (!vocabularies[field as keyof Vocabularies].includes(curated.value)) {
+          errors.push(`${label}: "${curated.value}" is not in the vocabulary`);
+        }
+        continue;
+      }
+
       if (!Array.isArray(curated.value)) {
         errors.push(`${label}: value must be an array`);
         continue;
@@ -109,10 +123,6 @@ function main(): number {
         continue;
       }
 
-      if (field === "hardwareGroup" && curated.value.length !== 1) {
-        errors.push(`${label}: hardwareGroup must have exactly one value`);
-      }
-
       const allowed = new Set(vocabularies[field as keyof Vocabularies]);
       for (const item of curated.value) {
         if (typeof item !== "string" || !allowed.has(item)) {
@@ -120,7 +130,7 @@ function main(): number {
         }
       }
 
-      if (curated.value.length === 0 && !OPTIONAL_FIELDS.has(field)) {
+      if (curated.value.length === 0) {
         errors.push(`${label}: value must not be empty`);
       }
     }
