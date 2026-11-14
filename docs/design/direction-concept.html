@@ -22,8 +22,47 @@
       --accent-red: #fc3d21;
       --logo-ring: #383838;
       --focus: #0099ff;
+      --zone-fill-opacity: .16;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       font-synthesis: none;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --canvas: #f6f7f9;
+      --surface-1: #ffffff;
+      --surface-2: #eef0f4;
+      --surface-hover: #e3e6ec;
+      --line: #d0d5dd;
+      --line-strong: #6b7385;
+      --text-primary: #0a0f1a;
+      --text-secondary: #3c4556;
+      --text-muted: #5b6475;
+      --action: #0b3d91;
+      --brand: #0b3d91;
+      --zone: #a15c00;
+      --accent-red: #c8321b;
+      --logo-ring: #c9ced8;
+      --zone-fill-opacity: .12;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --canvas: #f6f7f9;
+        --surface-1: #ffffff;
+        --surface-2: #eef0f4;
+        --surface-hover: #e3e6ec;
+        --line: #d0d5dd;
+        --line-strong: #6b7385;
+        --text-primary: #0a0f1a;
+        --text-secondary: #3c4556;
+        --text-muted: #5b6475;
+        --action: #0b3d91;
+        --brand: #0b3d91;
+        --zone: #a15c00;
+        --accent-red: #c8321b;
+        --logo-ring: #c9ced8;
+        --zone-fill-opacity: .12;
+      }
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--canvas); color: var(--text-primary); font-size: 14px; line-height: 1.5; }
@@ -36,6 +75,9 @@
     .brand { display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 700; text-decoration: none; white-space: nowrap; }
     .brand-mark { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--logo-ring); border-radius: 50%; color: var(--action); }
     .brand-tag, .tag { border: 1px solid var(--line-strong); border-radius: 3px; padding: 3px 6px; color: var(--text-secondary); font: 10px ui-monospace, monospace; letter-spacing: .03em; }
+    .theme-switch { display: flex; gap: 3px; padding: 3px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 5px; }
+    .theme-switch button { min-height: 44px; padding: 0 9px; background: transparent; border-color: transparent; color: var(--text-secondary); font-size: 11px; }
+    .theme-switch button[aria-pressed="true"] { background: var(--brand); color: #ffffff; }
     nav { display: flex; gap: 3px; }
     nav a { min-height: 44px; display: flex; align-items: center; padding: 0 12px; color: var(--text-muted); text-decoration: none; border-radius: 4px; }
     nav a[aria-current="page"] { color: var(--text-primary); background: var(--surface-hover); }
@@ -71,7 +113,7 @@
     .concept-note strong { color: var(--zone); }
     .filter-body { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 10px 12px; }
     .filter-body label { display: grid; gap: 4px; color: var(--text-muted); font-size: 10px; }
-    .filter-body select { width: 100%; min-width: 0; min-height: 38px; padding: 0 7px; font-size: 11px; }
+    .filter-body select { width: 100%; min-width: 0; min-height: 44px; padding: 0 7px; font-size: 11px; }
     .ranking-list { margin: 0; padding: 0; list-style: none; }
     .ranking-list li { padding: 10px 12px; border-bottom: 1px solid var(--line); }
     .ranking-list li:last-child { border-bottom: 0; }
@@ -103,6 +145,8 @@
     .small-body strong { color: var(--text-primary); }
     .source-line { display: flex; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 11px 0 17px; border-top: 1px solid var(--line); color: var(--text-muted); font-size: 10px; }
     .source-line a { color: var(--action); }
+    .skip-link { position: absolute; left: 12px; top: -80px; z-index: 2; padding: 9px 12px; color: var(--text-primary); background: var(--surface-1); border: 2px solid var(--action); }
+    .skip-link:focus { top: 8px; }
     @media (max-width: 1000px) {
       .app { padding: 0 14px; }
       .workspace { grid-template-columns: minmax(0, 1fr) 290px; }
@@ -135,6 +179,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#ranking">Skip to content</a>
   <div class="app">
     <header class="topbar">
       <a class="brand" href="#ranking"><span class="brand-mark" aria-hidden="true">✳</span><span>FLAME IN FREEFALL</span><span class="brand-tag">PSI RESEARCH CONSOLE</span></a>
@@ -144,10 +189,14 @@
         <a href="#coverage">Coverage map</a>
         <a href="#about">About</a>
       </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
       <div class="dataset-state">CACHED PSI DATA · 2026-11-14</div>
     </header>
     <div class="notice"><strong>CATALOG ANALYSIS · NOT LIVE VEHICLE MONITORING</strong><span>This console explores recorded combustion experiments. It does not monitor a spacecraft or predict operational fire risk.</span></div>
-    <main id="ranking">
+    <main id="ranking" tabindex="-1">
       <section class="page-heading" aria-labelledby="screen-title">
         <div><div class="eyebrow">Exploration context / relevance ranking</div><h1 id="screen-title">Investigation monitor</h1></div>
         <div class="profile-control" role="group" aria-label="Ranking profile">
@@ -171,25 +220,25 @@
               <svg viewBox="0 0 820 330" role="img" aria-labelledby="chart-title chart-desc">
                 <title id="chart-title">Coverage map layout for oxygen concentration and test pressure</title>
                 <desc id="chart-desc">Illustrative layout marks only. Replace with the 442 plottable records from the normalized PSI dataset. The amber dashed region represents expected lunar conditions from the challenge statement.</desc>
-                <rect x="61" y="18" width="735" height="255" fill="#000000" stroke="#383838"/>
-                <rect x="282" y="222" width="514" height="51" fill="#ffbb00" fill-opacity=".12" stroke="#ffbb00" stroke-dasharray="6 5"/>
-                <g stroke="#242424" stroke-width="1"><path d="M61 18H796M61 69H796M61 120H796M61 171H796M61 222H796M61 273H796"/><path d="M61 18V273M208 18V273M355 18V273M502 18V273M649 18V273M796 18V273"/></g>
-                <g fill="#aaaaaa" font-size="10" font-family="ui-monospace,monospace">
+                <rect x="61" y="18" width="735" height="255" fill="var(--canvas)" stroke="var(--line)"/>
+                <rect x="282" y="222" width="514" height="51" fill="var(--zone)" fill-opacity="var(--zone-fill-opacity)" stroke="var(--zone)" stroke-dasharray="6 5"/>
+                <g stroke="var(--surface-hover)" stroke-width="1"><path d="M61 18H796M61 69H796M61 120H796M61 171H796M61 222H796M61 273H796"/><path d="M61 18V273M208 18V273M355 18V273M502 18V273M649 18V273M796 18V273"/></g>
+                <g fill="var(--text-muted)" font-size="10" font-family="ui-monospace,monospace">
                   <text x="48" y="277" text-anchor="end">0</text><text x="48" y="226" text-anchor="end">0.7</text><text x="48" y="175" text-anchor="end">1.4</text><text x="48" y="124" text-anchor="end">2.1</text><text x="48" y="73" text-anchor="end">2.8</text><text x="48" y="22" text-anchor="end">3.5</text>
                   <text x="61" y="294" text-anchor="middle">0</text><text x="208" y="294" text-anchor="middle">20</text><text x="355" y="294" text-anchor="middle">40</text><text x="502" y="294" text-anchor="middle">60</text><text x="649" y="294" text-anchor="middle">80</text><text x="796" y="294" text-anchor="middle">100</text>
                   <text x="427" y="318" text-anchor="middle">O₂ concentration (%)</text><text transform="translate(14 146) rotate(-90)" text-anchor="middle">Pressure (bar)</text>
-                  <text x="293" y="242" fill="#ffbb00">EXPECTED MOON-BASE RANGE</text><text x="293" y="257" fill="#cccccc" font-size="9">≥30% O₂ · ≤0.7033 bar · challenge statement</text>
-                  <text x="73" y="195" fill="#cccccc" font-size="9">Earth air · ~21% O₂ · ~1.01 bar</text><text x="626" y="245" fill="#cccccc" font-size="9">Spacesuit · 100% · ~0.30 bar</text>
+                  <text x="293" y="242" fill="var(--zone)">EXPECTED MOON-BASE RANGE</text><text x="293" y="257" fill="var(--text-secondary)" font-size="9">≥30% O₂ · ≤0.7033 bar · challenge statement</text>
+                  <text x="73" y="195" fill="var(--text-secondary)" font-size="9">Earth air · ~21% O₂ · ~1.01 bar</text><text x="626" y="245" fill="var(--text-secondary)" font-size="9">Spacesuit · 100% · ~0.30 bar</text>
                 </g>
-                <path d="M61 199H215" stroke="#aaaaaa" stroke-dasharray="4 5"/><circle cx="215" cy="199" r="4" fill="#000000" stroke="#aaaaaa" stroke-width="2"/><circle cx="796" cy="251" r="5" fill="#000000" stroke="#aaaaaa" stroke-width="2"/>
-                <g fill="#0099ff" fill-opacity=".86">
+                <path d="M61 199H215" stroke="var(--text-muted)" stroke-dasharray="4 5"/><circle cx="215" cy="199" r="4" fill="var(--canvas)" stroke="var(--text-muted)" stroke-width="2"/><circle cx="796" cy="251" r="5" fill="var(--canvas)" stroke="var(--text-muted)" stroke-width="2"/>
+                <g fill="var(--action)" fill-opacity=".86">
                   <circle cx="143" cy="131" r="4"/><circle cx="191" cy="111" r="4"/><circle cx="239" cy="155" r="4"/><circle cx="285" cy="180" r="4"/><circle cx="326" cy="135" r="4"/><circle cx="367" cy="212" r="4"/><circle cx="408" cy="167" r="4"/><circle cx="448" cy="197" r="4"/><circle cx="492" cy="223" r="4"/><circle cx="532" cy="178" r="4"/><circle cx="576" cy="239" r="4"/><circle cx="617" cy="197" r="4"/><circle cx="661" cy="219" r="4"/><circle cx="705" cy="248" r="4"/><circle cx="747" cy="210" r="4"/>
                 </g>
-                <g fill="none" stroke="#0099ff" stroke-width="2">
+                <g fill="none" stroke="var(--action)" stroke-width="2">
                   <path d="M160 177l5 9h-10z"/><path d="M273 121l5 9h-10z"/><path d="M344 89l5 9h-10z"/><path d="M457 126l5 9h-10z"/><path d="M551 91l5 9h-10z"/><path d="M683 75l5 9h-10z"/>
                 </g>
-                <g fill="#0099ff"><path d="M218 151l5 5-5 5-5-5z"/><path d="M390 115l5 5-5 5-5-5z"/><path d="M623 136l5 5-5 5-5-5z"/></g>
-                <g fill="none" stroke="#0099ff" stroke-width="2"><path d="M300 203l8 8m0-8-8 8"/><path d="M509 110l8 8m0-8-8 8"/></g>
+                <g fill="var(--action)"><path d="M218 151l5 5-5 5-5-5z"/><path d="M390 115l5 5-5 5-5-5z"/><path d="M623 136l5 5-5 5-5-5z"/></g>
+                <g fill="none" stroke="var(--action)" stroke-width="2"><path d="M300 203l8 8m0-8-8 8"/><path d="M509 110l8 8m0-8-8 8"/></g>
               </svg>
             </div>
             <div class="legend" aria-label="Outcomes encoded by marker shape; color is shared">
@@ -246,5 +295,29 @@
       <footer class="source-line"><span>Data source: <a href="https://psi.nasa.gov/physci/repo/search?q=combustion">NASA PSI Combustion Science</a> · cite each investigation with its DOI.</span><span>Static design proposal · Not an official NASA product</span></footer>
     </main>
   </div>
+  <script>
+    const themeButtons = document.querySelectorAll('[data-theme-choice]');
+    const systemLightPreference = window.matchMedia('(prefers-color-scheme: light)');
+
+    function syncThemeButtons() {
+      const selectedTheme = document.documentElement.dataset.theme;
+      const activeTheme = selectedTheme ?? (systemLightPreference.matches ? 'light' : 'dark');
+      themeButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.themeChoice === activeTheme));
+      });
+    }
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        document.documentElement.dataset.theme = button.dataset.themeChoice;
+        syncThemeButtons();
+      });
+    });
+
+    systemLightPreference.addEventListener('change', () => {
+      if (!document.documentElement.dataset.theme) syncThemeButtons();
+    });
+    syncThemeButtons();
+  </script>
 </body>
 </html>
