@@ -1,4 +1,5 @@
 import type { ExperimentRecord } from '../../data/types';
+import type { ExplorerState } from '../../router/explorerQuery';
 
 // Pure helpers behind the map filters and the "N of M tests plotted" line.
 // A filter set to null means "all".
@@ -75,3 +76,19 @@ export function filterOptions(records: ExperimentRecord[]): FilterOptions {
 export function hasActiveFilters(filters: MapFilters): boolean {
   return Object.values(filters).some((value) => value !== null);
 }
+
+/** The map's filters as the explorer reads them from the address (`investigation`, `flame`, `fuel`, `outcome`). */
+export const filtersFromExplorer = (state: ExplorerState): MapFilters => ({
+  accession: state.investigation,
+  flameType: state.flame,
+  fuel: state.fuel,
+  outcome: state.outcome,
+});
+
+/** The address change that makes the map show `filters`. */
+export const explorerPatchFromFilters = (filters: MapFilters): Partial<ExplorerState> => ({
+  investigation: filters.accession,
+  flame: filters.flameType,
+  fuel: filters.fuel,
+  outcome: filters.outcome,
+});

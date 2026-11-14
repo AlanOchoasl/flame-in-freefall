@@ -6,12 +6,12 @@ import { PsiLink } from '../../components/PsiLink';
 import { getCatalog, getExperiments, getSummaries } from '../../data/dataAccess';
 import type { CatalogRecord, SummaryEntry } from '../../data/types';
 import { useDataResult } from '../../data/useDataResult';
+import { replaceExplorerState } from '../../router/explorerQuery';
 import { findSummary } from '../detailModel';
 import type { ViewProps } from '../types';
 import { buildComparison, type Cell, type RowMarker } from './comparisonModel';
 import {
   addToSelection,
-  compareHash,
   MIN_TO_COMPARE,
   parseSelection,
   removeFromSelection,
@@ -31,7 +31,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
   const [message, setMessage] = useState<string | null>(null);
 
   const select = (next: string[]) => {
-    window.location.hash = compareHash(next);
+    replaceExplorerState({ ids: next });
   };
   const add = (accession: string) => {
     const result = addToSelection(ids, accession);

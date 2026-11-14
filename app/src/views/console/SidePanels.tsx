@@ -5,7 +5,8 @@ import { Panel } from '../../components/Panel';
 import { PsiLink } from '../../components/PsiLink';
 import type { CatalogRecord, ExperimentRecord, SummaryEntry } from '../../data/types';
 import type { InvestigationTestCoverage, RankedInvestigation, RankingProfile } from '../../lib/ranking';
-import { addToSelection, compareHash } from '../compare/selection';
+import { carryExplorerState, explorerHash, mergeExplorerState, parseExplorerQuery } from '../../router/explorerQuery';
+import { addToSelection } from '../compare/selection';
 import { computeInsight, describeInsight } from '../coverageMap/insight';
 import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
@@ -20,16 +21,18 @@ interface RankingPanelProps {
   coverage: Record<string, InvestigationTestCoverage>;
   selected: string;
   compareIds: string[];
+  query: URLSearchParams;
   onSelect: (accession: string) => void;
 }
 
-function RankedRow({ item, rank, record, coverage, selected, compareIds, onSelect }: {
+function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect }: {
   item: RankedInvestigation;
   rank: number;
   record: CatalogRecord;
   coverage: InvestigationTestCoverage | undefined;
   selected: boolean;
   compareIds: string[];
+  query: URLSearchParams;
   onSelect: (accession: string) => void;
 }) {
   const { accession, curated } = item.investigation;
@@ -60,11 +63,16 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, onSelec
         <button type="button" aria-pressed={selected} aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
           Interpret
         </button>
-        <a href={`#/investigation/${accession}`}>Detail</a>
+        <a href={carryExplorerState(`/investigation/${accession}`, query)}>Detail</a>
+        {coverage && coverage.rowCount > 0 ? (
+          <a href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))}>Show tests on the map</a>
+        ) : (
+          <span className="evidence-mark">Nothing to show on the map</span>
+        )}
         {compareIds.includes(accession) ? (
           <span className="evidence-mark">In comparison</span>
         ) : addResult.message ? null : (
-          <a href={compareHash(addResult.ids)}>Add compare</a>
+          <a href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))}>Add compare</a>
         )}
         <PsiLink accession={accession} />
       </p>
@@ -73,7 +81,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, onSelec
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage, selected, compareIds, onSelect }: RankingPanelProps) {
+export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage, selected, compareIds, query, onSelect }: RankingPanelProps) {
   const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
   const [expanded, setExpanded] = useState(false);
   const options = rankingFilterOptions(ranked);
@@ -124,6 +132,7 @@ export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage
               coverage={coverage[item.investigation.accession]}
               selected={item.investigation.accession === selected}
               compareIds={compareIds}
+              query={query}
               onSelect={onSelect}
             />
           ))}
@@ -140,7 +149,7 @@ export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage
   );
 }
 
-export function InterpretationPanel({ id, record, entry }: { id: string; record: CatalogRecord; entry: SummaryEntry | undefined }) {
+export function InterpretationPanel({ id, record, entry, query }: { id: string; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
   return (
     <Panel id={id} title="Plain-language interpretation" subtitle={`${record.accession} · source-grounded summary`}>
       {entry ? (
@@ -158,7 +167,7 @@ export function InterpretationPanel({ id, record, entry }: { id: string; record:
         </>
       )}
       <p className="row-actions">
-        <a href={`#/investigation/${record.accession}`}>Open the investigation detail</a>
+        <a href={carryExplorerState(`/investigation/${record.accession}`, query)}>Open the investigation detail</a>
         <PsiLink accession={record.accession} doi={record.doi} />
       </p>
     </Panel>
@@ -187,7 +196,7 @@ export function GapsPanel({ id, tests }: { id: string; tests: ExperimentRecord[]
   );
 }
 
-export function BoundariesPanel({ id, selected }: { id: string; selected: string | null }) {
+export function BoundariesPanel({ id, selected, query }: { id: string; selected: string | null; query: URLSearchParams }) {
   return (
     <div className="bottom-line">
       <Panel id={`${id}-detail`} title="Investigation detail route" tag="Drill-down">
@@ -197,7 +206,7 @@ export function BoundariesPanel({ id, selected }: { id: string; selected: string
         </p>
         {selected ? (
           <p className="row-actions">
-            <a href={`#/investigation/${selected}`}>Open {selected}</a>
+            <a href={carryExplorerState(`/investigation/${selected}`, query)}>Open {selected}</a>
           </p>
         ) : null}
       </Panel>
@@ -205,7 +214,7 @@ export function BoundariesPanel({ id, selected }: { id: string; selected: string
         <p>{DISCLAIMER}</p>
         <p>The lunar zone is expected from the challenge statement, not a final habitat specification. AI text is precomputed and labeled.</p>
         <p className="row-actions">
-          <a href="#/about">About, sources and licenses</a>
+          <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
         </p>
       </Panel>
     </div>

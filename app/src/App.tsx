@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
+import { carryExplorerState } from './router/explorerQuery';
+import { useOfflineReady } from './offline';
 import { matchRoute } from './router/matchRoute';
 import { useHashLocation } from './router/useHashLocation';
 import { useRouteChrome } from './router/useRouteChrome';
@@ -9,8 +11,11 @@ import { NotFound } from './views/placeholders';
 
 export function App() {
   const hash = useHashLocation();
+  const offlineReady = useOfflineReady();
   const match = matchRoute(hash, views);
   const currentPath = match?.view.path;
+  // Links in the header keep the explorer choices of the current address.
+  const query = match?.query ?? new URLSearchParams();
   const mainRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,8 +36,12 @@ export function App() {
     else delete document.documentElement.dataset.theme;
   }, [theme]);
 
+  // The route is the hash without its parameters: a change of profile, filter or comparison does not
+  // count as a new screen, so it must not close the menu or move focus.
+  const route = hash.split('?')[0];
+
   // Any route change closes the menu, including the browser's Back button.
-  useEffect(() => setMenuOpen(false), [hash]);
+  useEffect(() => setMenuOpen(false), [route]);
 
   const closeMenuOnEscape = (event: KeyboardEvent) => {
     if (event.key !== 'Escape' || !menuOpen) return;
@@ -42,7 +51,7 @@ export function App() {
 
   const accession = match?.params.accession;
   const screenTitle = match ? [match.view.title, accession].filter(Boolean).join(' ') : 'Not found';
-  useRouteChrome(screenTitle, hash);
+  useRouteChrome(screenTitle, route);
 
   // A plain #anchor would change the hash and the router would see an unknown route.
   const skipToContent = (event: MouseEvent) => {
@@ -56,7 +65,7 @@ export function App() {
         Skip to content
       </a>
       <header className="console-header" onKeyDown={closeMenuOnEscape}>
-        <a className="console-brand" href="#/ranking" aria-label="Flame in Freefall — Ranking">
+        <a className="console-brand" href={carryExplorerState('/ranking', query)} aria-label="Flame in Freefall — Ranking">
           <span className="console-mark" aria-hidden="true" />
           <strong>FLAME IN FREEFALL</strong>
           <span className="console-tag">PSI RESEARCH CONSOLE</span>
@@ -77,7 +86,7 @@ export function App() {
               .filter((view) => view.inNav)
               .map((view) => (
                 <li key={view.path}>
-                  <a href={`#${view.path}`} aria-current={view.path === currentPath ? 'page' : undefined}>
+                  <a href={carryExplorerState(view.path, query)} aria-current={view.path === currentPath ? 'page' : undefined}>
                     {view.title}
                   </a>
                 </li>
@@ -103,6 +112,9 @@ export function App() {
       <footer>
         <DataSourceNote />
         <p>Independent research exploration · AI-generated text is always labeled.</p>
+        <p role="status" className="offline-state">
+          {offlineReady ? 'Available offline' : ''}
+        </p>
       </footer>
     </>
   );

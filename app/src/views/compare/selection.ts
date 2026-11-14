@@ -5,14 +5,11 @@ export const MIN_TO_COMPARE = 2;
 
 export const LIMIT_MESSAGE = `You can compare up to ${MAX_SELECTED} investigations. Remove one to add another.`;
 
-// "#/compare?ids=PSI-159,PSI-25" keeps the selection in the address, so a copied link restores it.
+// "?ids=PSI-159,PSI-25" keeps the selection in the address, so a copied link restores it. The address is
+// written by `replaceExplorerState` (router/explorerQuery.ts).
 export function parseSelection(query: URLSearchParams, known: string[]): string[] {
   const ids = (query.get('ids') ?? '').split(',').map((id) => id.trim()).filter((id) => known.includes(id));
   return [...new Set(ids)].slice(0, MAX_SELECTED);
-}
-
-export function compareHash(ids: string[]): string {
-  return ids.length === 0 ? '#/compare' : `#/compare?ids=${ids.join(',')}`;
 }
 
 export type AddResult = { ids: string[]; message: string | null };

@@ -69,7 +69,19 @@ Ranking, Compare and Detail pick up the new record. If it has test tables, add a
 
 Known issue: `npm run check:curation` rejects the current curation file (it expects `hardwareGroup` as a list and does not know `doi`). The catalog build in step 3 validates the same file, so rely on that until the check is aligned.
 
-## 5. Replace the static files with an API
+## 5. Add a choice to the shared address state (a new explorer parameter)
+
+The console keeps its choices in the address (`#/ranking?profile=detection&ids=PSI-47,PSI-25`). Everything that reads or writes them goes through `app/src/router/explorerQuery.ts`.
+
+1. Add the field to `ExplorerState` and to `NO_EXPLORER_STATE`, and its name to `KEYS` (the order the parameters are written in).
+2. Read it in `parseExplorerQuery`. If the data limits its values, add the list of known values to `KnownValues` and check it in `cleanExplorerState`, so an unknown value is ignored instead of breaking the page.
+3. In a panel, read the value from `query` and write a change with `replaceExplorerState({ yourField: value })`. This replaces the history entry, so Back keeps leaving the page and not each click.
+4. Links to other screens that must keep the choice use `carryExplorerState(path, query)` or `explorerHash(path, state)`. Only the explorer parameters are carried; any other parameter is dropped on purpose.
+5. Add cases to `explorerQuery.test.ts` (round trip, an unknown value, default omitted).
+
+Do not keep the choice in `useState` as well: the address is the only source of truth.
+
+## 6. Replace the static files with an API
 
 Only `app/src/data/dataAccess.ts` calls `fetch`. To read from an API:
 
@@ -96,4 +108,6 @@ Recipes 1 to 4 were followed on a throwaway change in the browser and the comman
 3. A mapper for the PSI-10 normal-flame table: `experiments.json` went from 453 to 660 records (629 plottable, 66 in the Moon-base zone), and the smoke check and the mapper-count test failed until their numbers were updated, which is why step 5 lists them. (That table is no longer in the project: PSI-10 declares no license, see the first paragraph of this recipe.)
 4. A copied catalog record: the catalog went from 26 to 27 records, and a curation entry for an unknown accession failed the build.
 
-Recipe 5 was checked only by searching for `fetch(` in `app/src` (one call, in `dataAccess.ts`); it was not implemented.
+Recipe 6 was checked only by searching for `fetch(` in `app/src` (one call, in `dataAccess.ts`); it was not implemented.
+
+Recipe 5 (the address state) was written from the `explorer-state` implementation; it was not followed again on a throwaway change.

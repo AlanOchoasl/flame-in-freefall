@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DataState } from '../../components/DataState';
 import { MetricTile, Panel } from '../../components/Panel';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
 import { useDataResult } from '../../data/useDataResult';
 import { rankInvestigations } from '../../lib/ranking';
+import { parseExplorerQuery, replaceExplorerState } from '../../router/explorerQuery';
 import { CompareBody } from '../compare/Compare';
 import { parseSelection } from '../compare/selection';
-import { CoverageMapBody } from '../coverageMap/CoverageMap';
+import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../coverageMap/CoverageMap';
 import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
@@ -21,8 +22,10 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
   const experiments = useDataResult(getExperiments);
   const profiles = useDataResult(getRankingProfiles);
   const summaries = useDataResult(getSummaries);
-  const [profileId, setProfileId] = useState<string | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
+  // The profile, the selected investigation, the comparison and the map filters live in the address.
+  const explorer = parseExplorerQuery(query);
+  const knownSelected =
+    catalog.status === 'ok' && catalog.data.records.some((record) => record.accession === explorer.selected) ? explorer.selected : null;
 
   // A deep link to a section scrolls there on the first load; later route changes move focus instead.
   useEffect(() => {
@@ -39,7 +42,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         </div>
         <DataState state={profiles} label="The ranking profiles">
           {(file) => {
-            const active = file.profiles.find((profile) => profile.id === profileId) ?? file.profiles[0];
+            const active = file.profiles.find((profile) => profile.id === explorer.profile) ?? file.profiles[0];
             return (
               <div className="profile-control" role="group" aria-label="Environment profile">
                 {file.profiles.map((profile) => (
@@ -47,7 +50,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                     key={profile.id}
                     type="button"
                     aria-pressed={profile.id === active.id}
-                    onClick={() => setProfileId(profile.id)}
+                    onClick={() => replaceExplorerState({ profile: profile.id === file.profiles[0].id ? null : profile.id })}
                   >
                     {profile.label}
                   </button>
@@ -80,7 +83,9 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         <div className="main-column">
           <Panel id="coverage" title="Test conditions · O₂ × pressure" subtitle="The quantitative coverage map · one point per plottable test" routeFocus={section === 'map'}>
             <DataState state={experiments} label="The test data">
-              {(file) => <CoverageMapBody records={file.records} initialAccession={query.get('investigation')} />}
+              {(file) => (
+                <CoverageMapBody records={file.records} filters={mapFiltersFromQuery(query, file.records)} onFiltersChange={writeMapFilters} />
+              )}
             </DataState>
           </Panel>
           <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
@@ -95,11 +100,12 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                 {(experimentsFile) => (
                   <DataState state={profiles} label="The ranking profiles">
                     {(profilesFile) => {
-                      const profile = profilesFile.profiles.find((p) => p.id === profileId) ?? profilesFile.profiles[0];
+                      const profile = profilesFile.profiles.find((p) => p.id === explorer.profile) ?? profilesFile.profiles[0];
                       const coverage = testCoverageByAccession(experimentsFile.investigations);
                       const ranked = rankInvestigations(catalogFile.records, profile, coverage);
-                      const selectedAccession = selected ?? ranked[0].investigation.accession;
-                      const record = catalogFile.records.find((r) => r.accession === selectedAccession) ?? catalogFile.records[0];
+                      const firstRanked = ranked[0].investigation.accession;
+                      const record = catalogFile.records.find((r) => r.accession === explorer.selected) ?? catalogFile.records.find((r) => r.accession === firstRanked)!;
+                      const selectedAccession = record.accession;
                       const entries = summaries.status === 'ok' ? summaries.data.entries : [];
                       return (
                         <>
@@ -112,9 +118,10 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             coverage={coverage}
                             selected={selectedAccession}
                             compareIds={parseSelection(query, catalogFile.records.map((r) => r.accession))}
-                            onSelect={setSelected}
+                            query={query}
+                            onSelect={(accession) => replaceExplorerState({ selected: accession === firstRanked ? null : accession })}
                           />
-                          <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} />
+                          <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} query={query} />
                           <GapsPanel id="gaps" tests={experimentsFile.records} />
                         </>
                       );
@@ -127,7 +134,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         </div>
       </div>
 
-      <BoundariesPanel id="boundaries" selected={selected} />
+      <BoundariesPanel id="boundaries" selected={knownSelected} query={query} />
     </div>
   );
 }

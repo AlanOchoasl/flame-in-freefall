@@ -8,6 +8,7 @@ import { useDataResult } from '../data/useDataResult';
 import { findSummary, formatO2Range, formatPressureRange, relatedLinks } from './detailModel';
 import { NotFound } from './placeholders';
 import { rankingPositions } from './rankingPosition';
+import { carryExplorerState } from '../router/explorerQuery';
 import type { ViewProps } from './types';
 
 function PsiText({ value }: { value: string | null }) {
@@ -89,7 +90,7 @@ function TestConditions({ record }: { record: CatalogRecord }) {
   );
 }
 
-function RankingPositions({ record, records }: { record: CatalogRecord; records: CatalogRecord[] }) {
+function RankingPositions({ record, records, query }: { record: CatalogRecord; records: CatalogRecord[]; query: URLSearchParams }) {
   const profiles = useDataResult(getRankingProfiles);
   const experiments = useDataResult(getExperiments);
 
@@ -112,7 +113,7 @@ function RankingPositions({ record, records }: { record: CatalogRecord; records:
                 )}
               </ul>
               <p>
-                A rule-based heuristic made by this team, not an assessment by NASA. <a href="#/ranking">See the full ranking</a>.
+                A rule-based heuristic made by this team, not an assessment by NASA. <a href={carryExplorerState('/ranking', query)}>See the full ranking</a>.
               </p>
             </>
           )}
@@ -160,19 +161,19 @@ function Facts({ record }: { record: CatalogRecord }) {
   );
 }
 
-function Related({ record, known }: { record: CatalogRecord; known: ReadonlySet<string> }) {
+function Related({ record, known, query }: { record: CatalogRecord; known: ReadonlySet<string>; query: URLSearchParams }) {
   const links = relatedLinks(record, known);
   if (links.length === 0) return <NotAvailable reason="not-in-psi-record" />;
   return (
     <ul>
       {links.map(({ accession, inCatalog }) => (
-        <li key={accession}>{inCatalog ? <a href={`#/investigation/${accession}`}>{accession}</a> : accession}</li>
+        <li key={accession}>{inCatalog ? <a href={carryExplorerState(`/investigation/${accession}`, query)}>{accession}</a> : accession}</li>
       ))}
     </ul>
   );
 }
 
-function DetailBody({ record, records }: { record: CatalogRecord; records: CatalogRecord[] }) {
+function DetailBody({ record, records, query }: { record: CatalogRecord; records: CatalogRecord[]; query: URLSearchParams }) {
   const known = new Set(records.map((item) => item.accession));
   return (
     <>
@@ -187,7 +188,7 @@ function DetailBody({ record, records }: { record: CatalogRecord; records: Catal
 
       <section className="research-panel"><h2>Test conditions</h2><TestConditions record={record} /></section>
 
-      <section className="research-panel"><h2>Ranking position</h2><RankingPositions record={record} records={records} /></section>
+      <section className="research-panel"><h2>Ranking position</h2><RankingPositions record={record} records={records} query={query} /></section>
 
       <section className="research-panel"><h2>Text from NASA PSI</h2><PsiTextLabel />
       <h3>Objectives</h3>
@@ -208,7 +209,7 @@ function DetailBody({ record, records }: { record: CatalogRecord; records: Catal
       </p>
       </section>
 
-      <section className="research-panel"><h2>Related investigations</h2><Related record={record} known={known} /></section>
+      <section className="research-panel"><h2>Related investigations</h2><Related record={record} known={known} query={query} /></section>
 
       <section className="research-panel"><h2>Cite this investigation</h2>
       <p>
@@ -219,7 +220,7 @@ function DetailBody({ record, records }: { record: CatalogRecord; records: Catal
   );
 }
 
-export function InvestigationDetail({ params }: ViewProps) {
+export function InvestigationDetail({ params, query }: ViewProps) {
   const { accession } = params;
   const catalog = useDataResult(getCatalog);
 
@@ -232,10 +233,10 @@ export function InvestigationDetail({ params }: ViewProps) {
     <>
       <h1>Investigation {accession}</h1>
       <p className="back-link">
-        <a href="#/ranking">← Back to the explorer</a>
+        <a href={carryExplorerState('/ranking', query)}>← Back to the explorer</a>
       </p>
       <DataState state={catalog} label="The catalog">
-        {(file) => <DetailBody record={record as CatalogRecord} records={file.records} />}
+        {(file) => <DetailBody record={record as CatalogRecord} records={file.records} query={query} />}
       </DataState>
     </>
   );
