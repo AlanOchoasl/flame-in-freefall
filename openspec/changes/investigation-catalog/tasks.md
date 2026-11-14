@@ -36,8 +36,8 @@ Depends on: 3.3 for the file; verification needs 3.2. Split by accession range (
 
 Depends on: 3.2 for docs; 5.2 can start once the dashboard knows which investigations it shows.
 
-- [ ] 5.1 (Sun by 11:00, ≤30 min) Document the record shape, vocabularies and the strict flag in `data/processed/README.md`; verify the documented commands run as written.
-- [ ] 5.2 (Sun by 14:00, ≤1h) Capture the DOI of each investigation shown in the dashboard from its PSI page ("Cite this Investigation") and fill it in the curation file; verify the DOIs appear in the output. Plan B: leave `doi` null and cite the PSI page link.
+- [x] 5.1 (Sun by 11:00, ≤30 min) Document the record shape, vocabularies and the strict flag in `data/processed/README.md`; verify the documented commands run as written.
+- [x] 5.2 (Sun by 14:00, ≤1h) Capture the DOI of each investigation shown in the dashboard from its PSI page ("Cite this Investigation") and fill it in the curation file; verify the DOIs appear in the output. Plan B: leave `doi` null and cite the PSI page link. *(Done: all 26 DOIs read from PSI's investigation record and verified against PSI-98's page; PSI also reports each license: 25 CC0-1.0, PSI-10 none declared, see `data/processed/README.md`.)*
 
 ## Workflow follow-up
 

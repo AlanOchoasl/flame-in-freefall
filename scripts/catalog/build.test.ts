@@ -62,9 +62,16 @@ describe('buildCatalog on the cached PSI data', () => {
     ]);
     expect(byId['PSI-100'].testTables).toEqual(['PSI-100_Experimental_table_SAFFIRE-3.csv']);
   });
-  it('gives every record its PSI page link and a null DOI until captured', () => {
+  it('gives every record its PSI page link and the DOI captured from PSI', () => {
     expect(byId['PSI-98'].pageUrl).toBe('https://psi.nasa.gov/physci/repo/data/investigations/PSI-98');
-    expect(dataset.records.every((r) => r.doi === null)).toBe(true);
+    expect(byId['PSI-98'].doi).toBe('10.60555/0t15-1z43');
+    expect(dataset.records.every((r) => r.doi !== null && /^10\.\d{4,9}\/\S+$/.test(r.doi))).toBe(true);
+    expect(new Set(dataset.records.map((r) => r.doi)).size).toBe(26);
+  });
+  it('leaves the DOI null when the curation file has none', () => {
+    const curation: CurationFile = { schemaVersion: '1.0.0', entries: {} };
+    const { dataset: bare } = buildCatalog(realInput({ curation }));
+    expect(bare.records.every((r) => r.doi === null)).toBe(true);
   });
   it('seeds the hardware group from the statement and keeps it unreviewed', () => {
     expect(byId['PSI-159'].curated.hardwareGroup.value).toBe('acme-cir');
