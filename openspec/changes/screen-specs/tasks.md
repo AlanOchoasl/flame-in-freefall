@@ -23,12 +23,12 @@ Depends on: 1. Uses stub `catalog.json`, `experiments.json`, `summaries.json`.
 
 Depends on: 1 and the view tasks in `investigation-ranking` 2.1, `investigation-comparator` 2.1, `coverage-map` 2.1.
 
-- [ ] 3.1 (Sun by 12:00, ≤1.5h) Check each of Ranking, Compare and Coverage map against its block order, states, 360 px and keyboard scenarios in this spec, and that each uses the `design-system` components; verify each scenario once by hand and note gaps in `docs/SMOKE.md`.
-- [ ] 3.2 (Sun by 12:00, ≤1h) Review all screen copy: each factual sentence cites the challenge statement or a PSI field; verify with a read-through by two people.
+- [x] 3.1 (Sun by 12:00, ≤1.5h) Check each of Ranking, Compare and Coverage map against its block order, states, 360 px and keyboard scenarios in this spec, and that each uses the `design-system` components; verify each scenario once by hand and note gaps in `docs/SMOKE.md`.
+- [x] 3.2 (Sun by 12:00, ≤1h) Review all screen copy: each factual sentence cites the challenge statement or a PSI field; verify with a read-through by two people.
 
 ## 4. Reconcile other changes
 
-- [ ] 4.1 (by 18:00, ≤30 min) Update the `app-shell` spec and proposal so About is a route and the home route is Ranking (use `/openspec-update-change`); verify the three documents no longer contradict each other.
+- [x] 4.1 (by 18:00, ≤30 min) Update the `app-shell` spec and proposal so About is a route and the home route is Ranking (use `/openspec-update-change`); verify the three documents no longer contradict each other.
 
 ## Workflow follow-up
 

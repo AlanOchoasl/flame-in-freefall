@@ -29,7 +29,7 @@ Depends on: 1.1 and `screen-specs` 1.1.
 Depends on: 2 and 3.
 
 - [ ] 4.1 (Sun by 12:00, ≤1h) Check the shipped screens in grayscale, with Tab only and at 360 px; verify each status is identifiable without color and note any gap in `docs/SMOKE.md`.
-- [ ] 4.2 (Sun by 12:00, ≤15 min) Search the build output for "MOCKUP", "sample-placeholder" and "Sample summary text"; verify none appears.
+- [x] 4.2 (Sun by 12:00, ≤15 min) Search the build output for "MOCKUP", "sample-placeholder" and "Sample summary text"; verify none appears.
 
 ## Workflow follow-up
 

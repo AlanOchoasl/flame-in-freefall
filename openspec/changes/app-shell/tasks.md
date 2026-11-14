@@ -34,8 +34,8 @@ Depends on: 1. Used by every view.
 
 Depends on: 2.
 
-- [ ] 5.1 (Sat by 20:00, ≤1.5h) Pick the host, set the base path, deploy the current build; verify the public URL opens all four routes and works offline after the first load. Plan B: serve the built folder from another host, or from a release artifact.
-- [ ] 5.2 (Sun by 12:00, ≤1h) Add a CI-free manual smoke checklist in `docs/SMOKE.md` (open each view, offline check, 360 px, keyboard); verify it is run once on the public URL.
+- [x] 5.1 (Sat by 20:00, ≤1.5h) Pick the host, set the base path, deploy the current build; verify the public URL opens all four routes and works offline after the first load. Plan B: serve the built folder from another host, or from a release artifact.
+- [x] 5.2 (Sun by 12:00, ≤1h) Add a CI-free manual smoke checklist in `docs/SMOKE.md` (open each view, offline check, 360 px, keyboard); verify it is run once on the public URL.
 
 - [x] 5.3 (Sun by 13:00, ≤1h) Write `docs/EXTENDING.md` (add an investigation, a table mapper, a ranking profile, a view, or swap the data-access module for an API); verify each recipe by following it once on a throwaway branch.
 
