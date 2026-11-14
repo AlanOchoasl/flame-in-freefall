@@ -73,14 +73,15 @@ describe('buildCatalog on the cached PSI data', () => {
     const { dataset: bare } = buildCatalog(realInput({ curation }));
     expect(bare.records.every((r) => r.doi === null)).toBe(true);
   });
-  it('seeds the hardware group from the statement and keeps it unreviewed', () => {
+  it('has the reviewed hardware group from the statement and the PSI record', () => {
     expect(byId['PSI-159'].curated.hardwareGroup.value).toBe('acme-cir');
     expect(byId['PSI-69'].curated.hardwareGroup.value).toBe('mdca-cir');
     expect(byId['PSI-26'].curated.hardwareGroup.value).toBe('msg-flow-duct');
-    expect(byId['PSI-159'].curated.hardwareGroup.reviewed).toBe(false);
+    expect(dataset.records.every((r) => r.curated.hardwareGroup.reviewed)).toBe(true);
   });
   it('counts unreviewed values and lists the accessions that still have some', () => {
-    expect(dataset.unreviewedCount).toBe(26 * 4);
+    // hardwareGroup is reviewed for all 26; fuelPhase, topics and measurements are still being curated.
+    expect(dataset.unreviewedCount).toBe(26 * 3);
     expect(accessionsWithUnreviewed(dataset)).toHaveLength(26);
   });
   it('reports no warnings on the real data', () => {
