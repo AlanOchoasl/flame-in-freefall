@@ -13,7 +13,9 @@ const projectDir = args.find((a) => !a.startsWith('--')) ?? process.cwd();
 const policyPath = join(dirname(fileURLToPath(import.meta.url)), 'license-policy.json');
 const policy = JSON.parse(readFileSync(policyPath, 'utf8'));
 const allowed = new Set(policy.allowedLicenses);
-const exceptions = new Set(policy.approvedExceptions.map((e) => e.name));
+// An exception name may end in '*' to cover per-platform binary packages (e.g. "lightningcss*").
+const isApproved = (name) =>
+  policy.approvedExceptions.some((e) => (e.name.endsWith('*') ? name.startsWith(e.name.slice(0, -1)) : name === e.name));
 
 function listPackageDirs(nodeModules) {
   const dirs = [];
@@ -54,7 +56,7 @@ for (const dir of listPackageDirs(join(projectDir, 'node_modules'))) {
 }
 
 const rows = [...packages.values()].sort((a, b) => a.name.localeCompare(b.name));
-const rejected = rows.filter((p) => !isAllowed(p.license) && !exceptions.has(p.name));
+const rejected = rows.filter((p) => !isAllowed(p.license) && !isApproved(p.name));
 
 console.log(`Checked ${rows.length} packages.`);
 if (rejected.length > 0) {

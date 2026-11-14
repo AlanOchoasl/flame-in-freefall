@@ -2,7 +2,7 @@
 
 ## Context
 
-No app code exists yet. Inputs are static JSON files produced by other changes. The team has React, Angular, .NET and Nest experience; React + TypeScript + Vite is the default proposed on 2026-11-14 and has **not been explicitly confirmed** by the team. See proposal.md.
+No app code exists yet. Inputs are static JSON files produced by other changes. The team has React, Angular, .NET and Nest experience. On 2026-11-14 the team chose React + TypeScript; Vite is the build tool. The team also asked about a Nest backend: the Must work stays **static with no backend**, and a Nest service is only considered for `ask-the-data` (runtime AI proxy), after milestone 2. See proposal.md.
 
 ## Goals / Non-Goals
 
@@ -23,10 +23,9 @@ Data flow: `data/processed/*.json` → `app/public/data/` → fetch at runtime �
 
 ## Risks / Trade-offs
 
-- [Vite 8 depends on `lightningcss` (MPL-2.0), which `check-licenses` rejects under the current policy] → **team decision needed before scaffolding**: approve it as an exception (build-time only, not in the shipped bundle; MPL-2.0 is OSI-approved, so within the 2026 Terms) or pick another Vite major / build tool. Nobody but a person edits `approvedExceptions`.
+- [Vite 8 depends on `lightningcss` (MPL-2.0)] → **approved by the team on 2026-11-14** as a build-time-only exception, recorded in `scripts/license-policy.json` (`lightningcss*` also covers its per-platform binaries). Only a person edits `approvedExceptions`.
 - [Node's TypeScript stripping vs Vite] → app code is compiled by Vite; build scripts use Node directly.
 - [Sub-path hosting breaks absolute URLs] → relative URLs and hash routing.
-- [React not confirmed by the team] → decide before 13:00; switching later costs rework.
 
 ## Open Questions
 

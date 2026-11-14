@@ -11,5 +11,12 @@
     "Unlicense",
     "BlueOak-1.0.0"
   ],
-  "approvedExceptions": []
+  "approvedExceptions": [
+    {
+      "name": "lightningcss*",
+      "license": "MPL-2.0",
+      "reason": "Hard dependency of Vite 8 (and its per-platform binaries). Build-time only; not included in the shipped bundle. MPL-2.0 is OSI-approved, so within the 2026 Terms. We do not modify it.",
+      "approvedBy": "team member, in chat with the assistant, 2026-11-14"
+    }
+  ]
 }

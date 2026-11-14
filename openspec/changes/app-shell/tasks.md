@@ -6,7 +6,7 @@ Tasks are **not pre-assigned**. Each person claims a module (a numbered group) i
 
 Depends on: team decisions (React stack; `lightningcss` exception).
 
-- [ ] 1.1 (by 13:30, ≤30 min) Team decides: React + TypeScript + Vite confirmed? approve or reject the `lightningcss` (MPL-2.0) exception, recorded by a person in `scripts/license-policy.json` with a reason; verify the decision is written in the team channel.
+- [x] 1.1 (by 13:30, ≤30 min) Team decided on 2026-11-14: React + TypeScript + Vite; the `lightningcss*` (MPL-2.0) exception is approved and recorded in `scripts/license-policy.json`; whether to add a Nest backend is **deferred** (not part of the Must work, see design). Verified: `node scripts/check-licenses.mjs` passes on a standard Vite install.
 - [ ] 1.2 (by 14:30, ≤1h) Scaffold `app/` (React + TypeScript + Vite + Recharts), add `build` and `sync:data` scripts; verify `npm run build` succeeds and `node scripts/check-licenses.mjs` passes.
 
 ## 2. Layout and routing
