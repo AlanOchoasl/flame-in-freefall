@@ -9,12 +9,18 @@ export interface InvestigationSummary {
   inMoonBaseZone: number;
   o2Range: Range;
   pressureBarRange: Range;
+  fuels: string[];
 }
 
 function rangeOf(values: (number | null)[]): Range {
   const numbers = values.filter((value): value is number => value !== null);
   if (numbers.length === 0) return [null, null];
   return [Math.min(...numbers), Math.max(...numbers)];
+}
+
+function fuelsOf(group: FlaggedRecord[]): string[] {
+  const species = group.map((r) => r.fuel.species).filter((s): s is string => s !== null);
+  return [...new Set(species)].sort();
 }
 
 export function summarizeInvestigations(records: FlaggedRecord[]): InvestigationSummary[] {
@@ -29,5 +35,6 @@ export function summarizeInvestigations(records: FlaggedRecord[]): Investigation
     inMoonBaseZone: group.filter((r) => r.inMoonBaseZone).length,
     o2Range: rangeOf(group.map((r) => r.o2Fraction)),
     pressureBarRange: rangeOf(group.map((r) => r.pressureBar)),
+    fuels: fuelsOf(group),
   }));
 }

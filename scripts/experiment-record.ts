@@ -10,7 +10,7 @@ export interface ExperimentRecord {
   flameType: FlameType;
   fuel: { species: string | null; raw: string; inferred: boolean };
   o2Fraction: number | null;
-  o2FractionAfterTest?: number | null;
+  o2FractionAfterTest: number | null;
   pressureBar: number | null;
   pressureIsApproximate: boolean;
   tadK: number | null;

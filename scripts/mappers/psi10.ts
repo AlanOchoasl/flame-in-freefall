@@ -26,6 +26,7 @@ function mapInverseRow(row: CsvRow): ExperimentRecord {
     // The table has no fuel column; its headers name the fuel fraction XC2H4 (ethylene).
     fuel: { species: 'ethylene', raw: 'XC2H4', inferred: true },
     o2Fraction: number('XO2', 'o2Fraction'),
+    o2FractionAfterTest: null,
     pressureBar: atmToBar(number('pmean (atm)', 'pressureBar')),
     pressureIsApproximate: false,
     tadK: number('Tad (K)', 'tadK'),

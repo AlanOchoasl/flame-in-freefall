@@ -52,12 +52,13 @@ function mapRow(columns: Columns, row: CsvRow): ExperimentRecord {
   };
   const fuelRaw = (row.Fuel ?? '').trim();
 
-  const record: ExperimentRecord = {
+  return {
     id: `${ACCESSION}:${row.Test.replace(/\s+/g, '')}`,
     accession: ACCESSION,
     flameType: columns.flameType,
     fuel: { species: speciesOf(fuelRaw), raw: fuelRaw, inferred: false },
     o2Fraction: number(columns.o2, 'o2Fraction'),
+    o2FractionAfterTest: columns === NORMAL ? number('XO2 after test', 'o2FractionAfterTest') : null,
     pressureBar: number('approx p (bar)', 'pressureBar'),
     pressureIsApproximate: true,
     tadK: number('Tad (K)', 'tadK'),
@@ -69,10 +70,6 @@ function mapRow(columns: Columns, row: CsvRow): ExperimentRecord {
     pageUrl: PAGE_URL,
     dataQuality: issues,
   };
-  if (columns === NORMAL) {
-    record.o2FractionAfterTest = number('XO2 after test', 'o2FractionAfterTest');
-  }
-  return record;
 }
 
 export const psi159NormalMapper: Mapper = {
