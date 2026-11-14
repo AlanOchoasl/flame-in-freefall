@@ -142,3 +142,9 @@ h2,
 h3 {
   overflow-wrap: anywhere;
 }
+
+/* Compare: the table scrolls inside its own area and the first column stays visible. */
+.table-scroll { overflow-x: auto; max-width: 100%; }
+.table-scroll table { border-collapse: collapse; min-width: 640px; }
+.table-scroll th, .table-scroll td { text-align: left; vertical-align: top; padding: 0.5rem; border-bottom: 1px solid #ccc; }
+.table-scroll tbody th { position: sticky; left: 0; background: var(--bg, #fff); }

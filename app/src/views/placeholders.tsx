@@ -1,8 +1,6 @@
 // Temporary screens: each owner replaces its component when their view is built.
 
 export const Ranking = () => <h1>Ranking</h1>;
-export const Compare = () => <h1>Compare</h1>;
-export const CoverageMap = () => <h1>Coverage map</h1>;
 
 export const NotFound = ({ requested, message }: { requested: string; message?: string }) => (
   <>
