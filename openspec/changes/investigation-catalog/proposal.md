@@ -4,7 +4,7 @@
 
 ## Why
 
-The challenge asks for a dashboard that summarizes, ranks and compares investigations. All three views, and the AI summaries, need one clean catalog of the 26 PSI investigations. The PSI data has messy text lists and 12 spellings of the research sub-area, and it lacks fields the statement cares about (hardware group, fuel phase, fire-safety topic, sensors).
+The challenge asks for a dashboard that summarizes, ranks and compares investigations. All three views, and the AI summaries, need one clean catalog of the 26 PSI investigations. The PSI data has messy text lists and 13 spellings of the research sub-area, and it lacks fields the statement cares about (hardware group, fuel phase, fire-safety topic, sensors).
 
 ## What Changes
 

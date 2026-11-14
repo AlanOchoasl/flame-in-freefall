@@ -12,10 +12,12 @@
     "check:summaries": "node scripts/check-summaries.ts",
     "check:curation": "node scripts/check-curation.ts",
     "generate:summaries": "node --env-file-if-exists=.env scripts/generate-summaries.ts",
-    "import:summaries": "node scripts/import-summaries.ts"
+    "import:summaries": "node scripts/import-summaries.ts",
+    "build:data": "node --experimental-strip-types scripts/build-data.ts"
   },
   "dependencies": {
-    "@google/genai": "^3.3.0"
+    "@google/genai": "^3.3.0",
+    "csv-parse": "^7.0.3"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
