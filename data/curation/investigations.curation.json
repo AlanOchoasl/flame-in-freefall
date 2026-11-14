@@ -459,14 +459,14 @@
           "solid"
         ],
         "source": "Approach text: SIBAL, silicone and PMMA samples",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
           "material-flammability"
         ],
         "source": "Objectives text: large-scale fire growth and flammability limits vs NASA normal-gravity screening test",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -477,7 +477,7 @@
           "anemometers"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-100": {
@@ -492,14 +492,14 @@
           "solid"
         ],
         "source": "Approach text: SIBAL sample material",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
           "material-flammability"
         ],
         "source": "Objectives text: large-scale fire growth and flammability limits vs NASA normal-gravity screening test",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -510,7 +510,7 @@
           "anemometers"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-101": {
@@ -588,7 +588,7 @@
           "gas"
         ],
         "source": "Approach text: methane, ethylene and nitrogen-diluted mixtures",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -596,7 +596,7 @@
           "modeling"
         ],
         "source": "Objectives text: structure and stability of laminar diffusion flames; validate numerical models of flame dynamics, soot and radiation",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -604,7 +604,7 @@
           "flow rate and temperature sensors"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-107": {
@@ -619,14 +619,14 @@
           "gas"
         ],
         "source": "Approach text: methane, ethylene, propane and propylene",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
           "flame-fundamentals"
         ],
         "source": "Objectives text: smoke-point properties and sooting propensity of non-buoyant jet diffusion flames",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -634,7 +634,7 @@
           "flame height, radiative heat losses and co-flow air velocity distributions"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-108": {

@@ -17,7 +17,7 @@ Depends on: 1.1. Tasks 2.1 and 2.2 are independent; split by accession range.
 
 - [x] 2.1 (Sat by 20:00, ≤2h) Draft summaries for the first 13 investigations with Gemini (app or API, per team decision) into the draft file; verify the check script passes on them.
 - [ ] 2.2 (Sat by 20:00, ≤2h) Same for the last 13 investigations; verify the check script passes.
-- [ ] 2.3 (Sun by 11:00, ≤3h) Review each draft against its source, fix wording, set `reviewed: true` only when satisfied; verify strict mode lists only the entries not yet reviewed. Plan B: leave unreviewed ones labeled, or drop them so the app falls back to PSI text.
+- [x] 2.3 (Sun by 11:00, ≤3h) Review each draft against its source, fix wording, set `reviewed: true` only when satisfied; verify strict mode lists only the entries not yet reviewed. Plan B: leave unreviewed ones labeled, or drop them so the app falls back to PSI text.
 
 ## 3. Output and use
 
