@@ -2,11 +2,12 @@ import { AiLabel, PsiTextLabel } from '../components/AiLabel';
 import { DataState } from '../components/DataState';
 import { NotAvailable } from '../components/NotAvailable';
 import { PsiLink } from '../components/PsiLink';
-import { getCatalog, getExperiments, getSummaries } from '../data/dataAccess';
+import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../data/dataAccess';
 import type { CatalogRecord } from '../data/types';
 import { useDataResult } from '../data/useDataResult';
 import { findSummary, formatO2Range, formatPressureRange, relatedLinks } from './detailModel';
 import { NotFound } from './placeholders';
+import { rankingPositions } from './rankingPosition';
 import type { ViewProps } from './types';
 
 function PsiText({ value }: { value: string | null }) {
@@ -88,6 +89,39 @@ function TestConditions({ record }: { record: CatalogRecord }) {
   );
 }
 
+function RankingPositions({ record, records }: { record: CatalogRecord; records: CatalogRecord[] }) {
+  const profiles = useDataResult(getRankingProfiles);
+  const experiments = useDataResult(getExperiments);
+
+  return (
+    <DataState state={profiles} label="The ranking profiles">
+      {(profilesFile) => (
+        <DataState state={experiments} label="The test conditions">
+          {(experimentsFile) => (
+            <>
+              <ul>
+                {rankingPositions(record.accession, profilesFile.profiles, records, experimentsFile.investigations).map(
+                  (item) => (
+                    <li key={item.profileId}>
+                      {item.label}: #{item.position} of {item.total} ({item.score} of {item.maximumScore} points)
+                      {item.notAssessedFactors > 0 ? `, ${item.notAssessedFactors} factor(s) not assessed` : ''}
+                      {item.basedOnUnreviewedTags ? ', based on unreviewed tags' : ''}
+                      {item.note ? `. ${item.note}` : ''}
+                    </li>
+                  ),
+                )}
+              </ul>
+              <p>
+                A rule-based heuristic made by this team, not an assessment by NASA. <a href="#/ranking">See the full ranking</a>.
+              </p>
+            </>
+          )}
+        </DataState>
+      )}
+    </DataState>
+  );
+}
+
 function Facts({ record }: { record: CatalogRecord }) {
   const { curated } = record;
   return (
@@ -138,7 +172,8 @@ function Related({ record, known }: { record: CatalogRecord; known: ReadonlySet<
   );
 }
 
-function DetailBody({ record, known }: { record: CatalogRecord; known: ReadonlySet<string> }) {
+function DetailBody({ record, records }: { record: CatalogRecord; records: CatalogRecord[] }) {
+  const known = new Set(records.map((item) => item.accession));
   return (
     <>
       <p>
@@ -154,6 +189,9 @@ function DetailBody({ record, known }: { record: CatalogRecord; known: ReadonlyS
 
       <h2>Test conditions</h2>
       <TestConditions record={record} />
+
+      <h2>Ranking position</h2>
+      <RankingPositions record={record} records={records} />
 
       <h2>Text from NASA PSI</h2>
       <PsiTextLabel />
@@ -198,12 +236,7 @@ export function InvestigationDetail({ params }: ViewProps) {
     <>
       <h1>Investigation {accession}</h1>
       <DataState state={catalog} label="The catalog">
-        {(file) => (
-          <DetailBody
-            record={record as CatalogRecord}
-            known={new Set(file.records.map((item) => item.accession))}
-          />
-        )}
+        {(file) => <DetailBody record={record as CatalogRecord} records={file.records} />}
       </DataState>
     </>
   );

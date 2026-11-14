@@ -39,3 +39,4 @@ export interface ExperimentsFile extends VersionedFile {
 export type { CatalogDataset as CatalogFile, CatalogRecord } from '../../../scripts/catalog/types';
 export type { SummariesFile, SummaryEntry } from '../../../scripts/lib/types';
 export type { InvestigationSummary } from '../../../scripts/summarize';
+export type { RankingProfilesFile } from '../lib/ranking';
