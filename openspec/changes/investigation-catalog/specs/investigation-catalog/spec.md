@@ -80,6 +80,13 @@ Each record SHALL include its official PSI page link and a DOI field, `null` unt
 - **WHEN** a consumer reads any record
 - **THEN** it has the PSI page link and the DOI, or `null` for the DOI
 
+### Requirement: Schema version
+The output SHALL declare a `schemaVersion` starting at `1.0.0`, and a change that removes or renames a field SHALL raise the major version.
+
+#### Scenario: Reading the version
+- **WHEN** a consumer opens the catalog
+- **THEN** it finds `schemaVersion` at the top level
+
 ### Requirement: Offline and deterministic
 The system SHALL read only local files and MUST NOT use the network. Two runs on the same inputs SHALL produce identical records.
 

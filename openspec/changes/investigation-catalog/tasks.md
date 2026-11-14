@@ -21,7 +21,7 @@ Depends on: 1. Tasks 2.1 and 2.2 are independent of each other.
 
 Depends on: 1 and 2. Task 3.3 depends on nothing and can start at once.
 
-- [ ] 3.1 (by 17:30, ≤2h) Load the curation file, validate vocabularies and accessions (unknown accession or value fails the build), merge into records, mark uncurated records unreviewed; verify tests for the typo case (`PSI-1599`) and for an unreviewed value.
+- [ ] 3.1 (by 17:30, ≤2h) Load the curation file and `data/curation/vocabularies.json`, validate vocabularies and accessions (unknown accession or value fails the build), merge into records, mark uncurated records unreviewed; verify tests for the typo case (`PSI-1599`) and for an unreviewed value.
 - [ ] 3.2 (by 19:00, ≤1.5h) Write `data/processed/catalog.json` with metadata, add `--strict`, and add an offline smoke check that runs twice and compares records (ignoring `generatedAt`); verify the file has 26 records and the smoke check passes with the network disabled.
 - [ ] 3.3 (by 15:30, ≤1h) Seed `hardwareGroup` in the curation file from the statement's Hardware section (ACME six → `acme-cir`; FLEX, FLEX-2, CFI → `mdca-cir`; BASS, BASS-II, SPICE, SLICE → `msg-flow-duct`), each with source "Challenge statement, Hardware section"; verify each entry matches the statement text.
 

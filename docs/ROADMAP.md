@@ -53,7 +53,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 
 *Rough size guess, not an estimate.
 
-**Status (2026-11-14):** specs written and validated for changes 1–7 (`openspec validate --all --strict`); `ask-the-data` (8) is not specced yet. Tasks are in each change's `tasks.md` (57 tasks). The sum of the per-task **caps** is about 70 h for Must work (caps are upper bounds, not estimates). It probably does not fit with every investigation curated and summarized; see the scope levers below.
+**Status (2026-11-14):** specs written and validated for changes 1–7 (`openspec validate --all --strict`); `ask-the-data` (8) is not specced yet. Tasks are in each change's `tasks.md` (58 tasks). The sum of the per-task **caps** is about 72 h for Must work (caps are upper bounds, not estimates). It probably does not fit with every investigation curated and summarized; see the scope levers below.
 
 ### Scope levers if time runs short (apply in this order)
 1. Curate tags and write AI summaries only for a **core set** (the investigations the statement names); the rest keep the PSI-text fallback, which the specs already support.
@@ -63,7 +63,8 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 
 ## Open items
 - [x] No pre-assigned owners: tasks come from the specs and each person claims the module they want (decided 2026-11-14)
-- [x] Stack: React + TypeScript + Vite (team, 2026-11-14). [ ] Nest backend: deferred; only for `ask-the-data` after milestone 2
+- [x] Stack: React + TypeScript + Vite (team, 2026-11-14). Architecture: static only (option A). Nest backend deferred; only for `ask-the-data` after milestone 2
+- [x] Extensibility (team request, 2026-11-14): data-access module, view list, data-driven profiles and vocabularies, `schemaVersion` on every data file, mapper list, `docs/EXTENDING.md`. About +2 h of task caps (measured: tasks 2.1, 3.1 and the new 5.3 in `app-shell`); no plugin systems or extra infrastructure
 - [ ] Verify 2026 judging criteria (Judging & Awards Guide)
 - [ ] Choose license (recommended Apache-2.0; see `AGENTS.md`)
 - [ ] Capture DOI of each investigation used ("Cite this Investigation" on its PSI page)

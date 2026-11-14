@@ -80,6 +80,13 @@ Each record SHALL include the investigation's PSI page link. The output SHALL in
 - **WHEN** a consumer reads a record
 - **THEN** it can show the PSI investigation and link with no other lookup
 
+### Requirement: Schema version
+The output SHALL declare a `schemaVersion` starting at `1.0.0`, and a change that removes or renames a field SHALL raise the major version.
+
+#### Scenario: Reading the version
+- **WHEN** a consumer opens the output
+- **THEN** it finds `schemaVersion` at the top level
+
 ### Requirement: Offline and deterministic
 The system SHALL read only local files and MUST NOT use the network. Two runs on the same inputs SHALL produce identical output apart from the generation date.
 

@@ -7,11 +7,15 @@ Defines how investigations are ranked by relevance to a chosen crew environment,
 ## ADDED Requirements
 
 ### Requirement: Environment profiles
-The system SHALL offer four profiles: `crew-cabin`, `lunar-base-rover`, `detection` and `suppression`. Selecting a profile SHALL re-rank all investigations.
+The system SHALL offer the profiles defined in the profiles data file, initially `crew-cabin`, `lunar-base-rover`, `detection` and `suppression`. Selecting a profile SHALL re-rank all investigations.
 
 #### Scenario: Switching profile
 - **WHEN** a user changes the profile from `crew-cabin` to `detection`
 - **THEN** the list is re-ranked using the detection weights
+
+#### Scenario: New profile added in data
+- **WHEN** a profile entry is added to the profiles file
+- **THEN** it appears in the selector after rebuild with no code change
 
 ### Requirement: Weights are data with a rationale
 Factor weights SHALL be stored in a data file, each with a rationale and a source, and changing a weight MUST NOT require a code change. A missing weight SHALL fail the build.

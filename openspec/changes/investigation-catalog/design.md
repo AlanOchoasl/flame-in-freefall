@@ -20,7 +20,7 @@ Input: `data/sample/psi-catalog/investigations.json`, 26 investigations, retriev
 1. **Node + TypeScript script, no framework.** Same language as the UI and the `data-pipeline` change; reuses its scaffold.
 2. **Committed static output `data/processed/catalog.json`.** The demo then works offline and the UI never runs the build.
 3. **Curation lives in a hand-edited JSON file** keyed by accession, merged at build time. Alternative (curate inside the output): gets overwritten on rebuild. Alternative (AI-only tagging): unverifiable. AI may *draft* entries to save time, but only a person sets `reviewed: true`.
-4. **Curated vocabularies (fixed lists; editing them is a spec change):**
+4. **Curated vocabularies live in `data/curation/vocabularies.json`**, validated at build; the UI builds its filters from the same file, so adding a value needs no code. Initial lists:
    - `hardwareGroup`: `acme-cir`, `mdca-cir`, `msg-flow-duct`, `other`, `unknown`. Seeded from the statement's text.
    - `fuelPhase` (array): `gas`, `liquid-droplet`, `solid`, `aerosol-dust`, `not-combustion`.
    - `topics` (array): `material-flammability`, `detection`, `suppression`, `flame-fundamentals`, `modeling`, `not-fire-safety`. The first three come straight from the statement's prevention/detection/suppression framing.
@@ -72,7 +72,7 @@ Data flow: `data/sample/psi-catalog/investigations.json` + `data/curation/invest
 - [Curation needs science reading and the team is not expert] → source note + `reviewed` flag on every value; hardware group seeded from the statement; UI can show "not reviewed"; split the 26 investigations among three people.
 - [Splitting on "two or more spaces" breaks a name that contains a double space] → unit tests on real rows; raw string kept in the cached source.
 - [PSI changes the data] → input is cached and committed.
-- [Curated vocabularies too coarse] → editing them is a visible spec change, not a silent drift.
+- [Curated vocabularies too coarse] → edit the vocabulary file; the change is visible in git and the build revalidates every entry.
 
 ## Open Questions
 

@@ -13,7 +13,7 @@
 
 1. **Precomputed, static JSON.** No keys in the browser, no latency, works offline. Alternative (live calls): fragile demo and an exposed key.
 2. **Generation by a script using the API key from `.env`** (ignored by git); drafts go to `data/ai/summaries.draft.json`. Pasting from the Gemini app stays as plan B. The SDK `@google/genai` exists on the registry (3.3.0, Apache-2.0, passes the license policy). **Not verified:** which model to use and how to request structured output. A search on 2026-11-14 found two documented styles (`responseJsonSchema` with `responseMimeType: "application/json"` in `generateContent`, and a newer Interactions API) and examples that disagree on model names, so the script task starts by reading Google's current documentation and picking one.
-3. **Prompt kept at `prompts/summary.md`**, versioned (`promptVersion`), one investigation per call, English output in plain language for students and engineers.
+3. **Prompt kept at `prompts/summary.md`** and the model name in `ai.config.json`, so changing the model is a config edit; the prompt is versioned (`promptVersion`), one investigation per call, English output in plain language for students and engineers.
 4. **Numeric guard:** extract numbers from the summary and require each to appear in the source text; strict and cheap, catches the most dangerous invention. It does not catch wrong words, so human review is required.
 5. **Review:** a person reads each summary against the source and sets `reviewed: true`; about 26 reviews, a few minutes each.
 6. **Check script in Node + TypeScript** (same setup as the other builds), run before every commit of `summaries.json` and in strict mode before submission.

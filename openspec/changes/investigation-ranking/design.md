@@ -23,7 +23,7 @@ Depends on `investigation-catalog` (topics, fuel phase, platform, normalized sub
 | Microgravity project type | 0–1 | 1 if project type is a microgravity investigation |
 
    Primary topic: `material-flammability` for crew cabin and lunar; `detection`; `suppression`. Maximums: crew-cabin 8, lunar 11, detection 7, suppression 6.
-3. **Weights live in `data/ranking/profiles.json`** with rationale and source per factor, validated at build. The scoring function is pure and has no knowledge of specific accessions.
+3. **Profiles and weights live in `data/ranking/profiles.json`** (factors are code: a new factor is one function plus one registry entry) with rationale and source per factor, validated at build. The scoring function is pure and has no knowledge of specific accessions.
 4. **Not-assessed is explicit** so BASS/SAFFIRE (no normalized rows) are not silently penalized.
 5. **Ranking logic in the app's `src/lib/`**, no extra dependencies.
 

@@ -29,6 +29,7 @@ Observed: Must set = 453 rows, 442 plottable (PSI-10 inverse has 11 rows with nu
 7. **O2 for PSI-159 normal is "before test"**; "after test" is kept as an extra field.
 8. **Moon-base zone constants** in one file: O2 ≥ 0.30, pressure ≤ 0.7033 bar (10.2 psi × 0.0689476), from the statement. Views read the flag; none recomputes it.
 9. **Stub first:** a 20-row `experiments.json` so the UI is unblocked early.
+10. **Mappers are registered in one list** (file name pattern → mapper). Adding another PSI table is one new mapper plus one entry; nothing else changes.
 
 ### Output contract (one record, values from the first PSI-159 normal row)
 

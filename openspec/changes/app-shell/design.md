@@ -19,7 +19,10 @@ No app code exists yet. Inputs are static JSON files produced by other changes. 
 6. **Testing:** Vitest for pure logic only; UI verified with a manual smoke checklist. Alternative (browser tests): heavier setup than the time allows.
 7. **Hosting:** GitHub Pages, Netlify or Vercel, chosen by the team after checking that the free tier and base-path settings fit. Not verified here.
 
-Data flow: `data/processed/*.json` → `app/public/data/` → fetch at runtime → views.
+8. **Extension points, kept deliberately small** (the team asked on 2026-11-14 for something that can grow): (a) all data goes through one data-access module (`getCatalog`, `getExperiments`, `getSummaries`); today it fetches static files and a future API would replace only that module; (b) views are declared in one list (path, title, component), so adding a view is one entry plus a component; (c) every data file carries a `schemaVersion`, checked at load; (d) lists that vary (ranking profiles, curation vocabularies, outcome labels) come from data files, not code. Not added on purpose: plugin systems, state libraries, a database, microservices; the rule against speculative abstractions still applies.
+9. **`docs/EXTENDING.md`** explains how to add an investigation, a table mapper, a ranking profile, a view, or a backend.
+
+Data flow: `data/processed/*.json` → `app/public/data/` → data-access module → views.
 
 ## Risks / Trade-offs
 

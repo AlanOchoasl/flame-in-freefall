@@ -24,6 +24,13 @@ The app SHALL load the catalog, experiments and summaries files separately. If o
 - **WHEN** the summaries file cannot be loaded
 - **THEN** Ranking and Coverage map work and Detail shows the PSI text instead
 
+### Requirement: Data version checked
+Each data file SHALL declare a `schemaVersion`. The app SHALL refuse a file whose major version it does not support and SHALL name the file and both versions.
+
+#### Scenario: Unsupported version
+- **WHEN** a data file declares a major version the app does not support
+- **THEN** the views that need it show a message naming the file and both versions
+
 ### Requirement: No network use at runtime beyond own files
 The app MUST NOT request anything from outside its own origin at runtime: no CDN scripts, remote fonts, analytics or AI services.
 

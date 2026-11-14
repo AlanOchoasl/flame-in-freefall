@@ -11,7 +11,7 @@ For each investigation the system SHALL store a plain summary (at most 120 words
 
 #### Scenario: Record shape
 - **WHEN** `summaries.json` is read
-- **THEN** every entry has all of those fields and `aiGenerated` true
+- **THEN** every entry has all of those fields and `aiGenerated` true, and the file declares a `schemaVersion`
 
 ### Requirement: Grounded in the investigation's own text
 Generation SHALL use only the objectives, approach, hypothesis and earth-benefits text of that investigation. The stored prompt SHALL forbid facts from outside that text.

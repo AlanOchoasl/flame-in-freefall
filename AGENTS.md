@@ -26,6 +26,7 @@ Timeline and milestones: `docs/ROADMAP.md`. Resources: `Recursos/`.
 - Simplest stack the team already knows. No new dependency without a one-line justification.
 - Clean code: small functions, intention-revealing names, no dead code, no speculative abstractions.
 - Small, frequent commits (Conventional Commits). No big refactors during the event.
+- Built to grow, cheaply: lists that vary (profiles, vocabularies, outcomes) live in data files; all data goes through one data-access module; every data file has a `schemaVersion`. No plugin systems, no speculative abstractions (see `docs/EXTENDING.md` once written).
 - Tests only where they protect the demo path (data parsing, core calculation).
 - Cache small data samples in `data/sample/` so the demo never depends on live network.
 - No secrets in the repo. Use `.env` (ignored) and `.env.example`.

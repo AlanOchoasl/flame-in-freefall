@@ -21,7 +21,7 @@ Depends on: 1.
 
 Depends on: 2. Tasks 3.1 and 3.2 are independent.
 
-- [ ] 3.1 (by 17:30, ≤2h) Map PSI-159 normal and inverse (flame type, fuel, O2 before test, bar + approximate flag, `Tad`, `Zst`, outcome, three-valued cool-flame with raw text, raw `SE/FT` and `TFP`); verify spot-check tests of 3 rows per file and that `no, PCI-hot` → `false`, `yes, PCI-D` → `true`, empty → `null`.
+- [ ] 3.1 (by 17:30, ≤2h) Register mappers in a single list and map PSI-159 normal and inverse (flame type, fuel, O2 before test, bar + approximate flag, `Tad`, `Zst`, outcome, three-valued cool-flame with raw text, raw `SE/FT` and `TFP`); verify spot-check tests of 3 rows per file and that `no, PCI-hot` → `false`, `yes, PCI-D` → `true`, empty → `null`.
 - [ ] 3.2 (by 18:00, ≤1h) Map PSI-10 inverse (atm → bar, outcome `not-reported`, ethylene inferred and flagged); verify 1.0 atm gives 1.01325 bar.
 - [ ] 3.3 (Nice, by Sun 12:00, ≤1h) Map PSI-10 normal (RAMP/RAMPED rows kept with nulls); verify 207 kept rows and 187 plottable.
 
