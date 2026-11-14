@@ -1,5 +1,5 @@
 // Experiments follow the contract in openspec/changes/data-pipeline/design.md.
-// Summaries are typed minimally until ai-summaries publishes its record type; replace it then.
+// Summaries are typed provisionally (see SummaryEntry) until ai-summaries publishes its record type.
 
 export interface VersionedFile {
   schemaVersion: number | string;
@@ -35,6 +35,16 @@ export interface ExperimentsFile extends VersionedFile {
 // The catalog types are owned by the build script; importing them keeps one source of truth.
 export type { CatalogDataset as CatalogFile, CatalogRecord } from '../../../scripts/catalog/types';
 
+// PROVISIONAL: field names follow the wording of the ai-summaries spec (model, generation date,
+// prompt version, reviewed flag). Align them with the real summaries.json when it is published.
+export interface SummaryEntry {
+  accession: string;
+  model: string;
+  generatedAt: string;
+  promptVersion: string;
+  reviewed: boolean;
+}
+
 export interface SummariesFile extends VersionedFile {
-  summaries: unknown[];
+  summaries: SummaryEntry[];
 }
