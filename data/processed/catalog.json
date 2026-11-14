@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-14T14:58:42.204Z",
+  "generatedAt": "2026-11-14T15:02:26.192Z",
   "sourceRetrieved": "2026-11-14",
   "recordCount": 26,
   "unreviewedCount": 66,
@@ -187,18 +187,26 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "gas"
+          ],
+          "source": "Objectives text: CH4/N2 and C2H4/N2 mixtures on porous burners",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "material-flammability",
+            "flame-fundamentals"
+          ],
+          "source": "Objectives text: burning conditions \"in terms of material properties\", flammability map and extinction limits; fuel conditions related to condensed fuels",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "burner surface temperature",
+            "heat flux sensor"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -273,18 +281,28 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "gas"
+          ],
+          "source": "Objectives text: methane and ethylene coflow diffusion flames",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "flame-fundamentals",
+            "modeling"
+          ],
+          "source": "Objectives text: rigorous testing of computational models; soot sub-models and sooting tendencies",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "OH* and CH* chemiluminescence",
+            "soot luminosity",
+            "laser extinction",
+            "thin-filament pyrometry"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -372,18 +390,27 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "gas"
+          ],
+          "source": "Approach text: gas-fueled flames, methane and ethylene",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "flame-fundamentals"
+          ],
+          "source": "Objectives text: electric-field effects on laminar diffusion flames, soot formation and lifted flames",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "voltage-current curves (chemi-ion current)",
+            "high-resolution cameras",
+            "spectral imaging with filters",
+            "thermopile detectors"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -487,18 +514,27 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "gas"
+          ],
+          "source": "Approach text: hydrogen, methane and ethylene",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "flame-fundamentals",
+            "modeling"
+          ],
+          "source": "Objectives text: transient structure, extinction limits and pulsating instabilities compared with detailed numerical simulation",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "spectrally resolved images",
+            "flame and burner temperatures",
+            "radiative flux measurements"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -574,18 +610,27 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "solid"
+          ],
+          "source": "Objectives text: solid fuels (slabs, cylinders, rods, films, fabric sheets)",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "material-flammability",
+            "modeling"
+          ],
+          "source": "Objectives text: bridge NASA-STD-6001 Test #1 and real material flammability; results feed combustion computational models",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "imaging supplied by the Microgravity Science Glovebox",
+            "flame growth and spread rates",
+            "flame appearance"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -654,18 +699,26 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "solid"
+          ],
+          "source": "Approach text: cotton-fiberglass fabric, Nomex and Ultem",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "material-flammability",
+            "suppression"
+          ],
+          "source": "Objectives text: bridge NASA-STD-6001 Test #1 gap; effectiveness of an inert gaseous extinguishing agent",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "top and edge profile flame observation",
+            "flame size, shape, color and spread rate"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -819,18 +872,25 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "aerosol-dust"
+          ],
+          "source": "Approach text: Arizona Red Dust aerosolized with GN2",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "detection"
+          ],
+          "source": "Objectives text: reliability of a particle counter for smoke aerosol measurement (SAME)",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "modified TSI P-Trak particle counter",
+            "DustTrak CNC"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -1084,18 +1144,27 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "liquid-droplet"
+          ],
+          "source": "Objectives text: pure and bi-component fuel droplets",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "flame-fundamentals",
+            "modeling"
+          ],
+          "source": "Objectives text: extinction mechanisms, soot formation, benchmark data to validate numerical simulations",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "high-speed photography",
+            "color camera video",
+            "chamber pressure and temperature data"
+          ],
+          "source": "Approach text",
           "reviewed": false
         }
       },
@@ -1203,18 +1272,26 @@
           "reviewed": true
         },
         "fuelPhase": {
-          "value": [],
-          "source": null,
+          "value": [
+            "liquid-droplet"
+          ],
+          "source": "Objectives text: liquid fuel droplets",
           "reviewed": false
         },
         "topics": {
-          "value": [],
-          "source": null,
+          "value": [
+            "suppression",
+            "flame-fundamentals"
+          ],
+          "source": "Objectives text: effectiveness of CO2, He and SF6 suppressants; flammability limits and Limiting Oxygen Index",
           "reviewed": false
         },
         "measurements": {
-          "value": [],
-          "source": null,
+          "value": [
+            "extinction droplet diameter",
+            "Limiting Oxygen Index (LOI) test series"
+          ],
+          "source": "Approach text; the instruments are not named, only what is measured",
           "reviewed": false
         }
       },
