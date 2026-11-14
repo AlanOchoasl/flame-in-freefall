@@ -1,5 +1,5 @@
 ---
-title: "Desafío de aplicaciones espaciales de la NASA"
+title: "Desafío de aplicaciones espaciales de la NASA" [Desafio](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/?tab=details)
 source: "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/?tab=resources"
 author:
 published:
