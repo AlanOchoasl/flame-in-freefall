@@ -66,8 +66,8 @@ describe('PSI-159 inverse flames', () => {
     expect(inverse.every((r) => r.coolFlame.value === null && r.coolFlame.raw === null)).toBe(true);
   });
 
-  test('does not carry the after-test O2 field', () => {
-    expect(inverse[0]).not.toHaveProperty('o2FractionAfterTest');
+  test('has no after-test O2 column, so the field is null', () => {
+    expect(inverse.every((r) => r.o2FractionAfterTest === null)).toBe(true);
   });
 });
 
