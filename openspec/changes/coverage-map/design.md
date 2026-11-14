@@ -2,7 +2,7 @@
 
 ## Context
 
-Depends on `data-pipeline` (`isPlottable`, `inMoonBaseZone`, `pressureIsApproximate`, outcome, per-record links) and `app-shell`. Observed: Must set 453 records, 442 plottable, 66 in the zone (PSI-159 normal 20, inverse 28, PSI-10 inverse 18); PSI-159 spans about 0.5–3.3 bar and 12–85 % O2. The statement gives the zone, 14.7 psi Earth and 4.3 psi / 100 % O2 spacesuit values. See proposal.md.
+Depends on `data-pipeline` (`isPlottable`, `inMoonBaseZone`, `pressureIsApproximate`, outcome, per-record links) and `app-shell`. Observed (original numbers; since 2026-11-14 PSI-10 is left out for lack of a declared license, so the data is PSI-159 only: 333 records, all plottable, 48 in the zone): Must set 453 records, 442 plottable, 66 in the zone (PSI-159 normal 20, inverse 28, PSI-10 inverse 18); PSI-159 spans about 0.5–3.3 bar and 12–85 % O2. The statement gives the zone, 14.7 psi Earth and 4.3 psi / 100 % O2 spacesuit values. See proposal.md.
 
 ## Goals / Non-Goals
 

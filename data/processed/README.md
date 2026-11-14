@@ -59,8 +59,8 @@ One entry per investigation in the file (today only PSI-159), so every point can
 | `accession`, `pageUrl` | The PSI investigation and its page |
 | `doi`, `doiUrl` | The DOI of the dataset and its `https://doi.org/` link. `null` when unknown (the page link is then the citation) |
 | `publisher` | Who DataCite lists as publisher (`NASA PSI`) |
-| `license` | `{ spdx, url }`, or `null` when none is declared. A missing license is never filled in with a guess |
-| `licenseNote` | Why the license is `null`; `null` when there is one |
+| `license` | `{ spdx, url }`. The build refuses any dataset without a declared license: it goes under `excluded` instead |
+| `licenseNote` | Always `null` today; kept for a future note on a license |
 | `checkedOn` | The day the DOI and license were captured |
 
 Today: **PSI-159** has DOI `10.60555/cyt1-kh64` and license `CC0-1.0`. `npm run smoke:data` fails if that DOI is missing from the output, and a test checks that the DOIs agree with the catalog's.

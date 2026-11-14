@@ -11,7 +11,7 @@ Input is cached CSVs in `data/sample/psi/` (observed 2026-11-14). See proposal.m
 | PSI-10 Inverse | 120 | `pmean (atm)` | `XO2` | none |
 | PSI-10 Normal (Nice) | 207 | `pmean (atm)` | `XO2 (init)` | none |
 
-Observed: Must set = 453 rows, 442 plottable (PSI-10 inverse has 11 rows with null O2). Full set = 660 rows, 629 plottable (PSI-10 normal has 20 rows with empty pressure). In the Moon-base zone: PSI-159 normal 20, inverse 28, PSI-10 inverse 18, PSI-10 normal 0 → **66**. Raw cool-flame values: `no, PCI-hot` and seven `yes, PCI-x`. Dirty cells: `#DIV/0!`, `#VALUE!`, `RAMP`, `RAMPED`, `LOW O2`, `-`. PSI-10 inverse has no fuel column (headers name `XC2H4`).
+Observed at design time (PSI-10 was dropped on 2026-11-14, no declared license; today: PSI-159 only, 333 rows, 48 in the zone): Must set = 453 rows, 442 plottable (PSI-10 inverse has 11 rows with null O2). Full set = 660 rows, 629 plottable (PSI-10 normal has 20 rows with empty pressure). In the Moon-base zone: PSI-159 normal 20, inverse 28, PSI-10 inverse 18, PSI-10 normal 0 → **66**. Raw cool-flame values: `no, PCI-hot` and seven `yes, PCI-x`. Dirty cells: `#DIV/0!`, `#VALUE!`, `RAMP`, `RAMPED`, `LOW O2`, `-`. PSI-10 inverse has no fuel column (headers name `XC2H4`).
 
 ## Goals / Non-Goals
 

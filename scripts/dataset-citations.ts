@@ -79,8 +79,8 @@ function parseEntry(accession: string, raw: unknown): CitationEntry {
     }
     parsedLicense = { spdx: license.spdx, url: license.url };
   }
-  if (parsedLicense === null && licenseNote === null) {
-    throw new Error(`dataset-citations: ${accession} has no license and no licenseNote saying why`);
+  if (parsedLicense === null) {
+    throw new Error(`dataset-citations: ${accession} declares no license, so it cannot be under "entries". Move it to "excluded" with the reason.`);
   }
   return { doi: parsedDoi, publisher, license: parsedLicense, licenseNote: licenseNote ?? null };
 }
@@ -110,9 +110,9 @@ export function parseCitations(raw: unknown): DatasetCitations {
 }
 
 /**
- * One entry per investigation present in the records, in order of first appearance. An investigation
- * with no citation entry keeps its page link and says so, so a missing DOI is visible and never invented.
- * A record of an excluded dataset is an error: its data must not be in the output.
+ * One entry per investigation present in the records, in order of first appearance.
+ * A record of an excluded dataset, or of one with no citation entry, is an error: no dataset is used
+ * without a verified license.
  */
 export function buildDatasets(records: { accession: string; pageUrl: string }[], citations: DatasetCitations): DatasetInfo[] {
   const pageUrls = new Map<string, string>();
@@ -120,6 +120,10 @@ export function buildDatasets(records: { accession: string; pageUrl: string }[],
   const leaked = [...pageUrls.keys()].filter((accession) => accession in citations.excluded);
   if (leaked.length > 0) {
     throw new Error(`Records of an excluded dataset reached the output: ${leaked.join(', ')}. See "excluded" in data/curation/dataset-citations.json.`);
+  }
+  const uncited = [...pageUrls.keys()].filter((accession) => !(accession in citations.entries));
+  if (uncited.length > 0) {
+    throw new Error(`Records of a dataset with no verified license: ${uncited.join(", ")}. Add it under "entries" (with its license) or "excluded" in data/curation/dataset-citations.json.`);
   }
   return [...pageUrls].map(([accession, pageUrl]) => {
     const entry = citations.entries[accession];
