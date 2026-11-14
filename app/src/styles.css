@@ -282,7 +282,7 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 /* Menu button: below 640 px the navigation collapses behind it. */
 .menu-button { display: none; }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .menu-button { display: inline-flex; align-items: center; }
   header nav { display: none; width: 100%; }
   header nav.open { display: block; }
