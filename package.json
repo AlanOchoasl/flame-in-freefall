@@ -13,6 +13,7 @@
     "check:curation": "node scripts/check-curation.ts",
     "generate:summaries": "node --env-file-if-exists=.env scripts/generate-summaries.ts",
     "import:summaries": "node scripts/import-summaries.ts",
+    "publish:summaries": "node scripts/publish-summaries.ts",
     "build:data": "node --experimental-strip-types scripts/build-data.ts",
     "smoke:data": "node --experimental-strip-types scripts/smoke-data.ts"
   },
