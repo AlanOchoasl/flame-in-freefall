@@ -51,8 +51,8 @@ describe('buildComparison', () => {
       [record('PSI-1'), record('PSI-2')],
       [summary('PSI-1', [0.21, 0.5], ['methane']), summary('PSI-2', [0.21, 0.21], ['methane'])],
     );
-    expect(rowOf(model, 'o2Range').cells[0].values).toEqual(['0.21 to 0.5 fraction']);
-    expect(rowOf(model, 'o2Range').cells[1].values).toEqual(['0.21 fraction']);
+    expect(rowOf(model, 'o2Range').cells[0].values).toEqual(['21–50 % O2']);
+    expect(rowOf(model, 'o2Range').cells[1].values).toEqual(['21 % O2']);
     expect(rowOf(model, 'o2Range').marker).toBe('differs');
     expect(rowOf(model, 'fuels').marker).toBe('same');
   });

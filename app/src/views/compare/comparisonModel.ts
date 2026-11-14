@@ -1,9 +1,9 @@
 import type { MissingReason } from '../../components/labelText';
 import type { CatalogRecord, InvestigationSummary } from '../../data/types';
+import { formatO2Range, formatPressureRange } from '../detailModel';
 
 export type { MissingReason };
 export type RowMarker = 'same' | 'differs' | 'all-missing';
-type Range = [number, number] | [null, null];
 
 export interface Cell {
   /** Display values; empty means missing. */
@@ -47,12 +47,6 @@ function hasTestData(summary: InvestigationSummary | undefined): summary is Inve
 
 const compact = (value: string | null): string[] => (value === null ? [] : [value]);
 
-function rangeText(range: Range, unit: string): string | null {
-  const [low, high] = range;
-  if (low === null || high === null) return null;
-  return low === high ? `${low} ${unit}` : `${low} to ${high} ${unit}`;
-}
-
 function testCell(summary: InvestigationSummary | undefined, pick: (s: InvestigationSummary) => string[]): Cell {
   if (!hasTestData(summary)) return missing('no-normalized-test-data');
   const values = pick(summary);
@@ -92,8 +86,8 @@ export function buildComparison(records: CatalogRecord[], summaries: Investigati
       row('fuelPhase', 'Fuel phase', cells((r) => curatedCell(r.curated.fuelPhase)), true),
       row('topics', 'Topics', cells((r) => curatedCell(r.curated.topics)), true),
       row('measurements', 'Measurements', cells((r) => curatedCell(r.curated.measurements)), true),
-      row('o2Range', 'O2 range', cells((r) => testCell(summaryOf(r), (s) => compact(rangeText(s.o2Range, 'fraction')))), true),
-      row('pressureRange', 'Pressure range', cells((r) => testCell(summaryOf(r), (s) => compact(rangeText(s.pressureBarRange, 'bar')))), true),
+      row('o2Range', 'O2 range', cells((r) => testCell(summaryOf(r), (s) => compact(formatO2Range(s.o2Range)))), true),
+      row('pressureRange', 'Pressure range', cells((r) => testCell(summaryOf(r), (s) => compact(formatPressureRange(s.pressureBarRange)))), true),
       row('fuels', 'Fuels tested', cells((r) => testCell(summaryOf(r), (s) => s.fuels)), true),
       row('dates', 'Dates', cells(datesCell), true),
       row('related', 'Related investigations', cells((r) => listCell(r.relatedInvestigations)), true),
