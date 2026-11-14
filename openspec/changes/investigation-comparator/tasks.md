@@ -6,7 +6,7 @@ Tasks are **not pre-assigned**. Each person claims a module (a numbered group) i
 
 Depends on: `investigation-catalog` types and stub (task 1.1).
 
-- [ ] 1.1 (by 18:30, ≤2h) Implement the pure function that builds rows, normalized values, same/differs markers and missing-value reasons, with unit tests for equal sets, differing fuel phases, a range, one missing value (marked differs) and all values missing (marked both missing, never same); verify all tests pass.
+- [x] 1.1 (by 18:30, ≤2h) Implement the pure function that builds rows, normalized values, same/differs markers and missing-value reasons, with unit tests for equal sets, differing fuel phases, a range, one missing value (marked differs) and all values missing (marked both missing, never same); verify all tests pass.
 
 ## 2. Compare view
 
