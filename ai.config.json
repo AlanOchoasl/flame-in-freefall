@@ -1,0 +1,10 @@
+{
+  "model": "gemini-3.6-flash",
+  "promptFile": "prompts/summary.md",
+  "promptVersion": "1.0.0",
+  "sourceFields": ["objectives", "approach", "hypothesis", "earthBenefits"],
+  "maxWords": {
+    "summary": 120,
+    "fireSafetyRelevance": 60
+  }
+}
