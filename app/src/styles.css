@@ -1,23 +1,24 @@
 /* Cached research console. All faces are system fonts; no runtime font request. */
 :root {
   color-scheme: dark;
-  --canvas: #000000;
-  --surface-1: #111111;
-  --surface-2: #171717;
-  --surface-hover: #242424;
-  --line: #383838;
-  --line-strong: #6b6b6b;
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --text-muted: #aaaaaa;
+  /* Blue-gray dark scale (design.md 2.1 alternates), not pure black. */
+  --canvas: #0d1114;
+  --surface-1: #151c20;
+  --surface-2: #1a2328;
+  --surface-hover: #243038;
+  --line: #2b383e;
+  --line-strong: #5f7078;
+  --text-primary: #e8eeeb;
+  --text-secondary: #bcc8ca;
+  --text-muted: #95a4a5;
   --action: #0099ff;
   --brand: #0b3d91;
   --zone: #ffbb00;
   --zone-fill-opacity: 0.16;
   --accent-red: #fc3d21;
-  --logo-ring: #383838;
-  --plot-grid: #383838;
-  --canvas-mark: #000000;
+  --logo-ring: #2b383e;
+  --plot-grid: #2b383e;
+  --canvas-mark: #0d1114;
   /* Existing component aliases keep route styles in the same palette. */
   --text: var(--text-primary);
   --background: var(--canvas);
