@@ -15,7 +15,8 @@ Run it on the public URL (https://flame-in-freefall-indol.vercel.app) after each
 - [ ] **AI summaries:** an investigation with a summary (for example `#/investigation/PSI-69`) shows the label "AI-generated (model), reviewed by a person", the summary and "Fire-safety relevance"; one without it shows its NASA text labeled "NASA PSI text". On Ranking, cards with a summary carry the AI label.
 - [ ] **360 px:** no horizontal page scroll on any screen (tables scroll inside their own area); the Menu button opens the navigation; Escape closes it.
 - [ ] **No outside requests:** all requests go to the app's own origin; no "MOCKUP" or "sample-placeholder" in the build.
-- [ ] **Offline:** known gap (see below).
+- [ ] **Address state** (`explorer-state`): select the Fire detection profile, add two investigations to the comparison, reload: the profile and the comparison are back; the address reads `#/...?profile=detection&ids=...`. Open an investigation with the "Detail" link and use "Back to the explorer": the profile and the comparison are unchanged. Open `#/ranking?selected=PSI-9999&profile=nope`: no error, default profile and first ranked investigation. Change the profile several times and press Back: it leaves the console (the changes add no history entries). "Show tests on the map" on a ranking row that has tests filters the map to that investigation (`investigation=` in the address); "Clear filters" removes it; a row without tests says "Nothing to show on the map".
+- [ ] **Offline:** open the public URL, wait for "Available offline" in the footer, disconnect the network and reload `#/map`, `#/about` and `#/investigation/PSI-159`: all render with data and styling, and the dataset tiles equal the online ones. Reconnect: one reload shows the current data. In a private window or a browser without service workers the footer says nothing and the app works online.
 
 ## Last run: 2026-11-14, deploy of `main` at 111fb7a
 
@@ -23,7 +24,7 @@ All checklist items passed except those listed below. After the PSI-10 normal fl
 
 ## Known gaps (found in this run)
 
-1. **Offline:** no service worker, so the app does not work offline after a reload (`app-shell` requires it).
+1. **Offline:** a service worker (`app/public/sw.js`) was added by `explorer-state` and checked in a browser against the production build with the server stopped; it has not been run on the public URL yet. Run the Offline item above there, then remove this gap.
 2. **Compare number format (fixed):** Compare now shows "12–85 % O2" and "0.50–3.31 bar" like Detail, using `formatO2Range` and `formatPressureRange`. Ranges are rounded, so two ranges that differ only beyond the rounding show as the same.
 3. **Map points are not keyboard-focusable;** the table is the keyboard alternative.
 4. **Ranking panel copy:** "Weights and wording come from the official challenge statement" overstates it: the rationales quote the statement, the point values are the team's judgment. Also "up to 1 points".

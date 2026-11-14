@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { carryExplorerState } from './router/explorerQuery';
+import { useOfflineReady } from './offline';
 import { matchRoute } from './router/matchRoute';
 import { useHashLocation } from './router/useHashLocation';
 import { useRouteChrome } from './router/useRouteChrome';
@@ -10,6 +11,7 @@ import { NotFound } from './views/placeholders';
 
 export function App() {
   const hash = useHashLocation();
+  const offlineReady = useOfflineReady();
   const match = matchRoute(hash, views);
   const currentPath = match?.view.path;
   // Links in the header keep the explorer choices of the current address.
@@ -110,6 +112,9 @@ export function App() {
       <footer>
         <DataSourceNote />
         <p>Independent research exploration · AI-generated text is always labeled.</p>
+        <p role="status" className="offline-state">
+          {offlineReady ? 'Available offline' : ''}
+        </p>
       </footer>
     </>
   );
