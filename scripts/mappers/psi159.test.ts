@@ -84,6 +84,6 @@ describe('mapper registry', () => {
   });
 
   test('registers each mapper once', () => {
-    expect(MAPPERS).toHaveLength(2);
+    expect(MAPPERS).toHaveLength(3);
   });
 });
