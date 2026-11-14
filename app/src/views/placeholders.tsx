@@ -5,7 +5,6 @@ import type { ViewProps } from './types';
 export const Ranking = () => <h1>Ranking</h1>;
 export const Compare = () => <h1>Compare</h1>;
 export const CoverageMap = () => <h1>Coverage map</h1>;
-export const About = () => <h1>About</h1>;
 
 export const InvestigationDetail = ({ params }: ViewProps) => <h1>Investigation {params.accession}</h1>;
 
