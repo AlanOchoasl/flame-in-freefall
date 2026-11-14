@@ -13,14 +13,14 @@
           "gas"
         ],
         "source": "Objectives text: C2H4 and CH4 flames",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
           "flame-fundamentals"
         ],
         "source": "Objectives text: soot inception, flame temperature and extinction limits",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -30,7 +30,7 @@
           "thermocouples"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-20": {
@@ -93,7 +93,7 @@
           "liquid-droplet"
         ],
         "source": "Objectives text: n-dodecane droplets",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -101,7 +101,7 @@
           "suppression"
         ],
         "source": "Objectives text: cool flames and helium dilution effects",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -111,7 +111,7 @@
           "narrow-band and wide-band radiometers"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-47": {
@@ -134,7 +134,7 @@
           "gas"
         ],
         "source": "Sub-research area: Gaseous; Approach text: coflow flames",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -142,7 +142,7 @@
           "modeling"
         ],
         "source": "Objectives text: soot formation and computational modeling",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -151,7 +151,7 @@
           "soot volume fraction"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-62": {
@@ -166,7 +166,7 @@
           "solid"
         ],
         "source": "Approach text: PMMA samples and wax cylinders",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -174,7 +174,7 @@
           "modeling"
         ],
         "source": "Objectives text: flammability limits and FGM flame-spread modeling",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -183,7 +183,7 @@
           "temperature and soot volume fraction"
         ],
         "source": "Approach text: evaluation metrics",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-68": {

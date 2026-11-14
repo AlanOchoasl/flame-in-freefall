@@ -15,7 +15,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-20",
@@ -31,7 +31,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-21",
@@ -47,7 +47,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-22",
@@ -63,7 +63,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-23",
@@ -79,7 +79,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-25",
@@ -95,7 +95,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-26",
@@ -111,7 +111,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-39",
@@ -127,7 +127,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-47",
@@ -143,7 +143,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-60",
@@ -159,7 +159,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-62",
@@ -175,7 +175,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-68",
@@ -191,7 +191,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-69",
@@ -207,7 +207,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     }
   ]
 }
