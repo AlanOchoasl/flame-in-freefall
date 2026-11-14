@@ -1,0 +1,22 @@
+{
+  "_comment": "Allowed licenses are a conservative team policy (permissive OSI licenses). The 2026 T&C require OSI-open or freely available third-party materials. Anything else needs team approval: add it to approvedExceptions with a reason.",
+  "allowedLicenses": [
+    "MIT",
+    "ISC",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Apache-2.0",
+    "0BSD",
+    "CC0-1.0",
+    "Unlicense",
+    "BlueOak-1.0.0"
+  ],
+  "approvedExceptions": [
+    {
+      "name": "lightningcss*",
+      "license": "MPL-2.0",
+      "reason": "Hard dependency of Vite 8 (and its per-platform binaries). Build-time only; not included in the shipped bundle. MPL-2.0 is OSI-approved, so within the 2026 Terms. We do not modify it.",
+      "approvedBy": "team member, in chat with the assistant, 2026-11-14"
+    }
+  ]
+}

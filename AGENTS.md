@@ -26,6 +26,7 @@ Timeline and milestones: `docs/ROADMAP.md`. Resources: `Recursos/`.
 - Simplest stack the team already knows. No new dependency without a one-line justification.
 - Clean code: small functions, intention-revealing names, no dead code, no speculative abstractions.
 - Small, frequent commits (Conventional Commits). No big refactors during the event.
+- Built to grow, cheaply: lists that vary (profiles, vocabularies, outcomes) live in data files; all data goes through one data-access module; every data file has a `schemaVersion`. No plugin systems, no speculative abstractions (see `docs/EXTENDING.md` once written).
 - Tests only where they protect the demo path (data parsing, core calculation).
 - Cache small data samples in `data/sample/` so the demo never depends on live network.
 - No secrets in the repo. Use `.env` (ignored) and `.env.example`.
@@ -34,6 +35,22 @@ Timeline and milestones: `docs/ROADMAP.md`. Resources: `Recursos/`.
 - Cite the official source (with link) for every NASA/partner dataset used. Show it in the demo.
 - Before using generative AI output, NASA logos/images, or minors' data, check the 2026 Terms & Conditions.
 - NASA does not endorse non-US sites; respect each data site's usage terms.
+- 2026 Terms & Conditions (https://www.spaceappschallenge.org/legal/, updated 2026-08-07), minimum obligations:
+  - Original content must be open source (OSI) or freely available; if no license is declared NASA applies Apache 2.0. Declare one in the repo.
+  - Third-party non-NASA materials (npm packages, fonts, etc.) must be free/open; **list their licenses in the submitted documentation**.
+  - Cite every source used (the submission form asks for references), even open ones: PSI investigation + DOI.
+  - Video: original work, no third-party music/images, no names/voices/likeness of anyone under 18, written consent from any adult shown.
+  - No personal data, no commercial promotion.
+  - The team confirmed AI/SI use is allowed. Still describe how AI was used in the project page; label AI-generated text in the UI.
+
+## Dependencies & third-party materials (hard rules for humans and agents)
+Full procedure: `.claude/skills/dependency-policy/`.
+1. **Never add a dependency, font, icon, image or dataset without checking its license first.** Allowed list: `scripts/license-policy.json` (MIT, ISC, BSD-2/3-Clause, Apache-2.0, 0BSD, CC0-1.0, Unlicense, BlueOak-1.0.0).
+2. **Forbidden without explicit team approval:** GPL/AGPL/LGPL, any package with no license, "UNLICENSED", "SEE LICENSE IN…", proprietary or paid SDKs, anything needing a paid or private API key at runtime.
+3. Run `node scripts/check-licenses.mjs` after every `npm install`/`npm add`. If it fails, remove the package or ask the team. An agent MUST NOT edit `approvedExceptions` on its own.
+4. Before submission run `node scripts/check-licenses.mjs --write` and commit `THIRD_PARTY_LICENSES.md`.
+5. No assets (images, fonts, audio, NASA logos) without a verified license; no code copied from sources with unknown license; cite everything in README.
+6. Prefer fewer dependencies. One-line justification per new package in the PR/commit.
 
 ## Skills available
-`clean-code`, `git-workflow`, `testing-basics`, `nasa-data-sources`, `submission-check`, plus the OpenSpec skills.
+`clean-code`, `git-workflow`, `testing-basics`, `nasa-data-sources`, `submission-check`, `dependency-policy`, plus the OpenSpec skills.
