@@ -2,14 +2,10 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import { buildExperiments, SCHEMA_VERSION } from './build-experiments.ts';
 import { mapCsvFile } from './map-file.ts';
-import { readCitations } from './pipeline.ts';
+import { MUST_FILES, readCitations } from './pipeline.ts';
 
+// The file list is the pipeline's own, so this test cannot drift from what build:data reads.
 const DIR = 'data/sample/psi';
-const MUST_FILES = [
-  'PSI-159_Experimental_table_CFI-G_Normal_Flames.csv',
-  'PSI-159_Experimental_table_CFI-G_Inverse_Flames.csv',
-  'PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv',
-];
 const citations = readCitations('');
 const build = (now: Date) => buildExperiments(MUST_FILES.map((f) => mapCsvFile(`${DIR}/${f}`)), now, citations);
 const dataset = build(new Date('2026-11-14T12:00:00Z'));
@@ -21,9 +17,9 @@ describe('buildExperiments', () => {
     expect(dataset.generatedAt).toBe('2026-11-14T12:00:00.000Z');
   });
 
-  test('has 453 records, 442 plottable', () => {
-    expect(dataset.records).toHaveLength(453);
-    expect(dataset.plottableCount).toBe(442);
+  test('has 660 records, 629 plottable', () => {
+    expect(dataset.records).toHaveLength(660); // 453 of the Must set + 207 of PSI-10 normal flames
+    expect(dataset.plottableCount).toBe(629); // 442 + 187
   });
 
   test('reports read, kept and skipped rows per source file', () => {
@@ -31,7 +27,13 @@ describe('buildExperiments', () => {
       { file: MUST_FILES[0], read: 179, kept: 179, skipped: 0 },
       { file: MUST_FILES[1], read: 1015, kept: 154, skipped: 861 },
       { file: MUST_FILES[2], read: 120, kept: 120, skipped: 0 },
+      { file: MUST_FILES[3], read: 207, kept: 207, skipped: 0 },
     ]);
+  });
+
+  test('reads the four tables of PSI-159 and PSI-10', () => {
+    expect(MUST_FILES).toHaveLength(4);
+    expect(MUST_FILES.filter((file) => file.startsWith('PSI-10_'))).toHaveLength(2);
   });
 
   test('every record has the same field names, whatever its source', () => {
@@ -42,12 +44,12 @@ describe('buildExperiments', () => {
 
   test('every record carries its PSI page link and a unique id', () => {
     expect(dataset.records.every((r) => r.pageUrl.startsWith('https://psi.nasa.gov/physci/repo/data/investigations/PSI-'))).toBe(true);
-    expect(new Set(dataset.records.map((r) => r.id)).size).toBe(453);
+    expect(new Set(dataset.records.map((r) => r.id)).size).toBe(660);
   });
 
   test('summary lists the fuels of each investigation', () => {
     const fuels = Object.fromEntries(dataset.investigations.map((i) => [i.accession, i.fuels]));
-    expect(fuels).toEqual({ 'PSI-159': ['butane', 'ethane', 'propane'], 'PSI-10': ['ethylene'] });
+    expect(fuels).toEqual({ 'PSI-159': ['butane', 'ethane', 'propane'], 'PSI-10': ['ethylene', 'propane'] });
   });
 
   test('summary counts match the records', () => {

@@ -11,7 +11,7 @@ import type { ExperimentsDataset } from './build-experiments.ts';
 import { readCitations, runPipeline } from './pipeline.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const EXPECTED = { records: 453, plottable: 442, inMoonBaseZone: 66 };
+const EXPECTED = { records: 660, plottable: 629, inMoonBaseZone: 66 };
 const EXPECTED_DOIS = ['10.60555/cyt1-kh64', '10.60555/w4zy-bt45']; // PSI-159 and PSI-10
 
 function blockNetwork(): void {

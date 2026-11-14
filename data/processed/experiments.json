@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1.0",
-  "generatedAt": "2026-11-14T17:51:52.789Z",
+  "generatedAt": "2026-11-14T18:16:05.146Z",
   "sources": [
     {
       "file": "PSI-159_Experimental_table_CFI-G_Normal_Flames.csv",
@@ -18,6 +18,12 @@
       "file": "PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv",
       "read": 120,
       "kept": 120,
+      "skipped": 0
+    },
+    {
+      "file": "PSI-10_Experimental_table_Flame_Design_Normal_Flame.csv",
+      "read": 207,
+      "kept": 207,
       "skipped": 0
     }
   ],
@@ -46,7 +52,7 @@
       "checkedOn": "2026-11-14"
     }
   ],
-  "plottableCount": 442,
+  "plottableCount": 629,
   "investigations": [
     {
       "accession": "PSI-159",
@@ -69,11 +75,11 @@
     },
     {
       "accession": "PSI-10",
-      "records": 120,
-      "plottable": 109,
+      "records": 327,
+      "plottable": 296,
       "inMoonBaseZone": 18,
       "o2Range": [
-        0.212017175,
+        0.198048193,
         0.849977932
       ],
       "pressureBarRange": [
@@ -81,7 +87,8 @@
         3.0581712
       ],
       "fuels": [
-        "ethylene"
+        "ethylene",
+        "propane"
       ]
     }
   ],
@@ -12514,6 +12521,6475 @@
       "dataQuality": [],
       "isPlottable": true,
       "inMoonBaseZone": true
+    },
+    {
+      "id": "PSI-10:19115A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.207128374,
+      "o2FractionAfterTest": 0.206202891,
+      "pressureBar": 1.0314562,
+      "pressureIsApproximate": false,
+      "tadK": 2352.144414,
+      "zst": 0.062716477,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.206169206,
+      "o2FractionAfterTest": 0.205663073,
+      "pressureBar": 1.0297325,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.205663073,
+      "o2FractionAfterTest": 0.204951718,
+      "pressureBar": 1.0307668,
+      "pressureIsApproximate": false,
+      "tadK": 2345.932123,
+      "zst": 0.062341004,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115B2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.204939076,
+      "o2FractionAfterTest": 0.20431758,
+      "pressureBar": 1.0300773,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20431758,
+      "o2FractionAfterTest": 0.203863566,
+      "pressureBar": 1.0300773,
+      "pressureIsApproximate": false,
+      "tadK": 2186.108871,
+      "zst": 0.184576296,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115G1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203863566,
+      "o2FractionAfterTest": 0.203513186,
+      "pressureBar": 1.0300773,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMPED",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203460708,
+      "o2FractionAfterTest": 0.202822015,
+      "pressureBar": 1.0311115,
+      "pressureIsApproximate": false,
+      "tadK": 2179.212411,
+      "zst": 0.185731014,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115L1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.202822015,
+      "o2FractionAfterTest": 0.201905747,
+      "pressureBar": 1.0342141,
+      "pressureIsApproximate": false,
+      "tadK": 2332.354419,
+      "zst": 0.061525773,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201883189,
+      "o2FractionAfterTest": 0.201368251,
+      "pressureBar": 1.0321457,
+      "pressureIsApproximate": false,
+      "tadK": 2260.545079,
+      "zst": 0.118937002,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115M4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201357214,
+      "o2FractionAfterTest": 0.20087857,
+      "pressureBar": 1.0324905,
+      "pressureIsApproximate": false,
+      "tadK": 2260.822619,
+      "zst": 0.116559644,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19115Q1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200867151,
+      "o2FractionAfterTest": 0.200398938,
+      "pressureBar": 1.0331799,
+      "pressureIsApproximate": false,
+      "tadK": 2324.097655,
+      "zst": 0.061045429,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.209828781,
+      "o2FractionAfterTest": 0.20919187,
+      "pressureBar": 1.0187009,
+      "pressureIsApproximate": false,
+      "tadK": 2364.426559,
+      "zst": 0.063501438,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20919187,
+      "o2FractionAfterTest": 0.208580728,
+      "pressureBar": 1.0214588,
+      "pressureIsApproximate": false,
+      "tadK": 2361.762282,
+      "zst": 0.063329411,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.208580728,
+      "o2FractionAfterTest": 0.207973375,
+      "pressureBar": 1.0242167,
+      "pressureIsApproximate": false,
+      "tadK": 2359.146427,
+      "zst": 0.063161368,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.207973375,
+      "o2FractionAfterTest": 0.207379511,
+      "pressureBar": 1.0245615,
+      "pressureIsApproximate": false,
+      "tadK": 2356.472075,
+      "zst": 0.062995621,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.207379511,
+      "o2FractionAfterTest": 0.20666972,
+      "pressureBar": 1.023872,
+      "pressureIsApproximate": false,
+      "tadK": 2197.57711,
+      "zst": 0.18770577,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20666972,
+      "o2FractionAfterTest": 0.206083892,
+      "pressureBar": 1.0259404,
+      "pressureIsApproximate": false,
+      "tadK": 2283.586332,
+      "zst": 0.12022924,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123F2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.206083892,
+      "o2FractionAfterTest": 0.205485391,
+      "pressureBar": 1.0266299,
+      "pressureIsApproximate": false,
+      "tadK": 2280.79265,
+      "zst": 0.120047982,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123F3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.205485391,
+      "o2FractionAfterTest": 0.20498867,
+      "pressureBar": 1.0280089,
+      "pressureIsApproximate": false,
+      "tadK": 2278.4985,
+      "zst": 0.119651505,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.204907733,
+      "o2FractionAfterTest": 0.204429245,
+      "pressureBar": 1.0307668,
+      "pressureIsApproximate": false,
+      "tadK": 2100.74935,
+      "zst": 0.243281303,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.204429245,
+      "o2FractionAfterTest": 0.203807321,
+      "pressureBar": 1.0324905,
+      "pressureIsApproximate": false,
+      "tadK": 2183.610185,
+      "zst": 0.186467574,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203807321,
+      "o2FractionAfterTest": 0.20322776,
+      "pressureBar": 1.0335247,
+      "pressureIsApproximate": false,
+      "tadK": 2269.282199,
+      "zst": 0.119978447,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20322776,
+      "o2FractionAfterTest": 0.202550678,
+      "pressureBar": 1.0342141,
+      "pressureIsApproximate": false,
+      "tadK": 2091.888636,
+      "zst": 0.242422701,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.202550678,
+      "o2FractionAfterTest": 0.201832917,
+      "pressureBar": 1.0352484,
+      "pressureIsApproximate": false,
+      "tadK": 2331.574241,
+      "zst": 0.061478048,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201832917,
+      "o2FractionAfterTest": 0.201123228,
+      "pressureBar": 1.0355931,
+      "pressureIsApproximate": false,
+      "tadK": 2328.203112,
+      "zst": 0.061280032,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201123228,
+      "o2FractionAfterTest": 0.200535703,
+      "pressureBar": 1.0359378,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200535703,
+      "o2FractionAfterTest": 0.200108197,
+      "pressureBar": 1.0362826,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200108197,
+      "o2FractionAfterTest": 0.199796361,
+      "pressureBar": 1.0355931,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.199796361,
+      "o2FractionAfterTest": 0.199415737,
+      "pressureBar": 1.0359378,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19123L7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.199415737,
+      "o2FractionAfterTest": 0.199166976,
+      "pressureBar": 1.0349036,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.210188478,
+      "o2FractionAfterTest": 0.209521205,
+      "pressureBar": 1.0197351,
+      "pressureIsApproximate": false,
+      "tadK": 2365.978278,
+      "zst": 0.063596373,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.209521205,
+      "o2FractionAfterTest": 0.208724327,
+      "pressureBar": 1.0200799,
+      "pressureIsApproximate": false,
+      "tadK": 2294.580179,
+      "zst": 0.122447386,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.208724327,
+      "o2FractionAfterTest": 0.208021363,
+      "pressureBar": 1.0218036,
+      "pressureIsApproximate": false,
+      "tadK": 2202.608744,
+      "zst": 0.189242716,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.208021363,
+      "o2FractionAfterTest": 0.207274975,
+      "pressureBar": 1.022493,
+      "pressureIsApproximate": false,
+      "tadK": 2113.26725,
+      "zst": 0.245975848,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.207274975,
+      "o2FractionAfterTest": 0.206583339,
+      "pressureBar": 1.023872,
+      "pressureIsApproximate": false,
+      "tadK": 2042.737923,
+      "zst": 0.286002577,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137F2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.206583339,
+      "o2FractionAfterTest": 0.205935113,
+      "pressureBar": 1.0242167,
+      "pressureIsApproximate": false,
+      "tadK": 2006.54149,
+      "zst": 0.304417155,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137F3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.205935113,
+      "o2FractionAfterTest": 0.205363297,
+      "pressureBar": 1.0255957,
+      "pressureIsApproximate": false,
+      "tadK": 2003.466901,
+      "zst": 0.304145478,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137G1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.205363297,
+      "o2FractionAfterTest": 0.204891116,
+      "pressureBar": 1.0259404,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.204891116,
+      "o2FractionAfterTest": 0.204441536,
+      "pressureBar": 1.0262852,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.204441536,
+      "o2FractionAfterTest": 0.20401684,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20401684,
+      "o2FractionAfterTest": 0.203628498,
+      "pressureBar": 1.0245615,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137K2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203628498,
+      "o2FractionAfterTest": 0.203230898,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203230898,
+      "o2FractionAfterTest": 0.202842409,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": 2268.778077,
+      "zst": 0.118182393,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.202842409,
+      "o2FractionAfterTest": 0.202392691,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.202392691,
+      "o2FractionAfterTest": 0.201997282,
+      "pressureBar": 1.0262852,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201997282,
+      "o2FractionAfterTest": 0.201642461,
+      "pressureBar": 1.0280089,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201642461,
+      "o2FractionAfterTest": 0.201330073,
+      "pressureBar": 1.0262852,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201330073,
+      "o2FractionAfterTest": 0.200879825,
+      "pressureBar": 1.0266299,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200879825,
+      "o2FractionAfterTest": 0.200458311,
+      "pressureBar": 1.0269746,
+      "pressureIsApproximate": false,
+      "tadK": 2257.839227,
+      "zst": 0.116914687,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19137L8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200458311,
+      "o2FractionAfterTest": 0.200039988,
+      "pressureBar": 1.0276641,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142G1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.396945546,
+      "o2FractionAfterTest": 0.389985715,
+      "pressureBar": 1.031801,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142G2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.389985715,
+      "o2FractionAfterTest": 0.38379786,
+      "pressureBar": 1.0366273,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142G3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.38379786,
+      "o2FractionAfterTest": 0.378755156,
+      "pressureBar": 1.0400747,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.378755156,
+      "o2FractionAfterTest": 0.373169325,
+      "pressureBar": 1.0445563,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142J2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.373169325,
+      "o2FractionAfterTest": 0.368985932,
+      "pressureBar": 1.0480037,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142G4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.378720538,
+      "o2FractionAfterTest": 0.375586869,
+      "pressureBar": 1.0056009,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142G5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.375586869,
+      "o2FractionAfterTest": 0.373429444,
+      "pressureBar": 1.0052561,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19142J3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.373429444,
+      "o2FractionAfterTest": 0.369621375,
+      "pressureBar": 1.0052561,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.398236568,
+      "o2FractionAfterTest": 0.397199753,
+      "pressureBar": 1.0218036,
+      "pressureIsApproximate": false,
+      "tadK": 2191.412558,
+      "zst": 0.568284905,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.397053473,
+      "o2FractionAfterTest": 0.395464744,
+      "pressureBar": 1.0262852,
+      "pressureIsApproximate": false,
+      "tadK": 2191.382943,
+      "zst": 0.566824325,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.395464744,
+      "o2FractionAfterTest": 0.392640279,
+      "pressureBar": 1.0321457,
+      "pressureIsApproximate": false,
+      "tadK": 2190.311601,
+      "zst": 0.564973815,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150A5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.392640279,
+      "o2FractionAfterTest": 0.389105849,
+      "pressureBar": 1.0380063,
+      "pressureIsApproximate": false,
+      "tadK": 2016.486447,
+      "zst": 0.620550782,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150B2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388949666,
+      "o2FractionAfterTest": 0.386279977,
+      "pressureBar": 1.0428326,
+      "pressureIsApproximate": false,
+      "tadK": 2266.279232,
+      "zst": 0.527525933,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.386279977,
+      "o2FractionAfterTest": 0.382816521,
+      "pressureBar": 1.0480037,
+      "pressureIsApproximate": false,
+      "tadK": 2357.411608,
+      "zst": 0.481465783,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150B3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.382816521,
+      "o2FractionAfterTest": 0.380191697,
+      "pressureBar": 1.0511063,
+      "pressureIsApproximate": false,
+      "tadK": 2258.50826,
+      "zst": 0.52379966,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.380057661,
+      "o2FractionAfterTest": 0.371068834,
+      "pressureBar": 1.051451,
+      "pressureIsApproximate": false,
+      "tadK": 2454.687757,
+      "zst": 0.414513641,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.371068834,
+      "o2FractionAfterTest": 0.361329459,
+      "pressureBar": 1.0604142,
+      "pressureIsApproximate": false,
+      "tadK": 2514.159531,
+      "zst": 0.360134008,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150G2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.370409062,
+      "o2FractionAfterTest": 0.365614547,
+      "pressureBar": 1.0586905,
+      "pressureIsApproximate": false,
+      "tadK": 2608.482429,
+      "zst": 0.287581619,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.365614547,
+      "o2FractionAfterTest": 0.36174856,
+      "pressureBar": 1.0590353,
+      "pressureIsApproximate": false,
+      "tadK": 2695.153604,
+      "zst": 0.193051831,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.36174856,
+      "o2FractionAfterTest": 0.358337895,
+      "pressureBar": 1.0617932,
+      "pressureIsApproximate": false,
+      "tadK": 2763.339012,
+      "zst": 0.102449525,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150G3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.358337895,
+      "o2FractionAfterTest": 0.35426149,
+      "pressureBar": 1.0631721,
+      "pressureIsApproximate": false,
+      "tadK": 2590.824593,
+      "zst": 0.2814123,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.300281323,
+      "o2FractionAfterTest": 0.294018816,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": 2317.42441,
+      "zst": 0.361434899,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19150S1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.294018816,
+      "o2FractionAfterTest": 0.292927725,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": 2632.641072,
+      "zst": 0.085829782,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156B2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388965886,
+      "o2FractionAfterTest": 0.388006709,
+      "pressureBar": 1.0297325,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156B4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.38786475,
+      "o2FractionAfterTest": 0.379703491,
+      "pressureBar": 1.0442115,
+      "pressureIsApproximate": false,
+      "tadK": 1829.222592,
+      "zst": 0.667875606,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.379703491,
+      "o2FractionAfterTest": 0.376921633,
+      "pressureBar": 1.0521405,
+      "pressureIsApproximate": false,
+      "tadK": 2536.529561,
+      "zst": 0.363230048,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.376921633,
+      "o2FractionAfterTest": 0.374961367,
+      "pressureBar": 1.0559326,
+      "pressureIsApproximate": false,
+      "tadK": 2787.380013,
+      "zst": 0.106286457,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156C2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.374961367,
+      "o2FractionAfterTest": 0.370676005,
+      "pressureBar": 1.05283,
+      "pressureIsApproximate": false,
+      "tadK": 2782.474241,
+      "zst": 0.105536682,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156C3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.370676005,
+      "o2FractionAfterTest": 0.366513124,
+      "pressureBar": 1.0535195,
+      "pressureIsApproximate": false,
+      "tadK": 2776.112319,
+      "zst": 0.10451947,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.373448053,
+      "o2FractionAfterTest": 0.370400179,
+      "pressureBar": 1.0493826,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.370400179,
+      "o2FractionAfterTest": 0.368534858,
+      "pressureBar": 1.0500721,
+      "pressureIsApproximate": false,
+      "tadK": 2777.179214,
+      "zst": 0.104729972,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.368534858,
+      "o2FractionAfterTest": 0.365929881,
+      "pressureBar": 1.0480037,
+      "pressureIsApproximate": false,
+      "tadK": 2773.585036,
+      "zst": 0.104190696,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.365929881,
+      "o2FractionAfterTest": 0.364456988,
+      "pressureBar": 1.0486931,
+      "pressureIsApproximate": false,
+      "tadK": 2770.475153,
+      "zst": 0.103697909,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.364456988,
+      "o2FractionAfterTest": 0.362735024,
+      "pressureBar": 1.0486931,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.362735024,
+      "o2FractionAfterTest": 0.36092323,
+      "pressureBar": 1.0486931,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19156J7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.36092323,
+      "o2FractionAfterTest": 0.358883174,
+      "pressureBar": 1.0483484,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.394349885,
+      "o2FractionAfterTest": 0.386570926,
+      "pressureBar": 1.0280089,
+      "pressureIsApproximate": false,
+      "tadK": 2805.86129,
+      "zst": 0.109747693,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.386570926,
+      "o2FractionAfterTest": 0.381344603,
+      "pressureBar": 1.0266299,
+      "pressureIsApproximate": false,
+      "tadK": 2796.639651,
+      "zst": 0.108202498,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171D3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.381344603,
+      "o2FractionAfterTest": 0.378553501,
+      "pressureBar": 1.0259404,
+      "pressureIsApproximate": false,
+      "tadK": 2790.830854,
+      "zst": 0.107245887,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171D4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.378553501,
+      "o2FractionAfterTest": 0.373907361,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": 2785.313081,
+      "zst": 0.106355733,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171D5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.373907361,
+      "o2FractionAfterTest": 0.369543498,
+      "pressureBar": 1.0255957,
+      "pressureIsApproximate": false,
+      "tadK": 2778.6568,
+      "zst": 0.105273748,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171S1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.369543498,
+      "o2FractionAfterTest": 0.367150074,
+      "pressureBar": 1.0266299,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.378873529,
+      "o2FractionAfterTest": 0.372135709,
+      "pressureBar": 1.0338694,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171B3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.372135709,
+      "o2FractionAfterTest": 0.365351771,
+      "pressureBar": 1.0438668,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.365351771,
+      "o2FractionAfterTest": 0.362579633,
+      "pressureBar": 1.0517958,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171J2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.362579633,
+      "o2FractionAfterTest": 0.361426502,
+      "pressureBar": 1.0500721,
+      "pressureIsApproximate": false,
+      "tadK": 2765.566709,
+      "zst": 0.102925196,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171J3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.361426502,
+      "o2FractionAfterTest": 0.35959538,
+      "pressureBar": 1.0521405,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19171J4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.35959538,
+      "o2FractionAfterTest": 0.356951356,
+      "pressureBar": 1.0542089,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.398389773,
+      "o2FractionAfterTest": 0.397248069,
+      "pressureBar": 1.2807018,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.397248069,
+      "o2FractionAfterTest": 0.390982574,
+      "pressureBar": 1.2906992,
+      "pressureIsApproximate": false,
+      "tadK": 2830.663435,
+      "zst": 0.110612658,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390982574,
+      "o2FractionAfterTest": 0.388733316,
+      "pressureBar": 1.2862177,
+      "pressureIsApproximate": false,
+      "tadK": 2824.353784,
+      "zst": 0.109604872,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388733316,
+      "o2FractionAfterTest": 0.387684407,
+      "pressureBar": 1.2841492,
+      "pressureIsApproximate": false,
+      "tadK": 2665.383806,
+      "zst": 0.283580737,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.387591064,
+      "o2FractionAfterTest": 0.384886695,
+      "pressureBar": 1.2803571,
+      "pressureIsApproximate": false,
+      "tadK": 2657.777524,
+      "zst": 0.286881575,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.384886695,
+      "o2FractionAfterTest": 0.383111725,
+      "pressureBar": 1.2820808,
+      "pressureIsApproximate": false,
+      "tadK": 2654.700196,
+      "zst": 0.285808835,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.389437129,
+      "o2FractionAfterTest": 0.387849574,
+      "pressureBar": 1.270015,
+      "pressureIsApproximate": false,
+      "tadK": 2490.914521,
+      "zst": 0.416181535,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.387849574,
+      "o2FractionAfterTest": 0.385960225,
+      "pressureBar": 1.275186,
+      "pressureIsApproximate": false,
+      "tadK": 2488.873852,
+      "zst": 0.415095349,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.385960225,
+      "o2FractionAfterTest": 0.383985713,
+      "pressureBar": 1.2713939,
+      "pressureIsApproximate": false,
+      "tadK": 2486.510624,
+      "zst": 0.41371122,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175B9",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.383985713,
+      "o2FractionAfterTest": 0.382547209,
+      "pressureBar": 1.2738071,
+      "pressureIsApproximate": false,
+      "tadK": 2558.279677,
+      "zst": 0.362636535,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.382547209,
+      "o2FractionAfterTest": 0.379403054,
+      "pressureBar": 1.2762203,
+      "pressureIsApproximate": false,
+      "tadK": 2555.231192,
+      "zst": 0.361308708,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175N2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.379403054,
+      "o2FractionAfterTest": 0.377441609,
+      "pressureBar": 1.2779439,
+      "pressureIsApproximate": false,
+      "tadK": 2743.821709,
+      "zst": 0.18469499,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19175N3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.377441609,
+      "o2FractionAfterTest": 0.376039214,
+      "pressureBar": 1.2779439,
+      "pressureIsApproximate": false,
+      "tadK": 2751.908041,
+      "zst": 0.171934852,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.398542439,
+      "o2FractionAfterTest": 0.396833456,
+      "pressureBar": 1.2820808,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.396833456,
+      "o2FractionAfterTest": 0.39522143,
+      "pressureBar": 1.2841492,
+      "pressureIsApproximate": false,
+      "tadK": 2578.366327,
+      "zst": 0.367903297,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.39522143,
+      "o2FractionAfterTest": 0.393608129,
+      "pressureBar": 1.2865624,
+      "pressureIsApproximate": false,
+      "tadK": 2576.224326,
+      "zst": 0.367118634,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.393608129,
+      "o2FractionAfterTest": 0.392269326,
+      "pressureBar": 1.2906992,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.392269326,
+      "o2FractionAfterTest": 0.390189347,
+      "pressureBar": 1.2951808,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390189347,
+      "o2FractionAfterTest": 0.388150549,
+      "pressureBar": 1.2982835,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182G9",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388150549,
+      "o2FractionAfterTest": 0.386276376,
+      "pressureBar": 1.2996624,
+      "pressureIsApproximate": false,
+      "tadK": 2569.047897,
+      "zst": 0.361731262,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.386276376,
+      "o2FractionAfterTest": 0.384855559,
+      "pressureBar": 1.3013861,
+      "pressureIsApproximate": false,
+      "tadK": 2565.170159,
+      "zst": 0.362057801,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182N2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.389021209,
+      "o2FractionAfterTest": 0.38758473,
+      "pressureBar": 1.2982835,
+      "pressureIsApproximate": false,
+      "tadK": 2568.715351,
+      "zst": 0.363629788,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182N3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.38758473,
+      "o2FractionAfterTest": 0.385704463,
+      "pressureBar": 1.3006967,
+      "pressureIsApproximate": false,
+      "tadK": 2568.856488,
+      "zst": 0.361014904,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.385704463,
+      "o2FractionAfterTest": 0.384814006,
+      "pressureBar": 1.297594,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.384814006,
+      "o2FractionAfterTest": 0.382594439,
+      "pressureBar": 1.305523,
+      "pressureIsApproximate": false,
+      "tadK": 1773.186913,
+      "zst": 0.682800088,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182C2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.382594439,
+      "o2FractionAfterTest": 0.380272275,
+      "pressureBar": 1.3103493,
+      "pressureIsApproximate": false,
+      "tadK": 1722.401267,
+      "zst": 0.694177801,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182N4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.380272275,
+      "o2FractionAfterTest": 0.378429675,
+      "pressureBar": 1.3144862,
+      "pressureIsApproximate": false,
+      "tadK": 2559.119998,
+      "zst": 0.357026209,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19182F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.378429675,
+      "o2FractionAfterTest": 0.373744084,
+      "pressureBar": 1.3213809,
+      "pressureIsApproximate": false,
+      "tadK": 2079.163152,
+      "zst": 0.586821387,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.398598351,
+      "o2FractionAfterTest": 0.395841809,
+      "pressureBar": 1.2803571,
+      "pressureIsApproximate": false,
+      "tadK": 1682.720497,
+      "zst": 0.715418162,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.395841809,
+      "o2FractionAfterTest": 0.394925333,
+      "pressureBar": 1.2869071,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.394925333,
+      "o2FractionAfterTest": 0.394012765,
+      "pressureBar": 1.2872519,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.394012765,
+      "o2FractionAfterTest": 0.39150599,
+      "pressureBar": 1.2924229,
+      "pressureIsApproximate": false,
+      "tadK": 1732.245239,
+      "zst": 0.700075453,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.39150599,
+      "o2FractionAfterTest": 0.390872924,
+      "pressureBar": 1.298973,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390872924,
+      "o2FractionAfterTest": 0.390078032,
+      "pressureBar": 1.3017309,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189D3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390078032,
+      "o2FractionAfterTest": 0.387709109,
+      "pressureBar": 1.3089704,
+      "pressureIsApproximate": false,
+      "tadK": 1729.397642,
+      "zst": 0.697976581,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.387709109,
+      "o2FractionAfterTest": 0.385199469,
+      "pressureBar": 1.3172441,
+      "pressureIsApproximate": false,
+      "tadK": 2091.280614,
+      "zst": 0.593356334,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.387159045,
+      "o2FractionAfterTest": 0.383237392,
+      "pressureBar": 1.3210362,
+      "pressureIsApproximate": false,
+      "tadK": 2749.091871,
+      "zst": 0.195237981,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189J2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.383237392,
+      "o2FractionAfterTest": 0.379651533,
+      "pressureBar": 1.3220704,
+      "pressureIsApproximate": false,
+      "tadK": 2743.972871,
+      "zst": 0.193540869,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189J3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.379651533,
+      "o2FractionAfterTest": 0.375979956,
+      "pressureBar": 1.3220704,
+      "pressureIsApproximate": false,
+      "tadK": 2738.528449,
+      "zst": 0.192278512,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.375979956,
+      "o2FractionAfterTest": 0.372524632,
+      "pressureBar": 1.3231046,
+      "pressureIsApproximate": false,
+      "tadK": 2733.213653,
+      "zst": 0.190959242,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189K2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.372524632,
+      "o2FractionAfterTest": 0.369301945,
+      "pressureBar": 1.3231046,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189K3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.369301945,
+      "o2FractionAfterTest": 0.365498172,
+      "pressureBar": 1.3231046,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19189P1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.365498172,
+      "o2FractionAfterTest": 0.361710714,
+      "pressureBar": 1.327931,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.395565745,
+      "o2FractionAfterTest": 0.394453826,
+      "pressureBar": 1.2731176,
+      "pressureIsApproximate": false,
+      "tadK": 2563.958156,
+      "zst": 0.376523561,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.394453826,
+      "o2FractionAfterTest": 0.392202621,
+      "pressureBar": 1.2744966,
+      "pressureIsApproximate": false,
+      "tadK": 2562.138751,
+      "zst": 0.3753533,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.392202621,
+      "o2FractionAfterTest": 0.390754941,
+      "pressureBar": 1.2769097,
+      "pressureIsApproximate": false,
+      "tadK": 2559.657152,
+      "zst": 0.374419513,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196B1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390754941,
+      "o2FractionAfterTest": 0.389782968,
+      "pressureBar": 1.2779439,
+      "pressureIsApproximate": false,
+      "tadK": 2653.074142,
+      "zst": 0.297943073,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196B2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.389782968,
+      "o2FractionAfterTest": 0.388258954,
+      "pressureBar": 1.2793229,
+      "pressureIsApproximate": false,
+      "tadK": 2650.57787,
+      "zst": 0.298085245,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196B3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388258954,
+      "o2FractionAfterTest": 0.3865883,
+      "pressureBar": 1.2800124,
+      "pressureIsApproximate": false,
+      "tadK": 2648.380267,
+      "zst": 0.297319679,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196B4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.3865883,
+      "o2FractionAfterTest": 0.384641571,
+      "pressureBar": 1.2807018,
+      "pressureIsApproximate": false,
+      "tadK": 2645.921949,
+      "zst": 0.296400966,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.384641571,
+      "o2FractionAfterTest": 0.383088242,
+      "pressureBar": 1.2827703,
+      "pressureIsApproximate": false,
+      "tadK": 2740.901303,
+      "zst": 0.1992359,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196C2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.383088242,
+      "o2FractionAfterTest": 0.381106161,
+      "pressureBar": 1.2827703,
+      "pressureIsApproximate": false,
+      "tadK": 2738.328597,
+      "zst": 0.198583027,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.386116096,
+      "o2FractionAfterTest": 0.3842703,
+      "pressureBar": 1.2886308,
+      "pressureIsApproximate": false,
+      "tadK": 2817.79709,
+      "zst": 0.108496691,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.3842703,
+      "o2FractionAfterTest": 0.382214792,
+      "pressureBar": 1.2913887,
+      "pressureIsApproximate": false,
+      "tadK": 2815.126373,
+      "zst": 0.10803205,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196F1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.382214792,
+      "o2FractionAfterTest": 0.381649393,
+      "pressureBar": 1.2820808,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19196N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.381649393,
+      "o2FractionAfterTest": 0.380621625,
+      "pressureBar": 1.2879413,
+      "pressureIsApproximate": false,
+      "tadK": 2811.788798,
+      "zst": 0.107529337,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.394712947,
+      "o2FractionAfterTest": 0.392546384,
+      "pressureBar": 1.0242167,
+      "pressureIsApproximate": false,
+      "tadK": 2641.750142,
+      "zst": 0.300817379,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.392546384,
+      "o2FractionAfterTest": 0.391981265,
+      "pressureBar": 1.0211141,
+      "pressureIsApproximate": false,
+      "tadK": 2642.211152,
+      "zst": 0.297908948,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.391981265,
+      "o2FractionAfterTest": 0.390565564,
+      "pressureBar": 1.0235273,
+      "pressureIsApproximate": false,
+      "tadK": 2640.792505,
+      "zst": 0.29766611,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.390565564,
+      "o2FractionAfterTest": 0.388965224,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": 2545.605845,
+      "zst": 0.373381597,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.388965224,
+      "o2FractionAfterTest": 0.386954381,
+      "pressureBar": 1.0269746,
+      "pressureIsApproximate": false,
+      "tadK": 2543.174798,
+      "zst": 0.372477065,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.386954381,
+      "o2FractionAfterTest": 0.384496992,
+      "pressureBar": 1.0293878,
+      "pressureIsApproximate": false,
+      "tadK": 2358.191575,
+      "zst": 0.482262201,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.384496992,
+      "o2FractionAfterTest": 0.382566898,
+      "pressureBar": 1.0314562,
+      "pressureIsApproximate": false,
+      "tadK": 2354.71168,
+      "zst": 0.481255923,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200A8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.382566898,
+      "o2FractionAfterTest": 0.375117028,
+      "pressureBar": 1.038351,
+      "pressureIsApproximate": false,
+      "tadK": 2349.883528,
+      "zst": 0.477739828,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.299432834,
+      "o2FractionAfterTest": 0.297429735,
+      "pressureBar": 1.022493,
+      "pressureIsApproximate": false,
+      "tadK": 2481.449752,
+      "zst": 0.24842156,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.297429735,
+      "o2FractionAfterTest": 0.293952369,
+      "pressureBar": 1.0242167,
+      "pressureIsApproximate": false,
+      "tadK": 2477.750681,
+      "zst": 0.24487885,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200H2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.293952369,
+      "o2FractionAfterTest": 0.289422616,
+      "pressureBar": 1.0283536,
+      "pressureIsApproximate": false,
+      "tadK": 2199.052834,
+      "zst": 0.416000398,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19200H3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.289422616,
+      "o2FractionAfterTest": 0.280273169,
+      "pressureBar": 1.038351,
+      "pressureIsApproximate": false,
+      "tadK": 2183.717314,
+      "zst": 0.410501243,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.209912572,
+      "o2FractionAfterTest": 0.208975718,
+      "pressureBar": 1.0200799,
+      "pressureIsApproximate": false,
+      "tadK": 2206.542885,
+      "zst": 0.190473037,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206A5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.208975718,
+      "o2FractionAfterTest": 0.208213735,
+      "pressureBar": 1.0228378,
+      "pressureIsApproximate": false,
+      "tadK": 2203.113936,
+      "zst": 0.18973854,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.208213735,
+      "o2FractionAfterTest": 0.207380999,
+      "pressureBar": 1.0245615,
+      "pressureIsApproximate": false,
+      "tadK": 2357.014038,
+      "zst": 0.063028998,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.207380999,
+      "o2FractionAfterTest": 0.206772012,
+      "pressureBar": 1.0245615,
+      "pressureIsApproximate": false,
+      "tadK": 2353.774342,
+      "zst": 0.062829973,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.206772012,
+      "o2FractionAfterTest": 0.206181778,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": 2351.085842,
+      "zst": 0.062664329,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.206181778,
+      "o2FractionAfterTest": 0.20545971,
+      "pressureBar": 1.0262852,
+      "pressureIsApproximate": false,
+      "tadK": 2348.135318,
+      "zst": 0.062482967,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20545971,
+      "o2FractionAfterTest": 0.204624224,
+      "pressureBar": 1.0266299,
+      "pressureIsApproximate": false,
+      "tadK": 2344.580687,
+      "zst": 0.062267576,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206L2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20452292,
+      "o2FractionAfterTest": 0.203933489,
+      "pressureBar": 1.0228378,
+      "pressureIsApproximate": false,
+      "tadK": 2183.802419,
+      "zst": 0.186632172,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206L3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203933489,
+      "o2FractionAfterTest": 0.203433022,
+      "pressureBar": 1.0235273,
+      "pressureIsApproximate": false,
+      "tadK": 2182.279113,
+      "zst": 0.185595214,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206L4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.203433022,
+      "o2FractionAfterTest": 0.202894626,
+      "pressureBar": 1.0242167,
+      "pressureIsApproximate": false,
+      "tadK": 2180.155709,
+      "zst": 0.185069928,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206L6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.202879725,
+      "o2FractionAfterTest": 0.202260063,
+      "pressureBar": 1.0245615,
+      "pressureIsApproximate": false,
+      "tadK": 2178.509374,
+      "zst": 0.183907052,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.2022457,
+      "o2FractionAfterTest": 0.201524174,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": 2329.80584,
+      "zst": 0.061392928,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206K1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201524174,
+      "o2FractionAfterTest": 0.201046071,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206K2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.201046071,
+      "o2FractionAfterTest": 0.20058213,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.20058213,
+      "o2FractionAfterTest": 0.200485764,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206G9",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.200485764,
+      "o2FractionAfterTest": 0.199858989,
+      "pressureBar": 1.0276641,
+      "pressureIsApproximate": false,
+      "tadK": 2321.720993,
+      "zst": 0.060917462,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206N1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.199858989,
+      "o2FractionAfterTest": 0.19968905,
+      "pressureBar": 1.025251,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.19968905,
+      "o2FractionAfterTest": 0.199163298,
+      "pressureBar": 1.0249062,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206H2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.199163298,
+      "o2FractionAfterTest": 0.198596375,
+      "pressureBar": 1.0273194,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206H3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.198596375,
+      "o2FractionAfterTest": 0.198048193,
+      "pressureBar": 1.0280089,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:19206H4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "ethylene",
+        "raw": "C2H4",
+        "inferred": false
+      },
+      "o2Fraction": 0.198048193,
+      "o2FractionAfterTest": 0.197475265,
+      "pressureBar": 1.0280089,
+      "pressureIsApproximate": false,
+      "tadK": null,
+      "zst": null,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "tadK",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        },
+        {
+          "field": "zst",
+          "raw": "RAMP",
+          "reason": "ramped-condition"
+        }
+      ],
+      "isPlottable": true,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A5",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A6",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301C1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2607.182737,
+      "zst": 0.257182771,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301C2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2607.182737,
+      "zst": 0.257182771,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301D1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2523.97951,
+      "zst": 0.331866302,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301D2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2523.97951,
+      "zst": 0.331866302,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A7",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A8",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301A9",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301H1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301H2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301H3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2734.953406,
+      "zst": 0.106461571,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301J1",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2357.78851,
+      "zst": 0.444563692,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301J2",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2398.666876,
+      "zst": 0.420415848,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301J3",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2440.404887,
+      "zst": 0.393571748,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
+    },
+    {
+      "id": "PSI-10:21301J4",
+      "accession": "PSI-10",
+      "flameType": "normal",
+      "fuel": {
+        "species": "propane",
+        "raw": "C3H8",
+        "inferred": false
+      },
+      "o2Fraction": 0.4,
+      "o2FractionAfterTest": null,
+      "pressureBar": null,
+      "pressureIsApproximate": false,
+      "tadK": 2357.78851,
+      "zst": 0.444563692,
+      "outcome": "not-reported",
+      "coolFlame": {
+        "value": null,
+        "raw": null
+      },
+      "selfExtOrFlowTermRaw": null,
+      "tfpRaw": null,
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "dataQuality": [
+        {
+          "field": "o2FractionAfterTest",
+          "raw": "",
+          "reason": "empty"
+        },
+        {
+          "field": "pressureBar",
+          "raw": "",
+          "reason": "empty"
+        }
+      ],
+      "isPlottable": false,
+      "inMoonBaseZone": false
     }
   ]
 }

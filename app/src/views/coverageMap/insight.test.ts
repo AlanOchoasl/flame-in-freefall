@@ -100,14 +100,14 @@ describe('describeInsight', () => {
   });
 });
 
-describe('the committed Must dataset', () => {
+describe('the committed dataset', () => {
   const file = JSON.parse(
     readFileSync(new URL('../../../../data/processed/experiments.json', import.meta.url), 'utf8'),
   ) as ExperimentsFile;
   const insight = computeInsight(file.records);
 
-  it('has 66 of 442 plotted tests in the zone', () => {
-    expect(insight).toMatchObject({ plotted: 442, inZone: 66, sharePercent: 14.9 });
+  it('has 66 of 629 plotted tests in the zone', () => {
+    expect(insight).toMatchObject({ plotted: 629, inZone: 66, sharePercent: 10.5 });
   });
 
   it('comes from PSI-159 (48) and PSI-10 (18), with the fuels it burns', () => {
@@ -125,7 +125,7 @@ describe('the committed Must dataset', () => {
 
   it('reads as the spec asks', () => {
     const text = describeInsight(insight);
-    expect(text.headline).toContain('66 of 442 plotted (14.9 %)');
+    expect(text.headline).toContain('66 of 629 plotted (10.5 %)');
     expect(text.limits).toHaveLength(3);
   });
 });

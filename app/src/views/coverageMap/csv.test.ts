@@ -89,7 +89,7 @@ describe('buildCsv', () => {
   });
 });
 
-describe('the committed Must dataset', () => {
+describe('the committed dataset', () => {
   const file = JSON.parse(
     readFileSync(new URL('../../../../data/processed/experiments.json', import.meta.url), 'utf8'),
   ) as ExperimentsFile;
@@ -102,9 +102,9 @@ describe('the committed Must dataset', () => {
     expect(rows.every((r) => r.flame_type === 'inverse')).toBe(true);
   });
 
-  it('has a source link and a value-for-value match on every one of the 453 records', () => {
+  it('has a source link and a value-for-value match on every one of the 660 records', () => {
     const rows = parseCsv(buildCsv(file.records));
-    expect(rows).toHaveLength(453);
+    expect(rows).toHaveLength(660);
     file.records.forEach((r, index) => {
       expect(rows[index].psi_page_url).toBe(r.pageUrl);
       expect(rows[index].fuel_label).toBe(r.fuel.raw ?? '');
