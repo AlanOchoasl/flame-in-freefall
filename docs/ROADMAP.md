@@ -21,7 +21,7 @@ Principles: no invented numbers; every point cites PSI + DOI; AI output always l
 
 ## Data facts (verified 2026-11-14, see `Recursos/PSI Combustion Science - catalogo de datos.md`)
 - 26 investigations; the catalog JSON (cached in `data/sample/psi-catalog/`) has objectives, approach, hypothesis and earth-benefits text for all 26. It has **no field for sensors/measurements**; that needs extraction from the approach text.
-- Test tables (cached in `data/sample/psi/`): 660 real rows in PSI-159 + PSI-10; 629 have both O2 and pressure; **66** of those fall in the Moon-base zone, all gaseous fuels. PSI-10 has no outcome columns.
+- Test tables (cached in `data/sample/psi/`): PSI-159 only, 333 real rows, all with O2 and pressure; **48** of them fall in the Moon-base zone, all gaseous fuels. PSI-10's tables (327 rows) were dropped on 2026-11-14: PSI declares no license for that investigation and no dataset is used without a verified license.
 - No partial-gravity data in PSI (per the statement).
 
 ## Timeline
@@ -43,7 +43,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 | # | Change | Label | Size* | Notes |
 |---|---|---|---|---|
 | 1 | `investigation-catalog` | Must | M | 26 investigations: metadata + hand-reviewed curation tags → `catalog.json` |
-| 2 | `data-pipeline` | Must | M | Revised: PSI-159 + PSI-10 inverse are Must, PSI-10 normal is Nice; review items fixed |
+| 2 | `data-pipeline` | Must | M | Revised: PSI-159 is Must; PSI-10's tables were dropped (no declared license); review items fixed |
 | 3 | `app-shell` | Must | S | React + TypeScript + Vite static app, loads the JSON files |
 | 4 | `investigation-ranking` | Must | M | Scoring rules; basis taken from the statement (solids, detection, suppression, Moon-base atmosphere) |
 | 5 | `investigation-comparator` | Must | S | Side-by-side view |
@@ -57,7 +57,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 
 ### Scope levers if time runs short (apply in this order)
 1. Curate tags and write AI summaries only for a **core set** (the investigations the statement names); the rest keep the PSI-text fallback, which the specs already support.
-2. Keep PSI-10 normal flames and the data download out (already Nice).
+2. Keep the data download out (already Nice). PSI-10's tables are already out: no declared license.
 3. Defer `ask-the-data` entirely.
 4. Cut the comparator's secondary rows before cutting a view.
 
@@ -67,7 +67,8 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 - [x] Extensibility (team request, 2026-11-14): data-access module, view list, data-driven profiles and vocabularies, `schemaVersion` on every data file, mapper list, `docs/EXTENDING.md`. About +2 h of task caps (measured: tasks 2.1, 3.1 and the new 5.3 in `app-shell`); no plugin systems or extra infrastructure
 - [ ] Verify 2026 judging criteria (Judging & Awards Guide)
 - [x] Choose license: Apache-2.0 (team, 2026-11-14); `LICENSE` and `THIRD_PARTY_LICENSES.md` added
-- [ ] Capture DOI of each investigation used ("Cite this Investigation" on its PSI page)
+- [x] Capture DOI of each investigation used ("Cite this Investigation" on its PSI page): PSI-159 in `data/curation/dataset-citations.json`; every catalog record carries its `doi`
 - [ ] Decide who curates the tags for the 26 investigations (needs science reading)
 - [x] AI access: Gemini via API key (team, 2026-11-14). Still to verify: model, limits, structured-output style (in Google's docs)
 - [ ] Verify the meaning of `SE`, `FT`, `TFP`, `Zst` in the PSI-159 Read Me
+- [x] PSI-10 test data is not used: PSI declares no license for it (team decision, 2026-11-14). Its DOI and the reason are in `excluded` of `experiments.json`. Open: whether its descriptive record stays in the catalog, and a mail to PSI (`msfc-psi-help@mail.nasa.gov`) to ask for the license

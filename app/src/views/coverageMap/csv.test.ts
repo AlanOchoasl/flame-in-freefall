@@ -97,20 +97,20 @@ describe('the committed dataset', () => {
   it('reads back as exactly the filtered records', () => {
     const filtered = applyFilters(file.records, { ...NO_FILTERS, flameType: 'inverse' });
     const rows = parseCsv(buildCsv(filtered));
-    expect(rows).toHaveLength(274);
+    expect(rows).toHaveLength(154);
     expect(rows.map((r) => r.id)).toEqual(filtered.map((r) => r.id));
     expect(rows.every((r) => r.flame_type === 'inverse')).toBe(true);
   });
 
-  it('has a source link and a value-for-value match on every one of the 660 records', () => {
+  it('has a source link and a value-for-value match on every one of the 333 records', () => {
     const rows = parseCsv(buildCsv(file.records));
-    expect(rows).toHaveLength(660);
+    expect(rows).toHaveLength(333);
     file.records.forEach((r, index) => {
       expect(rows[index].psi_page_url).toBe(r.pageUrl);
       expect(rows[index].fuel_label).toBe(r.fuel.raw ?? '');
       expect(rows[index].pressure_bar).toBe(r.pressureBar === null ? '' : String(r.pressureBar));
       expect(rows[index].in_moon_base_zone).toBe(String(r.inMoonBaseZone));
     });
-    expect(rows.filter((r) => r.in_moon_base_zone === 'true')).toHaveLength(66);
+    expect(rows.filter((r) => r.in_moon_base_zone === 'true')).toHaveLength(48);
   });
 });

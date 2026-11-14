@@ -56,10 +56,9 @@ describe('buildCatalog on the cached PSI data', () => {
     expect(outside).toEqual(['PSI-108', 'PSI-181']);
   });
   it('links cached test tables without mixing PSI-10 and PSI-100', () => {
-    expect(byId['PSI-10'].testTables).toEqual([
-      'PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv',
-      'PSI-10_Experimental_table_Flame_Design_Normal_Flame.csv',
-    ]);
+    // PSI-10's tables are not cached any more (no license declared, see dataset-citations.json), and
+    // PSI-100's must not be mistaken for them.
+    expect(byId['PSI-10'].testTables).toEqual([]);
     expect(byId['PSI-100'].testTables).toEqual(['PSI-100_Experimental_table_SAFFIRE-3.csv']);
   });
   it('gives every record its PSI page link and the DOI captured from PSI', () => {

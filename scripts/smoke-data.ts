@@ -11,8 +11,9 @@ import type { ExperimentsDataset } from './build-experiments.ts';
 import { readCitations, runPipeline } from './pipeline.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const EXPECTED = { records: 660, plottable: 629, inMoonBaseZone: 66 };
-const EXPECTED_DOIS = ['10.60555/cyt1-kh64', '10.60555/w4zy-bt45']; // PSI-159 and PSI-10
+const EXPECTED = { records: 333, plottable: 333, inMoonBaseZone: 48 };
+const EXPECTED_DOIS = ['10.60555/cyt1-kh64']; // PSI-159: the only dataset used
+const EXCLUDED = ['PSI-10']; // no license declared: none of its data may be in the output
 
 function blockNetwork(): void {
   const refuse = (): never => {
@@ -35,12 +36,14 @@ try {
   strictEqual(first.records.length, EXPECTED.records, 'record count');
   strictEqual(first.plottableCount, EXPECTED.plottable, 'plottable count');
   strictEqual(first.records.filter((r) => r.inMoonBaseZone).length, EXPECTED.inMoonBaseZone, 'Moon-base zone count');
-  deepStrictEqual(first.datasets.map((d) => d.doi).sort(), [...EXPECTED_DOIS].sort(), 'both DOIs must appear in the output');
+  deepStrictEqual(first.datasets.map((d) => d.doi).sort(), [...EXPECTED_DOIS].sort(), 'the DOI of every dataset used must appear in the output');
+  deepStrictEqual(first.excluded.map((d) => d.accession).sort(), [...EXCLUDED].sort(), 'the excluded datasets must be declared in the output');
+  strictEqual(first.records.filter((r) => EXCLUDED.includes(r.accession)).length, 0, 'no record of an excluded dataset may be in the output');
 
   const committed = JSON.parse(readFileSync(`${root}data/processed/experiments.json`, 'utf8'));
   deepStrictEqual(committed, JSON.parse(JSON.stringify({ ...first, generatedAt: committed.generatedAt })), 'committed experiments.json is out of date: run npm run build:data');
 
-  console.log(`Smoke check passed offline: ${EXPECTED.records} records, ${EXPECTED.plottable} plottable, ${EXPECTED.inMoonBaseZone} in the Moon-base zone, both DOIs present, two runs identical.`);
+  console.log(`Smoke check passed offline: ${EXPECTED.records} records, ${EXPECTED.plottable} plottable, ${EXPECTED.inMoonBaseZone} in the Moon-base zone, DOI present, PSI-10 excluded and absent, two runs identical.`);
 } catch (error) {
   console.error(`Smoke check FAILED: ${error instanceof Error ? error.message : error}`);
   process.exit(1);

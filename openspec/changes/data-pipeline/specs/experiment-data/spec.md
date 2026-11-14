@@ -87,6 +87,21 @@ The output SHALL declare a `schemaVersion` starting at `1.0.0`, and a change tha
 - **WHEN** a consumer opens the output
 - **THEN** it finds `schemaVersion` at the top level
 
+### Requirement: Only licensed datasets are used
+The system SHALL include in the output only the tests of investigations whose license is declared, and SHALL declare, in the output itself, every investigation it leaves out and why. A record of a left-out investigation MUST NOT reach the output.
+
+#### Scenario: Investigation with no declared license
+- **WHEN** an investigation declares no license in PSI's record or in the DataCite record of its DOI
+- **THEN** its tests are not in the output and it is listed under `excluded` with its DOI and the reason
+
+#### Scenario: Left-out data reaches the output by mistake
+- **WHEN** a record of a left-out investigation is about to be written
+- **THEN** the build stops with an error naming it
+
+#### Scenario: Cited dataset
+- **WHEN** an investigation is in the output
+- **THEN** the output lists its DOI, the link to the DOI and its license
+
 ### Requirement: Offline and deterministic
 The system SHALL read only local files and MUST NOT use the network. Two runs on the same inputs SHALL produce identical output apart from the generation date.
 

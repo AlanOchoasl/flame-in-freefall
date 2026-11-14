@@ -1,31 +1,34 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
-import { buildDatasets, parseCitations, type DatasetCitations } from './dataset-citations.ts';
+import { buildDatasets, buildExcluded, parseCitations, type DatasetCitations } from './dataset-citations.ts';
 import { readCitations } from './pipeline.ts';
 
 const PSI159_DOI = '10.60555/cyt1-kh64';
 const PSI10_DOI = '10.60555/w4zy-bt45';
 
 const citations: DatasetCitations = {
-  schemaVersion: '1.0.0',
+  schemaVersion: '1.1.0',
   checkedOn: '2026-11-14',
   provenance: 'test',
   entries: {
     'PSI-159': { doi: PSI159_DOI, publisher: 'NASA PSI', license: { spdx: 'CC0-1.0', url: 'https://example.org/cc0' }, licenseNote: null },
-    'PSI-10': { doi: PSI10_DOI, publisher: 'NASA PSI', license: null, licenseNote: 'No license declared.' },
+    'PSI-5': { doi: '10.1234/abc', publisher: 'NASA PSI', license: null, licenseNote: 'No license declared.' },
+  },
+  excluded: {
+    'PSI-10': { doi: PSI10_DOI, publisher: 'NASA PSI', reason: 'No license is declared.' },
   },
 };
 
 const records = [
   { accession: 'PSI-159', pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-159' },
   { accession: 'PSI-159', pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-159' },
-  { accession: 'PSI-10', pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-10' },
+  { accession: 'PSI-5', pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-5' },
 ];
 
 describe('buildDatasets', () => {
   test('lists each investigation once, in order, with its DOI link and page link', () => {
     const datasets = buildDatasets(records, citations);
-    expect(datasets.map((d) => d.accession)).toEqual(['PSI-159', 'PSI-10']);
+    expect(datasets.map((d) => d.accession)).toEqual(['PSI-159', 'PSI-5']);
     expect(datasets[0]).toMatchObject({
       doi: PSI159_DOI,
       doiUrl: `https://doi.org/${PSI159_DOI}`,
@@ -36,17 +39,42 @@ describe('buildDatasets', () => {
   });
 
   test('keeps a declared license and never invents one that is missing', () => {
-    const [psi159, psi10] = buildDatasets(records, citations);
+    const [psi159, psi5] = buildDatasets(records, citations);
     expect(psi159.license).toEqual({ spdx: 'CC0-1.0', url: 'https://example.org/cc0' });
     expect(psi159.licenseNote).toBeNull();
-    expect(psi10.license).toBeNull();
-    expect(psi10.licenseNote).toBe('No license declared.');
+    expect(psi5.license).toBeNull();
+    expect(psi5.licenseNote).toBe('No license declared.');
   });
 
   test('an investigation with no entry keeps its page link, with null DOI and a note', () => {
     const [dataset] = buildDatasets([{ accession: 'PSI-999', pageUrl: 'https://psi.nasa.gov/x' }], citations);
     expect(dataset).toMatchObject({ doi: null, doiUrl: null, publisher: null, license: null, pageUrl: 'https://psi.nasa.gov/x' });
     expect(dataset.licenseNote).toContain('No citation entry');
+  });
+
+  test('refuses a record of an excluded dataset, so its data cannot reach the output', () => {
+    const leaking = [...records, { accession: 'PSI-10', pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-10' }];
+    expect(() => buildDatasets(leaking, citations)).toThrow(/excluded dataset reached the output: PSI-10/);
+  });
+});
+
+describe('buildExcluded', () => {
+  test('declares each excluded dataset with its DOI link, page link and reason', () => {
+    expect(buildExcluded(citations)).toEqual([
+      {
+        accession: 'PSI-10',
+        pageUrl: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-10',
+        doi: PSI10_DOI,
+        doiUrl: `https://doi.org/${PSI10_DOI}`,
+        publisher: 'NASA PSI',
+        reason: 'No license is declared.',
+        checkedOn: '2026-11-14',
+      },
+    ]);
+  });
+
+  test('is empty when nothing is left out', () => {
+    expect(buildExcluded({ ...citations, excluded: {} })).toEqual([]);
   });
 });
 
@@ -62,13 +90,16 @@ describe('parseCitations', () => {
     ['a missing schemaVersion', { ...valid, schemaVersion: undefined }],
     ['a missing checkedOn', { ...valid, checkedOn: undefined }],
     ['missing entries', { ...valid, entries: undefined }],
+    ['a missing excluded block', { ...valid, excluded: undefined }],
   ])('rejects %s', (_name, raw) => {
     expect(() => parseCitations(raw)).toThrow(/dataset-citations/);
   });
 
-  test('rejects a DOI that is not a DOI', () => {
-    const bad = { ...valid, entries: { 'PSI-1': { ...valid.entries['PSI-159'], doi: 'cyt1-kh64' } } };
-    expect(() => parseCitations(bad)).toThrow(/does not look like a DOI/);
+  test('rejects a DOI that is not a DOI, in a used or an excluded dataset', () => {
+    const used = { ...valid, entries: { 'PSI-1': { ...valid.entries['PSI-159'], doi: 'cyt1-kh64' } } };
+    expect(() => parseCitations(used)).toThrow(/does not look like a DOI/);
+    const left = { ...valid, excluded: { 'PSI-1': { ...valid.excluded['PSI-10'], doi: 'nope' } } };
+    expect(() => parseCitations(left)).toThrow(/does not look like a DOI/);
   });
 
   test('allows a null DOI, as plan B for a dataset whose DOI is unknown', () => {
@@ -85,6 +116,16 @@ describe('parseCitations', () => {
     const bad = { ...valid, entries: { 'PSI-1': { ...valid.entries['PSI-159'], license: { spdx: 'CC0-1.0' } } } };
     expect(() => parseCitations(bad)).toThrow(/needs "spdx" and "url"/);
   });
+
+  test('rejects an excluded dataset with no reason', () => {
+    const bad = { ...valid, excluded: { 'PSI-10': { doi: PSI10_DOI, publisher: 'NASA PSI', reason: '' } } };
+    expect(() => parseCitations(bad)).toThrow(/needs a reason/);
+  });
+
+  test('rejects a dataset that is both used and excluded', () => {
+    const bad = { ...valid, excluded: { 'PSI-159': valid.excluded['PSI-10'] } };
+    expect(() => parseCitations(bad)).toThrow(/both used \(entries\) and excluded/);
+  });
 });
 
 describe('the committed citations', () => {
@@ -92,36 +133,46 @@ describe('the committed citations', () => {
   const catalog = JSON.parse(readFileSync('data/processed/catalog.json', 'utf8')) as { records: { accession: string; doi: string | null }[] };
   const catalogDoi = (accession: string) => catalog.records.find((r) => r.accession === accession)?.doi;
 
-  test('cover PSI-159 and PSI-10 with the DOIs read from their PSI records', () => {
+  test('use PSI-159 with the DOI and the CC0-1.0 license read from its PSI record', () => {
     expect(committed.entries['PSI-159'].doi).toBe(PSI159_DOI);
-    expect(committed.entries['PSI-10'].doi).toBe(PSI10_DOI);
+    expect(committed.entries['PSI-159'].license?.spdx).toBe('CC0-1.0');
+  });
+
+  test('leave PSI-10 out, with its DOI and the reason: no license is declared', () => {
+    expect(Object.keys(committed.entries)).toEqual(['PSI-159']);
+    expect(committed.excluded['PSI-10'].doi).toBe(PSI10_DOI);
+    expect(committed.excluded['PSI-10'].reason).toMatch(/No license is declared/);
   });
 
   test('agree with the DOIs of the catalog, so the two files cannot drift apart', () => {
-    for (const accession of Object.keys(committed.entries)) {
-      expect(committed.entries[accession].doi, accession).toBe(catalogDoi(accession));
+    const accessions = [...Object.keys(committed.entries), ...Object.keys(committed.excluded)];
+    for (const accession of accessions) {
+      const doi = committed.entries[accession]?.doi ?? committed.excluded[accession]?.doi;
+      expect(doi, accession).toBe(catalogDoi(accession));
     }
-  });
-
-  test('declare CC0-1.0 for PSI-159 and no license for PSI-10, with the reason', () => {
-    expect(committed.entries['PSI-159'].license?.spdx).toBe('CC0-1.0');
-    expect(committed.entries['PSI-10'].license).toBeNull();
-    expect(committed.entries['PSI-10'].licenseNote).toMatch(/Confirm with PSI/);
   });
 });
 
 describe('the committed experiments.json', () => {
   const output = JSON.parse(readFileSync('data/processed/experiments.json', 'utf8')) as {
     schemaVersion: string;
-    datasets: { accession: string; doi: string | null; doiUrl: string | null; license: unknown }[];
+    datasets: { accession: string; doi: string | null; doiUrl: string | null }[];
+    excluded: { accession: string; doi: string | null }[];
+    records: { accession: string }[];
   };
 
-  test('carries both DOIs', () => {
-    expect(output.datasets.map((d) => d.doi).sort()).toEqual([PSI159_DOI, PSI10_DOI].sort());
-    expect(output.datasets.map((d) => d.doiUrl).sort()).toEqual([`https://doi.org/${PSI159_DOI}`, `https://doi.org/${PSI10_DOI}`].sort());
+  test('carries the DOI of the dataset it uses', () => {
+    expect(output.datasets.map((d) => d.doi)).toEqual([PSI159_DOI]);
+    expect(output.datasets.map((d) => d.doiUrl)).toEqual([`https://doi.org/${PSI159_DOI}`]);
   });
 
-  test('is at schema 1.1.0 (the app accepts any 1.x)', () => {
-    expect(output.schemaVersion).toBe('1.1.0');
+  test('declares PSI-10 as excluded and holds none of its records', () => {
+    expect(output.excluded.map((d) => d.accession)).toEqual(['PSI-10']);
+    expect(output.excluded[0].doi).toBe(PSI10_DOI);
+    expect(output.records.filter((r) => r.accession === 'PSI-10')).toEqual([]);
+  });
+
+  test('is at schema 1.2.0 (the app accepts any 1.x)', () => {
+    expect(output.schemaVersion).toBe('1.2.0');
   });
 });

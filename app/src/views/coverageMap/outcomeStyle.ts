@@ -11,7 +11,7 @@ export interface OutcomeStyle {
 }
 
 // Each outcome keeps its distinct shape; all outcomes share the console's blue data color.
-// "not-reported" (PSI-10 has no outcome column) is a mark of its own, never drawn as "no".
+// "not-reported" (a table with no outcome column) is a mark of its own, never drawn as "no".
 export const OUTCOME_STYLE: Record<Outcome, OutcomeStyle> = {
   yes: { color: 'var(--outcome-yes)', shape: 'circle', filled: true },
   no: { color: 'var(--outcome-no)', shape: 'triangle', filled: true },

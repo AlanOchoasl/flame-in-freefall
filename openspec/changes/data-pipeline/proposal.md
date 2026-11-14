@@ -14,6 +14,8 @@ The coverage map and the ranking need test conditions from NASA's experiments, b
 - Adds `isPlottable` and `inMoonBaseZone` per row, and a per-investigation summary (ranges and counts) for the ranking and comparator.
 - Keeps `SE/FT` and `TFP` raw, uninterpreted. Offline, deterministic, with unit tests and a smoke check.
 
+- **Update 2026-11-14:** the PSI-10 tables (inverse and normal flames) are left out of the output, because PSI declares no license for that investigation and no dataset is used without a verified license. They are declared under `excluded` in `experiments.json`. The counts above that include PSI-10 are the history of this change; today the file has 333 records, all plottable, 48 in the Moon-base zone.
+
 ## Capabilities
 
 ### New Capabilities

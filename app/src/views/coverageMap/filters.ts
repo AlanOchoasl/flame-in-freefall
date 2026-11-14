@@ -14,7 +14,7 @@ export const NO_FILTERS: MapFilters = { accession: null, flameType: null, fuel: 
 
 export const OUTCOMES = ['yes', 'no', 'flash', 'not-reported'] as const;
 
-// PSI-10 has no outcome column: "not-reported" is a value of its own, never "no".
+// A table with no outcome column is "not-reported", a value of its own and never "no". No table in use has that today.
 export const OUTCOME_LABELS: Record<(typeof OUTCOMES)[number], string> = {
   yes: 'Ignition: yes',
   no: 'Ignition: no',

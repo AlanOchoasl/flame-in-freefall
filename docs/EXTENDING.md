@@ -45,10 +45,12 @@ To add a new scoring **factor**, add its id to `FactorId` and a `case` in `score
 
 ## 3. Add a test-table mapper (a new PSI table in `experiments.json`)
 
+**First, check the license.** No dataset is used without a verified license. Read `licenseName` in the PSI investigation record (`https://psi.nasa.gov/geode-py/ws/repo/investigations/<accession>`) and the `rightsList` of its DOI on DataCite (`https://api.datacite.org/dois/<doi>`). If a license is declared, add the investigation under `entries` in `data/curation/dataset-citations.json`. If none is declared, do not add its data: list it under `excluded` with the reason, as PSI-10 is. The build refuses to run if a record of an excluded dataset reaches the output.
+
 1. Put the CSV in `data/sample/psi/`. Keep small samples only; name it with the investigation's accession as prefix (`PSI-xx_...csv`), which also links it to its catalog record.
-2. Create `scripts/mappers/<name>.ts` exporting a `Mapper`: `{ accession, filePattern, mapRow }`. `filePattern` is a regex on the file name; `mapRow` returns one `ExperimentRecord`. Use `cleanNumber` for numeric cells so values like `#DIV/0!` or `RAMP` become `null` with a data-quality entry. Convert pressure to bar and keep O2 as a fraction. `scripts/mappers/psi10.ts` is a short template.
+2. Create `scripts/mappers/<name>.ts` exporting a `Mapper`: `{ accession, filePattern, mapRow }`. `filePattern` is a regex on the file name; `mapRow` returns one `ExperimentRecord`. Use `cleanNumber` for numeric cells so values like `#DIV/0!` or `RAMP` become `null` with a data-quality entry. Convert pressure to bar and keep O2 as a fraction. `scripts/mappers/psi159.ts` is the template.
 3. Register it in `MAPPERS` in `scripts/mappers/index.ts` **and** add the file name to `MUST_FILES` in `scripts/pipeline.ts` (a registered mapper alone does not include the file).
-4. Add a test beside it (see `psi10.test.ts`).
+4. Add a test beside it (see `psi159.test.ts`).
 5. `npm run build:data` regenerates `data/processed/experiments.json`. Then update the guards that hard-code today's numbers, or they will fail on purpose:
    - `EXPECTED` in `scripts/smoke-data.ts` (records, plottable, in the Moon-base zone);
    - the mapper count asserted in `scripts/mappers/psi159.test.ts` ("registers each mapper once").
@@ -91,7 +93,7 @@ Recipes 1 to 4 were followed on a throwaway change in the browser and the comman
 
 1. A new screen with a path parameter and one in the menu: both routes opened, the menu entry and the document title appeared, and `inNav: false` kept it out of the menu.
 2. A fifth ranking profile: `npm run build` validated it, and the Detail screen listed it with no code change.
-3. A mapper for the PSI-10 normal-flame table: `experiments.json` went from 453 to 660 records (629 plottable, 66 in the Moon-base zone), and the smoke check and the mapper-count test failed until their numbers were updated, which is why step 5 lists them.
+3. A mapper for the PSI-10 normal-flame table: `experiments.json` went from 453 to 660 records (629 plottable, 66 in the Moon-base zone), and the smoke check and the mapper-count test failed until their numbers were updated, which is why step 5 lists them. (That table is no longer in the project: PSI-10 declares no license, see the first paragraph of this recipe.)
 4. A copied catalog record: the catalog went from 26 to 27 records, and a curation entry for an unknown accession failed the build.
 
 Recipe 5 was checked only by searching for `fetch(` in `app/src` (one call, in `dataAccess.ts`); it was not implemented.
