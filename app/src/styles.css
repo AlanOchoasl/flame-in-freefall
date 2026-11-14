@@ -80,11 +80,11 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --canvas: #f6f7f9;
-  --surface-1: #ffffff;
-  --surface-2: #eef0f4;
-  --surface-hover: #e3e6ec;
-  --line: #d0d5dd;
+  --canvas: #e6e9ef;
+  --surface-1: #f3f5f8;
+  --surface-2: #dde1e9;
+  --surface-hover: #d1d6e0;
+  --line: #bcc3d0;
   --line-strong: #6b7385;
   --text-primary: #0a0f1a;
   --text-secondary: #3c4556;
@@ -94,30 +94,30 @@
   --zone: #a15c00;
   --zone-fill-opacity: 0.12;
   --accent-red: #c8321b;
-  --logo-ring: #c9ced8;
-  --plot-grid: #d0d5dd;
-  --canvas-mark: #ffffff;
+  --logo-ring: #b5bcc9;
+  --plot-grid: #bcc3d0;
+  --canvas-mark: #f3f5f8;
   --ai: #3b3179;
-  --ai-weak: #f3f1ff;
+  --ai-weak: #e8e6f6;
   --psi: #3d4450;
-  --psi-weak: #eef0f3;
+  --psi-weak: #dfe4eb;
   --status-unreviewed: #7b5100;
-  --status-unreviewed-weak: #fff0d0;
+  --status-unreviewed-weak: #f1e4c6;
   --status-approx: #005e82;
   --status-same: #206133;
   --status-differs: #913100;
   --status-error: #a92227;
-  --status-error-weak: #ffefed;
+  --status-error-weak: #f3e0de;
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
-    --canvas: #f6f7f9;
-    --surface-1: #ffffff;
-    --surface-2: #eef0f4;
-    --surface-hover: #e3e6ec;
-    --line: #d0d5dd;
+    --canvas: #e6e9ef;
+    --surface-1: #f3f5f8;
+    --surface-2: #dde1e9;
+    --surface-hover: #d1d6e0;
+    --line: #bcc3d0;
     --line-strong: #6b7385;
     --text-primary: #0a0f1a;
     --text-secondary: #3c4556;
@@ -127,20 +127,20 @@
     --zone: #a15c00;
     --zone-fill-opacity: 0.12;
     --accent-red: #c8321b;
-    --logo-ring: #c9ced8;
-    --plot-grid: #d0d5dd;
-    --canvas-mark: #ffffff;
+    --logo-ring: #b5bcc9;
+    --plot-grid: #bcc3d0;
+    --canvas-mark: #f3f5f8;
     --ai: #3b3179;
-    --ai-weak: #f3f1ff;
+    --ai-weak: #e8e6f6;
     --psi: #3d4450;
-    --psi-weak: #eef0f3;
+    --psi-weak: #dfe4eb;
     --status-unreviewed: #7b5100;
-    --status-unreviewed-weak: #fff0d0;
+    --status-unreviewed-weak: #f1e4c6;
     --status-approx: #005e82;
     --status-same: #206133;
     --status-differs: #913100;
     --status-error: #a92227;
-    --status-error-weak: #ffefed;
+    --status-error-weak: #f3e0de;
   }
 }
 
