@@ -1,4 +1,4 @@
-import type { CatalogFile, ExperimentsFile, SummariesFile, VersionedFile } from './types';
+import type { CatalogFile, ExperimentsFile, RankingProfilesFile, SummariesFile, VersionedFile } from './types';
 
 // The only place that knows where data comes from. A future API replaces this module only.
 
@@ -51,3 +51,4 @@ async function loadDataFile<T extends VersionedFile>(file: string): Promise<Data
 export const getCatalog = () => loadDataFile<CatalogFile>('catalog.json');
 export const getExperiments = () => loadDataFile<ExperimentsFile>('experiments.json');
 export const getSummaries = () => loadDataFile<SummariesFile>('summaries.json');
+export const getRankingProfiles = () => loadDataFile<RankingProfilesFile>('profiles.json');

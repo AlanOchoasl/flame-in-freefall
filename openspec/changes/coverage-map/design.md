@@ -19,6 +19,10 @@ Depends on `data-pipeline` (`isPlottable`, `inMoonBaseZone`, `pressureIsApproxim
 6. **Table and download:** the same filtered array feeds the table and the file (CSV or JSON, built with `Blob`); no libraries.
 7. **Standard disclaimers are constants** reused by the About section.
 
+8. **Axes and labels (from the mockup review).** The mockup drew no tick values and put overlay labels over the data. The plot reserves a margin for tick labels and overlay labels; overlays are drawn first so points sit on top; labels use the margin or leader lines. Ticks: O2 every 20 %, pressure at most six ticks with the unit in the axis title.
+9. **Narrow screens.** The plot keeps a 480 px minimum inside a scrollable, focusable region; everything else stacks in one column. Alternative: shrink the plot (the mockup did, and it became unreadable at about 230 px).
+10. **Table paging** is a 50-row slice of the same filtered array; no virtualization library.
+
 Data flow: `experiments.json` → filter → chart / table / insight / download.
 
 ## Risks / Trade-offs

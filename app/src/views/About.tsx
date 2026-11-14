@@ -1,3 +1,4 @@
+import { DataState } from '../components/DataState';
 import { PsiLink } from '../components/PsiLink';
 import { PSI_SEARCH_URL } from '../components/labelText';
 import { getCatalog, getSummaries } from '../data/dataAccess';
@@ -9,41 +10,44 @@ const LICENSES_URL = 'https://github.com/AlanOchoasl/flame-in-freefall/blob/main
 function AiUseDetails() {
   const summaries = useDataResult(getSummaries);
 
-  if (summaries.status === 'loading') return <p>Loading AI-use details…</p>;
-  if (summaries.status === 'error') return <p>The AI-use details could not be loaded. {summaries.message}</p>;
-
-  const facts = summariseAiUse(summaries.data.summaries);
-  if (facts.total === 0) return <p>No AI summaries have been generated yet.</p>;
-
   return (
-    <ul>
-      <li>
-        Summaries: {facts.total}, of which {facts.reviewed} reviewed by a person.
-      </li>
-      <li>Model: {facts.models.join(', ')}.</li>
-      <li>Prompt version: {facts.promptVersions.join(', ')}.</li>
-      <li>
-        Generated: {facts.firstGenerated}
-        {facts.lastGenerated !== facts.firstGenerated ? ` to ${facts.lastGenerated}` : ''}.
-      </li>
-    </ul>
+    <DataState state={summaries} label="The AI-use details">
+      {(file) => {
+        const facts = summariseAiUse(file.entries);
+        if (facts.total === 0) return <p>No AI summaries have been generated yet.</p>;
+        return (
+          <ul>
+            <li>
+              Summaries: {facts.total}, of which {facts.reviewed} reviewed by a person.
+            </li>
+            <li>Model: {facts.models.join(', ')}.</li>
+            <li>Prompt version: {facts.promptVersions.join(', ')}.</li>
+            <li>
+              Generated: {facts.firstGenerated}
+              {facts.lastGenerated !== facts.firstGenerated ? ` to ${facts.lastGenerated}` : ''}.
+            </li>
+          </ul>
+        );
+      }}
+    </DataState>
   );
 }
 
 function InvestigationSources() {
   const catalog = useDataResult(getCatalog);
 
-  if (catalog.status === 'loading') return <p>Loading the list of investigations…</p>;
-  if (catalog.status === 'error') return <p>The list of investigations could not be loaded. {catalog.message}</p>;
-
   return (
-    <ul>
-      {catalog.data.records.map((record) => (
-        <li key={record.accession}>
-          {record.title ?? record.accession} — <PsiLink accession={record.accession} doi={record.doi} />
-        </li>
-      ))}
-    </ul>
+    <DataState state={catalog} label="The list of investigations">
+      {(file) => (
+        <ul>
+          {file.records.map((record) => (
+            <li key={record.accession}>
+              {record.title ?? record.accession} — <PsiLink accession={record.accession} doi={record.doi} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </DataState>
   );
 }
 

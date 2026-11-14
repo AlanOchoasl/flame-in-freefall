@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-14T15:08:09.833Z",
+  "generatedAt": "2026-11-14T17:00:29.196Z",
   "sourceRetrieved": "2026-11-14",
   "recordCount": 26,
   "unreviewedCount": 0,
@@ -1362,14 +1362,14 @@
           "value": [
             "solid"
           ],
-          "source": "Approach text: Sibal cotton and fiberglass fabric sample",
+          "source": "Approach text: Sibal cotton and fiberglass fabric sample; Approach text: SIBAL composite cotton/fiberglass sample",
           "reviewed": true
         },
         "topics": {
           "value": [
             "material-flammability"
           ],
-          "source": "Objectives text: large-scale fire growth and flammability limits",
+          "source": "Objectives text: large-scale fire growth and flammability limits; Objectives text: large-fire growth and low-gravity material flammability limits",
           "reviewed": true
         },
         "measurements": {
@@ -1378,9 +1378,15 @@
             "thermocouples",
             "radiometers",
             "pressure, CO2 and O2 sensors",
-            "anemometers"
+            "anemometers",
+            "flame images",
+            "flow/flame/plume temperature",
+            "flame radiation",
+            "pressure",
+            "CO2 and O2 mole fraction",
+            "airflow velocity"
           ],
-          "source": "Approach text",
+          "source": "Approach text; Approach text: two cameras, thermocouples, radiometers, solid-state gas/pressure sensors, and anemometers",
           "reviewed": true
         }
       },
@@ -1456,7 +1462,7 @@
           "value": [
             "material-flammability"
           ],
-          "source": "Objectives text: large-scale fire growth and flammability limits vs NASA normal-gravity screening test",
+          "source": "Objectives text: low-gravity flammability limits and material flammability screening",
           "reviewed": true
         },
         "measurements": {
@@ -1464,10 +1470,11 @@
             "cameras",
             "thermocouples",
             "radiometers",
-            "pressure, CO2 and O2 sensors",
-            "anemometers"
+            "pressure",
+            "CO2 and O2 mole fraction",
+            "airflow velocity"
           ],
-          "source": "Approach text",
+          "source": "Approach text: flame images captured using two cameras; Approach text: flow, flame and plume temperatures; Approach text: flame radiation; Approach text: solid-state pressure sensors; Approach text: solid-state gas sensors; Approach text: anemometers",
           "reviewed": true
         }
       },
@@ -1539,7 +1546,7 @@
           "value": [
             "material-flammability"
           ],
-          "source": "Objectives text: large-scale fire growth and flammability limits vs NASA normal-gravity screening test",
+          "source": "Objectives text: low-gravity flammability limits and material flammability screening",
           "reviewed": true
         },
         "measurements": {
@@ -1547,10 +1554,11 @@
             "cameras",
             "thermocouples",
             "radiometers",
-            "pressure, CO2 and O2 sensors",
-            "anemometers"
+            "pressure",
+            "CO2 and O2 mole fraction",
+            "airflow velocity"
           ],
-          "source": "Approach text",
+          "source": "Approach text: flame images captured using two cameras; Approach text: flow, flame and plume temperatures; Approach text: flame radiation; Approach text: solid-state pressure sensors; Approach text: solid-state gas sensors; Approach text: anemometers",
           "reviewed": true
         }
       },
@@ -1622,23 +1630,27 @@
           "value": [
             "aerosol-dust"
           ],
-          "source": "Approach text: smoke from Pyrell foam samples",
+          "source": "Approach text: smoke from Pyrell foam samples; Objectives text: liquid smoke particulate size and distribution; Approach text: heated Pyrell foam smoke tests",
           "reviewed": true
         },
         "topics": {
           "value": [
             "detection"
           ],
-          "source": "Objectives text: smoke particle size; Approach text: DustTrak and ionization detector",
+          "source": "Objectives text: smoke particle size and detector response; Objectives text: quantify smoke-particle size and relate it to smoke generation and transport",
           "reviewed": true
         },
         "measurements": {
           "value": [
             "M-pass instrument",
             "commercial diagnostic enclosure (DustTrak and ionization detector)",
-            "transmission electron microscopy (TEM)"
+            "transmission electron microscopy (TEM)",
+            "smoke-particle size distribution",
+            "DustTrak",
+            "ionization detector",
+            "66 flight test points"
           ],
-          "source": "Approach text: M-pass and Commercial Diagnostic Enclosure; Objectives text: TEM",
+          "source": "Approach text; Objectives and Approach text: particle-size distribution, diagnostic equipment, and completed test points",
           "reviewed": true
         }
       },
@@ -1713,14 +1725,14 @@
           "value": [
             "aerosol-dust"
           ],
-          "source": "Objectives text: smoke from overheated spacecraft materials",
+          "source": "Objectives text: smoke from overheated spacecraft materials; Objectives text: liquid smoke particulate; Approach text: smoke generated from overheated spacecraft materials",
           "reviewed": true
         },
         "topics": {
           "value": [
             "detection"
           ],
-          "source": "Objectives text: smoke particle size; Approach text: response of the smoke detectors",
+          "source": "Objectives text: smoke particle size and detector response; Objectives text: smoke-particle size and smoke-generation/transport conditions; Approach text: response of smoke detectors",
           "reviewed": true
         },
         "measurements": {
@@ -1728,9 +1740,15 @@
             "smoke detectors",
             "video cameras",
             "thermophoretic soot samplers",
-            "transmission electron microscopy (TEM)"
+            "transmission electron microscopy (TEM)",
+            "particle dimensions",
+            "sample mass loss",
+            "smoke-detector response",
+            "sample temperature",
+            "flow field",
+            "particle aging time"
           ],
-          "source": "Approach text",
+          "source": "Approach text; Approach text: TEM analysis, sample weighing, video analysis, and controlled smoke conditions",
           "reviewed": true
         }
       },
@@ -1789,23 +1807,24 @@
           "value": [
             "gas"
           ],
-          "source": "Approach text: methane, ethylene and nitrogen-diluted mixtures",
+          "source": "Approach text: methane and ethylene fuels",
           "reviewed": true
         },
         "topics": {
           "value": [
-            "flame-fundamentals",
-            "modeling"
+            "flame-fundamentals"
           ],
-          "source": "Objectives text: structure and stability of laminar diffusion flames; validate numerical models of flame dynamics, soot and radiation",
+          "source": "Objectives text: flame structure, stability, liftoff and extinction limits",
           "reviewed": true
         },
         "measurements": {
           "value": [
-            "high-resolution camera",
-            "flow rate and temperature sensors"
+            "cameras",
+            "temperature",
+            "airflow velocity",
+            "soot"
           ],
-          "source": "Approach text",
+          "source": "Approach text: high-resolution images; Approach text: integrated temperature sensors; Approach text: calibration of airflow velocity; Approach text: soot measurement",
           "reviewed": true
         }
       },
@@ -1870,22 +1889,24 @@
           "value": [
             "gas"
           ],
-          "source": "Approach text: methane, ethylene, propane and propylene",
+          "source": "Approach text: methane, ethylene, propane and propylene fuels",
           "reviewed": true
         },
         "topics": {
           "value": [
             "flame-fundamentals"
           ],
-          "source": "Objectives text: smoke-point properties and sooting propensity of non-buoyant jet diffusion flames",
+          "source": "Objectives text: smoke-point behavior and flame properties",
           "reviewed": true
         },
         "measurements": {
           "value": [
-            "still and video cameras",
-            "flame height, radiative heat losses and co-flow air velocity distributions"
+            "flame length",
+            "flame height",
+            "radiative heat loss",
+            "co-flow air velocity"
           ],
-          "source": "Approach text",
+          "source": "Approach text: still and video camera recordings; Approach text: measurements included flame height; Approach text: measurements included radiative heat losses; Approach text: measurements included co-flow air velocity distributions",
           "reviewed": true
         }
       },
@@ -1960,22 +1981,26 @@
           "value": [
             "not-combustion"
           ],
-          "source": "Research area: Fluid Physics; Approach text: thermocapillary flow",
+          "source": "Research area: Fluid Physics; Approach text: thermocapillary flow; Objectives text: thermocapillary flow in a liquid free surface; no combustion fuel is described",
           "reviewed": true
         },
         "topics": {
           "value": [
-            "not-fire-safety"
+            "not-fire-safety",
+            "modeling"
           ],
-          "source": "Research area: Fluid Physics; no fire-safety objective stated",
+          "source": "Research area: Fluid Physics; no fire-safety objective stated; Objectives text: thermocapillary-flow behavior; Approach text: theoretical analysis and numerical modeling",
           "reviewed": true
         },
         "measurements": {
           "value": [
             "flow visualization",
-            "temperature measurements"
+            "temperature measurements",
+            "temperature distribution",
+            "flow patterns",
+            "velocity distribution"
           ],
-          "source": "Approach text",
+          "source": "Approach text; Objectives and Approach text: temperature distributions, flow characteristics and visualization",
           "reviewed": true
         }
       },
@@ -2034,21 +2059,26 @@
           "value": [
             "aerosol-dust"
           ],
-          "source": "Approach text: DBP smoke particles from a heated sample",
+          "source": "Approach text: DBP smoke particles from a heated sample; Approach text: dibutyl-phthalate smoke particles formed from pyrolysis vapor",
           "reviewed": true
         },
         "topics": {
           "value": [
+            "detection",
             "modeling"
           ],
-          "source": "Objectives text: numerical simulation of smoke growth in microgravity vs Earth gravity; no detection objective is stated",
+          "source": "Objectives text: smoke growth simulation and detection context; Objectives text: numerical simulation of pyrolysis-smoke growth; Approach text: particle-size distributions and transport",
           "reviewed": true
         },
         "measurements": {
           "value": [
-            "direct numerical simulation outputs"
+            "direct numerical simulation outputs",
+            "particle-size distribution",
+            "cross-flow velocity",
+            "particle settling",
+            "scalar fields"
           ],
-          "source": "Approach text: no experimental instruments named",
+          "source": "Approach text: no experimental instruments named; Approach text: simulated particle distributions, flow speeds, settling and instantaneous scalar fields",
           "reviewed": true
         }
       },
@@ -2111,7 +2141,7 @@
           "value": [
             "liquid-droplet"
           ],
-          "source": "Objectives text: n-alkane droplet cool flames",
+          "source": "Objectives text: n-alkane droplet cool flames; Objectives text: small and large cool-flame droplets; Approach text: n-alkane droplets",
           "reviewed": true
         },
         "topics": {
@@ -2119,16 +2149,18 @@
             "flame-fundamentals",
             "modeling"
           ],
-          "source": "Objectives and Approach text: cool-flame stability, CFD model",
+          "source": "Objectives and Approach text: cool-flame stability, CFD model; Objectives and Approach text: cool-flame dynamics, CFD model, stability maps and sensitivity analyses",
           "reviewed": true
         },
         "measurements": {
           "value": [
             "ignition delay",
             "oscillation frequency and amplitude",
-            "stand-off and extinction diameters"
+            "stand-off and extinction diameters",
+            "stand-off diameter",
+            "extinction diameter"
           ],
-          "source": "Approach text: observables extracted from simulations and compared with FLEX",
+          "source": "Approach text: observables extracted from simulations and compared with FLEX; Approach text: predictive observables extracted from simulated cases",
           "reviewed": true
         }
       },
@@ -2209,7 +2241,7 @@
           "value": [
             "gas"
           ],
-          "source": "Objectives text: ozone-sensitized counterflow flames",
+          "source": "Objectives text: ozone-sensitized counterflow flames; Approach text: n-heptane/air and dimethyl ether (DME)/air counterflow flames",
           "reviewed": true
         },
         "topics": {
@@ -2217,16 +2249,17 @@
             "flame-fundamentals",
             "modeling"
           ],
-          "source": "Objectives text: cool-flame flammability and extinction limits",
+          "source": "Objectives text: cool-flame flammability and extinction limits; Objectives text: cool-flame flammability/extinction limits and model validation; Approach text: numerical modeling",
           "reviewed": true
         },
         "measurements": {
           "value": [
             "flame temperature",
             "species distribution",
-            "extinction limits"
+            "extinction limits",
+            "extinction limit"
           ],
-          "source": "Objectives text (objective 4): quantities to obtain for model validation; the Approach text names no instruments",
+          "source": "Objectives text: quantitative data for model validation; Objectives text: quantitative data for validation of kinetic and radiation models",
           "reviewed": true
         }
       },
@@ -2292,7 +2325,7 @@
           "value": [
             "gas"
           ],
-          "source": "Objectives text: propane, n-butane and n-pentane flames",
+          "source": "Objectives text: propane, n-butane and n-pentane flames; Objectives text: propane, n-butane and n-pentane fuels",
           "reviewed": true
         },
         "topics": {
@@ -2300,7 +2333,7 @@
             "flame-fundamentals",
             "modeling"
           ],
-          "source": "Objectives text: cool diffusion flames, CFD and chemical kinetics",
+          "source": "Objectives text: cool diffusion flames, CFD and chemical kinetics; Objectives text: cool diffusion flames and CFD simulations",
           "reviewed": true
         },
         "measurements": {
@@ -2308,9 +2341,13 @@
             "cameras",
             "radiometers",
             "photomultiplier tubes",
-            "thermocouples"
+            "thermocouples",
+            "flame images",
+            "radiation",
+            "photomultiplier signals",
+            "temperature"
           ],
-          "source": "Approach text",
+          "source": "Approach text; Approach text: cameras, radiometers, photomultiplier tubes and thermocouples",
           "reviewed": true
         }
       },
@@ -2367,23 +2404,27 @@
           "value": [
             "not-combustion"
           ],
-          "source": "Research area: Materials Science; Approach text: solder alloys",
+          "source": "Research area: Materials Science; Approach text: solder alloys; Objectives text: solder alloys and solder-joint formation, not combustion fuels",
           "reviewed": true
         },
         "topics": {
           "value": [
             "not-fire-safety"
           ],
-          "source": "Research area: Materials Science; objectives address solder-joint reliability",
+          "source": "Research area: Materials Science; objectives address solder-joint reliability; Objectives text: reliability of solder joints and material properties, not fire safety",
           "reviewed": true
         },
         "measurements": {
           "value": [
             "microstructural characterization",
             "micromechanical testing",
-            "thermal exposure (-157 °C to +121 °C)"
+            "thermal cycling",
+            "microstructure",
+            "mechanical response",
+            "thermal response",
+            "phase transformation"
           ],
-          "source": "Approach text",
+          "source": "Approach text; Approach text: microstructural characterization, micromechanical response and cryogenic phase transformation",
           "reviewed": true
         }
       },

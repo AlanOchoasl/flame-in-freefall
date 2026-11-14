@@ -13,6 +13,7 @@ The view changes (ranking, comparator, coverage map, summaries) and `app-shell` 
 - Records two routing decisions: `#/` redirects to Ranking, and About lives at `#/about`.
 - A low-fidelity wireframe (text) per screen in `design.md`, so the team can build without a design tool.
 - Behavior already specified elsewhere is referenced, not repeated.
+- Updated after the UI mockup review (`docs/design/`): the visual layer (tokens, shared components, responsive header) moved to the new `design-system` change; this change gains the Compare picker interaction and the per-profile ranking position format.
 
 ## Capabilities
 
@@ -30,4 +31,4 @@ The view changes (ranking, comparator, coverage map, summaries) and `app-shell` 
 
 ## Out of scope (No)
 
-Brand identity, final colors and typography, illustrations or NASA logos, animations, dark mode, a landing/marketing page, any new data field, any change to scoring, comparison or map behavior.
+Dark mode, illustrations or NASA logos, animations, a landing/marketing page, any new data field, any change to scoring, comparison or map behavior. (Colors, typography and component looks are no longer out of scope: they belong to `design-system`.)

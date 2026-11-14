@@ -1,0 +1,163 @@
+# Third-party licenses
+
+Generated with `node scripts/check-licenses.mjs <dir> --write` and merged here. Policy: `scripts/license-policy.json`.
+The `lightningcss*` packages (MPL-2.0) are a team-approved exception recorded in that policy.
+
+No fonts, icons, images or audio are bundled: the app uses system fonts. Data comes from NASA PSI
+(https://psi.nasa.gov/physci/repo/search?q=combustion) and is cited in the README and in the app.
+
+## App (`app/`, ships to the browser)
+
+| Package | Version | License |
+|---|---|---|
+| @oxc-project/types | 0.156.0 | MIT |
+| @reduxjs/toolkit | 2.14.0 | MIT |
+| @rolldown/binding-linux-x64-gnu | 1.2.19 | MIT |
+| @rolldown/binding-linux-x64-musl | 1.2.19 | MIT |
+| @rolldown/pluginutils | 1.1.1 | MIT |
+| @standard-schema/spec | 1.1.0 | MIT |
+| @standard-schema/utils | 0.3.0 | MIT |
+| @types/d3-array | 3.2.2 | MIT |
+| @types/d3-color | 3.1.3 | MIT |
+| @types/d3-ease | 3.0.2 | MIT |
+| @types/d3-interpolate | 3.0.4 | MIT |
+| @types/d3-path | 3.1.1 | MIT |
+| @types/d3-scale | 4.0.9 | MIT |
+| @types/d3-shape | 3.2.0 | MIT |
+| @types/d3-time | 3.0.4 | MIT |
+| @types/d3-timer | 3.0.2 | MIT |
+| @types/react | 19.3.0 | MIT |
+| @types/react-dom | 19.3.0 | MIT |
+| @types/use-sync-external-store | 0.0.6 | MIT |
+| @typescript/typescript-linux-x64 | 7.0.2 | Apache-2.0 |
+| @vitejs/plugin-react | 6.3.0 | MIT |
+| clsx | 2.1.1 | MIT |
+| csstype | 3.2.3 | MIT |
+| d3-array | 3.2.5 | ISC |
+| d3-color | 3.1.1 | ISC |
+| d3-ease | 3.0.2 | BSD-3-Clause |
+| d3-format | 3.1.3 | ISC |
+| d3-interpolate | 3.0.2 | ISC |
+| d3-path | 3.1.1 | ISC |
+| d3-scale | 4.0.3 | ISC |
+| d3-shape | 3.2.1 | ISC |
+| d3-time | 3.1.1 | ISC |
+| d3-time-format | 4.1.1 | ISC |
+| d3-timer | 3.0.2 | ISC |
+| decimal.js-light | 2.5.1 | MIT |
+| detect-libc | 2.1.2 | Apache-2.0 |
+| es-toolkit | 1.53.2 | MIT |
+| eventemitter3 | 5.0.4 | MIT |
+| fdir | 6.5.0 | MIT |
+| immer | 11.2.10 | MIT |
+| internmap | 2.0.3 | ISC |
+| lightningcss | 1.33.0 | MPL-2.0 |
+| lightningcss-linux-x64-gnu | 1.33.0 | MPL-2.0 |
+| lightningcss-linux-x64-musl | 1.33.0 | MPL-2.0 |
+| nanoid | 3.3.20 | MIT |
+| picocolors | 1.1.1 | ISC |
+| picomatch | 4.0.7 | MIT |
+| postcss | 8.5.33 | MIT |
+| react | 19.3.1 | MIT |
+| react-dom | 19.3.1 | MIT |
+| react-is | 19.3.1 | MIT |
+| react-redux | 9.3.1 | MIT |
+| recharts | 3.10.1 | MIT |
+| redux | 5.0.1 | MIT |
+| redux-thunk | 3.1.0 | MIT |
+| reselect | 5.2.0 | MIT |
+| rolldown | 1.2.19 | MIT |
+| scheduler | 0.28.0 | MIT |
+| source-map-js | 1.2.2 | BSD-3-Clause |
+| tiny-invariant | 1.3.3 | MIT |
+| tinyglobby | 0.2.17 | MIT |
+| typescript | 7.0.2 | Apache-2.0 |
+| use-sync-external-store | 1.7.0 | MIT |
+| victory-vendor | 37.4.1 | MIT AND ISC AND BSD-3-Clause |
+| vite | 8.3.8 | MIT |
+
+## Data pipeline and tests (repo root, build-time only)
+
+| Package | Version | License |
+|---|---|---|
+| @google/genai | 3.3.0 | Apache-2.0 |
+| @jridgewell/resolve-uri | 3.1.3 | MIT |
+| @jridgewell/sourcemap-codec | 1.6.0 | MIT |
+| @jridgewell/trace-mapping | 0.3.31 | MIT |
+| @oxc-project/types | 0.156.0 | MIT |
+| @protobufjs/aspromise | 1.1.2 | BSD-3-Clause |
+| @protobufjs/base64 | 1.1.2 | BSD-3-Clause |
+| @protobufjs/codegen | 2.0.5 | BSD-3-Clause |
+| @protobufjs/eventemitter | 1.1.1 | BSD-3-Clause |
+| @protobufjs/fetch | 1.1.1 | BSD-3-Clause |
+| @protobufjs/float | 1.0.2 | BSD-3-Clause |
+| @protobufjs/path | 1.1.2 | BSD-3-Clause |
+| @protobufjs/pool | 1.1.0 | BSD-3-Clause |
+| @protobufjs/utf8 | 1.1.2 | BSD-3-Clause |
+| @rolldown/binding-linux-x64-gnu | 1.2.19 | MIT |
+| @rolldown/binding-linux-x64-musl | 1.2.19 | MIT |
+| @rolldown/pluginutils | 1.1.1 | MIT |
+| @types/chai | 5.2.3 | MIT |
+| @types/deep-eql | 4.0.2 | MIT |
+| @types/estree | 1.0.10 | MIT |
+| @types/node | 26.6.6 | MIT |
+| @types/retry | 0.12.0 | MIT |
+| @typescript/typescript-linux-x64 | 7.0.2 | Apache-2.0 |
+| @vitest/mocker | 5.1.0 | MIT |
+| @vitest/spy | 5.1.0 | MIT |
+| agent-base | 7.1.4 | MIT |
+| assertion-error | 2.0.1 | MIT |
+| base64-js | 1.5.1 | MIT |
+| bignumber.js | 9.3.1 | MIT |
+| buffer-equal-constant-time | 1.0.1 | BSD-3-Clause |
+| chai | 6.3.0 | MIT |
+| csv-parse | 7.0.3 | MIT |
+| data-uri-to-buffer | 4.0.1 | MIT |
+| debug | 4.4.3 | MIT |
+| detect-libc | 2.1.2 | Apache-2.0 |
+| ecdsa-sig-formatter | 1.0.11 | Apache-2.0 |
+| es-module-lexer | 2.3.2 | MIT |
+| estree-walker | 3.0.3 | MIT |
+| expect-type | 1.4.0 | Apache-2.0 |
+| extend | 3.0.2 | MIT |
+| fdir | 6.5.0 | MIT |
+| fetch-blob | 3.2.0 | MIT |
+| formdata-polyfill | 4.0.10 | MIT |
+| gaxios | 7.3.1 | Apache-2.0 |
+| gcp-metadata | 8.1.2 | Apache-2.0 |
+| google-auth-library | 10.9.1 | Apache-2.0 |
+| google-logging-utils | 1.1.3 | Apache-2.0 |
+| https-proxy-agent | 7.0.6 | MIT |
+| json-bigint | 1.0.0 | MIT |
+| jwa | 2.0.1 | MIT |
+| jws | 4.0.1 | MIT |
+| lightningcss | 1.33.0 | MPL-2.0 |
+| lightningcss-linux-x64-gnu | 1.33.0 | MPL-2.0 |
+| lightningcss-linux-x64-musl | 1.33.0 | MPL-2.0 |
+| long | 5.3.2 | Apache-2.0 |
+| magic-string | 1.4.5 | MIT |
+| ms | 2.1.3 | MIT |
+| nanoid | 3.3.20 | MIT |
+| node-domexception | 1.0.0 | MIT |
+| node-fetch | 3.3.2 | MIT |
+| obug | 3.0.0 | MIT |
+| p-retry | 4.6.2 | MIT |
+| picocolors | 1.1.1 | ISC |
+| picomatch | 4.0.7 | MIT |
+| postcss | 8.5.33 | MIT |
+| protobufjs | 7.6.6 | BSD-3-Clause |
+| retry | 0.13.1 | MIT |
+| rolldown | 1.2.19 | MIT |
+| safe-buffer | 5.2.1 | MIT |
+| source-map-js | 1.2.2 | BSD-3-Clause |
+| std-env | 4.3.0 | MIT |
+| tinybench | 6.2.3 | MIT |
+| tinyexec | 1.3.1 | MIT |
+| tinyglobby | 0.2.17 | MIT |
+| typescript | 7.0.2 | Apache-2.0 |
+| undici-types | 8.9.0 | MIT |
+| vite | 8.3.8 | MIT |
+| vitest | 5.1.0 | MIT |
+| web-streams-polyfill | 3.3.3 | MIT |
+| why-is-node-running | 3.2.1 | MIT |
+| ws | 8.23.0 | MIT |
