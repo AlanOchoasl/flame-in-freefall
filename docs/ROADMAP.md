@@ -43,15 +43,23 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 | # | Change | Label | Size* | Notes |
 |---|---|---|---|---|
 | 1 | `investigation-catalog` | Must | M | 26 investigations: metadata + hand-reviewed curation tags → `catalog.json` |
-| 2 | `data-pipeline` (to revise) | Must | M | Trim to PSI-159 + PSI-10; fix review items (cool-flame field, determinism, JSON contract, task hours) |
+| 2 | `data-pipeline` | Must | M | Revised: PSI-159 + PSI-10 inverse are Must, PSI-10 normal is Nice; review items fixed |
 | 3 | `app-shell` | Must | S | React + TypeScript + Vite static app, loads the JSON files |
-| 4 | `fire-safety-ranking` | Must | M | Scoring rules; basis taken from the statement (solids, detection, suppression, Moon-base atmosphere) |
+| 4 | `investigation-ranking` | Must | M | Scoring rules; basis taken from the statement (solids, detection, suppression, Moon-base atmosphere) |
 | 5 | `investigation-comparator` | Must | S | Side-by-side view |
 | 6 | `coverage-map` | Must | M | O2 × pressure, Moon-base zone, gaps |
 | 7 | `ai-summaries` | Must | M | Precomputed, grounded, labeled, human-reviewed |
 | 8 | `ask-the-data` | Nice | L | Constrained NL → query; precomputed Q&A first |
 
-*Rough size guess, not an estimate: S ≈ 2 h, M ≈ 4–5 h, L ≈ 8 h of one person's time. Total Must ≈ 25–30 h across 3 people.
+*Rough size guess, not an estimate.
+
+**Status (2026-11-14):** specs written and validated for changes 1–7 (`openspec validate --all --strict`); `ask-the-data` (8) is not specced yet. Tasks are in each change's `tasks.md` (57 tasks). The sum of the per-task **caps** is about 70 h for Must work (caps are upper bounds, not estimates). It probably does not fit with every investigation curated and summarized; see the scope levers below.
+
+### Scope levers if time runs short (apply in this order)
+1. Curate tags and write AI summaries only for a **core set** (the investigations the statement names); the rest keep the PSI-text fallback, which the specs already support.
+2. Keep PSI-10 normal flames and the data download out (already Nice).
+3. Defer `ask-the-data` entirely.
+4. Cut the comparator's secondary rows before cutting a view.
 
 ## Open items
 - [x] No pre-assigned owners: tasks come from the specs and each person claims the module they want (decided 2026-11-14)
