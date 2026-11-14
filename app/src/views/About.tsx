@@ -13,7 +13,7 @@ function AiUseDetails() {
   return (
     <DataState state={summaries} label="The AI-use details">
       {(file) => {
-        const facts = summariseAiUse(file.summaries);
+        const facts = summariseAiUse(file.entries);
         if (facts.total === 0) return <p>No AI summaries have been generated yet.</p>;
         return (
           <ul>
