@@ -1,0 +1,15 @@
+{
+  "_comment": "Allowed licenses are a conservative team policy (permissive OSI licenses). The 2026 T&C require OSI-open or freely available third-party materials. Anything else needs team approval: add it to approvedExceptions with a reason.",
+  "allowedLicenses": [
+    "MIT",
+    "ISC",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Apache-2.0",
+    "0BSD",
+    "CC0-1.0",
+    "Unlicense",
+    "BlueOak-1.0.0"
+  ],
+  "approvedExceptions": []
+}

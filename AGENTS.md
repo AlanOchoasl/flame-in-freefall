@@ -42,5 +42,14 @@ Timeline and milestones: `docs/ROADMAP.md`. Resources: `Recursos/`.
   - No personal data, no commercial promotion.
   - The team confirmed AI/SI use is allowed. Still describe how AI was used in the project page; label AI-generated text in the UI.
 
+## Dependencies & third-party materials (hard rules for humans and agents)
+Full procedure: `.claude/skills/dependency-policy/`.
+1. **Never add a dependency, font, icon, image or dataset without checking its license first.** Allowed list: `scripts/license-policy.json` (MIT, ISC, BSD-2/3-Clause, Apache-2.0, 0BSD, CC0-1.0, Unlicense, BlueOak-1.0.0).
+2. **Forbidden without explicit team approval:** GPL/AGPL/LGPL, any package with no license, "UNLICENSED", "SEE LICENSE IN…", proprietary or paid SDKs, anything needing a paid or private API key at runtime.
+3. Run `node scripts/check-licenses.mjs` after every `npm install`/`npm add`. If it fails, remove the package or ask the team. An agent MUST NOT edit `approvedExceptions` on its own.
+4. Before submission run `node scripts/check-licenses.mjs --write` and commit `THIRD_PARTY_LICENSES.md`.
+5. No assets (images, fonts, audio, NASA logos) without a verified license; no code copied from sources with unknown license; cite everything in README.
+6. Prefer fewer dependencies. One-line justification per new package in the PR/commit.
+
 ## Skills available
-`clean-code`, `git-workflow`, `testing-basics`, `nasa-data-sources`, `submission-check`, plus the OpenSpec skills.
+`clean-code`, `git-workflow`, `testing-basics`, `nasa-data-sources`, `submission-check`, `dependency-policy`, plus the OpenSpec skills.

@@ -18,7 +18,7 @@ First re-verify the rules against the official 2026 guide and Terms & Conditions
 
 **Terms & Conditions 2026** (https://www.spaceappschallenge.org/legal/)
 - [ ] LICENSE file in the repo (OSI license; if none, NASA applies Apache 2.0).
-- [ ] Third-party licenses (libraries, fonts, assets) listed in the documentation.
+- [ ] `node scripts/check-licenses.mjs --write` passes and `THIRD_PARTY_LICENSES.md` is committed; fonts/images/CDN assets checked by hand.
 - [ ] Every source cited in the references field, including PSI investigations with DOI.
 - [ ] Video is original work; no minors' names/voices/likeness; written consent from any adult shown.
 - [ ] AI use described on the project page; AI-generated text labeled in the app.
