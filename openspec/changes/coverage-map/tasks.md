@@ -6,7 +6,7 @@ Tasks are **not pre-assigned**. Each person claims a module (a numbered group) i
 
 Depends on: `data-pipeline` contract and stub (task 4.4).
 
-- [ ] 1.1 (by 18:30, ≤1.5h) Implement pure helpers: filter, counts ("N of M plotted", not-plotted count), psi↔bar overlay constants, insight computation and CSV building; verify unit tests with synthetic records (a point at O2 0.30 / 0.7033 bar counts as in zone; missing pressure is not plotted).
+- [x] 1.1 (by 18:30, ≤1.5h) Implement pure helpers: filter, counts ("N of M plotted", not-plotted count), psi↔bar overlay constants, insight computation and CSV building; verify unit tests with synthetic records (a point at O2 0.30 / 0.7033 bar counts as in zone; missing pressure is not plotted).
 
 ## 2. Map view
 
