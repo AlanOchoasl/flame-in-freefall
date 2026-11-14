@@ -1,4 +1,213 @@
 {
   "schemaVersion": "1.0.0",
-  "entries": []
+  "entries": [
+    {
+      "accession": "PSI-10",
+      "summary": "The Advanced Combustion via Microgravity Experiments / Flame Design investigation studies normal and inverse spherical diffusion flames using C2H4 and CH4 fuels. Its purpose is to determine soot-inception limits, flame characteristics, and extinction limits under varying flow rates, pressures, and diluents like N2 and CO2. Testing is conducted in drop towers and aboard the International Space Station using cameras, radiometers, photomultiplier tubes, and thermocouples. The study evaluates hypotheses regarding soot formation conditions, the existence of steady-state spherical flames, and flame extinction occurring when peak temperatures fall below 1130 K.",
+      "fireSafetyRelevance": "The source text does not state a direct spacecraft fire-safety application, focusing instead on flame fundamentals and terrestrial combustor efficiency.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-20",
+      "summary": "The Advanced Combustion via Microgravity Experiments - Burning Rate Emulator (BRE) investigation examined whether quasi-steady burning of condensed fuels occurs in microgravity without airflow based on material properties. Aboard the International Space Station (ISS), researchers burned fuel mixtures on porous circular burners under various oxygen concentrations and pressures. The investigation demonstrated that flames simulating materials such as PMMA and Nylon can continue burning without airflow in elevated-oxygen atmospheres considered for future human spaceflight, whereas flames in normal atmospheres extinguished quickly. These results help guide the use of NASA Test 2 cone calorimeter data to establish flammability maps for real materials.",
+      "fireSafetyRelevance": "This investigation informs material flammability and flame fundamentals for spacecraft fire safety. It demonstrated that burning can continue without airflow in elevated-oxygen atmospheres considered for future spacecraft missions, despite ventilation shut-off being a standard fire response. The work supports using NASA Test 2 cone calorimeter data to establish flammability maps for spacecraft materials in microgravity.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-21",
+      "summary": "The Advanced Combustion via Microgravity Experiments Coflow Laminar Diffusion Flame investigation studies methane and ethylene diffusion flames in microgravity to improve computational models across a wide range of fuel dilution and soot loading. In microgravity, enhanced time and spatial scales allow researchers to measure flame behavior without buoyancy interference. Diagnostics include thin-filament pyrometry for non-sooting flame temperatures, flame chemiluminescence for flame shape and lift-off height near extinction limits, and soot luminosity with laser extinction for soot temperatures and volume fractions. The resulting benchmark data will refine chemical kinetics and soot sub-models for momentum-dominated combustion systems.",
+      "fireSafetyRelevance": "This investigation informs flame fundamentals and fire suppression. By examining factors that affect flame extinction in microgravity diffusion flames without buoyancy forces, researchers gain insights into complex transport phenomena and detailed chemical kinetics critical for fire suppression.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-22",
+      "summary": "The E-FIELD Flames experiment investigated how electric fields influence laminar diffusion flames in microgravity, an environment that isolates electric field effects from buoyancy forces. Conducted in the Combustion Integrated Rack (CIR) with direction from the Glenn Research Center (GRC), the study tested methane and ethylene flames diluted with nitrogen, both with and without an air coflow. High voltages up to 10 kV were applied between the burner and an electrode. Researchers measured ion current, flame response times, soot distribution, and radiant emissions to evaluate how electric fields and ion-driven convection can precisely control flame stability, soot behavior, and combustion dynamics.",
+      "fireSafetyRelevance": "This research was not conducted to serve any space or fire-safety applications, though its findings on flame fundamentals could potentially aid the development of future space-based combustion devices.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-23",
+      "summary": "This investigation uses microgravity to study the structure, behavior, and extinction limits of spherical diffusion flames. Researchers issue gaseous fuels such as hydrogen, methane, or ethylene mixed with diluents like nitrogen, helium, or carbon dioxide through a spherical porous burner into an oxidizing environment. Eliminating buoyancy in microgravity creates simple flow fields to acquire high-fidelity combustion data. Synchronized measurements of flame temperatures, radiative flux, spectral images, and operating conditions are taken. These data are compared against detailed numerical simulations to evaluate transport properties, chemical kinetic models, flame extinction limits under different conditions, and pulsating flame instabilities.",
+      "fireSafetyRelevance": "The source text does not state any direct fire-safety applications or crew environments for this investigation.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-25",
+      "summary": "The Burning and Suppression of Solids - II (BASS-II) investigation studied how solid fuels burn and extinguish in microgravity aboard the International Space Station. Working inside the Microgravity Science Glovebox with crew support, tests examined fuel geometries including slabs, cylinders, rods, films, and fabric sheets inside a small wind tunnel. Researchers varied airflow speeds up to 40 cm/s and lowered oxygen concentration by adding nitrogen. The study evaluated flame appearance, growth, spread rates, and extinction limits in concurrent and opposed flows. Results refine computer combustion models and bridge gaps between normal gravity flammability testing and actual material flammability in microgravity.",
+      "fireSafetyRelevance": "BASS-II informs material flammability, fire detection, and suppression systems for spacecraft environments such as the International Space Station and future space missions. By analyzing solid fuel ignition and flame spread in microgravity forced flows, the results help engineers select safer spacecraft materials, improve space firefighting techniques, and refine Earth-based fire models.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-26",
+      "summary": "The Burning and Suppression of Solids (BASS) experiment on the International Space Station (ISS) evaluated material flammability and flame suppression in microgravity. Conducted inside the Microgravity Glove Box (MSG), researchers burned cotton-fiberglass fabric, Nomex, and Ultem using a Kanthal wire igniter under airflows up to 40 cm/s. BASS tested whether ventilated materials burn as well as or better in microgravity than in normal gravity. The study also assessed using an inert gaseous extinguishing agent like nitrogen to put out flames across different fuel geometries, preheating levels, and airflows.",
+      "fireSafetyRelevance": "This investigation informs material flammability, flame suppression, and flame fundamentals for spacecraft crew environments. It improves spacecraft material selection tests, evaluates nitrogen gas extinguishment techniques, and validates combustion models to ensure the safety of future crewed missions.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-39",
+      "summary": "The Cool Flames Investigation examines the low-temperature combustion behavior of liquid hydrocarbon fuels in microgravity. Researchers test fuels including n-dodecane, farnesane, and n-dodecane/iso-dodecane mixtures diluted with molecular oxygen, atomic nitrogen, and helium at pressures from 0.25 to 5 atm. Experiments use the Multi-User Droplet Combustion Apparatus (MDCA) inside the Combustion Integrated Rack (CIR). Suspended fuel droplets are ignited with a hot wire, while specialized cameras and radiometers measure droplet size, flame radiation, and emissions. This research aims to analyze chemical kinetics, flame extinction, soot formation, and flame dynamics to advance Earth engine designs and computational models.",
+      "fireSafetyRelevance": "This investigation informs fundamental flame dynamics, extinction, and low-temperature chemical kinetics in microgravity. Refining knowledge of combustion in microgravity environments supports the design of safer spacecraft systems.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-47",
+      "summary": "The Dust and Aerosol Measurement Feasibility Test (DAFT and DAFT-2) evaluated whether a modified particulate counter could measure smoke aerosols in microgravity for the Smoke Aerosol Measurement Experiment (SAME). Because standard TSI P-Trak counters rely on gravity to recycle isopropyl alcohol, researchers modified the condenser tube to use capillary action and removed the mercury switch. During on-orbit testing, Arizona Red Dust aerosolized with GN2 in 15-liter Mylar bags was measured by the modified TSI P-Trak and compared to a DustTrak control device. This research aims to demonstrate functionality, analyze aerosol standards, and ensure reliable future spaceflight aerosol measurements.",
+      "fireSafetyRelevance": "This investigation informs fire and smoke detection for spacecraft crew environments, including the International Space Station and future extended-duration missions. By evaluating modified particle-counting hardware in microgravity, it supports more reliable and sensitive fire detection systems. It also informs instrument design for Earth environments such as submarines and underwater laboratories.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-60",
+      "summary": "This ground investigation examined why soot formation differs significantly between normal gravity (1g) and microgravity (0g) flames. Researchers integrated computational soot modeling with experimental data from the Smoke Point in Coflow Experiment (SPICE). They processed over 1600 raw camera images using color-ratio pyrometry and calibration methods to determine soot temperatures and volume fractions. Simulations were run for Yale and ACME burner configurations in both gravity levels, incorporating radiation re-absorption and aggregate growth models. By comparing experimental results with computational models, the study aimed to reconcile gravity-driven flame differences, identify processes affecting smoke point development, and improve predictive combustion models.",
+      "fireSafetyRelevance": "This study informs fire detection, suppression, and flame fundamentals by improving the understanding of soot formation, flame structure, and radiative transport in microgravity. The findings support safer fire detection and suppression technologies for spacecraft and long-duration space missions, as well as cleaner combustion applications on Earth.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-62",
+      "summary": "Concurrent flame spread in microgravity involves complex interactions between heat transfer, mass transport, and chemical kinetics. To address modeling limitations, researchers developed an unsteady flamelet generated manifold (UFGM) framework to accurately simulate solid fuel combustion. The team tested UFGM modeling against data from the NASA Burning and Suppression of Solids (BASS and BASS-II) experiments, studying polymethyl methacrylate (PMMA) sheets, spheres, rods, and wax cylinders. They processed experimental imagery using two-color tomography with DSLR cameras to create 3D reconstructions of temperature and soot fields. Ultimately, this modeling approach aims to accurately predict spacecraft material flammability limits and support hazard mitigation during space missions.",
+      "fireSafetyRelevance": "This research informs material flammability screening, flame fundamentals, and fire risk assessment in confined spacecraft habitats and long-duration space missions. By predicting material flammability limits and improving subgrid-scale fire simulation models, it enhances hazard mitigation and spacecraft safety protocols.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-68",
+      "summary": "The Flame Extinguishment Experiment - 2 (FLEX-2) investigation aims to provide benchmark data on pure and bi-component droplet combustion in microgravity to validate numerical simulations and develop new theoretical models. By minimizing buoyancy, microgravity allows clear observation of fundamental combustion processes, liquid-phase mixing, soot formation, and transitions between radiative and diffusive flame extinction. Researchers filled a chamber with gas mixtures at pressures from 0.5 to 3.0 atmospheres and oxygen concentrations from 0.1 to 0.4 mole fraction. Droplets were deployed, stabilized, ignited for 1 to 5 seconds, and monitored using high-speed photography to analyze flammability limits and extinction behavior.",
+      "fireSafetyRelevance": "The source text does not state a direct fire-safety application or crew environment for this investigation.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    },
+    {
+      "accession": "PSI-69",
+      "summary": "The Flame Extinguishment Experiment (FLEX) investigates how microgravity alters the combustion and extinction of liquid fuel droplets. Researchers hypothesized that lacking buoyant convection fundamentally changes transport dynamics, heat loss, and chemical kinetics. Experiments involved igniting fuel droplets (around 3 millimeters) at pressures from 0.5 to 1.5 atmospheres across varying oxygen concentrations and gaseous fire suppressants, including carbon dioxide, helium, and sulfur hexafluoride. By measuring droplet burning rates, flame extinction, soot, temperatures, and sub-buoyant flow effects, FLEX aims to map flammability boundaries, determine the Limiting Oxygen Index (LOI), and develop predictive combustion models for space environments.",
+      "fireSafetyRelevance": "This investigation informs flame fundamentals and fire suppression for spacecraft crew environments. By testing gaseous suppressants and liquid fuel flammability limits in reduced gravity, FLEX helps enhance space mission fire safety protocols and supports safety applications in confined Earth environments such as submarines and high-altitude aircraft.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-14",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": false
+    }
+  ]
 }
