@@ -4,7 +4,9 @@
 
 Present Flame in Freefall as a **PSI research console**: an interactive way to monitor coverage and evidence in a cached experimental catalog. It is not a live spacecraft monitor, a fire alarm, or an operational risk predictor.
 
-The interface opens on the investigation ranking with the experimental envelope as its main instrument. It then exposes the four challenge capabilities: rank, compare, map test conditions, and interpret PSI records with reviewed, labeled AI summaries.
+The interface opens on the investigation ranking in a console frame. An optional topology overview makes the investigation relationships easy to scan, while the required O2/pressure test envelope remains a distinct, quantitative map. The console exposes the four challenge capabilities: rank, compare, map test conditions, and interpret PSI records with reviewed, labeled AI summaries.
+
+The reference image's node-link style is adapted as an optional **investigation topology** view. It answers which investigations share a curated hardware group and which PSI records explicitly list one another as related. It is a different question from the quantitative O2/pressure coverage map, so both views are kept.
 
 ## Palette and theme control
 
@@ -31,8 +33,9 @@ The challenge statement asks for an SI-powered web dashboard that summarizes, ra
 | Explore test conditions | O2 × pressure map, filters, overlays, table alternative, point details, visible gaps | Coverage map; 453 test rows, 442 plottable, 66 in expected lunar zone |
 | Summarize and interpret | Precomputed AI summary, fire-safety note, provenance label, and human-review state | Detail/About and summary file; 13 reviewed entries in current main |
 | Trace evidence | PSI links and DOI citations at investigation/test level | Detail, comparison, About |
+| Explore study relationships (optional) | Node-link topology; solid links mean shared curated hardware group, dashed links mean a PSI related-investigation entry | Catalog curation fields: hardwareGroup and relatedInvestigations |
 
-The first console draft showed only a map and a small ranking list. This revision adds visible comparison and AI interpretation previews and identifies the investigation-detail and About drill-downs. A single screen cannot replace the separate routes and states required by OpenSpec.
+The first console draft showed only a map and a small ranking list. This revision adds visible comparison and AI interpretation previews, investigation-detail and About drill-downs, and the optional topology view. A single screen cannot replace the separate routes and states required by OpenSpec.
 
 ## Verified facts used in the mockup
 
@@ -42,6 +45,9 @@ The first console draft showed only a map and a small ranking list. This revisio
 - PSI-159 tests use butane, ethane, and propane. PSI-10's ethylene fuel label is inferred from table columns; its table has no hot-ignition outcome field.
 - The current lunar ranking's first three positions are PSI-25, PSI-26, and PSI-98, each 8/11 points. These studies have no rows in the normalized test set. This shows that relevance and experimental coverage answer different questions.
 - There are 13 precomputed, human-reviewed AI summaries in data/processed/summaries.json; the mockup uses PSI-10's reviewed label and a shortened paraphrase of its stored summary.
+- Curated hardware groups currently contain 6 ACME/CIR studies, 3 MDCA/CIR studies, and 4 MSG/flow-duct studies. The other 8 and unknown 5 are not drawn as shared-hardware clusters; they remain unlinked unless an explicit PSI related-investigation entry connects them.
+- PSI-22 explicitly lists PSI-23 as a related investigation; that relation is shown with a dashed line, distinct from a shared-hardware membership line.
+- In the topology concept, node size illustrates normalized test-row coverage only: PSI-159 has 333 rows, PSI-10 has 120, and the other displayed ACME/CIR studies have no rows in this normalized test set.
 
 **The scatter coordinates in the HTML are placeholders**, not measured PSI points. Replace them with data-driven marks before presenting the design as a working product. Counts, study metadata, and ranking values are from current processed files and the ranking function.
 
@@ -53,6 +59,7 @@ The first console draft showed only a map and a small ranking list. This revisio
 - AI summaries remain precomputed, source-grounded, labeled, and marked as human-reviewed. No runtime AI claims.
 - Keep loading, error, empty, and missing-data states; table and keyboard access; PSI citations and DOI; accessible names and contrast.
 - Show Earth-air and spacesuit references alongside the lunar range on the coverage map.
+- Never replace the required O2 × pressure test map with the topology graph. Treat topology as an optional second view only after all Must routes and interactions work.
 - Keep the notice: **Not an official NASA product.** Do not add NASA imagery or insignia without checking the event and NASA rules.
 
 ## Scope for implementation

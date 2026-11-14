@@ -96,6 +96,31 @@
     .metric-label { display: block; margin-top: 5px; color: var(--text-muted); font-size: 11px; }
     .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 10px; align-items: start; }
     .main-column, .side-column { display: grid; gap: 10px; min-width: 0; }
+    .network-layout { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 300px; }
+    .network-field { min-width: 0; display: grid; place-items: center; overflow: auto; background-color: var(--canvas); background-image: radial-gradient(var(--line) .65px, transparent .65px); background-size: 22px 22px; }
+    .network-field svg { display: block; width: 100%; height: auto; }
+    .network-field .shared-link { stroke: var(--action); stroke-width: 1.3; opacity: .45; }
+    .network-field .psi-link { stroke: var(--text-muted); stroke-width: 1.4; stroke-dasharray: 4 5; }
+    .network-field .hub-ring { fill: var(--surface-1); stroke: var(--action); stroke-width: 1.5; }
+    .network-field .study-node { fill: var(--surface-2); stroke: var(--action); stroke-width: 1.5; }
+    .network-field .node-active { fill: var(--brand); stroke: var(--action); stroke-width: 2; }
+    .network-field .node-label { fill: var(--text-primary); font: 11px ui-monospace, monospace; }
+    .network-field .node-meta { fill: var(--text-muted); font: 9px system-ui, sans-serif; }
+    .network-field .hub-label { fill: var(--text-primary); font: 600 12px system-ui, sans-serif; }
+    .network-field .hub-meta { fill: var(--text-muted); font: 9px ui-monospace, monospace; }
+    .network-aside { padding: 12px; border-top: 1px solid var(--line); background: var(--surface-1); }
+    .network-aside h3 { margin: 0 0 8px; font-size: 12px; }
+    .network-aside p { margin: 6px 0 12px; color: var(--text-muted); font-size: 11px; }
+    .group-list { margin: 0; padding: 0; list-style: none; }
+    .group-list li { display: flex; justify-content: space-between; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); color: var(--text-secondary); font-size: 10px; }
+    .group-list strong { color: var(--text-primary); font: 11px ui-monospace, monospace; }
+    .selected-study { padding: 9px 12px; border-top: 1px solid var(--line); color: var(--text-secondary); font-size: 11px; }
+    .selected-study strong { color: var(--text-primary); }
+    .network-legend { display: flex; flex-wrap: wrap; gap: 8px 15px; padding: 9px 12px; border-top: 1px solid var(--line); color: var(--text-secondary); font-size: 10px; }
+    .line-key { width: 21px; height: 0; border-top: 2px solid var(--action); }
+    .line-key.dashed { border-top: 2px dashed var(--text-muted); }
+    .node-key { width: 9px; height: 9px; border: 1.5px solid var(--action); border-radius: 50%; }
+    .node-key.large { width: 15px; height: 15px; }
     .panel-head { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--line); }
     .panel-title { font-weight: 650; }
     .panel-sub { color: var(--text-muted); font-size: 11px; }
@@ -152,6 +177,8 @@
       .workspace { grid-template-columns: minmax(0, 1fr) 290px; }
       .dataset-state { display: none; }
       .filter-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .network-field { place-items: start; }
+      .network-field svg { width: 760px; min-width: 760px; }
     }
     @media (max-width: 760px) {
       .topbar { padding: 10px 0; flex-wrap: wrap; }
@@ -171,6 +198,8 @@
       .filter-body { grid-template-columns: 1fr 1fr; }
       .chart-wrap { overflow-x: auto; }
       .chart-wrap svg { width: 560px; min-height: auto; }
+      .network-field { place-items: start; }
+      .network-field svg { width: 760px; min-width: 760px; }
       .comparison { grid-template-columns: 1fr; }
       .comparison article + article { border-top: 1px solid var(--line); border-left: 0; }
       .source-line { flex-direction: column; }
@@ -214,8 +243,43 @@
       </section>
       <div class="workspace">
         <div class="main-column">
+          <section class="panel" aria-labelledby="network-heading">
+            <div class="panel-head"><div><div class="panel-title" id="network-heading">Investigation topology</div><div class="panel-sub">How studies connect through shared hardware and PSI-listed relationships</div></div><span class="count-tag">26 STUDIES · 5 HARDWARE GROUP LABELS</span></div>
+            <div class="network-layout">
+              <div class="network-field" role="region" aria-label="Investigation topology diagram; scrolls horizontally on narrow screens" tabindex="0">
+                <svg viewBox="0 0 760 300" role="img" aria-labelledby="network-title network-desc">
+                  <title id="network-title">ACME/CIR investigation hardware group</title>
+                  <desc id="network-desc">Six investigation nodes share the curated ACME/CIR hardware group. PSI-22 and PSI-23 also have an explicit related-investigation link in PSI. Circle size indicates normalized test-row coverage: PSI-159 has 333 rows, PSI-10 has 120, and the other four studies have no normalized rows in this dataset.</desc>
+                  <g class="shared-link"><path d="M380 151L115 66"/><path d="M380 151L255 40"/><path d="M380 151L510 47"/><path d="M380 151L655 99"/><path d="M380 151L620 238"/><path d="M380 151L270 252"/></g>
+                  <path class="psi-link" d="M655 99L620 238"/>
+                  <circle class="hub-ring" cx="380" cy="151" r="47"/>
+                  <text class="hub-label" x="380" y="146" text-anchor="middle">ACME / CIR</text>
+                  <text class="hub-meta" x="380" y="164" text-anchor="middle">6 STUDIES</text>
+                  <g><circle class="study-node" cx="115" cy="66" r="12"/><text class="node-label" x="135" y="62">PSI-10</text><text class="node-meta" x="135" y="76">120 test rows</text></g>
+                  <g><circle class="study-node" cx="255" cy="40" r="8"/><text class="node-label" x="268" y="37">PSI-20</text><text class="node-meta" x="268" y="50">no normalized rows</text></g>
+                  <g><circle class="study-node" cx="510" cy="47" r="8"/><text class="node-label" x="523" y="44">PSI-21</text><text class="node-meta" x="523" y="57">no normalized rows</text></g>
+                  <g><circle class="study-node" cx="655" cy="99" r="8"/><text class="node-label" x="668" y="96">PSI-22</text><text class="node-meta" x="668" y="109">PSI related link</text></g>
+                  <g><circle class="study-node" cx="620" cy="238" r="8"/><text class="node-label" x="633" y="235">PSI-23</text><text class="node-meta" x="633" y="248">PSI related link</text></g>
+                  <g><circle class="node-active" cx="270" cy="252" r="17"/><text class="node-label" x="244" y="282">PSI-159</text><text class="node-meta" x="244" y="294">333 test rows</text></g>
+                </svg>
+              </div>
+              <aside class="network-aside" aria-label="Hardware group coverage">
+                <h3>Verified group counts</h3>
+                <p>Solid lines connect studies assigned to the same reviewed hardware group. Dashed lines come from PSI's related-investigation field.</p>
+                <ul class="group-list">
+                  <li><span>ACME / CIR</span><strong>6</strong></li>
+                  <li><span>MDCA / CIR</span><strong>3</strong></li>
+                  <li><span>MSG / flow duct</span><strong>4</strong></li>
+                  <li><span>Other / unknown</span><strong>13</strong></li>
+                </ul>
+                <p>Other/unknown studies stay unlinked unless PSI lists a relationship. No shared hardware is inferred for them.</p>
+              </aside>
+            </div>
+            <div class="network-legend"><span class="legend-item"><i class="line-key" aria-hidden="true"></i>Same curated hardware group</span><span class="legend-item"><i class="line-key dashed" aria-hidden="true"></i>PSI-listed related investigation</span><span class="legend-item"><i class="node-key" aria-hidden="true"></i>Study with no normalized test rows</span><span class="legend-item"><i class="node-key large" aria-hidden="true"></i>Study with normalized test rows; node size is illustrative of row count</span></div>
+            <div class="selected-study"><strong>Selected example · PSI-159:</strong> 333 normalized tests, including 48 inside the expected lunar range. Select a node in a future interactive version to open its record or add it to Compare.</div>
+          </section>
           <section class="panel" id="coverage" aria-labelledby="chart-heading">
-            <div class="panel-head"><div><div class="panel-title" id="chart-heading">Experimental envelope</div><div class="panel-sub">One point per test · oxygen concentration × pressure</div></div><span class="count-tag">442 / 453 PLOTTABLE</span></div>
+            <div class="panel-head"><div><div class="panel-title" id="chart-heading">Test conditions · O₂ × pressure</div><div class="panel-sub">The quantitative coverage map · one point per plottable test</div></div><span class="count-tag">442 / 453 PLOTTABLE</span></div>
             <div class="chart-wrap">
               <svg viewBox="0 0 820 330" role="img" aria-labelledby="chart-title chart-desc">
                 <title id="chart-title">Coverage map layout for oxygen concentration and test pressure</title>
