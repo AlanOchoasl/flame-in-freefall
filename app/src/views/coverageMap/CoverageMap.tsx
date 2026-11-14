@@ -8,6 +8,7 @@ import type { ViewProps } from '../types';
 import { EARTH_AIR, MOON_BASE_ZONE, O2_AXIS_MAX_PERCENT, OVERLAY_COLORS, PRESSURE_AXIS_MAX_BAR, SPACESUIT } from './constants';
 import { applyFilters, countPlotted, filterOptions, hasActiveFilters, NO_FILTERS, OUTCOME_LABELS, OUTCOMES, type MapFilters } from './filters';
 import { computeInsight, describeInsight } from './insight';
+import { marginLabel } from './OverlayLabel';
 import { scatterShapeFor } from './OutcomeMarker';
 import { OutcomeLegend } from './OutcomeLegend';
 import { OverlayList } from './OverlayList';
@@ -17,6 +18,11 @@ import { downloadCsv, ResultsTable } from './ResultsTable';
 // One shape component per outcome (own color and own shape, see outcomeStyle.ts), created once so
 // recharts does not remount the markers on every render.
 const SHAPE_OF = Object.fromEntries(OUTCOMES.map((outcome) => [outcome, scatterShapeFor(outcome)]));
+
+// Overlay labels live in the right margin of the plot (see labelPlacement.ts), never over the points.
+const ZONE_LABEL = marginLabel(['Expected', 'Moon-base zone'], 'top', OVERLAY_COLORS.moonEdge);
+const EARTH_LABEL = marginLabel(['Earth air'], 'middle', OVERLAY_COLORS.earth);
+const SUIT_LABEL = marginLabel(['Spacesuit'], 'middle', OVERLAY_COLORS.suit);
 
 function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
   return (
@@ -68,9 +74,17 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
     <div className="table-scroll" tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens">
       <div style={{ width: '100%', minWidth: 480, height: 420 }}>
         <ResponsiveContainer>
-          <ScatterChart margin={{ top: 24, right: 72, bottom: 36, left: 12 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" dataKey="x" name="O2" domain={[0, O2_AXIS_MAX_PERCENT]} ticks={[0, 20, 40, 60, 80, 100]} label={{ value: 'O2 (%)', position: 'insideBottom', offset: -20 }} />
+          <ScatterChart margin={{ top: 24, right: 112, bottom: 36, left: 12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <XAxis
+              type="number"
+              dataKey="x"
+              name="O2"
+              domain={[0, O2_AXIS_MAX_PERCENT]}
+              ticks={[0, 20, 40, 60, 80, 100]}
+              tickFormatter={(value: number) => `${value} %`}
+              label={{ value: 'O2 (% of the atmosphere)', position: 'insideBottom', offset: -20 }}
+            />
             <YAxis type="number" dataKey="y" name="Pressure" domain={[0, PRESSURE_AXIS_MAX_BAR]} tickCount={6} label={{ value: 'Pressure (bar)', angle: -90, position: 'insideLeft' }} />
             <ReferenceArea
               x1={MOON_BASE_ZONE.o2Percent}
@@ -80,16 +94,26 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               fill={OVERLAY_COLORS.moonFill}
               fillOpacity={0.4}
               stroke={OVERLAY_COLORS.moonEdge}
-              label={{ value: 'Expected Moon-base zone', position: 'insideTopRight', fontSize: 11 }}
+              label={{ content: ZONE_LABEL }}
             />
+            {/* Guide from the Earth-air ring to its label in the margin; it is drawn behind the points. */}
             <ReferenceLine
-              segment={[{ x: 0, y: EARTH_AIR.pressureBar }, { x: EARTH_AIR.o2Percent, y: EARTH_AIR.pressureBar }]}
-              stroke="#000"
-              strokeDasharray="4 2"
-              label={{ value: 'Earth air', position: 'insideTopLeft', fontSize: 11 }}
+              segment={[{ x: EARTH_AIR.o2Percent, y: EARTH_AIR.pressureBar }, { x: O2_AXIS_MAX_PERCENT, y: EARTH_AIR.pressureBar }]}
+              stroke={OVERLAY_COLORS.earth}
+              strokeOpacity={0.55}
+              strokeDasharray="2 4"
+              label={{ content: EARTH_LABEL }}
             />
-            <ReferenceDot x={EARTH_AIR.o2Percent} y={EARTH_AIR.pressureBar} r={6} fill="none" stroke="#000" />
-            <ReferenceDot x={SPACESUIT.o2Percent} y={SPACESUIT.pressureBar} r={6} fill="none" stroke="#000" label={{ value: 'Spacesuit', position: 'right', fontSize: 11 }} />
+            <ReferenceDot x={EARTH_AIR.o2Percent} y={EARTH_AIR.pressureBar} r={6} fill="none" stroke={OVERLAY_COLORS.earth} strokeWidth={2.5} />
+            <ReferenceDot
+              x={SPACESUIT.o2Percent}
+              y={SPACESUIT.pressureBar}
+              r={6}
+              fill="none"
+              stroke={OVERLAY_COLORS.suit}
+              strokeWidth={2.5}
+              label={{ content: SUIT_LABEL }}
+            />
             {OUTCOMES.map((outcome) => (
               <Scatter
                 key={outcome}
