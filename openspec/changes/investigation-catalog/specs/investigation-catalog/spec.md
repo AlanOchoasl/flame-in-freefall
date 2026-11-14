@@ -97,3 +97,14 @@ The system SHALL read only local files and MUST NOT use the network. Two runs on
 #### Scenario: Build without network
 - **WHEN** the build runs with no network
 - **THEN** it completes and writes the catalog
+
+### Requirement: Fire-safety records are curated
+The records named in the challenge statement as fire-safety work (PSI-25 BASS-II, PSI-26 BASS, PSI-47 DAFT, PSI-68 FLEX-2, PSI-69 FLEX) SHALL have curated `fuelPhase` and `topics` values, each with a source from the PSI text or the challenge statement. The build in strict mode SHALL fail while any of them lacks these fields.
+
+#### Scenario: FLEX curated
+- **WHEN** the catalog is built
+- **THEN** PSI-69 has a `topics` value that includes `suppression`, with its source text
+
+#### Scenario: Missing curation in strict mode
+- **WHEN** PSI-26 has no `topics` and the strict build runs
+- **THEN** the build fails and names PSI-26
