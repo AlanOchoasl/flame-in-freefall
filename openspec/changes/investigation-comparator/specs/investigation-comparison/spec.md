@@ -27,6 +27,17 @@ For rows with comparable values (everything except the long text rows), the syst
 - **WHEN** two investigations share the platform and have different fuel phases
 - **THEN** the platform row is marked same and the fuel-phase row is marked differs
 
+### Requirement: Rows where every value is missing
+For a comparable row in which every selected investigation has a missing value, the system SHALL mark the row "both missing" (or "all missing" with three selected) and SHALL NOT mark it "same". A row with some missing and some present values SHALL be marked "differs".
+
+#### Scenario: Dates missing in both
+- **WHEN** neither selected investigation has dates
+- **THEN** the dates row is marked "both missing", not "same"
+
+#### Scenario: One value missing
+- **WHEN** one investigation has an O2 range and the other has no normalized test data
+- **THEN** the O2 row is marked "differs"
+
 ### Requirement: Missing values explain themselves
 A missing value SHALL show a dash and the reason: not in the PSI record, no normalized test data, or not reviewed yet. It MUST NOT show zero or blank.
 

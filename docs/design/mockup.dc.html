@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Flame in Freefall — UI mockup</title>
+<style>
+:root{
+--text:#1c1e22;--background:#f7f7f5;--surface:#ffffff;--muted:#575d66;--border:#d4d6da;--border-strong:#9aa0a8;
+--accent:oklch(0.5 0.15 42);--accent-strong:oklch(0.42 0.13 42);--accent-weak:oklch(0.96 0.025 42);
+--ai:oklch(0.43 0.13 290);--ai-weak:oklch(0.965 0.02 290);--psi:#3d4450;--psi-weak:#eef0f3;
+--status-unreviewed:oklch(0.47 0.1 75);--status-unreviewed-weak:oklch(0.96 0.045 85);--status-na:#575d66;--status-approx:oklch(0.45 0.1 230);
+--status-same:oklch(0.44 0.1 150);--status-differs:oklch(0.45 0.14 42);--status-error:oklch(0.48 0.17 25);--status-error-weak:oklch(0.965 0.02 25);
+--outcome-yes:oklch(0.58 0.17 42);--outcome-no:oklch(0.47 0.13 250);--outcome-flash:oklch(0.5 0.18 330);--outcome-nr:#7a8089;
+--zone-moon:oklch(0.88 0.07 150 / .4);--zone-moon-edge:oklch(0.45 0.1 150);--zone-earth:#1c1e22;--zone-suit:oklch(0.43 0.13 290);
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--gutter:clamp(16px,4vw,32px);
+--radius-1:4px;--radius-2:8px;
+--fs-xs:13px;--fs-sm:14px;--fs-base:16px;--fs-lg:18px;--fs-xl:22px;--fs-2xl:28px;--lh:1.5;
+--focus:#1a56c4;--focus-width:3px;--target-size:44px;
+--font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e6e7e9;color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5}
+:focus-visible{outline:var(--focus-width) solid var(--focus);outline-offset:2px}
+a{color:var(--accent-strong);text-underline-offset:2px}
+a:hover{color:var(--text)}
+button,input,select{font:inherit;color:inherit}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="background:#2a2d33;color:#f2f2f2;font-size:13px;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-family:var(--mono)">
+  <strong style="letter-spacing:.06em">MOCKUP STATES</strong><span style="color:#b9bdc4">not part of the product · sample data</span>
+  <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap"><span style="color:#b9bdc4">Width</span>
+    <sc-for list="{{ widths }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.on }}" aria-pressed="{{ b.pressed }}" style="background:{{ b.bg }};color:#f2f2f2;border:1px solid #5b6068;border-radius:4px;padding:4px 8px;cursor:pointer">{{ b.label }}</button></sc-for>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap"><span style="color:#b9bdc4">Frame</span>
+    <sc-for list="{{ frames }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.on }}" aria-pressed="{{ b.pressed }}" style="background:{{ b.bg }};color:#f2f2f2;border:1px solid #5b6068;border-radius:4px;padding:4px 8px;cursor:pointer">{{ b.label }}</button></sc-for>
+  </div>
+</div>
+<div style="padding:{{ framePad }}">
+<div ref="{{ frameRef }}" style="max-width:{{ frameW }};margin:0 auto;background:var(--background);min-height:100vh;display:flex;flex-direction:column;box-shadow:0 0 0 1px #c9cbcf;overflow-x:hidden">
+  <a href="#main" onClick="{{ skip }}" style="position:absolute;left:-9999px;top:auto" style-focus="left:16px;top:56px;background:var(--surface);padding:12px 16px;z-index:10;border:2px solid var(--text)">Skip to content</a>
+  <header style="background:var(--surface);border-bottom:1px solid var(--border);padding:0 var(--gutter)">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap">
+      <a href="#/ranking" style="display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700;font-size:18px;min-height:44px">
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="3" fill="none" stroke="var(--accent)" stroke-width="2"></rect><circle cx="11" cy="11" r="4" fill="var(--accent)"></circle></svg>
+        Flame in Freefall
+      </a>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="primary-nav" style="min-height:44px;min-width:44px;padding:0 14px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius-1);cursor:pointer;font-weight:600">{{ menuLabel }}</button>
+      </sc-if>
+      <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+        <nav id="primary-nav" aria-label="Primary" style="flex-basis:{{ navBasis }}">
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ navDir }};gap:4px">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+              <li><a href="{{ n.href }}" aria-current="{{ n.current }}" style="display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:var(--text);font-weight:{{ n.weight }};border-bottom:3px solid {{ n.bar }};background:{{ n.bg }}">{{ n.label }}</a></li>
+            </sc-for>
+          </ul>
+        </nav>
+      </sc-if>
+    </div>
+  </header>
+  <main id="main" tabindex="-1" style="flex:1;padding:24px var(--gutter) 48px;min-width:0;width:100%;max-width:1200px;margin:0 auto">
+    <h1 style="font-size:var(--fs-2xl);line-height:1.2;margin:8px 0 8px;text-wrap:pretty">{{ h1 }}</h1>
+    <sc-if value="{{ isRanking }}" hint-placeholder-val="{{ true }}">
+<p style="margin:0 0 20px;color:var(--muted);max-width:68ch">Investigations ordered by a fire-safety heuristic for the selected profile. Scores are sample values in this mockup.</p>
+<fieldset style="border:0;padding:0;margin:0 0 20px">
+  <legend style="font-weight:700;margin-bottom:8px">Profile</legend>
+  <div role="radiogroup" style="display:flex;flex-wrap:wrap;gap:8px">
+    <sc-for list="{{ profiles }}" as="p" hint-placeholder-count="4">
+      <label style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:{{ p.b }};background:{{ p.bg }};border-radius:var(--radius-2);cursor:pointer">
+        <input type="radio" name="profile" checked="{{ p.checked }}" onChange="{{ p.pick }}" style="width:18px;height:18px;margin:0;accent-color:var(--accent-strong)"></input>{{ p.name }}
+      </label>
+    </sc-for>
+  </div>
+</fieldset>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px;display:grid;gap:14px;margin-bottom:20px">
+  <fieldset style="border:0;padding:0;margin:0;min-width:0"><legend style="font-weight:700;font-size:var(--fs-sm);margin-bottom:6px">Fuel phase</legend>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ phaseOpts }}" as="o" hint-placeholder-count="5"><button onClick="{{ o.toggle }}" aria-pressed="{{ o.on }}" style="min-height:44px;padding:0 12px;border:{{ o.b }};background:{{ o.bg }};border-radius:999px;cursor:pointer;font-size:var(--fs-sm)">{{ o.mark }}{{ o.v }}</button></sc-for></div>
+  </fieldset>
+  <fieldset style="border:0;padding:0;margin:0;min-width:0"><legend style="font-weight:700;font-size:var(--fs-sm);margin-bottom:6px">Topic</legend>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ topicOpts }}" as="o" hint-placeholder-count="6"><button onClick="{{ o.toggle }}" aria-pressed="{{ o.on }}" style="min-height:44px;padding:0 12px;border:{{ o.b }};background:{{ o.bg }};border-radius:999px;cursor:pointer;font-size:var(--fs-sm)">{{ o.mark }}{{ o.v }}</button></sc-for></div>
+  </fieldset>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:12px">
+    <p role="status" style="margin:0;font-weight:700">{{ rCount }}</p>
+    <span style="font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono)">Mockup: 12 sample records of the 26 in the catalog</span>
+  </div>
+</div>
+<sc-if value="{{ rLoading }}" hint-placeholder-val="{{ false }}">
+  <div aria-busy="true" role="status" style="padding:32px;border:1px dashed var(--border-strong);border-radius:var(--radius-2);background:var(--surface);color:var(--muted)">Loading catalog…</div>
+</sc-if>
+<sc-if value="{{ rFailed }}" hint-placeholder-val="{{ false }}">
+  <div role="alert" style="padding:20px;border:1px solid var(--status-error);border-left-width:1px;border-radius:var(--radius-2);background:var(--status-error-weak)">
+    <p style="margin:0 0 6px;font-weight:700;color:var(--status-error)">⚠ Could not load catalog.json</p>
+    <p style="margin:0 0 12px">The ranking cannot be shown. Other screens are still reachable: <a href="#/map">Coverage map</a>, <a href="#/about">About</a>.</p>
+    <button onClick="{{ retry }}" style="min-height:44px;padding:0 16px;border:1px solid var(--text);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">Try again</button>
+  </div>
+</sc-if>
+<sc-if value="{{ rEmpty }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:20px;border:1px dashed var(--border-strong);border-radius:var(--radius-2);background:var(--surface)">
+    <p style="margin:0 0 6px;font-weight:700">No investigations match these filters.</p>
+    <p style="margin:0 0 12px;color:var(--muted)">Active filters: {{ activeFilters }}</p>
+    <button onClick="{{ clearFilters }}" style="min-height:44px;padding:0 16px;border:1px solid var(--accent-strong);color:var(--accent-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">Clear filters</button>
+  </div>
+</sc-if>
+<sc-if value="{{ rOk }}" hint-placeholder-val="{{ true }}">
+<ol style="list-style:none;margin:0;padding:0;display:grid;gap:12px">
+  <sc-for list="{{ items }}" as="it" hint-placeholder-count="4">
+  <li style="display:grid;gap:12px">
+    <sc-if value="{{ it.nonNote }}"><p style="margin:12px 0 0;padding:10px 12px;border-top:2px solid var(--border-strong);color:var(--muted);font-size:var(--fs-sm)">Listed last: records outside Combustion Science (research area is not combustion).</p></sc-if>
+    <article style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px">
+      <div style="font-size:var(--fs-2xl);font-weight:700;line-height:1;color:var(--muted);min-width:32px" aria-label="Rank">#{{ it.rank }}</div>
+      <div style="display:grid;gap:10px;min-width:0">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;align-items:baseline">
+          <div style="min-width:0;flex:1 1 280px">
+            <div style="font-family:var(--mono);font-size:var(--fs-sm);color:var(--muted)">{{ it.id }}</div>
+            <h2 style="margin:2px 0 0;font-size:var(--fs-lg);line-height:1.3;text-wrap:pretty;overflow-wrap:anywhere"><a href="{{ it.detail }}" style="color:var(--text)">{{ it.title }}{{ it.acr }}</a></h2>
+          </div>
+          <div style="font-weight:700;font-size:var(--fs-lg);white-space:nowrap">{{ it.total }} <span style="font-weight:400;font-size:var(--fs-sm);color:var(--muted)">points</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ it.chips }}" as="c" hint-placeholder-count="2"><span style="font-size:var(--fs-xs);padding:3px 8px;border:{{ c.b }};border-radius:{{ c.r }};background:var(--background)">{{ c.label }}</span></sc-for>
+          <sc-if value="{{ it.na }}"><span style="font-size:var(--fs-xs);padding:3px 8px;border:1px dashed var(--status-na);border-radius:4px;color:var(--status-na)">⊘ not assessed: some factors</span></sc-if>
+          <sc-if value="{{ it.unrev }}"><span style="font-size:var(--fs-xs);padding:3px 8px;border:1px solid var(--status-unreviewed);background:var(--status-unreviewed-weak);border-radius:4px;color:var(--status-unreviewed);font-weight:600">◐ based on unreviewed tags</span></sc-if>
+          <sc-if value="{{ it.non }}"><span style="font-size:var(--fs-xs);padding:3px 8px;border:1px solid var(--border-strong);border-radius:4px">{{ it.area }}</span></sc-if>
+        </div>
+        <sc-if value="{{ it.ai }}">
+          <div style="border:1px dashed var(--ai);background:var(--ai-weak);border-radius:var(--radius-1);padding:10px 12px">
+            <p style="margin:0 0 4px;font-size:var(--fs-xs);font-weight:700;color:var(--ai)">✦ AI-generated · model &lt;name&gt; · not reviewed yet</p>
+            <p style="margin:0">Sample summary text. Placeholder for a short AI summary of this investigation.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ it.psi }}">
+          <div style="border-left:3px solid var(--psi);background:var(--psi-weak);padding:10px 12px">
+            <p style="margin:0 0 4px;font-size:var(--fs-xs);font-weight:700;color:var(--psi)">▤ NASA PSI text</p>
+            <p style="margin:0;color:var(--text)">PSI objectives text appears here, copied verbatim (sample placeholder).</p>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center">
+          <button onClick="{{ it.toggle }}" aria-expanded="{{ it.open }}" style="min-height:44px;padding:0 12px;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">{{ it.openTxt }}</button>
+          <a href="{{ it.detail }}" style="min-height:44px;display:flex;align-items:center;padding:0 4px">Detail</a>
+          <a href="{{ it.compare }}" style="min-height:44px;display:flex;align-items:center;padding:0 4px">Compare</a>
+          <a href="{{ it.psiHref }}" style="min-height:44px;display:flex;align-items:center;padding:0 4px">PSI page ↗</a>
+        </div>
+        <sc-if value="{{ it.open }}">
+          <dl style="margin:0;border-top:1px solid var(--border);display:grid">
+            <sc-for list="{{ it.factors }}" as="f" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:8px 0;border-bottom:1px solid var(--border)">
+                <dt style="font-weight:600">{{ f.name }}</dt>
+                <dd style="margin:0;font-weight:700;font-family:var(--mono)">{{ f.val }}</dd>
+                <dd style="margin:0;grid-column:1 / -1;font-size:var(--fs-sm);color:var(--muted)">{{ f.ev }}</dd>
+              </div>
+            </sc-for>
+          </dl>
+        </sc-if>
+      </div>
+    </article>
+  </li>
+  </sc-for>
+</ol>
+</sc-if>
+<section style="margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2)">
+  <h2 style="margin:0;font-size:var(--fs-lg)"><button onClick="{{ toggleHow }}" aria-expanded="{{ howOpen }}" style="width:100%;min-height:52px;text-align:left;padding:0 16px;background:none;border:0;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;gap:12px;align-items:center">How this ranking works <span style="font-weight:500;font-size:var(--fs-sm);color:var(--accent-strong)">{{ howTxt }}</span></button></h2>
+  <sc-if value="{{ howOpen }}">
+    <div style="padding:0 16px 16px;display:grid;gap:10px">
+      <sc-for list="{{ howRows }}" as="h" hint-placeholder-count="5">
+        <div style="border-top:1px solid var(--border);padding-top:10px;display:grid;gap:2px"><strong>{{ h.name }} · {{ h.w }}</strong><span style="font-size:var(--fs-sm);color:var(--muted)">Follows: {{ h.src }}</span></div>
+      </sc-for>
+      <p style="margin:6px 0 0;padding:10px 12px;border:1px solid var(--border-strong);border-radius:var(--radius-1);font-weight:600">Heuristic, not an assessment by NASA.</p>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+<sc-if value="{{ isCompare }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0 0 20px;color:var(--muted);max-width:68ch">Pick 2 or 3 investigations to compare side by side. The selection is kept in the address, so the page can be shared.</p>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px;display:grid;gap:12px;margin-bottom:20px">
+  <div style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:baseline">
+    <label for="cmp-search" style="font-weight:700">Add an investigation</label>
+    <p role="status" style="margin:0;font-weight:700">{{ cmpCount }}</p>
+  </div>
+  <input id="cmp-search" type="search" value="{{ cmpQ }}" onChange="{{ onCmpQ }}" placeholder="Search by title, acronym or accession (e.g. PSI-10)" style="min-height:44px;padding:0 12px;border:1px solid var(--border-strong);border-radius:var(--radius-1);background:var(--surface);width:100%;min-width:0"></input>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px">
+    <sc-for list="{{ cmpResults }}" as="r" hint-placeholder-count="4">
+      <li><button onClick="{{ r.add }}" style="width:100%;min-height:44px;text-align:left;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius-1);background:var(--background);cursor:pointer;display:flex;gap:12px;align-items:center"><span style="font-family:var(--mono);font-size:var(--fs-sm);color:var(--muted);flex:none">{{ r.id }}</span><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.title }}</span><span style="flex:none;color:var(--accent-strong);font-weight:600">+ Add</span></button></li>
+    </sc-for>
+  </ul>
+  <sc-if value="{{ cmpNoResults }}"><p style="margin:0;color:var(--muted)">No investigation matches “{{ cmpQ }}”.</p></sc-if>
+  <sc-if value="{{ cmpLimitShow }}"><p role="alert" style="margin:0;padding:10px 12px;border:1px solid var(--status-unreviewed);background:var(--status-unreviewed-weak);border-radius:var(--radius-1);font-weight:600">⚠ Limit reached: you can compare up to 3 investigations. Remove one to add another.</p></sc-if>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <sc-for list="{{ cmpSelected }}" as="c" hint-placeholder-count="2">
+      <span style="display:flex;align-items:center;gap:4px;padding-left:12px;border:2px solid var(--accent-strong);background:var(--accent-weak);border-radius:999px"><span style="font-family:var(--mono);font-size:var(--fs-sm)">{{ c.id }}</span> {{ c.label }}<button onClick="{{ c.remove }}" aria-label="Remove {{ c.id }}" style="min-width:44px;min-height:44px;border:0;background:none;cursor:pointer;font-size:18px">×</button></span>
+    </sc-for>
+  </div>
+</div>
+<sc-if value="{{ cmpFew }}">
+  <div style="padding:24px;border:1px dashed var(--border-strong);border-radius:var(--radius-2);background:var(--surface)"><p style="margin:0;font-weight:600">Select at least 2 investigations to see the comparison table.</p><p style="margin:6px 0 0;color:var(--muted)">Use the search above, or the “Compare” link on any item in <a href="#/ranking">Ranking</a>.</p></div>
+</sc-if>
+<sc-if value="{{ cmpTable }}" hint-placeholder-val="{{ true }}">
+<div role="region" aria-label="Comparison table, scrolls horizontally" tabindex="0" style="overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-2);background:var(--surface)">
+  <table style="border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:var(--fs-sm)">
+    <thead><tr>
+      <th scope="col" style="position:sticky;left:0;z-index:2;background:var(--psi-weak);text-align:left;padding:12px;border-bottom:2px solid var(--border-strong);width:170px">Field</th>
+      <sc-for list="{{ cmpCols }}" as="c" hint-placeholder-count="2"><th scope="col" style="text-align:left;padding:12px;border-bottom:2px solid var(--border-strong);background:var(--psi-weak);min-width:220px"><span style="font-family:var(--mono);font-weight:400;color:var(--muted)">{{ c.id }}</span><br></br><a href="{{ c.href }}">{{ c.label }}</a></th></sc-for>
+    </tr></thead>
+    <tbody>
+      <sc-for list="{{ cmpRows }}" as="r" hint-placeholder-count="8">
+      <tr>
+        <th scope="row" style="position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)">{{ r.name }}<sc-if value="{{ r.hasMk }}"><span style="display:block;margin-top:4px;font-size:var(--fs-xs);font-weight:700;color:{{ r.mkColor }}">{{ r.mk }}</span></sc-if></th>
+        <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="2">
+        <td style="vertical-align:top;padding:12px;border-bottom:1px solid var(--border)">
+          <sc-if value="{{ c.psiLbl }}"><span style="display:block;font-size:var(--fs-xs);font-weight:700;color:var(--psi);margin-bottom:2px">▤ NASA PSI text</span></sc-if>
+          <sc-if value="{{ c.val }}"><span>{{ c.text }}</span></sc-if>
+          <sc-if value="{{ c.dash }}"><span style="color:var(--muted)"><span aria-hidden="true" style="font-weight:700;color:var(--text)">— </span>{{ c.reason }}<sc-if value="{{ c.hasLink }}"> · <a href="{{ c.link }}">PSI page ↗</a></sc-if></span></sc-if>
+          <sc-if value="{{ c.approx }}"><span style="display:inline-block;margin-left:6px;font-size:var(--fs-xs);padding:1px 6px;border:1px solid var(--status-approx);color:var(--status-approx);border-radius:4px">≈ approximate</span></sc-if>
+          <sc-if value="{{ c.unrev }}"><span style="display:inline-block;margin-left:6px;font-size:var(--fs-xs);padding:1px 6px;border:1px solid var(--status-unreviewed);background:var(--status-unreviewed-weak);color:var(--status-unreviewed);border-radius:4px;font-weight:600">◐ unreviewed</span></sc-if>
+        </td>
+        </sc-for>
+      </tr>
+      </sc-for>
+    </tbody>
+  </table>
+</div>
+</sc-if>
+</sc-if>
+<sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0 0 20px;color:var(--muted);max-width:72ch">Each point is one test: oxygen share of the atmosphere (x, %) against pressure (y, bar). Empty regions mean PSI holds no tests there. <strong style="color:var(--text)">Points in this mockup are sample data.</strong></p>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px;display:grid;gap:12px;margin-bottom:16px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
+    <label style="display:grid;gap:4px;font-weight:700;font-size:var(--fs-sm)">Investigation<select value="{{ mInvSel.val }}" onChange="{{ mInvSel.on }}" style="min-height:44px;padding:0 8px;border:1px solid var(--border-strong);border-radius:var(--radius-1);background:var(--surface);font-weight:400"><sc-for list="{{ mInvSel.opts }}" as="o"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+    <label style="display:grid;gap:4px;font-weight:700;font-size:var(--fs-sm)">Flame type<select value="{{ mFlameSel.val }}" onChange="{{ mFlameSel.on }}" style="min-height:44px;padding:0 8px;border:1px solid var(--border-strong);border-radius:var(--radius-1);background:var(--surface);font-weight:400"><sc-for list="{{ mFlameSel.opts }}" as="o"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+    <label style="display:grid;gap:4px;font-weight:700;font-size:var(--fs-sm)">Fuel<select value="{{ mFuelSel.val }}" onChange="{{ mFuelSel.on }}" style="min-height:44px;padding:0 8px;border:1px solid var(--border-strong);border-radius:var(--radius-1);background:var(--surface);font-weight:400"><sc-for list="{{ mFuelSel.opts }}" as="o"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+    <label style="display:grid;gap:4px;font-weight:700;font-size:var(--fs-sm)">Outcome<select value="{{ mOutSel.val }}" onChange="{{ mOutSel.on }}" style="min-height:44px;padding:0 8px;border:1px solid var(--border-strong);border-radius:var(--radius-1);background:var(--surface);font-weight:400"><sc-for list="{{ mOutSel.opts }}" as="o"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px 16px;border-top:1px solid var(--border);padding-top:12px">
+    <p role="status" style="margin:0;font-weight:700">{{ mCount }}</p>
+    <p style="margin:0;color:var(--muted)">11 tests not plotted (missing O2 or pressure)</p>
+  </div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+  <section aria-label="Chart" style="flex:3 1 560px;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2)">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;padding:8px;border-bottom:1px solid var(--border)">
+      <button onClick="{{ mToggleTable }}" style="min-height:44px;padding:0 14px;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">{{ mTableTxt }}</button>
+      <button onClick="{{ mDownload }}" style="min-height:44px;padding:0 14px;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">Download filtered data</button>
+    </div>
+    <sc-if value="{{ mEmpty }}">
+      <div style="margin:16px;padding:20px;border:1px dashed var(--border-strong);border-radius:var(--radius-2)"><p style="margin:0 0 6px;font-weight:700">0 tests match these filters.</p><p style="margin:0 0 12px;color:var(--muted)">Active filters: {{ mActive }}</p><button onClick="{{ mReset }}" style="min-height:44px;padding:0 16px;border:1px solid var(--accent-strong);color:var(--accent-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">Clear filters</button></div>
+    </sc-if>
+    <sc-if value="{{ mChart }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:8px">
+        <svg viewBox="0 0 640 400" role="application" aria-label="{{ chartLabel }}" tabindex="0" onKeyDown="{{ mKey }}" style="width:100%;height:auto;display:block;font-family:var(--font)">
+          <rect x="{{ plot.x }}" y="{{ plot.y }}" width="{{ plot.w }}" height="{{ plot.h }}" fill="#fff" stroke="var(--border-strong)"></rect>
+          <sc-for list="{{ xTicks }}" as="t"><line x1="{{ t.x1 }}" x2="{{ t.x1 }}" y1="{{ t.y1 }}" y2="{{ t.y2 }}" stroke="#eceef0"></line><text x="{{ t.x }}" y="{{ t.y }}" font-size="11" text-anchor="middle" fill="#575d66">{{ t.label }}</text></sc-for>
+          <sc-for list="{{ yTicks }}" as="t"><line x1="{{ t.x1 }}" x2="{{ t.x2 }}" y1="{{ t.y }}" y2="{{ t.y }}" stroke="#eceef0"></line><text x="{{ t.x }}" y="{{ t.ty }}" font-size="11" text-anchor="end" fill="#575d66">{{ t.label }}</text></sc-for>
+          <rect x="{{ zone.x }}" y="{{ zone.y }}" width="{{ zone.w }}" height="{{ zone.h }}" fill="var(--zone-moon)" stroke="var(--zone-moon-edge)" stroke-dasharray="5 3"></rect>
+          <text x="{{ zoneLbl.x }}" y="{{ zoneLbl.y }}" font-size="11" font-weight="700" fill="var(--zone-moon-edge)">Moon-base zone (expected)</text>
+          <sc-for list="{{ points }}" as="p"><path d="{{ p.d }}" fill="{{ p.fill }}" stroke="{{ p.stroke }}" stroke-width="{{ p.sw }}" onClick="{{ p.pick }}" style="cursor:pointer"></path></sc-for>
+          <path d="{{ earth.d }}" fill="#fff" stroke="var(--zone-earth)" stroke-width="2"></path>
+          <text x="{{ earth.tx }}" y="{{ earth.ty }}" font-size="11" font-weight="700" fill="var(--zone-earth)">Earth air</text>
+          <path d="{{ suit.d }}" fill="#fff" stroke="var(--zone-suit)" stroke-width="2"></path>
+          <text x="{{ suit.tx }}" y="{{ suit.ty }}" font-size="11" font-weight="700" text-anchor="end" fill="var(--zone-suit)">Spacesuit</text>
+          <sc-if value="{{ hasSel }}"><path d="{{ mSelRing }}" fill="none" stroke="var(--focus)" stroke-width="3"></path></sc-if>
+          <text x="{{ axX.x }}" y="{{ axX.y }}" font-size="12" text-anchor="middle" fill="#1c1e22">O2 (%)</text>
+          <text x="{{ axY.x }}" y="{{ axY.y }}" transform="{{ axY.t }}" font-size="12" text-anchor="middle" fill="#1c1e22">Pressure (bar)</text>
+        </svg>
+        <p style="margin:4px 8px 0;font-size:var(--fs-xs);color:var(--muted)">Keyboard: focus the chart, then use arrow keys to step through points; Esc clears.</p>
+      </div>
+      <div style="padding:12px 16px 16px;border-top:1px solid var(--border);display:grid;gap:10px;font-size:var(--fs-sm)">
+        <ul aria-label="Legend: outcomes" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px">
+          <sc-for list="{{ legend }}" as="l" hint-placeholder-count="4"><li style="display:flex;align-items:center;gap:6px"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="{{ l.d }}" fill="{{ l.fill }}" stroke="{{ l.stroke }}" stroke-width="1.8"></path></svg>{{ l.label }}</li></sc-for>
+        </ul>
+        <ul aria-label="Legend: reference overlays" style="list-style:none;margin:0;padding:0;display:grid;gap:4px;color:var(--muted)">
+          <li><strong style="color:var(--zone-moon-edge)">▭ Moon-base zone</strong>: O2 ≥ 30 %, pressure ≤ 10.2 psi ≈ 0.70 bar. Expected, per the challenge statement; not final.</li>
+          <li><strong style="color:var(--text)">◇ Earth air</strong>: about 21 % O2, 14.7 psi ≈ 1.01 bar. Source: standard sea-level atmosphere.</li>
+          <li><strong style="color:var(--zone-suit)">◇ Spacesuit atmosphere</strong>: 100 % O2, 4.3 psi ≈ 0.30 bar. Source: challenge statement.</li>
+        </ul>
+      </div>
+    </sc-if>
+    <sc-if value="{{ mTable }}">
+      <div role="region" aria-label="Plotted tests as a table" tabindex="0" style="overflow-x:auto;max-height:520px;overflow-y:auto">
+        <table style="border-collapse:collapse;width:100%;min-width:620px;font-size:var(--fs-sm)">
+          <caption style="text-align:left;padding:10px 12px;color:var(--muted)">{{ rowsInfo }} · sample data · ≈ = approximate pressure</caption>
+          <thead><tr style="background:var(--psi-weak);text-align:left"><th style="padding:8px 12px">Investigation</th><th style="padding:8px 12px">Test id</th><th style="padding:8px 12px">Fuel</th><th style="padding:8px 12px">Flame type</th><th style="padding:8px 12px">O2 %</th><th style="padding:8px 12px">Pressure bar</th><th style="padding:8px 12px">Tad K</th><th style="padding:8px 12px">Outcome</th></tr></thead>
+          <tbody><sc-for list="{{ rows }}" as="r" hint-placeholder-count="8"><tr style="border-top:1px solid var(--border)"><td style="padding:8px 12px">{{ r.inv }}</td><td style="padding:8px 12px;font-family:var(--mono)">{{ r.tid }}</td><td style="padding:8px 12px">{{ r.fuel }}</td><td style="padding:8px 12px">{{ r.flame }}</td><td style="padding:8px 12px">{{ r.o2 }}</td><td style="padding:8px 12px">{{ r.p2 }}{{ r.approx }}</td><td style="padding:8px 12px">{{ r.tad }}</td><td style="padding:8px 12px">{{ r.out }}</td></tr></sc-for></tbody>
+        </table>
+      </div>
+      <sc-if value="{{ rowsMore }}"><div style="padding:12px"><button onClick="{{ moreRows }}" style="min-height:44px;padding:0 16px;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-1);cursor:pointer;font-weight:600">Show 50 more rows</button></div></sc-if>
+    </sc-if>
+  </section>
+  <div style="flex:1 1 280px;min-width:0;display:grid;gap:16px">
+    <section aria-labelledby="ins-h" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px">
+      <h2 id="ins-h" style="margin:0 0 8px;font-size:var(--fs-lg)">Insight</h2>
+      <p style="margin:0 0 10px">66 of 442 plotted tests (15 %) are in the Moon-base zone, from PSI-159 and PSI-10, all burning gaseous fuels.</p>
+      <p style="margin:0 0 4px;font-weight:700;font-size:var(--fs-sm)">Limits</p>
+      <ul style="margin:0;padding-left:18px;font-size:var(--fs-sm);color:var(--muted);display:grid;gap:4px"><li>Tests burn gaseous fuels, not spacecraft materials.</li><li>PSI holds no partial-gravity data.</li></ul>
+      <p style="margin:10px 0 0;font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono)">Computed from the data · shown as sample</p>
+    </section>
+    <section aria-labelledby="det-h" aria-live="polite" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px">
+      <h2 id="det-h" style="margin:0 0 8px;font-size:var(--fs-lg)">Point details</h2>
+      <sc-if value="{{ hasSel }}">
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:var(--fs-sm)">
+          <dt style="color:var(--muted)">Investigation</dt><dd style="margin:0"><a href="{{ det.href }}">{{ det.inv }}</a> · <a href="{{ det.psi }}">PSI page ↗</a></dd>
+          <dt style="color:var(--muted)">Test id</dt><dd style="margin:0;font-family:var(--mono)">{{ det.tid }}</dd>
+          <dt style="color:var(--muted)">Fuel</dt><dd style="margin:0">{{ det.fuel }}</dd>
+          <dt style="color:var(--muted)">Flame type</dt><dd style="margin:0">{{ det.flame }}</dd>
+          <dt style="color:var(--muted)">O2</dt><dd style="margin:0">{{ det.o2 }}</dd>
+          <dt style="color:var(--muted)">Pressure</dt><dd style="margin:0">{{ det.p }}<sc-if value="{{ det.approx }}"><span style="margin-left:6px;font-size:var(--fs-xs);padding:1px 6px;border:1px solid var(--status-approx);color:var(--status-approx);border-radius:4px">≈ approximate</span></sc-if></dd>
+          <dt style="color:var(--muted)">Tad</dt><dd style="margin:0">{{ det.tad }}</dd>
+          <dt style="color:var(--muted)">Outcome</dt><dd style="margin:0;font-weight:700">{{ det.out }}</dd>
+          <dt style="color:var(--muted)">Cool flame (raw)</dt><dd style="margin:0;font-family:var(--mono)">{{ det.cf }}</dd>
+          <dt style="color:var(--muted)">SE/FT (raw)</dt><dd style="margin:0;font-family:var(--mono)">{{ det.se }}</dd>
+        </dl>
+        <p style="margin:10px 0 0;font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono)">Sample values</p>
+      </sc-if>
+      <sc-if value="{{ mHint }}"><p style="margin:0;color:var(--muted);font-size:var(--fs-sm)">Select a point, or focus the chart and use the arrow keys.</p></sc-if>
+    </section>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;margin-bottom:20px;color:var(--muted)">
+  <span style="font-family:var(--mono)">{{ d.id }}</span><span>Acronym: <strong style="color:var(--text)">{{ d.acr }}</strong></span>
+  <a href="{{ d.psi }}" style="min-height:44px;display:flex;align-items:center">PSI page ↗</a><span>DOI: <span style="font-family:var(--mono)">10.xxxx/sample-placeholder</span></span>
+</div>
+<div style="display:grid;gap:20px;max-width:860px">
+<section aria-labelledby="s-sum" style="display:grid;gap:8px">
+  <h2 id="s-sum" style="margin:0;font-size:var(--fs-xl)">Summary</h2>
+  <sc-if value="{{ d.ai }}">
+    <div style="border:1px dashed var(--ai);background:var(--ai-weak);border-radius:var(--radius-1);padding:14px 16px;display:grid;gap:8px">
+      <p style="margin:0;font-size:var(--fs-xs);font-weight:700;color:var(--ai)">✦ AI-generated · model &lt;name&gt; · not reviewed yet</p>
+      <p style="margin:0">Sample summary text. Placeholder for the AI summary of this investigation.</p>
+      <p style="margin:0"><strong>Fire-safety note:</strong> Sample summary text. Placeholder for the fire-safety relevance note.</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{ d.psiSum }}">
+    <div style="border-left:3px solid var(--psi);background:var(--psi-weak);padding:14px 16px;display:grid;gap:6px">
+      <p style="margin:0;font-size:var(--fs-xs);font-weight:700;color:var(--psi)">▤ NASA PSI text · objectives (no AI summary yet)</p>
+      <p style="margin:0">PSI objectives text appears here, copied verbatim (sample placeholder).</p>
+    </div>
+  </sc-if>
+</section>
+<section aria-labelledby="s-facts" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px">
+  <h2 id="s-facts" style="margin:0 0 10px;font-size:var(--fs-xl)">Facts</h2>
+  <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px 20px">
+    <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Flight platform</dt><dd style="margin:0">{{ d.plat }}</dd></div>
+    <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Hardware group</dt><dd style="margin:0"><sc-if value="{{ d.hasHw }}">{{ d.hw }}</sc-if></dd></div>
+    <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Fuel phase</dt><dd style="margin:0"><sc-if value="{{ d.hasPhase }}">{{ d.phase }}</sc-if><sc-if value="{{ d.noPhase }}"><span style="color:var(--muted)"><strong style="color:var(--text)">—</strong> not reviewed yet</span></sc-if></dd></div>
+    <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Topics</dt><dd style="margin:0">{{ d.topics }}</dd></div>
+  </dl>
+  <sc-if value="{{ d.unrev }}"><p style="margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:var(--fs-sm)"><span style="padding:2px 8px;border:1px solid var(--status-unreviewed);background:var(--status-unreviewed-weak);color:var(--status-unreviewed);border-radius:4px;font-weight:600">◐ unreviewed</span>Curated tags on this page are not yet checked by a person.</p></sc-if>
+  <h3 style="margin:16px 0 6px;font-size:var(--fs-base)">Measurements</h3>
+  <sc-if value="{{ d.hasMeas }}"><ul style="margin:0;padding-left:20px;display:grid;gap:2px"><sc-for list="{{ dMeas }}" as="m" hint-placeholder-count="4"><li>{{ m.m }}</li></sc-for></ul></sc-if>
+  <sc-if value="{{ d.noTests }}"><p style="margin:0;color:var(--muted)"><strong style="color:var(--text)">—</strong> not in the PSI record</p></sc-if>
+</section>
+<section aria-labelledby="s-psi" style="display:grid;gap:12px">
+  <h2 id="s-psi" style="margin:0;font-size:var(--fs-xl)">PSI text <span style="font-size:var(--fs-xs);font-weight:700;color:var(--psi);vertical-align:middle;margin-left:6px">▤ NASA PSI text</span></h2>
+  <div style="max-width:68ch;display:grid;gap:14px;line-height:1.65">
+    <div><h3 style="margin:0 0 4px;font-size:var(--fs-base)">Objectives</h3><p style="margin:0">Long PSI objectives text, set in a comfortable reading measure (sample placeholder).</p></div>
+    <div><h3 style="margin:0 0 4px;font-size:var(--fs-base)">Approach</h3><p style="margin:0">Long PSI approach text (sample placeholder).</p></div>
+    <div><h3 style="margin:0 0 4px;font-size:var(--fs-base)">Hypothesis</h3><p style="margin:0;color:var(--muted)"><strong style="color:var(--text)">—</strong> not in the PSI record</p></div>
+    <div><h3 style="margin:0 0 4px;font-size:var(--fs-base)">Earth benefits</h3><p style="margin:0">PSI earth-benefits text (sample placeholder).</p></div>
+  </div>
+</section>
+<section aria-labelledby="s-tc" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px">
+  <h2 id="s-tc" style="margin:0 0 10px;font-size:var(--fs-xl)">Test conditions</h2>
+  <sc-if value="{{ d.tests }}">
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px 20px">
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Tests</dt><dd style="margin:0;font-weight:700;font-size:var(--fs-lg)">{{ d.n }}</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">O2 range</dt><dd style="margin:0;font-weight:700;font-size:var(--fs-lg)">{{ d.o2 }}</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Pressure range</dt><dd style="margin:0;font-weight:700;font-size:var(--fs-lg)">{{ d.p }}</dd><sc-if value="{{ d.approx }}"><dd style="margin:2px 0 0"><span style="font-size:var(--fs-xs);padding:1px 6px;border:1px solid var(--status-approx);color:var(--status-approx);border-radius:4px">≈ approximate</span></dd></sc-if></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Fuels</dt><dd style="margin:0">{{ d.fuels }}</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">In Moon-base zone</dt><dd style="margin:0;font-weight:700;font-size:var(--fs-lg)">{{ d.zone }}</dd></div>
+    </dl>
+    <p style="margin:12px 0 0"><a href="#/map" style="min-height:44px;display:inline-flex;align-items:center">See on the Coverage map</a></p>
+  </sc-if>
+  <sc-if value="{{ d.noTests }}"><p style="margin:0;color:var(--muted)"><strong style="color:var(--text)">—</strong> no normalized test data · <a href="{{ d.psi }}">see the PSI page ↗</a></p></sc-if>
+</section>
+<section aria-labelledby="s-rank">
+  <h2 id="s-rank" style="margin:0 0 4px;font-size:var(--fs-xl)">Ranking position per profile</h2>
+  <p style="margin:0 0 10px;font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono)">Sample values</p>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:8px">
+    <sc-for list="{{ dPos }}" as="p" hint-placeholder-count="4"><li style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:12px"><div style="font-size:var(--fs-sm);color:var(--muted)">{{ p.name }}</div><div style="font-size:var(--fs-xl);font-weight:700">{{ p.rank }}</div></li></sc-for>
+  </ul>
+</section>
+<section aria-labelledby="s-rel">
+  <h2 id="s-rel" style="margin:0 0 8px;font-size:var(--fs-xl)">Related investigations</h2>
+  <ul style="margin:0;padding-left:20px;display:grid;gap:2px">
+    <sc-for list="{{ dRel }}" as="r" hint-placeholder-count="2"><li><sc-if value="{{ r.link }}"><a href="{{ r.href }}" style="display:inline-flex;min-height:44px;align-items:center">{{ r.label }}</a></sc-if><sc-if value="{{ r.plain }}"><span>{{ r.label }}</span></sc-if></li></sc-for>
+  </ul>
+</section>
+<section aria-labelledby="s-cite" style="border:1px solid var(--border-strong);border-radius:var(--radius-2);padding:16px;background:var(--surface)">
+  <h2 id="s-cite" style="margin:0 0 8px;font-size:var(--fs-lg)">Cite this investigation</h2>
+  <p style="margin:0 0 4px">NASA Physical Sciences Informatics, {{ d.id }}. <a href="{{ d.psi }}">PSI page ↗</a></p>
+  <p style="margin:0;font-family:var(--mono);font-size:var(--fs-sm)">DOI: 10.xxxx/sample-placeholder</p>
+</section>
+</div>
+</sc-if>
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;gap:24px;max-width:760px;line-height:1.6">
+<section style="display:grid;gap:8px">
+  <p style="margin:0;font-size:var(--fs-lg)">Flame in Freefall helps professors, students and aerospace engineers explore the 26 combustion-science investigations in NASA Physical Sciences Informatics (PSI), to understand fire safety in spacecraft and on the Moon.</p>
+  <p style="margin:0;color:var(--muted)">Built for the NASA Space Apps 2026 challenge “Flame in Freefall”. The unit of the app is the investigation, not the individual test.</p>
+  <p style="margin:0;padding:12px 16px;border:2px solid var(--text);border-radius:var(--radius-2);font-weight:700;background:var(--surface)">Not an official NASA product.</p>
+</section>
+<section aria-labelledby="a-ai" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2);padding:16px;display:grid;gap:8px">
+  <h2 id="a-ai" style="margin:0;font-size:var(--fs-xl)">How AI was used</h2>
+  <sc-if value="{{ aiOk }}" hint-placeholder-val="{{ true }}">
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px 20px">
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Model</dt><dd style="margin:0">&lt;name&gt;</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Generated on</dt><dd style="margin:0">&lt;date&gt;</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Prompt version</dt><dd style="margin:0">&lt;version&gt;</dd></div>
+      <div><dt style="color:var(--muted);font-size:var(--fs-sm)">Reviewed by a person</dt><dd style="margin:0">0 of 0 summaries</dd></div>
+    </dl>
+    <p style="margin:0">Summaries are generated ahead of time and stored with the data. <strong>Nothing is generated at runtime.</strong> Every AI text carries the label “AI-generated”; where no summary exists, NASA PSI text is shown instead.</p>
+  </sc-if>
+  <sc-if value="{{ aiFail }}"><p role="alert" style="margin:0;padding:12px;border:1px solid var(--status-error);background:var(--status-error-weak);border-radius:var(--radius-1)"><strong style="color:var(--status-error)">⚠ Could not load ai-summaries.json.</strong> AI details are unavailable. The rest of the app still works; AI text will not be shown.</p></sc-if>
+</section>
+<section aria-labelledby="a-src" style="display:grid;gap:8px">
+  <h2 id="a-src" style="margin:0;font-size:var(--fs-xl)">Data sources</h2>
+  <p style="margin:0">All data comes from <a href="https://psi.nasa.gov/physci/repo/search?q=combustion">NASA Physical Sciences Informatics</a>. 26 investigations: 24 Combustion Science, 1 Fluid Physics, 1 Materials Science.</p>
+  <ul style="margin:0;padding:0;list-style:none;border-top:1px solid var(--border)">
+    <sc-for list="{{ srcList }}" as="r" hint-placeholder-count="6"><li style="display:flex;flex-wrap:wrap;gap:2px 12px;padding:8px 0;border-bottom:1px solid var(--border);align-items:baseline"><span style="font-family:var(--mono);font-size:var(--fs-sm);min-width:72px">{{ r.id }}</span><a href="{{ r.href }}" style="flex:1 1 200px;min-width:0;overflow-wrap:anywhere">{{ r.label }}</a><span style="font-family:var(--mono);font-size:var(--fs-xs);color:var(--muted)">DOI 10.xxxx/sample</span></li></sc-for>
+  </ul>
+  <p style="margin:0;font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono)">Mockup lists 12 of 26; the product lists all.</p>
+</section>
+<section aria-labelledby="a-lim" style="display:grid;gap:8px">
+  <h2 id="a-lim" style="margin:0;font-size:var(--fs-xl)">Known limits</h2>
+  <ul style="margin:0;padding-left:20px;display:grid;gap:4px"><li>PSI holds no partial-gravity data.</li><li>Tests on the Coverage map burn gaseous fuels, not spacecraft materials.</li><li>The ranking is a heuristic, not an assessment by NASA.</li></ul>
+</section>
+<p style="margin:0"><a href="THIRD_PARTY_LICENSES" style="display:inline-flex;min-height:44px;align-items:center">THIRD_PARTY_LICENSES</a></p>
+</div>
+</sc-if>
+<sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:640px;display:grid;gap:12px">
+  <sc-if value="{{ nfIsInv }}"><p style="margin:0;font-size:var(--fs-lg)">There is no investigation <strong style="font-family:var(--mono)">{{ nfInv }}</strong> in the catalog.</p></sc-if>
+  <p style="margin:0;font-size:var(--fs-lg)">Nothing exists at this address:</p>
+  <p style="margin:0;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-1);font-family:var(--mono);overflow-wrap:anywhere">{{ nfAddr }}</p>
+  <p style="margin:0">Go to <a href="#/ranking">Ranking</a>, or use the navigation above: <a href="#/compare">Compare</a> · <a href="#/map">Coverage map</a> · <a href="#/about">About</a>.</p>
+</div>
+</sc-if>
+  </main>
+  <footer style="border-top:1px solid var(--border);background:var(--surface);padding:20px var(--gutter);font-size:var(--fs-sm);color:var(--muted)">
+    <p style="margin:0;display:flex;flex-wrap:wrap;gap:4px 12px"><span>Data: <a href="https://psi.nasa.gov/physci/repo/search?q=combustion">NASA PSI</a></span><span aria-hidden="true">·</span><span>Not an official NASA product</span><span aria-hidden="true">·</span><span>AI-generated text is always labeled</span><span aria-hidden="true">·</span><a href="#/about">About</a></p>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PSI = id => 'https://psi.nasa.gov/physci/repo/search?q=' + id;
+const INV = [
+ {id:'PSI-159',acr:'ACME CFI-G',title:'Advanced Combustion via Microgravity Experiments / Cool Flames Investigation with Gases',plat:'ISS',phase:'gas',topics:['flame-fundamentals','modeling'],hw:'acme-cir',area:'Combustion Science',tests:{n:333,o2:'12–85 %',p:'0.50–3.31 bar',fuels:'butane, ethane, propane',zone:48},approx:true,rel:['PSI-10','PSI-39']},
+ {id:'PSI-10',acr:'ACME/Flame Design',title:'Advanced Combustion via Microgravity Experiments / Flame Design',plat:'ISS',phase:'gas',topics:['flame-fundamentals'],hw:'acme-cir',area:'Combustion Science',tests:{n:120,o2:'21–85 %',p:'0.43–3.06 bar',fuels:'ethylene',zone:18},rel:['PSI-159']},
+ {id:'PSI-98',acr:'SAFFIRE-I',title:'Spacecraft Fire Safety Experiment-I',plat:'ISS',phase:'solid',topics:['material-flammability'],hw:'other',area:'Combustion Science',rel:['PSI-99','PSI-100']},
+ {id:'PSI-99',acr:'SAFFIRE-II',title:'Spacecraft Fire Experiment-II',plat:'Cygnus',phase:'solid',topics:['material-flammability'],hw:'other',area:'Combustion Science',rel:['PSI-98','PSI-100']},
+ {id:'PSI-100',acr:'SAFFIRE-III',title:'Spacecraft Fire Experiment-III',plat:'ISS',phase:'solid',topics:['material-flammability'],hw:'other',area:'Combustion Science',rel:['PSI-98','PSI-99']},
+ {id:'PSI-25',acr:'BASS-II',title:'Burning and Suppression of Solids - II',plat:'ISS',phase:null,topics:['material-flammability'],hw:'msg-flow-duct',area:'Combustion Science',unrev:true,rel:['BASS (not in catalog)']},
+ {id:'PSI-101',acr:'SAME-R',title:'Smoke Aerosol Measurement Experiment-Reflight',plat:'ISS',phase:'aerosol-dust',topics:['detection'],hw:'other',area:'Combustion Science',rel:['PSI-102']},
+ {id:'PSI-102',acr:'SAME',title:'Smoke and Aerosol Measurement Experiment',plat:'ISS',phase:'aerosol-dust',topics:['detection'],hw:'other',area:'Combustion Science',rel:['PSI-101']},
+ {id:'PSI-39',acr:'CFI',title:'Cool Flames Investigation',plat:'ISS',phase:'liquid-droplet',topics:['flame-fundamentals','suppression'],hw:'mdca-cir',area:'Combustion Science',unrev:true,rel:['PSI-159']},
+ {id:'PSI-68',acr:'FLEX-2',title:'Flame Extinguishment Experiment - 2',plat:'ISS',phase:null,topics:[],hw:'mdca-cir',area:'Combustion Science',unrev:true,rel:['PSI-39']},
+ {id:'PSI-108',acr:'STDCE-1',title:'STDCE-1',plat:'Space Shuttle',phase:'not-combustion',topics:['not-fire-safety'],hw:null,area:'Fluid Physics',rel:[]},
+ {id:'PSI-181',acr:'',title:'Structure and Properties of Pb-Sn and Pb-free Sn-Ag-Cu Solders Produced in Terrestrial vs. Microgravity Environments under Extremes of Elevated and Cryo Temperatures',plat:'ISS',phase:'not-combustion',topics:['not-fire-safety'],hw:null,area:'Materials Science',rel:[]}
+];
+const BYID = Object.fromEntries(INV.map(i => [i.id, i]));
+const PROFILES = [{id:'crew',name:'Crew cabin'},{id:'lunar',name:'Lunar base / pressurized rover'},{id:'detection',name:'Detection'},{id:'suppression',name:'Suppression'}];
+const PHASES = ['gas','solid','liquid-droplet','aerosol-dust','not-combustion'];
+const TOPICS = ['flame-fundamentals','modeling','material-flammability','detection','suppression','not-fire-safety'];
+const TOPIC_PTS = {
+ crew:{'material-flammability':3,suppression:2,detection:2,'flame-fundamentals':1,modeling:1},
+ lunar:{'material-flammability':3,suppression:2,detection:2,'flame-fundamentals':1,modeling:1},
+ detection:{detection:3,'material-flammability':1,'flame-fundamentals':1},
+ suppression:{suppression:3,'flame-fundamentals':1,'material-flammability':1}};
+const SOLID_MAX = {crew:2,lunar:2,detection:1,suppression:0};
+const FIRE = ['material-flammability','detection','suppression'];
+const NAV = [['Ranking','#/ranking','ranking'],['Compare','#/compare','compare'],['Coverage map','#/map','map'],['About','#/about','about']];
+
+class Component extends DCLogic {
+  state = { route:'#/ranking', w:1280, frameW:'1280px', frame:null, profile:'crew', fPhase:[], fTopic:[], open:{}, howOpen:false, catalog:'ok', menu:false,
+    cmpQ:'', cmpLimit:false, mInv:'all', mFlame:'all', mFuel:'all', mOut:'all', mSel:null, mTable:false, aiFail:false };
+  componentDidMount() {
+    this.onHash = () => { if (!location.hash || location.hash === '#/' || location.hash === '#') { location.replace('#/ranking'); return; } this.setState({ route: location.hash, menu:false, cmpLimit:false }); };
+    window.addEventListener('hashchange', this.onHash); this.onHash();
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.onHash); this.ro && this.ro.disconnect(); }
+  frameRef = el => { if (!el || this.frameEl === el) return; this.frameEl = el; this.ro && this.ro.disconnect();
+    this.ro = new ResizeObserver(e => { const w = Math.round(e[0].contentRect.width); if (Math.abs(w - this.state.w) > 2) this.setState({ w }); }); this.ro.observe(el); };
+  go = h => { location.hash = h; };
+  parse() {
+    const r = this.state.route.slice(1); const [path, qs] = r.split('?'); const parts = path.split('/').filter(Boolean);
+    const q = new URLSearchParams(qs || ''); return { parts, q, screen: parts[0] || 'ranking' };
+  }
+  score(inv, p) {
+    const f = [];
+    const tp = TOPIC_PTS[p];
+    if (!inv.topics.length) f.push({name:'Topic match',max:3,na:true,reason:'topic not curated yet'});
+    else { const pts = Math.max(0, ...inv.topics.map(t => tp[t] || 0)); f.push({name:'Topic match',max:3,pts,ev:'Topic tags: ' + inv.topics.join(', ') + (inv.unrev ? ' (unreviewed)' : '')}); }
+    if (SOLID_MAX[p] > 0) { if (!inv.phase) f.push({name:'Solid-fuel flammability',max:SOLID_MAX[p],na:true,reason:'fuel phase not curated yet'});
+      else f.push({name:'Solid-fuel flammability',max:SOLID_MAX[p],pts:inv.phase === 'solid' ? SOLID_MAX[p] : 0,ev:'Fuel phase: ' + inv.phase}); }
+    const fs = inv.topics.some(t => FIRE.includes(t));
+    f.push({name:'NASA fire-safety label',max:2,pts:fs ? 2 : 0,ev:fs ? 'Sample evidence text: fire-safety label present in PSI record' : 'Sample evidence text: no fire-safety label in PSI record'});
+    if (p === 'lunar') { if (!inv.tests) f.push({name:'Moon-base atmosphere',max:3,na:true,reason:'no normalized test data'});
+      else f.push({name:'Moon-base atmosphere',max:3,pts:inv.tests.zone > 0 ? 3 : 0,ev:inv.tests.zone + ' of ' + inv.tests.n + ' tests in Moon-base zone'}); }
+    const cs = inv.area === 'Combustion Science';
+    f.push({name:'Microgravity project type',max:1,pts:cs ? 1 : 0,ev:'Research area: ' + inv.area});
+    const total = f.reduce((s, x) => s + (x.pts || 0), 0), max = f.reduce((s, x) => s + x.max, 0);
+    return { f, total, max, na: f.some(x => x.na) };
+  }
+  ranked(p) {
+    return INV.map(i => ({ i, s: this.score(i, p) })).sort((a, b) => {
+      const ca = a.i.area === 'Combustion Science' ? 0 : 1, cb = b.i.area === 'Combustion Science' ? 0 : 1;
+      return ca - cb || b.s.total - a.s.total || a.i.id.localeCompare(b.i.id, undefined, {numeric:true});
+    });
+  }
+  chips(inv) {
+    const c = [];
+    c.push({ label: inv.phase ? 'fuel: ' + inv.phase : 'fuel: not curated yet', b:'1px solid var(--border-strong)', r:'4px' });
+    inv.topics.forEach(t => c.push({ label: 'topic: ' + t, b:'1px solid var(--border)', r:'999px' }));
+    if (!inv.topics.length) c.push({ label:'topic: not curated yet', b:'1px dashed var(--border-strong)', r:'999px' });
+    return c;
+  }
+  toggleArr(key, v) { this.setState(s => ({ [key]: s[key].includes(v) ? s[key].filter(x => x !== v) : [...s[key], v] })); }
+  vRanking() {
+    const s = this.state, p = s.profile;
+    const all = this.ranked(p);
+    const list = all.filter(({ i }) => (!s.fPhase.length || s.fPhase.includes(i.phase)) && (!s.fTopic.length || i.topics.some(t => s.fTopic.includes(t))));
+    let firstNon = true, rank = 0;
+    const items = list.map(({ i, s: sc }) => {
+      const non = i.area !== 'Combustion Science'; const note = non && firstNon; if (non) firstNon = false; rank++;
+      const ai = p === 'lunar' && i.id === 'PSI-159';
+      return { rank, id:i.id, title:i.title, acr:i.acr ? ' (' + i.acr + ')' : '', total:sc.total + ' / ' + sc.max, chips:this.chips(i), na:sc.na, unrev:!!i.unrev,
+        ai, psi:!ai, nonNote:note, non, area:i.area, open:!!s.open[i.id], openTxt:s.open[i.id] ? 'Hide breakdown' : 'Breakdown',
+        toggle:() => this.setState(st => ({ open:{ ...st.open, [i.id]:!st.open[i.id] } })),
+        factors:sc.f.map(x => ({ name:x.name, val:x.na ? '— / ' + x.max : x.pts + ' / ' + x.max, ev:x.na ? 'Not assessed: ' + x.reason : x.ev, na:!!x.na, ok:!x.na })),
+        detail:'#/investigation/' + i.id, compare:'#/compare?ids=' + i.id, psiHref:PSI(i.id) };
+    });
+    const opt = (arr, key) => arr.map(v => ({ v, on:s[key].includes(v), toggle:() => this.toggleArr(key, v), b:s[key].includes(v) ? '2px solid var(--accent-strong)' : '1px solid var(--border-strong)', bg:s[key].includes(v) ? 'var(--accent-weak)' : 'var(--surface)', mark:s[key].includes(v) ? '✓ ' : '' }));
+    const active = [...s.fPhase.map(v => 'Fuel phase: ' + v), ...s.fTopic.map(v => 'Topic: ' + v)];
+    const prof = PROFILES.find(x => x.id === p);
+    return {
+      profiles: PROFILES.map(x => ({ id:x.id, name:x.name, checked:x.id === p, pick:() => this.setState({ profile:x.id }), b:x.id === p ? '2px solid var(--accent-strong)' : '1px solid var(--border-strong)', bg:x.id === p ? 'var(--accent-weak)' : 'var(--surface)' })),
+      phaseOpts:opt(PHASES, 'fPhase'), topicOpts:opt(TOPICS, 'fTopic'),
+      rCount:items.length + ' of ' + INV.length + ' investigations', items, profName:prof.name,
+      rLoading:s.catalog === 'loading', rFailed:s.catalog === 'failed', rOk:s.catalog === 'ok' && items.length > 0, rEmpty:s.catalog === 'ok' && !items.length,
+      activeFilters:active.join(' · ') || 'none', hasFilters:active.length > 0,
+      clearFilters:() => this.setState({ fPhase:[], fTopic:[] }), retry:() => this.setState({ catalog:'ok' }),
+      howOpen:s.howOpen, howTxt:s.howOpen ? 'Hide' : 'Show', toggleHow:() => this.setState(st => ({ howOpen:!st.howOpen })),
+      howRows:[
+        { name:'Topic match', w:'3 points', src:'Challenge statement focus on spacecraft fire safety topics (text quoted here in the product)' },
+        { name:'Solid-fuel flammability', w:'2 points (1 in Detection, 0 in Suppression)', src:'Challenge statement reference to flammability of spacecraft materials' },
+        { name:'NASA fire-safety label', w:'2 points', src:'PSI record labels investigation as fire-safety research' },
+        { name:'Moon-base atmosphere', w:'3 points, Lunar profile only', src:'Challenge statement: expected Moon-base atmosphere (O2 ≥ 30 %, ≤ 10.2 psi)' },
+        { name:'Microgravity project type', w:'1 point', src:'PSI research area is Combustion Science' }]
+    };
+  }
+  framesFor(screen) {
+    const set = (o, h) => () => { this.setState({ frame:o.label, ...o.st }); if (h) this.go(h); };
+    const F = {
+      ranking:[
+        { label:'Normal', st:{ profile:'crew', fPhase:['solid'], fTopic:['detection','suppression'], catalog:'ok', open:{} } },
+        { label:'Lunar + breakdown', st:{ profile:'lunar', fPhase:[], fTopic:[], catalog:'ok', open:{ 'PSI-159':true } } },
+        { label:'Empty filter', st:{ profile:'crew', fPhase:['aerosol-dust'], fTopic:['suppression'], catalog:'ok' } },
+        { label:'Loading', st:{ catalog:'loading' } },
+        { label:'Catalog failed', st:{ catalog:'failed' } }],
+      compare:[
+        { label:'2 selected', h:'#/compare?ids=PSI-159,PSI-98' }, { label:'1 selected', h:'#/compare?ids=PSI-159' },
+        { label:'Limit reached', h:'#/compare?ids=PSI-159,PSI-98,PSI-10', st:{ cmpLimit:true } }],
+      map:[
+        { label:'Normal', st:{ mInv:'all', mFlame:'all', mFuel:'all', mOut:'all', mSel:null, mTable:false } },
+        { label:'Point selected', st:{ mInv:'all', mFlame:'all', mFuel:'all', mOut:'all', mSel:7, mTable:false } },
+        { label:'0 tests', st:{ mInv:'PSI-10', mFlame:'all', mFuel:'all', mOut:'yes', mSel:null, mTable:false } },
+        { label:'Table view', st:{ mInv:'all', mFlame:'all', mFuel:'all', mOut:'all', mSel:null, mTable:true } }],
+      investigation:[{ label:'PSI-159 (rich)', h:'#/investigation/PSI-159' }, { label:'PSI-25 (sparse)', h:'#/investigation/PSI-25' }],
+      about:[{ label:'Normal', st:{ aiFail:false } }, { label:'AI info failed', st:{ aiFail:true } }],
+      notfound:[{ label:'#/nothing-here', h:'#/nothing-here' }, { label:'PSI-9999', h:'#/investigation/PSI-9999' }]
+    };
+    return (F[screen] || F.notfound).map(o => { const on = this.state.frame === o.label; return { label:o.label, pressed:on ? 'true' : 'false', bg:on ? '#5b6068' : 'transparent', on:() => { this.setState({ frame:o.label, ...(o.st || {}) }); if (o.h) this.go(o.h); } }; });
+  }
+  vCompare({ q }) {
+    const s = this.state;
+    const ids = (q.get('ids') || '').split(',').filter(x => BYID[x]).slice(0, 3);
+    const setIds = a => this.go('#/compare' + (a.length ? '?ids=' + a.join(',') : ''));
+    const sel = ids.map(id => BYID[id]);
+    const ql = s.cmpQ.trim().toLowerCase();
+    const results = INV.filter(i => !ids.includes(i.id) && (!ql || (i.id + ' ' + i.acr + ' ' + i.title).toLowerCase().includes(ql))).slice(0, 6)
+      .map(i => ({ id:i.id, label:i.acr || i.title, title:i.title, add:() => { if (ids.length >= 3) { this.setState({ cmpLimit:true }); return; } this.setState({ cmpLimit:false, cmpQ:'' }); setIds([...ids, i.id]); } }));
+    const dash = (r, link, id) => ({ dash:true, reason:r, link:link ? PSI(id) : null, hasLink:!!link });
+    const val = (t, o) => ({ text:t, val:true, ...(o || {}) });
+    const T = i => i.tests;
+    const rows = [
+      ['Objectives', i => val('PSI objectives text (sample placeholder).', { psiLbl:true }), true],
+      ['Flight platform', i => val(i.plat)],
+      ['Hardware', i => i.hw ? val(i.hw) : dash('not in the PSI record')],
+      ['Fuel phase', i => i.phase ? val(i.phase, { unrev:i.unrev }) : dash('not reviewed yet')],
+      ['Topics', i => i.topics.length ? val(i.topics.join(', '), { unrev:i.unrev }) : dash('not reviewed yet')],
+      ['Measurements', i => T(i) ? val('Sample measurement A; Sample measurement B') : dash('not in the PSI record')],
+      ['O2 range', i => T(i) ? val(T(i).o2) : dash('no normalized test data', true, i.id)],
+      ['Pressure range', i => T(i) ? val(T(i).p, { approx:!!i.approx }) : dash('no normalized test data', true, i.id)],
+      ['Fuels tested', i => T(i) ? val(T(i).fuels) : dash('no normalized test data', true, i.id)],
+      ['Dates', i => dash('not in the PSI record')],
+      ['Related investigations', i => i.rel.length ? val(i.rel.join(', ')) : dash('not in the PSI record')],
+      ['Earth benefits', i => val('PSI earth-benefits text (sample placeholder).', { psiLbl:true }), true],
+      ['Summary', i => val('PSI objectives text, shown as fallback (no AI summary yet).', { psiLbl:true }), true]
+    ].map(([name, fn, long]) => {
+      const cells = sel.map(i => { const c = fn(i); return { ...c, text:c.text || '', approx:!!c.approx, unrev:!!c.unrev, psiLbl:!!c.psiLbl, dash:!!c.dash, val:!!c.val, reason:c.reason || '', hasLink:!!c.hasLink, link:c.link || '' }; });
+      let mk = null;
+      if (!long) { const keys = cells.map(c => c.dash ? '—' : c.text); mk = keys.every(k => k === '—') ? 'both missing' : keys.every(k => k === keys[0]) ? '= same' : '≠ differs'; }
+      return { name, cells, hasMk:!!mk, mk:mk || '', mkColor:mk === '= same' ? 'var(--status-same)' : mk === '≠ differs' ? 'var(--status-differs)' : 'var(--muted)' };
+    });
+    return {
+      cmpQ:s.cmpQ, onCmpQ:e => this.setState({ cmpQ:e.target.value }), cmpResults:results, cmpNoResults:!results.length,
+      cmpSelected:sel.map(i => ({ id:i.id, label:i.acr || i.title, remove:() => { this.setState({ cmpLimit:false }); setIds(ids.filter(x => x !== i.id)); } })),
+      cmpCount:ids.length + ' of 3 selected', cmpLimit:s.cmpLimit || false, cmpLimitShow:s.cmpLimit && ids.length >= 3,
+      cmpFew:ids.length < 2, cmpTable:ids.length >= 2, cmpCols:sel.map(i => ({ id:i.id, label:i.acr || i.title, href:'#/investigation/' + i.id })), cmpRows:rows,
+      tryFourth:() => this.setState({ cmpLimit:true })
+    };
+  }
+  pts() {
+    if (this._pts) return this._pts;
+    let seed = 42; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const pick = a => a[Math.floor(rnd() * a.length)];
+    const out = [];
+    const make = (inv, n, zone, o2s, pr, outs, fuels, flames) => {
+      for (let k = 0; k < n; k++) {
+        let o2, p; const inZ = k < zone;
+        do { o2 = Math.min(o2s[1], Math.max(o2s[0], pick(o2s[2]) + (rnd() - .5) * 3)); p = inZ ? pr[0] + rnd() * (0.70 - pr[0]) : pr[0] + Math.pow(rnd(), 1.6) * (pr[1] - pr[0]); if (inZ) o2 = Math.max(30, o2); }
+        while (!inZ && o2 >= 30 && p <= 0.70);
+        out.push({ inv, o2:Math.round(o2 * 10) / 10, p:Math.round(p * 100) / 100, out:outs[k], fuel:pick(fuels), flame:flames[k], tid:inv + '-T' + String(out.filter(x => x.inv === inv).length + 1).padStart(3, '0'), tad:1400 + Math.round(rnd() * 900), cf:rnd() > .7 ? '1' : '0', se:(rnd() * 2).toFixed(2) });
+      }
+    };
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const o159 = shuffle([...Array(260).fill('yes'), ...Array(62).fill('no'), ...Array(8).fill('flash')]);
+    const f159 = shuffle([...Array(268).fill('inverse'), ...Array(62).fill('normal')]);
+    make('PSI-159', 330, 48, [12, 85, [12, 16, 21, 21, 30, 40, 40, 50, 65, 85]], [0.50, 3.31], o159, ['butane','ethane','propane'], f159);
+    make('PSI-10', 112, 18, [21, 85, [21, 21, 30, 40, 50, 85]], [0.43, 3.06], Array(112).fill('not-reported'), ['ethylene'], Array(112).fill('normal'));
+    out.forEach((d, i) => d.i = i);
+    return this._pts = out;
+  }
+  vMap() {
+    const s = this.state, all = this.pts();
+    const W = 640, H = 400, L = 52, R = 16, T = 16, B = 44, pw = W - L - R, ph = H - T - B;
+    const X = v => L + v / 100 * pw, Y = v => T + ph - v / 3.5 * ph;
+    const OC = { yes:'var(--outcome-yes)', no:'var(--outcome-no)', flash:'var(--outcome-flash)', 'not-reported':'var(--outcome-nr)' };
+    const shape = (o, x, y, r) => o === 'yes' ? `M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0` : o === 'no' ? `M${x - r} ${y - r}h${2 * r}v${2 * r}h${-2 * r}z` : o === 'flash' ? `M${x} ${y - r * 1.3}L${x + r * 1.2} ${y + r}L${x - r * 1.2} ${y + r}z` : `M${x - r} ${y - r}L${x + r} ${y + r}M${x + r} ${y - r}L${x - r} ${y + r}`;
+    const style = o => o === 'no' ? { fill:'none', stroke:OC[o], sw:1.5 } : o === 'not-reported' ? { fill:'none', stroke:OC[o], sw:1.5 } : { fill:OC[o], stroke:'#fff', sw:.6 };
+    const f = all.filter(d => (s.mInv === 'all' || d.inv === s.mInv) && (s.mFlame === 'all' || d.flame === s.mFlame) && (s.mFuel === 'all' || d.fuel === s.mFuel) && (s.mOut === 'all' || d.out === s.mOut));
+    const fs = f.slice().sort((a, b) => a.o2 - b.o2 || a.p - b.p);
+    const sel = s.mSel != null && f.find(d => d.i === s.mSel) ? all[s.mSel] : null;
+    const points = f.map(d => { const st = style(d.out); return { d:shape(d.out, X(d.o2), Y(d.p), 3.6), fill:st.fill, stroke:st.stroke, sw:st.sw, pick:() => this.setState({ mSel:d.i }) }; });
+    const sel2 = sel ? { d:`M${X(sel.o2) - 9} ${Y(sel.p)}a9 9 0 1 0 18 0a9 9 0 1 0 -18 0` } : null;
+    const onKey = e => {
+      const k = e.key; if (!['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Home','End','Escape'].includes(k) || !fs.length) return; e.preventDefault();
+      if (k === 'Escape') return this.setState({ mSel:null });
+      let idx = sel ? fs.findIndex(d => d.i === sel.i) : -1;
+      idx = k === 'Home' ? 0 : k === 'End' ? fs.length - 1 : (k === 'ArrowRight' || k === 'ArrowUp') ? Math.min(fs.length - 1, idx + 1) : Math.max(0, idx - 1);
+      this.setState({ mSel:fs[idx].i });
+    };
+    const sel3 = (key, opts) => ({ val:s[key], on:e => this.setState({ [key]:e.target.value, mSel:null }), opts:opts.map(v => ({ v, label:v === 'all' ? 'All' : v })) });
+    const zone = { x:X(30), y:Y(0.70), w:X(100) - X(30), h:Y(0) - Y(0.70) };
+    const download = () => { const rows = [['investigation','test_id','fuel','flame_type','o2_pct','pressure_bar','outcome'], ...f.map(d => [d.inv, d.tid, d.fuel, d.flame, d.o2, d.p, d.out])];
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([rows.map(r => r.join(',')).join('\n')], { type:'text/csv' })); a.download = 'coverage-filtered-sample.csv'; a.click(); };
+    const limit = s.mTableN || 25;
+    return {
+      mInvSel:sel3('mInv', ['all','PSI-159','PSI-10']), mFlameSel:sel3('mFlame', ['all','inverse','normal']), mFuelSel:sel3('mFuel', ['all','butane','ethane','propane','ethylene']), mOutSel:sel3('mOut', ['all','yes','no','flash','not-reported']),
+      mCount:f.length + ' of 442 tests plotted', mEmpty:!f.length, mHas:f.length > 0, mChart:!s.mTable, mTable:!!s.mTable,
+      mToggleTable:() => this.setState(st => ({ mTable:!st.mTable })), mTableTxt:s.mTable ? 'Show as chart' : 'Show as table', mDownload:download,
+      mReset:() => this.setState({ mInv:'all', mFlame:'all', mFuel:'all', mOut:'all', mSel:null }),
+      mActive:[['Investigation', s.mInv], ['Flame type', s.mFlame], ['Fuel', s.mFuel], ['Outcome', s.mOut]].filter(x => x[1] !== 'all').map(x => x[0] + ': ' + x[1]).join(' · '),
+      mHint:f.length > 0 && !s.mTable && !sel, points, mSelRing:sel2 ? sel2.d : '', hasSel:!!sel, mKey:onKey,
+      xTicks:[0,10,20,30,40,50,60,70,80,90,100].map(v => ({ x:X(v), y:H - B + 18, label:String(v), x1:X(v), y1:T, y2:T + ph })),
+      yTicks:[0,0.5,1,1.5,2,2.5,3,3.5].map(v => ({ y:Y(v), ty:Y(v) + 4, x:L - 8, label:v.toFixed(1), x1:L, x2:L + pw })),
+      zone, earth:{ d:`M${X(21)} ${Y(1.01) - 7}l7 7l-7 7l-7 -7z`, tx:X(21) + 10, ty:Y(1.01) - 8 }, suit:{ d:`M${X(100)} ${Y(0.30) - 7}l7 7l-7 7l-7 -7z`, tx:X(100) - 12, ty:Y(0.30) - 12 },
+      zoneLbl:{ x:X(30) + 6, y:Y(0.70) + 16 }, axX:{ x:L + pw / 2, y:H - 6 }, axY:{ x:14, y:T + ph / 2, t:`rotate(-90 14 ${T + ph / 2})` }, plot:{ x:L, y:T, w:pw, h:ph },
+      chartLabel:'Scatter chart of ' + f.length + ' sample tests, oxygen percent versus pressure in bar. Use arrow keys to move between points, Escape to clear.',
+      legend:[['yes','yes (flame)'],['no','no'],['flash','flash'],['not-reported','not-reported']].map(([o, l]) => { const st = style(o); return { label:l, d:shape(o, 10, 10, 5), fill:st.fill, stroke:o === 'yes' || o === 'flash' ? 'none' : st.stroke, n:all.filter(d => d.out === o).length }; }),
+      det:sel ? { inv:sel.inv, href:'#/investigation/' + sel.inv, psi:PSI(sel.inv), tid:sel.tid, fuel:sel.fuel, flame:sel.flame, o2:sel.o2 + ' %', p:sel.p.toFixed(2) + ' bar', approx:sel.inv === 'PSI-159', tad:sel.tad + ' K', out:sel.out, cf:sel.cf, se:sel.se } : {},
+      rows:f.slice(0, limit).map(d => ({ ...d, p2:d.p.toFixed(2), approx:d.inv === 'PSI-159' ? ' ≈' : '' })), rowsMore:f.length > limit, rowsInfo:'Showing ' + Math.min(limit, f.length) + ' of ' + f.length + ' rows',
+      moreRows:() => this.setState({ mTableN:limit + 50 })
+    };
+  }
+  vDetail({ inv }) {
+    const t = inv.tests;
+    const pos = PROFILES.map(p => { const r = this.ranked(p.id).findIndex(x => x.i.id === inv.id) + 1; return { name:p.name, rank:'#' + r }; });
+    return {
+      d:{ id:inv.id, acr:inv.acr || '—', psi:PSI(inv.id), plat:inv.plat, hw:inv.hw || '', hasHw:!!inv.hw, phase:inv.phase || '', hasPhase:!!inv.phase, noPhase:!inv.phase, topics:inv.topics.join(', '), hasTopics:inv.topics.length > 0, unrev:!!inv.unrev,
+        ai:inv.id === 'PSI-159', psiSum:inv.id !== 'PSI-159', hasMeas:!!t, tests:!!t, noTests:!t, approx:!!inv.approx,
+        n:t ? String(t.n) : '', o2:t ? t.o2 : '', p:t ? t.p : '', fuels:t ? t.fuels : '', zone:t ? String(t.zone) : '' },
+      dPos:pos, dRel:inv.rel.map(r => ({ label:BYID[r] ? r + ' · ' + (BYID[r].acr || BYID[r].title) : r, href:'#/investigation/' + r, link:!!BYID[r], plain:!BYID[r] })),
+      dMeas:t ? ['Sample measurement A','Sample measurement B','Sample measurement C','Sample measurement D'].map(m => ({ m })) : []
+    };
+  }
+  vAbout() {
+    return { aiFail:this.state.aiFail, aiOk:!this.state.aiFail, srcList:INV.map(i => ({ id:i.id, label:i.acr || i.title, href:PSI(i.id) })) };
+  }
+  vNotFound({ parts }) {
+    return { nfAddr:'#/' + parts.join('/'), nfInv:parts[0] === 'investigation' ? parts[1] : '' , nfIsInv:parts[0] === 'investigation' };
+  }
+  // @more
+  renderVals() {
+    const s = this.state, { parts, q, screen } = this.parse();
+    let sc = ['ranking','compare','map','about'].includes(screen) && parts.length === 1 ? screen : null;
+    let inv = null;
+    if (screen === 'investigation' && parts[1]) { inv = BYID[parts[1]]; sc = inv ? 'investigation' : null; }
+    const nf = !sc; const key = nf ? 'notfound' : sc;
+    const narrow = s.w < 640;
+    const titles = { ranking:'Investigation ranking', compare:'Compare investigations', map:'Coverage map of test conditions', about:'About Flame in Freefall', notfound:'Page not found', investigation:inv ? inv.title : '' };
+    const extra = {};
+    const add = n => { const fn = this['v' + n]; if (fn) Object.assign(extra, fn.call(this, { parts, q, inv })); };
+    if (sc === 'ranking') add('Ranking'); if (sc === 'compare') add('Compare'); if (sc === 'map') add('Map'); if (sc === 'investigation') add('Detail'); if (sc === 'about') add('About'); if (nf) add('NotFound');
+    return {
+      widths:[['1280 px','1280px'],['768 px','768px'],['360 px','360px'],['Fluid','100%']].map(([l, v]) => ({ label:l, pressed:s.frameW === v ? 'true' : 'false', bg:s.frameW === v ? '#5b6068' : 'transparent', on:() => this.setState({ frameW:v }) })),
+      frames:this.framesFor(key), frameW:s.frameW, framePad:s.frameW === '100%' ? '0' : '16px', frameRef:this.frameRef,
+      skip:e => { e.preventDefault(); const m = document.getElementById('main'); m && m.focus(); },
+      narrow, menuOpen:s.menu ? 'true' : 'false', menuLabel:s.menu ? 'Close menu' : 'Menu', toggleMenu:() => this.setState(st => ({ menu:!st.menu })),
+      showNav:!narrow || s.menu, navDir:narrow ? 'column' : 'row', navBasis:narrow ? '100%' : 'auto',
+      nav:NAV.map(([label, href, k]) => { const c = k === sc; return { label, href, current:c ? 'page' : undefined, weight:c ? 700 : 500, bar:c ? 'var(--accent)' : 'transparent', bg:c && narrow ? 'var(--accent-weak)' : 'transparent' }; }),
+      h1:titles[key], isRanking:sc === 'ranking', isCompare:sc === 'compare', isMap:sc === 'map', isDetail:sc === 'investigation', isAbout:sc === 'about', isNotFound:nf,
+      ...extra
+    };
+  }
+}
+</script>
+</body>
+</html>

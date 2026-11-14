@@ -12,7 +12,8 @@ The statement says the Moon base is expected to run at 30 % O2 or more and 10.2 
 - Overlays: the expected Moon-base zone, Earth air and the spacesuit atmosphere, each labeled with its source.
 - Outcome is encoded by color and marker shape; filters for investigation, flame type, fuel and outcome.
 - A computed insight panel (how many plotted tests fall in the zone) with honest limits stated.
-- A table alternative with the same data, and a CSV download of the filtered rows.
+- A table alternative with the same data (paged), and a CSV download of the filtered rows.
+- Readability rules found in the UI mockup review: numeric axes, overlay labels that never cover points, a 480 px minimum plot that scrolls inside its own area on phones. Nice: arrow-key stepping and a deep link from Investigation detail.
 
 ## Capabilities
 
