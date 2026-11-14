@@ -31,4 +31,4 @@ The view changes (ranking, comparator, coverage map, summaries) and `app-shell` 
 
 ## Out of scope (No)
 
-Dark mode, illustrations or NASA logos, animations, a landing/marketing page, any new data field, any change to scoring, comparison or map behavior. (Colors, typography and component looks are no longer out of scope: they belong to `design-system`.)
+Theme selection, illustrations or NASA logos, animations, a landing/marketing page, any new data field, any change to scoring, comparison or map behavior. (This change fixes layout and states; the later `monitoring-console-theme` change owns dark/light appearance.)

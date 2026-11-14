@@ -7,7 +7,7 @@ Six screens, one shared frame, static JSON data, React + TypeScript (see `app-sh
 ## Goals / Non-Goals
 
 **Goals:** one consistent frame; the same four states everywhere; every block named so tasks and tests can point at it.
-**Non-Goals:** dark mode, motion, new data. The visual layer (palette, typography, component looks) is specified in `design-system`.
+**Non-Goals:** theme selection, motion, new data. This change fixes order and states; the later `monitoring-console-theme` change owns dark/light appearance.
 
 ## Decisions
 

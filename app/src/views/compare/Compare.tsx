@@ -41,10 +41,10 @@ function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
   const matches = searchInvestigations(records, text).filter((record) => !ids.includes(record.accession));
 
   return (
-    <section aria-labelledby="picker-title">
+    <section className="compare-picker" aria-labelledby="picker-title">
       <h2 id="picker-title">Choose investigations</h2>
       <p role="status">{ids.length} of 3 selected</p>
-      <ul aria-label="Selected investigations">
+      <ul className="compare-selected" aria-label="Selected investigations">
         {ids.map((id) => (
           <li key={id}>
             {id}{' '}
@@ -66,7 +66,7 @@ function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
         <input type="search" value={text} onChange={(event) => setText(event.target.value)} />
       </label>
       {message ? <p role="alert">{message}</p> : null}
-      <ul aria-label="Investigations to add">
+      <ul className="compare-options" aria-label="Investigations to add">
         {matches.slice(0, 8).map((record) => (
           <li key={record.accession}>
             {record.accession} {record.acronym ? `(${record.acronym}) ` : ''}
@@ -186,6 +186,7 @@ export function Compare({ query }: ViewProps) {
   return (
     <>
       <h1>Compare</h1>
+      <p className="view-intro">Compare recorded conditions and source text side by side. Missing values stay visible.</p>
       <DataState state={catalog} label="The list of investigations">
         {(file) => {
           const ids = parseSelection(query, file.records.map((record) => record.accession));

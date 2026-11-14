@@ -176,25 +176,20 @@ function DetailBody({ record, records }: { record: CatalogRecord; records: Catal
   const known = new Set(records.map((item) => item.accession));
   return (
     <>
-      <p>
+      <p className="detail-title">
         <strong>{record.title ?? record.accession}</strong>
         {record.acronym ? ` (${record.acronym})` : ''}
       </p>
 
-      <h2>Summary</h2>
-      <Summary record={record} />
+      <section className="research-panel"><h2>Summary</h2><Summary record={record} /></section>
 
-      <h2>Facts</h2>
-      <Facts record={record} />
+      <section className="research-panel"><h2>Facts</h2><Facts record={record} /></section>
 
-      <h2>Test conditions</h2>
-      <TestConditions record={record} />
+      <section className="research-panel"><h2>Test conditions</h2><TestConditions record={record} /></section>
 
-      <h2>Ranking position</h2>
-      <RankingPositions record={record} records={records} />
+      <section className="research-panel"><h2>Ranking position</h2><RankingPositions record={record} records={records} /></section>
 
-      <h2>Text from NASA PSI</h2>
-      <PsiTextLabel />
+      <section className="research-panel"><h2>Text from NASA PSI</h2><PsiTextLabel />
       <h3>Objectives</h3>
       <p>
         <PsiText value={record.objectives} />
@@ -211,14 +206,15 @@ function DetailBody({ record, records }: { record: CatalogRecord; records: Catal
       <p>
         <PsiText value={record.earthBenefits} />
       </p>
+      </section>
 
-      <h2>Related investigations</h2>
-      <Related record={record} known={known} />
+      <section className="research-panel"><h2>Related investigations</h2><Related record={record} known={known} /></section>
 
-      <h2>Cite this investigation</h2>
+      <section className="research-panel"><h2>Cite this investigation</h2>
       <p>
         <PsiLink accession={record.accession} doi={record.doi} />
       </p>
+      </section>
     </>
   );
 }

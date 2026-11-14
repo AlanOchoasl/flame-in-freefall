@@ -24,12 +24,16 @@ The app SHALL use only system font stacks and SHALL NOT load any font, icon, ima
 - **WHEN** the app is opened with no network after the first load
 - **THEN** every screen renders with its final typography and no missing icon
 
-### Requirement: Light theme only
-The app SHALL ship one light theme. It SHALL NOT switch theme from the system preference. Transitions SHALL be disabled when the user prefers reduced motion.
+### Requirement: Theme compatibility and reduced motion
+The app SHALL support the approved dark and light palettes according to `console-appearance`, while preserving the shared component styling. Transitions SHALL be disabled when the user prefers reduced motion.
 
 #### Scenario: Reduced motion
 - **WHEN** the system asks for reduced motion
 - **THEN** no transition or animation runs
+
+#### Scenario: Shared components in either palette
+- **WHEN** a visitor selects either color theme
+- **THEN** shared components remain readable and use the selected theme's semantic tokens
 
 ### Requirement: Contrast
 Body and label text SHALL have a contrast ratio of at least 4.5:1 against its background. Borders of form controls, map markers, overlays and the focus ring SHALL have at least 3:1 against the surface they sit on. The ratios of the token pairs listed in `design.md` SHALL be re-measured on the shipped CSS and the results recorded.
