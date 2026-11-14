@@ -4,9 +4,21 @@ import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
 import type { ExperimentRecord } from '../../data/types';
 import { useDataResult } from '../../data/useDataResult';
+import { cleanExplorerState, parseExplorerQuery, replaceExplorerState } from '../../router/explorerQuery';
 import type { ViewProps } from '../types';
 import { EARTH_AIR, MOON_BASE_ZONE, O2_AXIS_MAX_PERCENT, OVERLAY_COLORS, PRESSURE_AXIS_MAX_BAR, SPACESUIT } from './constants';
-import { applyFilters, countPlotted, filterOptions, hasActiveFilters, NO_FILTERS, OUTCOME_LABELS, OUTCOMES, type MapFilters } from './filters';
+import {
+  applyFilters,
+  countPlotted,
+  explorerPatchFromFilters,
+  filterOptions,
+  filtersFromExplorer,
+  hasActiveFilters,
+  NO_FILTERS,
+  OUTCOME_LABELS,
+  OUTCOMES,
+  type MapFilters,
+} from './filters';
 import { computeInsight, describeInsight } from './insight';
 import { marginLabel } from './OverlayLabel';
 import { scatterShapeFor } from './OutcomeMarker';
@@ -154,8 +166,15 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
   );
 }
 
-export function CoverageMapBody({ records, initialAccession }: { records: ExperimentRecord[]; initialAccession: string | null }) {
-  const [filters, setFilters] = useState<MapFilters>({ ...NO_FILTERS, accession: initialAccession });
+interface CoverageMapBodyProps {
+  records: ExperimentRecord[];
+  /** The map's filters; the page keeps them in the address, so the map does not own them. */
+  filters: MapFilters;
+  onFiltersChange: (filters: MapFilters) => void;
+}
+
+export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageMapBodyProps) {
+  const setFilters = onFiltersChange;
   const [selected, setSelected] = useState<ExperimentRecord | null>(null);
   const [asTable, setAsTable] = useState(false);
   const options = filterOptions(records);
@@ -248,13 +267,22 @@ export function CoverageMapBody({ records, initialAccession }: { records: Experi
   );
 }
 
+/** The map's filters taken from the address and cleaned against the data: unknown values are ignored. */
+export function mapFiltersFromQuery(query: URLSearchParams, records: ExperimentRecord[]): MapFilters {
+  const options = filterOptions(records);
+  const known = { accessionsWithTests: options.accessions, flames: options.flameTypes, fuels: options.fuels, outcomes: options.outcomes };
+  return filtersFromExplorer(cleanExplorerState(parseExplorerQuery(query), known));
+}
+
+export const writeMapFilters = (filters: MapFilters): void => replaceExplorerState(explorerPatchFromFilters(filters));
+
 export function CoverageMap({ query }: ViewProps) {
   const experiments = useDataResult(getExperiments);
   return (
     <>
       <h1>Coverage map</h1>
       <DataState state={experiments} label="The test data">
-        {(file) => <CoverageMapBody records={file.records} initialAccession={query.get('investigation')} />}
+        {(file) => <CoverageMapBody records={file.records} filters={mapFiltersFromQuery(query, file.records)} onFiltersChange={writeMapFilters} />}
       </DataState>
     </>
   );

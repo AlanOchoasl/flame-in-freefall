@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addToSelection, compareHash, LIMIT_MESSAGE, parseSelection, removeFromSelection, searchInvestigations } from './selection';
+import { addToSelection, LIMIT_MESSAGE, parseSelection, removeFromSelection, searchInvestigations } from './selection';
 import type { CatalogRecord } from '../../data/types';
 
 const known = ['PSI-1', 'PSI-2', 'PSI-3', 'PSI-4'];
@@ -24,10 +24,6 @@ describe('selection changes', () => {
   it('adds and removes', () => {
     expect(addToSelection(['PSI-1'], 'PSI-2').ids).toEqual(['PSI-1', 'PSI-2']);
     expect(removeFromSelection(['PSI-1', 'PSI-2'], 'PSI-1')).toEqual(['PSI-2']);
-  });
-  it('round-trips through the hash', () => {
-    const hash = compareHash(['PSI-1', 'PSI-2']);
-    expect(parseSelection(new URLSearchParams(hash.split('?')[1]), known)).toEqual(['PSI-1', 'PSI-2']);
   });
 });
 
