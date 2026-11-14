@@ -13,7 +13,9 @@ export function App() {
   const currentPath = match?.view.path;
   const mainRef = useRef<HTMLElement>(null);
 
-  useRouteChrome(match?.view.title ?? 'Not found', hash);
+  const accession = match?.params.accession;
+  const screenTitle = match ? [match.view.title, accession].filter(Boolean).join(' ') : 'Not found';
+  useRouteChrome(screenTitle, hash);
 
   // A plain #anchor would change the hash and the router would see an unknown route.
   const skipToContent = (event: MouseEvent) => {

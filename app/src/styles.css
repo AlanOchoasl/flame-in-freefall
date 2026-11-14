@@ -79,6 +79,32 @@ footer p {
   margin: 4px 0;
 }
 
+dl.facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 0;
+}
+
+dl.facts dt {
+  color: var(--muted);
+}
+
+dl.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  dl.facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  dl.facts dd {
+    margin-bottom: 8px;
+  }
+}
+
 .skip-link {
   position: absolute;
   left: var(--gutter);
