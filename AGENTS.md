@@ -34,6 +34,13 @@ Timeline and milestones: `docs/ROADMAP.md`. Resources: `Recursos/`.
 - Cite the official source (with link) for every NASA/partner dataset used. Show it in the demo.
 - Before using generative AI output, NASA logos/images, or minors' data, check the 2026 Terms & Conditions.
 - NASA does not endorse non-US sites; respect each data site's usage terms.
+- 2026 Terms & Conditions (https://www.spaceappschallenge.org/legal/, updated 2026-08-07), minimum obligations:
+  - Original content must be open source (OSI) or freely available; if no license is declared NASA applies Apache 2.0. Declare one in the repo.
+  - Third-party non-NASA materials (npm packages, fonts, etc.) must be free/open; **list their licenses in the submitted documentation**.
+  - Cite every source used (the submission form asks for references), even open ones: PSI investigation + DOI.
+  - Video: original work, no third-party music/images, no names/voices/likeness of anyone under 18, written consent from any adult shown.
+  - No personal data, no commercial promotion.
+  - The team confirmed AI/SI use is allowed. Still describe how AI was used in the project page; label AI-generated text in the UI.
 
 ## Skills available
 `clean-code`, `git-workflow`, `testing-basics`, `nasa-data-sources`, `submission-check`, plus the OpenSpec skills.

@@ -16,6 +16,14 @@ First re-verify the rules against the official 2026 guide and Terms & Conditions
 
 **Repo**: public, English README (problem, solution, data, run instructions, team), license, no secrets.
 
+**Terms & Conditions 2026** (https://www.spaceappschallenge.org/legal/)
+- [ ] LICENSE file in the repo (OSI license; if none, NASA applies Apache 2.0).
+- [ ] Third-party licenses (libraries, fonts, assets) listed in the documentation.
+- [ ] Every source cited in the references field, including PSI investigations with DOI.
+- [ ] Video is original work; no minors' names/voices/likeness; written consent from any adult shown.
+- [ ] AI use described on the project page; AI-generated text labeled in the app.
+- [ ] No personal data, no commercial promotion.
+
 **Submit**: T&C checkbox ticked, "Submit" pressed and confirmed **before Sunday 23:00**. Nothing is editable after the deadline.
 
 Video script (30 s): 0–3 team + challenge · 3–10 problem · 10–25 solution + data · 25–30 impact.
