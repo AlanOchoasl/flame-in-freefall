@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import { buildExperiments, SCHEMA_VERSION } from './build-experiments.ts';
 import { mapCsvFile } from './map-file.ts';
+import { readCitations } from './pipeline.ts';
 
 const DIR = 'data/sample/psi';
 const MUST_FILES = [
@@ -9,13 +10,14 @@ const MUST_FILES = [
   'PSI-159_Experimental_table_CFI-G_Inverse_Flames.csv',
   'PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv',
 ];
-const build = (now: Date) => buildExperiments(MUST_FILES.map((f) => mapCsvFile(`${DIR}/${f}`)), now);
+const citations = readCitations('');
+const build = (now: Date) => buildExperiments(MUST_FILES.map((f) => mapCsvFile(`${DIR}/${f}`)), now, citations);
 const dataset = build(new Date('2026-11-14T12:00:00Z'));
 
 describe('buildExperiments', () => {
   test('declares the schema version and generation date at the top level', () => {
     expect(dataset.schemaVersion).toBe(SCHEMA_VERSION);
-    expect(SCHEMA_VERSION).toBe('1.0.0');
+    expect(SCHEMA_VERSION).toBe('1.1.0');
     expect(dataset.generatedAt).toBe('2026-11-14T12:00:00.000Z');
   });
 

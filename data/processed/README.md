@@ -47,7 +47,21 @@ npm run smoke:data    # offline check: two runs are identical, 453 / 442 / 66, c
 
 Regenerating changes only `generatedAt` when the inputs did not change. PSI-10 normal flames (Nice-to-have) are not included.
 
-Top level: `schemaVersion` (`1.0.0`; a removed or renamed field raises the major version), `generatedAt`, `sources`, `plottableCount`, `investigations`, `records`.
+Top level: `schemaVersion` (`1.1.0`; a removed or renamed field raises the major version; `1.1.0` added `datasets`), `generatedAt`, `sources`, `datasets`, `plottableCount`, `investigations`, `records`.
+
+### Datasets (`datasets[]`)
+One entry per investigation in the file (PSI-159 and PSI-10), so every point can be cited. Built from `data/curation/dataset-citations.json`, which is edited by hand and says where each value came from.
+
+| Field | Meaning |
+|---|---|
+| `accession`, `pageUrl` | The PSI investigation and its page |
+| `doi`, `doiUrl` | The DOI of the dataset and its `https://doi.org/` link. `null` when unknown (the page link is then the citation) |
+| `publisher` | Who DataCite lists as publisher (`NASA PSI`) |
+| `license` | `{ spdx, url }`, or `null` when none is declared. A missing license is never filled in with a guess |
+| `licenseNote` | Why the license is `null`; `null` when there is one |
+| `checkedOn` | The day the DOI and license were captured |
+
+Today: **PSI-159** has DOI `10.60555/cyt1-kh64` and license `CC0-1.0`. **PSI-10** has DOI `10.60555/w4zy-bt45` and **no declared license**. To change either, edit `dataset-citations.json` and run `npm run build:data`; `npm run smoke:data` fails if one of the two DOIs is missing from the output, and a test checks that the DOIs agree with the catalog's.
 
 ### Sources (`sources[]`)
 Every file reports `read` (rows parsed), `kept` (rows with a test id) and `skipped` (rows without one). Skipped rows are empty rows, not tests.
@@ -106,5 +120,6 @@ Per investigation: `accession`, `records`, `plottable`, `inMoonBaseZone`, `o2Ran
 ## Data licenses and citation (checked 2026-11-14 against PSI's investigation records)
 - 25 of 26 investigations declare **CC0-1.0**.
 - **PSI-10 (ACME Flame Design) declares no license in PSI's record.** It is NASA data hosted by PSI, but the license is unconfirmed: check the page's license field and ask PSI (the page lists `msfc-psi-help@mail.nasa.gov`) before submission.
-- PSI asks users to cite each investigation with its DOI ("Cite this Investigation"). Every record carries its `doi`.
+- **Second check on 2026-11-14, through DataCite** (`https://api.datacite.org/dois/<doi>`, because PSI's investigation service answered HTTP 500 that day): PSI-159's DOI declares `cc0-1.0`; PSI-10's DOI has an **empty license list**. So PSI-10 is still unconfirmed, and `experiments.json` says so in `datasets[].licenseNote` instead of assuming CC0.
+- PSI asks users to cite each investigation with its DOI ("Cite this Investigation"). Every catalog record carries its `doi`, and `experiments.json` carries the DOI and license of the two datasets it uses (`datasets[]`).
 - The investigation record (including DOI and license) comes from the endpoint the PSI web page itself calls, `GET https://psi.nasa.gov/geode-py/ws/repo/investigations/<accession>`. It is not a documented API and may change, so the DOIs are stored in `data/curation/investigations.curation.json`.

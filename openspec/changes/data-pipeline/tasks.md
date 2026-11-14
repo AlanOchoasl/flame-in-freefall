@@ -38,8 +38,8 @@ Depends on: 3.1, 3.2.
 
 Depends on: 4.2 for docs.
 
-- [ ] 5.1 (Sun by 11:00, ≤1h) Document the schema, cleaning rules and data-quality entries in `data/processed/README.md`; verify the documented command regenerates the file as written.
-- [ ] 5.2 (Sun by 14:00, ≤30 min) Capture the DOI and licence of PSI-159 and PSI-10 from their pages ("Cite this Investigation") and fill the dataset metadata; verify both DOIs appear in the output. Plan B: leave `doi` null and cite the page link.
+- [x] 5.1 (Sun by 11:00, ≤1h) Document the schema, cleaning rules and data-quality entries in `data/processed/README.md`; verify the documented command regenerates the file as written.
+- [x] 5.2 (Sun by 14:00, ≤30 min) Capture the DOI and licence of PSI-159 and PSI-10 from their pages ("Cite this Investigation") and fill the dataset metadata; verify both DOIs appear in the output. Plan B: leave `doi` null and cite the page link.
 
 ## Workflow follow-up
 

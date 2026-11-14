@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-14T12:54:10.844Z",
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-11-14T17:51:52.789Z",
   "sources": [
     {
       "file": "PSI-159_Experimental_table_CFI-G_Normal_Flames.csv",
@@ -19,6 +19,31 @@
       "read": 120,
       "kept": 120,
       "skipped": 0
+    }
+  ],
+  "datasets": [
+    {
+      "accession": "PSI-159",
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-159",
+      "doi": "10.60555/cyt1-kh64",
+      "doiUrl": "https://doi.org/10.60555/cyt1-kh64",
+      "publisher": "NASA PSI",
+      "license": {
+        "spdx": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+      },
+      "licenseNote": null,
+      "checkedOn": "2026-11-14"
+    },
+    {
+      "accession": "PSI-10",
+      "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "doi": "10.60555/w4zy-bt45",
+      "doiUrl": "https://doi.org/10.60555/w4zy-bt45",
+      "publisher": "NASA PSI",
+      "license": null,
+      "licenseNote": "No license is declared: the DataCite record of this DOI has an empty rightsList and PSI's investigation record has none either. It is not assumed to be CC0. Confirm with PSI (msfc-psi-help@mail.nasa.gov) before submission.",
+      "checkedOn": "2026-11-14"
     }
   ],
   "plottableCount": 442,
