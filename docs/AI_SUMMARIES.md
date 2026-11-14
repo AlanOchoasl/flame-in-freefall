@@ -87,9 +87,16 @@ For each draft:
 ## 4. Publish (task 3.1)
 
 Before submission, run `npm run check:summaries -- --strict`. Then write
-`data/processed/summaries.json` from the reviewed entries only. Unreviewed
-entries stay out; the app falls back to the PSI objectives text, which the spec
-allows and expects.
+`data/processed/summaries.json` from the reviewed entries only:
+
+```powershell
+npm run publish:summaries
+```
+
+The script checks the reviewed entries, writes the file and lists the entries
+it left out. Unreviewed entries stay out; the app falls back to the PSI
+objectives text, which the spec allows and expects. Run it again whenever more
+drafts are reviewed, then `npm run sync:data` in `app/`.
 
 ## Plan B: no API key
 
