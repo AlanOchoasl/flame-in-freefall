@@ -12,7 +12,8 @@ export function useRouteChrome(screenTitle: string, hash: string): void {
       isFirstRender.current = false;
       return;
     }
-    const heading = document.querySelector<HTMLElement>('main h1');
+    // A screen made of sections can name its own focus target; otherwise the screen heading.
+    const heading = document.querySelector<HTMLElement>('main [data-route-focus]') ?? document.querySelector<HTMLElement>('main h1');
     if (heading) {
       heading.tabIndex = -1;
       heading.focus();

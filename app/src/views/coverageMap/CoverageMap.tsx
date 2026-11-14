@@ -154,7 +154,7 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
   );
 }
 
-function Map({ records, initialAccession }: { records: ExperimentRecord[]; initialAccession: string | null }) {
+export function CoverageMapBody({ records, initialAccession }: { records: ExperimentRecord[]; initialAccession: string | null }) {
   const [filters, setFilters] = useState<MapFilters>({ ...NO_FILTERS, accession: initialAccession });
   const [selected, setSelected] = useState<ExperimentRecord | null>(null);
   const [asTable, setAsTable] = useState(false);
@@ -254,7 +254,7 @@ export function CoverageMap({ query }: ViewProps) {
     <>
       <h1>Coverage map</h1>
       <DataState state={experiments} label="The test data">
-        {(file) => <Map records={file.records} initialAccession={query.get('investigation')} />}
+        {(file) => <CoverageMapBody records={file.records} initialAccession={query.get('investigation')} />}
       </DataState>
     </>
   );

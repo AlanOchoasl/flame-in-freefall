@@ -98,7 +98,7 @@ export function App() {
         <span>Not a spacecraft monitor or operational fire-risk predictor.</span>
       </div>
       <main id="main-content" ref={mainRef} tabIndex={-1}>
-        {match ? <match.view.component params={match.params} query={match.query} /> : <NotFound requested={hash} />}
+        {match ? <match.view.component params={match.params} query={match.query} section={match.view.section} /> : <NotFound requested={hash} />}
       </main>
       <footer>
         <DataSourceNote />

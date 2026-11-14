@@ -10,7 +10,7 @@ import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from './rankingFilters';
 
-const FACTOR_LABELS: Record<FactorId, string> = {
+export const FACTOR_LABELS: Record<FactorId, string> = {
   topicMatch: 'Topic match',
   solidFuelFlammability: 'Solid-fuel flammability',
   nasaFireSafetyLabel: 'NASA fire-safety label',
@@ -20,7 +20,7 @@ const FACTOR_LABELS: Record<FactorId, string> = {
 
 const SHORT_SUMMARY = 220;
 
-const DISCLAIMER =
+export const DISCLAIMER =
   'This ranking is a heuristic built by the team from the challenge statement and PSI fields. It is not an assessment by NASA.';
 
 function ShortSummary({ record, entry }: { record: CatalogRecord; entry: SummaryEntry | undefined }) {
@@ -41,7 +41,7 @@ function ShortSummary({ record, entry }: { record: CatalogRecord; entry: Summary
   );
 }
 
-function Breakdown({ item }: { item: RankedInvestigation }) {
+export function Breakdown({ item }: { item: RankedInvestigation }) {
   return (
     <details>
       <summary>Score breakdown</summary>
@@ -83,7 +83,7 @@ function RankedItem({ item, rank, record, entry }: { item: RankedInvestigation; 
   );
 }
 
-function HowItWorks({ profile, sourceUrl }: { profile: RankingProfile; sourceUrl: string }) {
+export function HowItWorks({ profile, sourceUrl }: { profile: RankingProfile; sourceUrl: string }) {
   return (
     <details>
       <summary>How this ranking works</summary>
