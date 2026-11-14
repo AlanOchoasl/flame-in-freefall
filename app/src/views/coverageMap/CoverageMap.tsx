@@ -1,20 +1,22 @@
 import { useState } from 'react';
-import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, XAxis, YAxis, Legend } from 'recharts';
+import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
 import type { ExperimentRecord } from '../../data/types';
 import { useDataResult } from '../../data/useDataResult';
 import type { ViewProps } from '../types';
-import { EARTH_AIR, MOON_BASE_ZONE, O2_AXIS_MAX_PERCENT, PRESSURE_AXIS_MAX_BAR, SPACESUIT, formatPressure } from './constants';
+import { EARTH_AIR, MOON_BASE_ZONE, O2_AXIS_MAX_PERCENT, OVERLAY_COLORS, PRESSURE_AXIS_MAX_BAR, SPACESUIT } from './constants';
 import { applyFilters, countPlotted, filterOptions, hasActiveFilters, NO_FILTERS, OUTCOME_LABELS, OUTCOMES, type MapFilters } from './filters';
 import { computeInsight, describeInsight } from './insight';
+import { scatterShapeFor } from './OutcomeMarker';
+import { OutcomeLegend } from './OutcomeLegend';
+import { OverlayList } from './OverlayList';
 import { pointsByOutcome, type PlotPoint } from './plotPoints';
 import { downloadCsv, ResultsTable } from './ResultsTable';
 
-// Shape per outcome, so the four outcomes differ without relying on color.
-const SHAPES = { yes: 'circle', no: 'triangle', flash: 'diamond', 'not-reported': 'cross' } as const;
-// Same values as the --outcome-* tokens in styles.css (SVG fills cannot rely on CSS variables everywhere).
-const COLORS = { yes: '#c94e0c', no: '#065da0', flash: '#982f93', 'not-reported': '#7a8089' } as const;
+// One shape component per outcome (own color and own shape, see outcomeStyle.ts), created once so
+// recharts does not remount the markers on every render.
+const SHAPE_OF = Object.fromEntries(OUTCOMES.map((outcome) => [outcome, scatterShapeFor(outcome)]));
 
 function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
   return (
@@ -75,9 +77,9 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               x2={O2_AXIS_MAX_PERCENT}
               y1={0}
               y2={MOON_BASE_ZONE.pressureBar}
-              fill="#b7e5bf"
+              fill={OVERLAY_COLORS.moonFill}
               fillOpacity={0.4}
-              stroke="#236436"
+              stroke={OVERLAY_COLORS.moonEdge}
               label={{ value: 'Expected Moon-base zone', position: 'insideTopRight', fontSize: 11 }}
             />
             <ReferenceLine
@@ -88,15 +90,12 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
             />
             <ReferenceDot x={EARTH_AIR.o2Percent} y={EARTH_AIR.pressureBar} r={6} fill="none" stroke="#000" />
             <ReferenceDot x={SPACESUIT.o2Percent} y={SPACESUIT.pressureBar} r={6} fill="none" stroke="#000" label={{ value: 'Spacesuit', position: 'right', fontSize: 11 }} />
-            <Legend verticalAlign="top" />
             {OUTCOMES.map((outcome) => (
               <Scatter
                 key={outcome}
                 name={OUTCOME_LABELS[outcome]}
                 data={series[outcome]}
-                shape={SHAPES[outcome]}
-                fill={COLORS[outcome]}
-                fillOpacity={0.55}
+                shape={SHAPE_OF[outcome]}
                 isAnimationActive={false}
                 onClick={(item) => {
                   const point = item.payload as PlotPoint | undefined;
@@ -160,11 +159,8 @@ function Map({ records, initialAccession }: { records: ExperimentRecord[]; initi
       ) : (
         <Chart records={matching} onSelect={setSelected} />
       )}
-      <p>
-        Overlays: {MOON_BASE_ZONE.label} (O2 ≥ {MOON_BASE_ZONE.o2Percent} %, ≤ {formatPressure(MOON_BASE_ZONE)}), {EARTH_AIR.label} (
-        {formatPressure(EARTH_AIR)}), {SPACESUIT.label} ({SPACESUIT.o2Percent} % O2, {formatPressure(SPACESUIT)}). Source: NASA Space Apps 2026
-        challenge statement; expected values, not final.
-      </p>
+      <OutcomeLegend />
+      <OverlayList />
       <section aria-labelledby="insight-title">
         <h2 id="insight-title">What the data shows</h2>
         <p>{insight.headline}</p>

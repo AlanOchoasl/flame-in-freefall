@@ -6,6 +6,14 @@ export const BAR_PER_PSI = 0.0689476;
 
 export const psiToBar = (psi: number): number => psi * BAR_PER_PSI;
 
+// Overlay tokens of the design-system change (openspec/changes/design-system).
+export const OVERLAY_COLORS = {
+  moonFill: '#b7e5bf',
+  moonEdge: '#236436',
+  earth: '#1c1e22',
+  suit: '#513f91',
+} as const;
+
 export const O2_AXIS_MAX_PERCENT = 100;
 export const PRESSURE_AXIS_MAX_BAR = 3.5;
 

@@ -1,0 +1,36 @@
+.map-overlays {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-overlays li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.map-overlays svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.map-overlay-source {
+  color: var(--muted);
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
