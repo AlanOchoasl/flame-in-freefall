@@ -33,9 +33,9 @@ The dark palette conflicts with the current docs/DESIGN_PROMPT.md and OpenSpec d
 - Filters: investigation, flame type, fuel, and outcome; counts update after filtering.
 - Selecting a real point opens the test inspector with PSI source and the recorded conditions.
 
-The current normalized sample has 453 test records; 442 include both O2 and pressure, and 66 are in the expected lunar range. The current mapped tests use gaseous fuels; they do not test spacecraft materials, and the PSI set has no partial-gravity combustion data.
+The normalized sample has 453 test records; 442 include both O2 and pressure, and 66 are in the expected lunar range. The concept embeds the cached normalized test rows and plots those 442 actual conditions. The current mapped tests use gaseous fuels; they do not test spacecraft materials, and the PSI set has no partial-gravity combustion data.
 
-**The points in direction-concept.html are illustrative positions**, not measurements. The production chart must plot the actual filtered records from experiments.json. This static concept's filters and points do not interact; only the Light/Dark selector works.
+The concept plots the 442 actual plottable records from `data/processed/experiments.json`. Its investigation, flame type, fuel, and outcome filters update the points; selecting a point reveals its record and PSI source. Arrow keys move between visible points. This is still a static design proposal; it does not replace the application.
 
 ## Does the direction cover the challenge?
 
