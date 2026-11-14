@@ -25,7 +25,7 @@ export interface InsightText {
   limits: string[];
 }
 
-// Limits stated by the challenge statement and by PSI ("Flames of Gaseous Fuels" for PSI-159 and PSI-10).
+// Limits stated by the challenge statement and by PSI ("Flames of Gaseous Fuels" for PSI-159).
 export const INSIGHT_LIMITS = [
   'These tests burn gaseous fuels, not spacecraft materials such as fabrics and plastics.',
   'PSI holds no partial-gravity combustion data (challenge statement), so none of these points is a Moon-gravity test.',

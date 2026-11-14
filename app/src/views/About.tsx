@@ -80,7 +80,7 @@ export function About() {
         <a href={PSI_SEARCH_URL} target="_blank" rel="noopener noreferrer">
           Combustion Science
         </a>
-        . The test conditions on the coverage map come from the experimental tables of PSI-159 and PSI-10.
+        . The test conditions on the coverage map come from the experimental tables of PSI-159 (license CC0-1.0).
       </p>
       <InvestigationSources />
 
@@ -88,7 +88,11 @@ export function About() {
       <ul>
         <li>PSI holds no partial-gravity combustion data, so nothing here covers Moon or Mars gravity.</li>
         <li>
-          The coverage map shows tests from PSI-159 and PSI-10 only. They burn gaseous fuels, not spacecraft materials.
+          The coverage map shows tests from PSI-159 only. They burn gaseous fuels, not spacecraft materials.
+        </li>
+        <li>
+          The experimental tables of PSI-10 (DOI 10.60555/w4zy-bt45) are not used: PSI declares no license for that
+          investigation, and this project uses no dataset without a verified license.
         </li>
         <li>
           The Moon-base zone (30% oxygen or more, 10.2 psi or less) is the expected range given in the challenge

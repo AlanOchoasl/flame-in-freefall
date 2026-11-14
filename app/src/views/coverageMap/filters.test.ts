@@ -131,33 +131,32 @@ describe('the committed dataset', () => {
   ) as ExperimentsFile;
   const records = file.records;
 
-  it('plots 629 of 660 tests and reports 31 as not plotted', () => {
-    // 453 of the Must set + 207 of PSI-10 normal flames; 11 + 20 lack O2 or pressure.
-    expect(countPlotted(applyFilters(records, NO_FILTERS))).toEqual({ total: 660, plotted: 629, notPlotted: 31 });
+  it('plots 333 of 333 tests: every test of PSI-159 has O2 and pressure', () => {
+    expect(countPlotted(applyFilters(records, NO_FILTERS))).toEqual({ total: 333, plotted: 333, notPlotted: 0 });
   });
 
   it('updates the counts when filtering by inverse flames', () => {
     const inverse = applyFilters(records, filters({ flameType: 'inverse' }));
     expect(inverse.every((r) => r.flameType === 'inverse')).toBe(true);
-    expect(countPlotted(inverse)).toEqual({ total: 274, plotted: 263, notPlotted: 11 });
+    expect(countPlotted(inverse)).toEqual({ total: 154, plotted: 154, notPlotted: 0 });
   });
 
-  it('counts the normal flames of both investigations', () => {
+  it('counts the normal flames', () => {
     const normal = applyFilters(records, filters({ flameType: 'normal' }));
-    expect(countPlotted(normal)).toEqual({ total: 386, plotted: 366, notPlotted: 20 }); // 179 PSI-159 + 207 PSI-10
+    expect(countPlotted(normal)).toEqual({ total: 179, plotted: 179, notPlotted: 0 });
   });
 
-  it('PSI-10 has 327 tests (120 inverse + 207 normal), 296 plotted, all with outcome not-reported', () => {
-    expect(countPlotted(applyFilters(records, filters({ accession: 'PSI-10' })))).toEqual({ total: 327, plotted: 296, notPlotted: 31 });
-    expect(applyFilters(records, filters({ outcome: 'not-reported' }))).toHaveLength(327);
+  it('has no test of PSI-10, which is excluded for having no license, and so no not-reported outcome', () => {
+    expect(applyFilters(records, filters({ accession: 'PSI-10' }))).toEqual([]);
+    expect(applyFilters(records, filters({ outcome: 'not-reported' }))).toEqual([]);
   });
 
   it('offers the investigations, fuels and outcomes that exist', () => {
     expect(filterOptions(records)).toEqual({
-      accessions: ['PSI-10', 'PSI-159'],
+      accessions: ['PSI-159'],
       flameTypes: ['inverse', 'normal'],
-      fuels: ['butane', 'ethane', 'ethylene', 'propane'],
-      outcomes: ['yes', 'no', 'flash', 'not-reported'],
+      fuels: ['butane', 'ethane', 'propane'],
+      outcomes: ['yes', 'no', 'flash'],
     });
   });
 });

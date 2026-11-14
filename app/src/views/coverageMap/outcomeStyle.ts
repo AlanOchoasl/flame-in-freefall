@@ -12,7 +12,7 @@ export interface OutcomeStyle {
 
 // Each outcome has its own color AND its own shape, so the map reads in grayscale.
 // Colors are the map outcome tokens of the design-system change (openspec/changes/design-system).
-// "not-reported" (PSI-10 has no outcome column) is a mark of its own, never drawn as "no".
+// "not-reported" (a table with no outcome column) is a mark of its own, never drawn as "no".
 export const OUTCOME_STYLE: Record<Outcome, OutcomeStyle> = {
   yes: { color: '#c94e0c', shape: 'circle', filled: true },
   no: { color: '#065da0', shape: 'triangle', filled: true },

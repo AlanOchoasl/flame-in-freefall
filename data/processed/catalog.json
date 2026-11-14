@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-14T17:00:29.196Z",
+  "generatedAt": "2026-11-14T18:55:51.074Z",
   "sourceRetrieved": "2026-11-14",
   "recordCount": 26,
   "unreviewedCount": 0,
@@ -112,10 +112,7 @@
           "reviewed": true
         }
       },
-      "testTables": [
-        "PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv",
-        "PSI-10_Experimental_table_Flame_Design_Normal_Flame.csv"
-      ],
+      "testTables": [],
       "pageUrl": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
       "doi": "10.60555/w4zy-bt45"
     },

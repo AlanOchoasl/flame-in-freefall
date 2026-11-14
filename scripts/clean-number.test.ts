@@ -3,7 +3,6 @@ import { cleanNumber } from './clean-number.ts';
 import { readCsvTable } from './read-csv.ts';
 
 const NORMAL = 'data/sample/psi/PSI-159_Experimental_table_CFI-G_Normal_Flames.csv';
-const PSI10 = 'data/sample/psi/PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv';
 
 describe('cleanNumber', () => {
   test('parses a plain number without an issue', () => {
@@ -45,13 +44,6 @@ describe('cleanNumber on real PSI cells', () => {
     expect(cleanNumber(row!['Tad (K)'], 'tadK').value).toBeNull();
     expect(cleanNumber(row!['XO2 before test'], 'o2Fraction').value).not.toBeNull();
   });
-
-  test('turns the 9 RAMP and 2 LOW O2 O2 cells of PSI-10 inverse into null', () => {
-    const issues = readCsvTable(PSI10)
-      .rows.map((r) => cleanNumber(r.XO2, 'o2Fraction').issue)
-      .filter((i) => i !== null);
-    expect(issues).toHaveLength(11);
-    expect(issues.filter((i) => i.raw === 'RAMP')).toHaveLength(9);
-    expect(issues.filter((i) => i.raw === 'LOW O2')).toHaveLength(2);
-  });
+  // RAMP, RAMPED and LOW O2 only appeared in the PSI-10 tables, which are no longer in the repo (no
+  // license declared); their handling stays covered by the synthetic cases above.
 });

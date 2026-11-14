@@ -8,7 +8,6 @@ const DIR = 'data/sample/psi';
 const FILES = [
   'PSI-159_Experimental_table_CFI-G_Normal_Flames.csv',
   'PSI-159_Experimental_table_CFI-G_Inverse_Flames.csv',
-  'PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv',
 ];
 
 const base: ExperimentRecord = mapCsvFile(`${DIR}/${FILES[0]}`).records[0];
@@ -38,32 +37,31 @@ describe('addFlags: boundaries', () => {
   });
 });
 
-describe('Must set (PSI-159 normal + inverse, PSI-10 inverse)', () => {
+describe('Dataset in use (PSI-159 normal + inverse; PSI-10 is excluded for having no license)', () => {
   const mapped = FILES.map((file) => mapCsvFile(`${DIR}/${file}`));
   const records = mapped.flatMap((m) => m.records).map(addFlags);
 
-  test('has 453 records, 442 plottable and 66 in the Moon-base zone', () => {
-    expect(records).toHaveLength(453);
-    expect(records.filter((r) => r.isPlottable)).toHaveLength(442);
-    expect(records.filter((r) => r.inMoonBaseZone)).toHaveLength(66);
+  test('has 333 records, 333 plottable and 48 in the Moon-base zone', () => {
+    expect(records).toHaveLength(333); // 179 + 154
+    expect(records.filter((r) => r.isPlottable)).toHaveLength(333);
+    expect(records.filter((r) => r.inMoonBaseZone)).toHaveLength(48);
   });
 
-  test('per file: 20 / 28 / 18 tests in the zone', () => {
+  test('per file: 20 / 28 tests in the zone', () => {
     const perFile = mapped.map((m) => m.records.map(addFlags).filter((r) => r.inMoonBaseZone).length);
-    expect(perFile).toEqual([20, 28, 18]);
+    expect(perFile).toEqual([20, 28]);
   });
 
   test('summary groups by investigation with counts and ranges', () => {
     const summary = summarizeInvestigations(records);
-    expect(summary.map((s) => s.accession)).toEqual(['PSI-159', 'PSI-10']);
+    expect(summary.map((s) => s.accession)).toEqual(['PSI-159']);
     expect(summary[0]).toMatchObject({ records: 333, plottable: 333, inMoonBaseZone: 48 });
-    expect(summary[1]).toMatchObject({ records: 120, plottable: 109, inMoonBaseZone: 18 });
   });
 
   test('summary ranges ignore null values', () => {
-    const [psi159, psi10] = summarizeInvestigations(records);
-    expect(psi10.o2Range[0]).toBeGreaterThan(0);
-    expect(psi10.o2Range[1]).toBeLessThanOrEqual(1);
+    const [psi159] = summarizeInvestigations(records);
+    expect(psi159.o2Range[0]).toBeGreaterThan(0);
+    expect(psi159.o2Range[1]).toBeLessThanOrEqual(1);
     expect(psi159.pressureBarRange[0]).toBeLessThan(psi159.pressureBarRange[1] as number);
   });
 });
@@ -87,5 +85,10 @@ describe('mapCsvFile', () => {
 
   test('refuses a file with no registered mapper', () => {
     expect(() => mapCsvFile(`${DIR}/PSI-108_Experimental_table_STDCE-1.csv`)).toThrow(/No mapper/);
+  });
+
+  test('has no mapper for PSI-10, whose data is not used (no license declared)', () => {
+    expect(() => mapCsvFile(`${DIR}/PSI-10_Experimental_table_Flame_Design_Inverse_Flame.csv`)).toThrow(/No mapper/);
+    expect(() => mapCsvFile(`${DIR}/PSI-10_Experimental_table_Flame_Design_Normal_Flame.csv`)).toThrow(/No mapper/);
   });
 });

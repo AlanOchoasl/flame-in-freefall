@@ -106,18 +106,14 @@ describe('the committed dataset', () => {
   ) as ExperimentsFile;
   const insight = computeInsight(file.records);
 
-  it('has 66 of 629 plotted tests in the zone', () => {
-    expect(insight).toMatchObject({ plotted: 629, inZone: 66, sharePercent: 10.5 });
+  it('has 48 of 333 plotted tests in the zone', () => {
+    expect(insight).toMatchObject({ plotted: 333, inZone: 48, sharePercent: 14.4 });
   });
 
-  it('comes from PSI-159 (48) and PSI-10 (18), with the fuels it burns', () => {
-    expect(insight.investigations).toEqual([
-      { label: 'PSI-159', count: 48 },
-      { label: 'PSI-10', count: 18 },
-    ]);
+  it('comes from PSI-159 alone (PSI-10 is excluded for having no license), with the fuels it burns', () => {
+    expect(insight.investigations).toEqual([{ label: 'PSI-159', count: 48 }]);
     expect(insight.fuels).toEqual([
       { label: 'butane', count: 26 },
-      { label: 'ethylene', count: 18 },
       { label: 'ethane', count: 17 },
       { label: 'propane', count: 5 },
     ]);
@@ -125,7 +121,7 @@ describe('the committed dataset', () => {
 
   it('reads as the spec asks', () => {
     const text = describeInsight(insight);
-    expect(text.headline).toContain('66 of 629 plotted (10.5 %)');
+    expect(text.headline).toContain('48 of 333 plotted (14.4 %)');
     expect(text.limits).toHaveLength(3);
   });
 });
