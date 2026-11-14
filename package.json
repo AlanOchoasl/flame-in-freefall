@@ -1,16 +1,27 @@
 {
   "name": "flame-in-freefall",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "SI-powered fire-safety dashboard over NASA PSI combustion investigations (NASA Space Apps Challenge 2026).",
+  "license": "Apache-2.0",
   "scripts": {
-    "build:data": "node --experimental-strip-types scripts/build-data.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "licenses": "node scripts/check-licenses.mjs",
+    "check:summaries": "node scripts/check-summaries.ts",
+    "check:curation": "node scripts/check-curation.ts",
+    "generate:summaries": "node --env-file-if-exists=.env scripts/generate-summaries.ts",
+    "import:summaries": "node scripts/import-summaries.ts",
+    "build:data": "node --experimental-strip-types scripts/build-data.ts"
   },
   "dependencies": {
+    "@google/genai": "^3.3.0",
     "csv-parse": "^7.0.3"
   },
   "devDependencies": {
-    "@types/node": "^22.20.5",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   }
 }
