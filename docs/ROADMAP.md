@@ -54,7 +54,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 *Rough size guess, not an estimate: S ≈ 2 h, M ≈ 4–5 h, L ≈ 8 h of one person's time. Total Must ≈ 25–30 h across 3 people.
 
 ## Open items
-- [ ] Name the 3 owners (data, frontend, content/delivery) and a backup
+- [x] No pre-assigned owners: tasks come from the specs and each person claims the module they want (decided 2026-11-14)
 - [ ] Confirm stack: React + TypeScript + Vite (default) or Angular
 - [ ] Verify 2026 judging criteria (Judging & Awards Guide)
 - [ ] Choose license (recommended Apache-2.0; see `AGENTS.md`)

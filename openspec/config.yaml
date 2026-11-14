@@ -19,7 +19,7 @@ rules:
     - Include the data flow as source -> processing -> visualization
     - Never reference endpoints or APIs that have not been verified in official docs
   tasks:
-    - Break tasks into chunks of max 2 hours, each with an owner and a deadline
+    - Break tasks into chunks of max 2 hours, each with a deadline and how to verify it. Do NOT pre-assign owners: each person claims a module (a numbered group) before starting
     - Include a plan B (cached sample data / mock) for any task that depends on live data
 
 # Per-operation guidance (optional)
