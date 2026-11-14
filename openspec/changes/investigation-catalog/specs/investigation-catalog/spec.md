@@ -21,7 +21,11 @@ The system MUST represent empty source values as `null` and MUST NOT fill them w
 - **THEN** its record has both dates as `null`
 
 ### Requirement: Lists and dates are normalized
-The system SHALL split space-separated source strings (keywords, related investigations, hardware names and links) into arrays, collapse repeated whitespace in text, and output dates as ISO `YYYY-MM-DD`, including the epoch release date.
+The system SHALL split space-separated source strings (keywords, related investigations, hardware names and links) into arrays, collapse repeated spaces and tabs in text while keeping line breaks, and output dates as ISO `YYYY-MM-DD`, including the epoch release date.
+
+#### Scenario: Paragraphs kept
+- **WHEN** a source text has a blank line between two paragraphs and double spaces inside a sentence
+- **THEN** the output keeps one blank line and has single spaces
 
 #### Scenario: Related investigations string
 - **WHEN** the source value is `PSI-69     PSI-142`

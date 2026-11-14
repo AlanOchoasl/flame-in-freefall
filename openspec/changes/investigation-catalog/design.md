@@ -5,7 +5,7 @@
 Input: `data/sample/psi-catalog/investigations.json`, 26 investigations, retrieved 2026-11-14 from the endpoint the PSI web page itself calls (not a documented API; it may change, hence the cached copy). See proposal.md for motivation. Observed in the data:
 
 - Empty values: `Acronym` 6/26, dates 4/26, `Hypothesis` 1/26 (PSI-108), `SubResearch Area` 2/26, `Experiment Hardware` name empty 6/26.
-- `SubResearch Area` has 12 distinct spellings, e.g. `Flames of Gaseous Fuels`, `Flames of gaseous fuel`, `Flames of gaseous fuels`, `Gaseous`.
+- `SubResearch Area` has 13 distinct non-empty spellings (10 once plural variants are unified), e.g. `Flames of Gaseous Fuels`, `Flames of gaseous fuel`, `Flames of gaseous fuels`, `Gaseous`.
 - Keywords, related investigations, hardware names and links are strings separated by runs of spaces. Dates are `MM-DD-YYYY`; the release date is an epoch number.
 - All 26 have objectives, approach and earth-benefits text. There is **no field for sensors/measurements, fuel phase, fire-safety topic or hardware group**.
 - The statement groups hardware: ACME's six experiments use the Combustion Integrated Rack (CIR); FLEX, FLEX-2 and CFI use the droplet apparatus (MDCA) in the CIR; BASS, BASS-II, SPICE and SLICE use the Microgravity Science Glovebox flow duct.
@@ -29,7 +29,10 @@ Input: `data/sample/psi-catalog/investigations.json`, 26 investigations, retriev
 5. **Sub-area normalization via an explicit alias table** (lowercase, trimmed, known variants mapped), not general stemming. Unknown values pass through lowercased and are reported.
 6. **Dates:** epoch → UTC date; `MM-DD-YYYY` → ISO. Invalid → `null` plus a warning.
 7. **Test tables are linked by file-name prefix** (`PSI-159_…csv` in `data/sample/psi/`), so the link needs no curation.
-8. **Privacy/minimalism:** person names, author lists and funding numbers are not copied to the output; publication titles are kept for references.
+8. **Text keeps its paragraphs.** Observed: objectives, approach, hypothesis and earth-benefits text use line breaks (17 of 26 objectives) and have stray double spaces (e.g. PSI-60). Rule: collapse spaces and tabs, trim each line, allow at most one blank line.
+9. **Output order is ascending accession number**, not PSI's order, so "first 13 / last 13" is stable: first 13 = PSI-10 … PSI-69, last 13 = PSI-98 … PSI-181.
+10. **Code lives in `scripts/catalog/`** (`types`, `normalize`, `subarea`, `curation`, `build` as pure functions; `cli.ts` is the only file that touches the disk). Run `node scripts/catalog/cli.ts [--strict]`.
+11. **Privacy/minimalism:** person names, author lists and funding numbers are not copied to the output; publication titles are kept for references.
 
 ### Output contract (record shape; values shortened)
 

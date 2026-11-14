@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0.0",
+  "entries": {
+    "PSI-10": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-20": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-21": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-22": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-23": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-25": {
+      "hardwareGroup": {
+        "value": "msg-flow-duct",
+        "source": "Challenge statement, Hardware section: BASS, BASS-II, SPICE and SLICE run in the Microgravity Science Glovebox with the SPICE flow duct; the PSI hardware field names the Glovebox",
+        "reviewed": false
+      }
+    },
+    "PSI-26": {
+      "hardwareGroup": {
+        "value": "msg-flow-duct",
+        "source": "Challenge statement, Hardware section: BASS, BASS-II, SPICE and SLICE run in the Microgravity Science Glovebox with the SPICE flow duct; the PSI hardware field names the Glovebox",
+        "reviewed": false
+      }
+    },
+    "PSI-39": {
+      "hardwareGroup": {
+        "value": "mdca-cir",
+        "source": "Challenge statement, Hardware section: FLEX, FLEX-2 and CFI use the Multi-user Droplet Combustion Apparatus in the CIR; the PSI hardware field also names it",
+        "reviewed": false
+      }
+    },
+    "PSI-47": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"TSI P-Trak\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-60": {
+      "hardwareGroup": {
+        "value": "unknown",
+        "source": "PSI Experiment Hardware field is empty",
+        "reviewed": false
+      }
+    },
+    "PSI-62": {
+      "hardwareGroup": {
+        "value": "unknown",
+        "source": "PSI Experiment Hardware field is empty",
+        "reviewed": false
+      }
+    },
+    "PSI-68": {
+      "hardwareGroup": {
+        "value": "mdca-cir",
+        "source": "Challenge statement, Hardware section: FLEX, FLEX-2 and CFI use the Multi-user Droplet Combustion Apparatus in the CIR; the PSI hardware field also names it",
+        "reviewed": false
+      }
+    },
+    "PSI-69": {
+      "hardwareGroup": {
+        "value": "mdca-cir",
+        "source": "Challenge statement, Hardware section: FLEX, FLEX-2 and CFI use the Multi-user Droplet Combustion Apparatus in the CIR; the PSI hardware field also names it",
+        "reviewed": false
+      }
+    },
+    "PSI-98": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Saffire 1 enclosure in Cygnus\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-99": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Cygnus Pressurized Cargo Module / SAFFIRE\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-100": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Saffire III enclosure in Cygnus\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-101": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Comparitive Soot Diagnostic Hardware; Refer to final report\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-102": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Comparitive Soot Diagnostic Hardware\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-106": {
+      "hardwareGroup": {
+        "value": "msg-flow-duct",
+        "source": "Challenge statement, Hardware section only: the PSI record for SLICE lists no hardware",
+        "reviewed": false
+      }
+    },
+    "PSI-107": {
+      "hardwareGroup": {
+        "value": "msg-flow-duct",
+        "source": "Challenge statement, Hardware section: BASS, BASS-II, SPICE and SLICE run in the Microgravity Science Glovebox with the SPICE flow duct; the PSI hardware field names the Glovebox",
+        "reviewed": false
+      }
+    },
+    "PSI-108": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"STDCE Hardware\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-115": {
+      "hardwareGroup": {
+        "value": "unknown",
+        "source": "PSI Experiment Hardware field is empty",
+        "reviewed": false
+      }
+    },
+    "PSI-117": {
+      "hardwareGroup": {
+        "value": "unknown",
+        "source": "PSI Experiment Hardware field is empty",
+        "reviewed": false
+      }
+    },
+    "PSI-142": {
+      "hardwareGroup": {
+        "value": "other",
+        "source": "PSI Experiment Hardware field names \"Principal Investigator Laboratory Hardware\", which is not one of the three hardware groups in the statement",
+        "reviewed": false
+      }
+    },
+    "PSI-159": {
+      "hardwareGroup": {
+        "value": "acme-cir",
+        "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
+        "reviewed": false
+      }
+    },
+    "PSI-181": {
+      "hardwareGroup": {
+        "value": "unknown",
+        "source": "PSI Experiment Hardware field is empty",
+        "reviewed": false
+      }
+    }
+  }
+}
