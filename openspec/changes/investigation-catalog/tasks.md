@@ -29,7 +29,7 @@ Depends on: 1 and 2. Task 3.3 depends on nothing and can start at once.
 
 Depends on: 3.3 for the file; verification needs 3.2. Split by accession range (first 13 / last 13) between whoever claims the tasks.
 
-- [ ] 4.1 (by 19:30, ≤3h) Curate `fuelPhase`, `topics` and `measurements` for the first 13 accessions (PSI-10 … PSI-69, ascending number), citing the text each value came from; set `reviewed: true` only after reading the objectives and approach; verify the build passes and the counts of reviewed values are reported.
+- [x] 4.1 (by 19:30, ≤3h) Curate `fuelPhase`, `topics` and `measurements` for the first 13 accessions (PSI-10 … PSI-69, ascending number), citing the text each value came from; set `reviewed: true` only after reading the objectives and approach; verify the build passes and the counts of reviewed values are reported.
 - [x] 4.2 (by 19:30, ≤3h) Same for the last 13 accessions (PSI-98 … PSI-181); verify the build passes in strict mode for those accessions.
 
 ## 5. Documentation and citation

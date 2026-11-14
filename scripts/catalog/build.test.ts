@@ -80,12 +80,9 @@ describe('buildCatalog on the cached PSI data', () => {
     expect(dataset.records.every((r) => r.curated.hardwareGroup.reviewed)).toBe(true);
   });
   it('counts unreviewed values and lists the accessions that still have some', () => {
-    // The last 13 accessions are reviewed; the first 13 remain another owner's curation task.
-    expect(dataset.unreviewedCount).toBe(13 * 3);
-    expect(accessionsWithUnreviewed(dataset)).toEqual([
-      'PSI-10', 'PSI-20', 'PSI-21', 'PSI-22', 'PSI-23', 'PSI-25', 'PSI-26',
-      'PSI-39', 'PSI-47', 'PSI-60', 'PSI-62', 'PSI-68', 'PSI-69',
-    ]);
+    // Both halves (first 13 and last 13 accessions) are curated and reviewed.
+    expect(dataset.unreviewedCount).toBe(0);
+    expect(accessionsWithUnreviewed(dataset)).toEqual([]);
   });
   it('passes strict review for the last 13 accessions in ascending order', () => {
     const lastThirteen = dataset.records.slice(13);
