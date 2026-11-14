@@ -13,7 +13,8 @@ import { downloadCsv, ResultsTable } from './ResultsTable';
 
 // Shape per outcome, so the four outcomes differ without relying on color.
 const SHAPES = { yes: 'circle', no: 'triangle', flash: 'diamond', 'not-reported': 'cross' } as const;
-const COLORS = { yes: '#0072b2', no: '#d55e00', flash: '#009e73', 'not-reported': '#555555' } as const;
+// Same values as the --outcome-* tokens in styles.css (SVG fills cannot rely on CSS variables everywhere).
+const COLORS = { yes: '#c94e0c', no: '#065da0', flash: '#982f93', 'not-reported': '#7a8089' } as const;
 
 function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
   return (
@@ -74,8 +75,9 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               x2={O2_AXIS_MAX_PERCENT}
               y1={0}
               y2={MOON_BASE_ZONE.pressureBar}
-              fill="#0072b2"
-              fillOpacity={0.12}
+              fill="#b7e5bf"
+              fillOpacity={0.4}
+              stroke="#236436"
               label={{ value: 'Expected Moon-base zone', position: 'insideTopRight', fontSize: 11 }}
             />
             <ReferenceLine
