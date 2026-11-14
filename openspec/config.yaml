@@ -1,0 +1,35 @@
+schema: spec-driven
+
+context: |
+  Language: en
+  All artifacts must be written in en.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+  Project: NASA Space Apps Challenge 2026, challenge "Flame in Freefall" (combustion science
+  in microgravity). 48-hour hackathon: feature freeze Sunday 16:00, submit before Sunday 23:00.
+  Demo is a <=30 s video or <=7 slides. See AGENTS.md and docs/PLAYBOOK.md.
+
+rules:
+  proposal:
+    - Keep proposals under 300 words
+    - Always state what is out of scope (the "No" list)
+    - Name the exact NASA/partner dataset used, with its official link
+    - Label the change Must, Nice-to-have, or No
+  design:
+    - Prefer the simplest stack the team already knows; justify each piece in one line
+    - Include the data flow as source -> processing -> visualization
+    - Never reference endpoints or APIs that have not been verified in official docs
+  tasks:
+    - Break tasks into chunks of max 2 hours, each with an owner and a deadline
+    - Include a plan B (cached sample data / mock) for any task that depends on live data
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
