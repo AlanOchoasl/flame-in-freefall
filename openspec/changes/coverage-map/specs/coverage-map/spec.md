@@ -11,7 +11,7 @@ The map SHALL show one point for each record with `isPlottable` true: O2 as a pe
 
 #### Scenario: Plotted count
 - **WHEN** the map loads the Must dataset
-- **THEN** it shows 442 points and states that 11 tests are not plotted for lacking O2 or pressure
+- **THEN** it shows one point per plottable record (333 with the current data) and, when some tests are not plotted for lacking O2 or pressure, states how many (none today)
 
 ### Requirement: Outcome encoded without relying on color
 Each outcome (`yes`, `no`, `flash`, `not-reported`) SHALL have its own color and its own marker shape, and a legend SHALL list them.
@@ -38,7 +38,7 @@ The map SHALL filter by investigation, flame type, fuel and outcome, and SHALL s
 The insight panel SHALL compute from the data how many plotted tests are in the Moon-base zone, their share, and the fuels and investigations they come from. It SHALL state that the tests burn gaseous fuels, not spacecraft materials, and that PSI holds no partial-gravity data.
 
 #### Scenario: Insight text
-- **WHEN** the dataset has 66 plotted tests in the zone out of 442
+- **WHEN** the dataset has 48 plotted tests in the zone out of 333
 - **THEN** the panel shows those numbers computed from the records, plus both limits
 
 ### Requirement: Point details
@@ -94,8 +94,8 @@ When the chart has focus, the arrow keys SHALL move the selection between points
 The table alternative SHALL show the first 50 filtered records and a "Show 50 more rows" button that appends the next 50 until all are shown, and SHALL state "showing N of M". The download SHALL always contain all filtered records, not only the visible rows.
 
 #### Scenario: Paging
-- **WHEN** 442 records are filtered and the table is shown
-- **THEN** 50 rows appear with "showing 50 of 442", and activating the button shows 100
+- **WHEN** 333 records are filtered and the table is shown
+- **THEN** 50 rows appear with "showing 50 of 333", and activating the button shows 100
 
 ### Requirement: Deep link from an investigation
 The map SHALL accept an `investigation` parameter in its address (for example `#/map?investigation=PSI-159`) that preselects the investigation filter. The Investigation detail screen SHALL show a "See on the Coverage map" link only for investigations that have plotted tests. This is Nice-to-have.

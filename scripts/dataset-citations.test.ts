@@ -12,7 +12,7 @@ const citations: DatasetCitations = {
   provenance: 'test',
   entries: {
     'PSI-159': { doi: PSI159_DOI, publisher: 'NASA PSI', license: { spdx: 'CC0-1.0', url: 'https://example.org/cc0' }, licenseNote: null },
-    'PSI-5': { doi: '10.1234/abc', publisher: 'NASA PSI', license: null, licenseNote: 'No license declared.' },
+    'PSI-5': { doi: '10.1234/abc', publisher: 'NASA PSI', license: { spdx: 'MIT', url: 'https://example.org/mit' }, licenseNote: null },
   },
   excluded: {
     'PSI-10': { doi: PSI10_DOI, publisher: 'NASA PSI', reason: 'No license is declared.' },
@@ -38,18 +38,14 @@ describe('buildDatasets', () => {
     });
   });
 
-  test('keeps a declared license and never invents one that is missing', () => {
+  test('keeps the declared license of each dataset', () => {
     const [psi159, psi5] = buildDatasets(records, citations);
     expect(psi159.license).toEqual({ spdx: 'CC0-1.0', url: 'https://example.org/cc0' });
-    expect(psi159.licenseNote).toBeNull();
-    expect(psi5.license).toBeNull();
-    expect(psi5.licenseNote).toBe('No license declared.');
+    expect(psi5.license).toEqual({ spdx: 'MIT', url: 'https://example.org/mit' });
   });
 
-  test('an investigation with no entry keeps its page link, with null DOI and a note', () => {
-    const [dataset] = buildDatasets([{ accession: 'PSI-999', pageUrl: 'https://psi.nasa.gov/x' }], citations);
-    expect(dataset).toMatchObject({ doi: null, doiUrl: null, publisher: null, license: null, pageUrl: 'https://psi.nasa.gov/x' });
-    expect(dataset.licenseNote).toContain('No citation entry');
+  test('refuses records of an investigation with no citation entry (no verified license)', () => {
+    expect(() => buildDatasets([{ accession: 'PSI-999', pageUrl: 'https://psi.nasa.gov/x' }], citations)).toThrow(/no verified license: PSI-999/);
   });
 
   test('refuses a record of an excluded dataset, so its data cannot reach the output', () => {
@@ -107,9 +103,9 @@ describe('parseCitations', () => {
     expect(parseCitations(plainB).entries['PSI-1'].doi).toBeNull();
   });
 
-  test('rejects a missing license that does not say why', () => {
-    const bad = { ...valid, entries: { 'PSI-1': { ...valid.entries['PSI-159'], license: null, licenseNote: null } } };
-    expect(() => parseCitations(bad)).toThrow(/no licenseNote/);
+  test('rejects an entry with no license: it must go under excluded', () => {
+    const bad = { ...valid, entries: { 'PSI-1': { ...valid.entries['PSI-159'], license: null, licenseNote: 'unknown' } } };
+    expect(() => parseCitations(bad)).toThrow(/declares no license.*excluded/);
   });
 
   test('rejects a license without spdx or url', () => {
