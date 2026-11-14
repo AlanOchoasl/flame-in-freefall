@@ -81,7 +81,7 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
       <div style={{ width: '100%', minWidth: 480, height: PLOT_HEIGHT }}>
         <ResponsiveContainer>
           <ScatterChart margin={{ top: 24, right: 128, bottom: 40, left: 12 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--plot-grid)" />
+            <CartesianGrid stroke="var(--plot-grid)" strokeOpacity={0.55} />
             <XAxis
               type="number"
               dataKey="x"
@@ -113,7 +113,8 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               fill={OVERLAY_COLORS.moonFill}
               fillOpacity={0.12}
               stroke={OVERLAY_COLORS.moonEdge}
-              strokeDasharray="5 4"
+              strokeWidth={1.5}
+              strokeDasharray="6 4"
               label={{ content: ZONE_LABEL }}
             />
             {/* Guide from the Earth-air ring to its label in the margin; it is drawn behind the points. */}

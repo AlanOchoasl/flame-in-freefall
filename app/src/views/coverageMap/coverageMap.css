@@ -73,7 +73,10 @@
 }
 
 .map-primary, .map-side { min-width: 0; }
-.map-plot-region .recharts-surface { background: var(--surface-1); }
+/* Dot-matrix plot background (design.md 3.2): a 20px dot grid over the panel surface. */
+.map-plot-region .recharts-surface { background: radial-gradient(var(--plot-grid) 1px, transparent 1px) 0 0 / 20px 20px, var(--surface-1); }
+.map-plot-region .recharts-cartesian-axis-tick-value,
+.map-plot-region .recharts-label { font: 12px var(--mono); }
 .map-plot-region .recharts-reference-area path { fill-opacity: var(--zone-fill-opacity); }
 .map-plot-region .recharts-text { fill: var(--text-secondary); }
 .map-plot-region .recharts-cartesian-axis-tick-value { fill: var(--text-secondary); }
