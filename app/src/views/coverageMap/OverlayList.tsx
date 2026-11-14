@@ -7,7 +7,7 @@ function Swatch({ index }: { index: number }) {
   return (
     <svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
       {index === 0 ? (
-        <rect x="2" y="3" width="24" height="14" fill={OVERLAY_COLORS.moonFill} fillOpacity="0.4" stroke={OVERLAY_COLORS.moonEdge} strokeWidth="1.5" />
+        <rect x="2" y="3" width="24" height="14" fill={OVERLAY_COLORS.moonFill} fillOpacity="0.12" stroke={OVERLAY_COLORS.moonEdge} strokeDasharray="4 3" strokeWidth="1.5" />
       ) : (
         <circle cx="14" cy="10" r="7" fill="none" stroke={index === 1 ? OVERLAY_COLORS.earth : OVERLAY_COLORS.suit} strokeWidth="2.5" />
       )}

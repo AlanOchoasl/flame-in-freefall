@@ -15,7 +15,7 @@ export function OutcomeLegend() {
       ))}
       <li>
         <OutcomeMarker outcome="yes" inZone />
-        <span>Thick dark outline: inside the expected Moon-base zone</span>
+        <span>Thick contrasting outline: inside the expected Moon-base zone</span>
       </li>
     </ul>
   );

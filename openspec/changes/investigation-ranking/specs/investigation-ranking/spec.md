@@ -7,11 +7,11 @@ Defines how investigations are ranked by relevance to a chosen crew environment,
 ## ADDED Requirements
 
 ### Requirement: Environment profiles
-The system SHALL offer the profiles defined in the profiles data file, initially `crew-cabin`, `lunar-base-rover`, `detection` and `suppression`. Selecting a profile SHALL re-rank all investigations.
+The system SHALL offer the profiles defined in the profiles data file, initially `crew-cabin` and `lunar-base-rover`. Profiles are the habitat scenarios of `scenario-explorer`; detection and suppression are fire-safety goals (filters), not profiles. Selecting a profile SHALL re-rank all investigations.
 
 #### Scenario: Switching profile
-- **WHEN** a user changes the profile from `crew-cabin` to `detection`
-- **THEN** the list is re-ranked using the detection weights
+- **WHEN** a user changes the profile from `crew-cabin` to `lunar-base-rover`
+- **THEN** the list is re-ranked using the lunar weights
 
 #### Scenario: New profile added in data
 - **WHEN** a profile entry is added to the profiles file
@@ -60,15 +60,30 @@ For the same data and profile the order SHALL be identical. Ties SHALL be broken
 - **THEN** the one with the lower accession is listed first
 
 ### Requirement: Basis and disclaimer visible
-The Ranking view SHALL include a panel explaining each factor, its weight and the challenge-statement text it follows, and SHALL say this is a heuristic and not an assessment by NASA.
+The Investigations view SHALL include a panel explaining each factor, its weight and the challenge-statement text it follows, and SHALL say this is a heuristic and not an assessment by NASA.
 
 #### Scenario: Opening the panel
-- **WHEN** a user opens "How this ranking works"
+- **WHEN** a user opens "How it is scored"
 - **THEN** every factor and the disclaimer are shown
 
 ### Requirement: Filters
-The Ranking view SHALL filter by fuel phase and topic, and SHALL show how many investigations match.
+The Investigations view SHALL filter by fire-safety goal (Prevent, Detect, Suppress, Fundamentals, mapped from curated topics) and by a text search over title, acronym and accession, and SHALL show how many investigations match. The goal filter SHALL be kept in the address.
 
-#### Scenario: Filtering by solid fuel
-- **WHEN** the fuel-phase filter is `solid`
-- **THEN** only investigations tagged `solid` are listed and the count is shown
+#### Scenario: Filtering by goal
+- **WHEN** the goal filter is Suppress
+- **THEN** only investigations tagged `suppression` are listed and the count is shown
+
+#### Scenario: Searching
+- **WHEN** a user types "FLEX"
+- **THEN** only investigations whose title, acronym or accession contain it are listed
+
+### Requirement: Compact list rows
+The Investigations view SHALL show one row per investigation with: rank, acronym and accession, the title on one line, the goal labels (or "Not tagged yet"), a relevance bar with `points / max`, whether a PSI test table exists, and a checkbox to select it for Compare. The row SHALL link to the Detail screen. At 1280 px at least ten rows SHALL fit in one screen.
+
+#### Scenario: Selecting two rows
+- **WHEN** a user checks two rows and activates "Compare selected"
+- **THEN** Compare opens with those two accessions
+
+#### Scenario: Untagged record
+- **WHEN** an investigation has no curated topics
+- **THEN** its row shows "Not tagged yet" with the unreviewed style instead of an empty cell

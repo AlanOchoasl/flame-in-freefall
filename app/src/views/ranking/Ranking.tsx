@@ -65,17 +65,17 @@ function RankedItem({ item, rank, record, entry }: { item: RankedInvestigation; 
         #{rank} {accession} {record.acronym ? `(${record.acronym}) ` : ''}
         {record.title}
       </h3>
-      <p>
+      <p className="ranking-score">
         {item.score} of {item.maximumScore} points
         {item.basedOnUnreviewedTags ? ' · ◐ based on unreviewed tags' : ''}
       </p>
-      <p>
+      <p className="ranking-meta">
         Fuel phase: {curated.fuelPhase.value.join(', ') || '—'} · Topics: {curated.topics.value.join(', ') || '—'}
       </p>
       {item.note ? <p>{item.note}</p> : null}
       <ShortSummary record={record} entry={entry} />
       <Breakdown item={item} />
-      <p>
+      <p className="ranking-links">
         <a href={`#/investigation/${accession}`}>Details</a> · <a href={`#/compare?ids=${accession}`}>Compare</a> ·{' '}
         <PsiLink accession={accession} />
       </p>
@@ -128,7 +128,7 @@ function RankingScreen({ data }: { data: RankingData }) {
 
   return (
     <>
-      <label>
+      <label className="ranking-profile">
         Environment{' '}
         <select value={profile.id} onChange={(event) => setProfileId(event.target.value)}>
           {data.profiles.map((p) => (
@@ -138,7 +138,7 @@ function RankingScreen({ data }: { data: RankingData }) {
           ))}
         </select>
       </label>
-      <fieldset>
+       <fieldset className="ranking-filters">
         <legend>Filters</legend>
         <label>
           Fuel phase{' '}
@@ -159,7 +159,7 @@ function RankingScreen({ data }: { data: RankingData }) {
           </select>
         </label>
       </fieldset>
-      <p role="status">
+      <p role="status" className="result-count">
         {shown.length} of {ranked.length} investigations
       </p>
       {shown.length === 0 ? (
@@ -196,7 +196,8 @@ export function Ranking() {
   // Summaries are optional: without them every item falls back to the PSI text.
   return (
     <>
-      <h1>Ranking</h1>
+      <h1>Investigation ranking</h1>
+      <p className="view-intro">Explore source-backed investigations ranked by a transparent team heuristic, not a NASA assessment.</p>
       <DataState state={catalog} label="The list of investigations">
         {(catalogFile) => (
           <DataState state={experiments} label="The test data">

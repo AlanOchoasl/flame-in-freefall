@@ -6,6 +6,8 @@
 
 `screen-specs` fixes what each screen contains but explicitly left colors, typography and component looks out of scope, so the three unbuilt views (Ranking, Compare, Coverage map) would each be styled ad hoc. A clickable UI mockup now exists (`docs/design/mockup.dc.html`, made from `docs/DESIGN_PROMPT.md`). Review found it good on labels, markers and structure, and found gaps that the specs must close before the team builds from it.
 
+The later approved `monitoring-console-theme` change supersedes this change's original light-only palette. Shared components and accessibility rules here remain applicable; new color/theme decisions come from `docs/design/DIRECTION_CONCEPT.md`.
+
 ## What Changes
 
 - One design-token block (colors, spacing, radius, type scale, focus ring, target size) in `app/src/styles.css`, taken from the mockup with the corrections found in review (a darker `--border-strong`, sRGB hex instead of `oklch()`).
@@ -30,4 +32,4 @@
 
 ## Out of scope (No)
 
-Dark mode, animations beyond state transitions, NASA logos or imagery, illustrations, web fonts, an icon library, a landing page, any new data field or behavior outside the items listed above.
+Animations beyond state transitions, NASA logos or imagery, illustrations, web fonts, an icon library, a landing page, any new data field or behavior outside the items listed above. Theme selection is specified by `monitoring-console-theme`.

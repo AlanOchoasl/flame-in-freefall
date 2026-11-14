@@ -56,7 +56,7 @@ export function About() {
     <>
       <h1>About</h1>
 
-      <h2>What this is</h2>
+      <section className="research-panel"><h2>What this is</h2>
       <p>
         A dashboard to find, rank and compare the NASA combustion investigations on fire in microgravity, built for the
         NASA Space Apps Challenge 2026, challenge &ldquo;Flame in Freefall&rdquo;.
@@ -64,8 +64,9 @@ export function About() {
       <p>
         <strong>This is not an official NASA product.</strong> NASA does not endorse it.
       </p>
+      </section>
 
-      <h2>How AI was used</h2>
+      <section className="research-panel"><h2>How AI was used</h2>
       <p>
         Plain-language summaries were written by AI before the app was built, using only each investigation&rsquo;s own
         PSI text. Every summary is labeled as AI-generated and shows its model and whether a person reviewed it. The
@@ -73,8 +74,9 @@ export function About() {
         code from the data and use no AI.
       </p>
       <AiUseDetails />
+      </section>
 
-      <h2>Data sources</h2>
+      <section className="research-panel"><h2>Data sources</h2>
       <p>
         All data comes from the NASA Physical Sciences Informatics (PSI) repository:{' '}
         <a href={PSI_SEARCH_URL} target="_blank" rel="noopener noreferrer">
@@ -83,8 +85,9 @@ export function About() {
         . The test conditions on the coverage map come from the experimental tables of PSI-159 (license CC0-1.0).
       </p>
       <InvestigationSources />
+      </section>
 
-      <h2>Known limits</h2>
+      <section className="research-panel"><h2>Known limits</h2>
       <ul>
         <li>PSI holds no partial-gravity combustion data, so nothing here covers Moon or Mars gravity.</li>
         <li>
@@ -101,14 +104,16 @@ export function About() {
         <li>The ranking is a rule-based heuristic made by this team, not an assessment by NASA.</li>
         <li>Some curated tags (fuel phase, topics, measurements) may not be reviewed yet; they are marked where shown.</li>
       </ul>
+      </section>
 
-      <h2>Open-source licenses</h2>
+      <section className="research-panel"><h2>Open-source licenses</h2>
       <p>
         <a href={LICENSES_URL} target="_blank" rel="noopener noreferrer">
           Third-party licenses
         </a>{' '}
         lists the libraries this app uses.
       </p>
+      </section>
     </>
   );
 }

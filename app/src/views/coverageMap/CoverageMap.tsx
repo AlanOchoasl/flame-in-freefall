@@ -81,15 +81,18 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
       <div style={{ width: '100%', minWidth: 480, height: PLOT_HEIGHT }}>
         <ResponsiveContainer>
           <ScatterChart margin={{ top: 24, right: 128, bottom: 40, left: 12 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--plot-grid)" />
             <XAxis
               type="number"
               dataKey="x"
               name="O2"
               domain={[0, O2_AXIS_MAX_PERCENT]}
               ticks={O2_TICKS}
+              tick={{ fill: 'var(--text-secondary)' }}
+              axisLine={{ stroke: 'var(--line-strong)' }}
+              tickLine={{ stroke: 'var(--line-strong)' }}
               tickFormatter={(value: number) => `${value} %`}
-              label={{ value: 'O2 (% of the atmosphere)', position: 'insideBottom', offset: -22 }}
+              label={{ value: 'O2 (% of the atmosphere)', position: 'insideBottom', offset: -22, fill: 'var(--text-primary)' }}
             />
             <YAxis
               type="number"
@@ -97,7 +100,10 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               name="Pressure"
               domain={[0, PRESSURE_AXIS_MAX_BAR]}
               ticks={PRESSURE_TICKS}
-              label={{ value: 'Pressure (bar)', angle: -90, position: 'insideLeft' }}
+              tick={{ fill: 'var(--text-secondary)' }}
+              axisLine={{ stroke: 'var(--line-strong)' }}
+              tickLine={{ stroke: 'var(--line-strong)' }}
+              label={{ value: 'Pressure (bar)', angle: -90, position: 'insideLeft', fill: 'var(--text-primary)' }}
             />
             <ReferenceArea
               x1={MOON_BASE_ZONE.o2Percent}
@@ -105,8 +111,9 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               y1={0}
               y2={MOON_BASE_ZONE.pressureBar}
               fill={OVERLAY_COLORS.moonFill}
-              fillOpacity={0.4}
+              fillOpacity={0.12}
               stroke={OVERLAY_COLORS.moonEdge}
+              strokeDasharray="5 4"
               label={{ content: ZONE_LABEL }}
             />
             {/* Guide from the Earth-air ring to its label in the margin; it is drawn behind the points. */}

@@ -7,7 +7,7 @@ Static React + TypeScript + Vite app (`app-shell`). The app already has plain-HT
 ## Goals / Non-Goals
 
 **Goals:** one token block; the same component looks everywhere; accessible by construction; a mockup-to-code mapping that costs little time.
-**Non-Goals:** brand identity beyond these tokens, dark mode, animation, new components not in the mockup.
+**Non-Goals:** brand identity beyond these tokens, animation, new components not in the mockup. The palette and theme selection are superseded by `monitoring-console-theme` and `docs/design/DIRECTION_CONCEPT.md`.
 
 ## Decisions
 
@@ -21,7 +21,9 @@ Static React + TypeScript + Vite app (`app-shell`). The app already has plain-HT
 
 Data flow: not applicable; this change renders data already loaded by `data-access`.
 
-### Tokens (starting values, from the mockup, converted)
+### Legacy tokens (historical light-only starting values; superseded for implementation)
+
+The following table and measured ratios describe the earlier mockup, not the active palette. Use the theme tokens of `monitoring-console-theme` when changing CSS; preserve the existing variable names for compatibility.
 
 | Group | Tokens |
 |---|---|
@@ -36,7 +38,7 @@ Data flow: not applicable; this change renders data already loaded by `data-acce
 | Type | `--fs-xs 13px`, `--fs-sm 14px`, `--fs-base 16px`, `--fs-lg 18px`, `--fs-xl 22px`, `--fs-2xl 28px`, `--lh 1.5`; `--font` system stack; `--mono` system monospace stack |
 | Targets | `--target-size 44px` |
 
-### Measured contrast (WCAG relative-luminance formula, computed 2026-11-14)
+### Legacy measured contrast (light-only palette, not valid for the approved console)
 
 Text pairs: text on background 15.56, text on surface 16.69, muted on background 6.19, muted on surface 6.64, accent-strong on surface 8.96, accent on surface 6.41, AI on AI-weak 7.67, PSI on PSI-weak 8.59, unreviewed on its weak fill 6.17, error on its weak fill 6.39, approx 7.17, same 7.41, differs 7.91 (all on surface). Graphics (3:1 needed): outcome-yes 4.61, no 6.83, flash 6.64, not-reported 3.98, zone-moon-edge 7.10, focus 6.62; `--border-strong` 3.52 (white). These are starting measurements; task 1.3 re-checks them against the shipped CSS.
 

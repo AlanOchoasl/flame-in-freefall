@@ -14,6 +14,22 @@ export function App() {
   const mainRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() =>
+    window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark',
+  );
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-color-scheme: light)');
+    const onChange = () => setSystemTheme(preference.matches ? 'light' : 'dark');
+    preference.addEventListener('change', onChange);
+    return () => preference.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    if (theme) document.documentElement.dataset.theme = theme;
+    else delete document.documentElement.dataset.theme;
+  }, [theme]);
 
   // Any route change closes the menu, including the browser's Back button.
   useEffect(() => setMenuOpen(false), [hash]);
@@ -39,8 +55,12 @@ export function App() {
       <a className="skip-link" href="#main-content" onClick={skipToContent}>
         Skip to content
       </a>
-      <header onKeyDown={closeMenuOnEscape}>
-        <strong>Flame in Freefall</strong>
+      <header className="console-header" onKeyDown={closeMenuOnEscape}>
+        <a className="console-brand" href="#/ranking" aria-label="Flame in Freefall — Ranking">
+          <span className="console-mark" aria-hidden="true" />
+          <strong>FLAME IN FREEFALL</strong>
+          <span className="console-tag">PSI RESEARCH CONSOLE</span>
+        </a>
         <button
           ref={menuButtonRef}
           type="button"
@@ -64,13 +84,25 @@ export function App() {
               ))}
           </ul>
         </nav>
+        <div className="theme-switch" role="group" aria-label="Color theme">
+          {(['light', 'dark'] as const).map((choice) => (
+            <button key={choice} type="button" aria-pressed={(theme ?? systemTheme) === choice} onClick={() => setTheme(choice)}>
+              {choice === 'light' ? 'Light' : 'Dark'}
+            </button>
+          ))}
+        </div>
+        <span className="dataset-state">CACHED PSI DATA</span>
       </header>
+      <div className="console-notice">
+        <strong>EXPERIMENTAL DATA EXPLORER</strong>
+        <span>Not a spacecraft monitor or operational fire-risk predictor.</span>
+      </div>
       <main id="main-content" ref={mainRef} tabIndex={-1}>
         {match ? <match.view.component params={match.params} query={match.query} /> : <NotFound requested={hash} />}
       </main>
       <footer>
         <DataSourceNote />
-        <p>AI-generated text is always labeled.</p>
+        <p>Independent research exploration · AI-generated text is always labeled.</p>
       </footer>
     </>
   );

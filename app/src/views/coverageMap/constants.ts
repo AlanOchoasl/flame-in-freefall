@@ -6,12 +6,12 @@ export const BAR_PER_PSI = 0.0689476;
 
 export const psiToBar = (psi: number): number => psi * BAR_PER_PSI;
 
-// Overlay tokens of the design-system change (openspec/changes/design-system).
+// CSS variables resolve inside SVG in both themes without changing the reference values.
 export const OVERLAY_COLORS = {
-  moonFill: '#b7e5bf',
-  moonEdge: '#236436',
-  earth: '#1c1e22',
-  suit: '#513f91',
+  moonFill: 'var(--zone-moon)',
+  moonEdge: 'var(--zone-moon-edge)',
+  earth: 'var(--zone-earth)',
+  suit: 'var(--zone-suit)',
 } as const;
 
 export const O2_AXIS_MAX_PERCENT = 100;

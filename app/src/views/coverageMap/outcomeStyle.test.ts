@@ -9,22 +9,17 @@ describe('OUTCOME_STYLE', () => {
     expect(Object.keys(OUTCOME_STYLE).sort()).toEqual([...OUTCOMES].sort());
   });
 
-  it('gives each outcome its own color and its own shape (readable in grayscale)', () => {
-    expect(new Set(styles.map((s) => s.color)).size).toBe(4);
+  it('gives each outcome its own shape (readable without color)', () => {
     expect(new Set(styles.map((s) => s.shape)).size).toBe(4);
     expect(new Set(styles.map((s) => markerPath(s.shape, 5))).size).toBe(4);
   });
 
-  it('keeps not-reported apart from no, in shape and color', () => {
+  it('keeps not-reported apart from no by shape', () => {
     expect(OUTCOME_STYLE['not-reported'].shape).not.toBe(OUTCOME_STYLE.no.shape);
-    expect(OUTCOME_STYLE['not-reported'].color).not.toBe(OUTCOME_STYLE.no.color);
   });
 
-  it('uses the colors of the design-system outcome tokens', () => {
-    expect(OUTCOME_STYLE.yes.color).toBe('#c94e0c');
-    expect(OUTCOME_STYLE.no.color).toBe('#065da0');
-    expect(OUTCOME_STYLE.flash.color).toBe('#982f93');
-    expect(OUTCOME_STYLE['not-reported'].color).toBe('#7a8089');
+  it('uses theme-aware data color tokens instead of encoding outcomes in color', () => {
+    expect(styles.map((style) => style.color)).toEqual(OUTCOMES.map((outcome) => `var(--outcome-${outcome === 'not-reported' ? 'nr' : outcome})`));
   });
 
   it('draws the cross as strokes and the other shapes filled', () => {

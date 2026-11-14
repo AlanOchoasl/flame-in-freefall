@@ -52,7 +52,7 @@ describe('ranking demo path with committed data', () => {
     expect(rankingFilterOptions(ranked).fuelPhases).toContain('solid');
 
     const solid = filterRanked(ranked, { fuelPhase: 'solid', topic: null });
-    expect(solid).toHaveLength(4);
+    expect(solid).toHaveLength(catalog.records.filter((record) => record.curated.fuelPhase.value.includes('solid')).length);
     expect(solid.every(({ item, rank }) =>
       item.investigation.curated.fuelPhase.value.includes('solid') && ranked[rank - 1] === item,
     )).toBe(true);

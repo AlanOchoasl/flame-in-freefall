@@ -19,7 +19,7 @@ export function MarkerPath({ outcome, radius, inZone = false, opacity = 1 }: Mar
       d={markerPath(shape, radius)}
       fill={filled ? color : 'none'}
       fillOpacity={filled ? opacity : undefined}
-      stroke={filled ? (inZone ? '#1a1a1a' : color) : color}
+      stroke={filled ? (inZone ? 'var(--canvas-mark)' : color) : color}
       strokeOpacity={filled && !inZone ? 0.9 : 1}
       strokeWidth={filled ? outline : inZone ? 3.5 : 2}
       strokeLinecap="round"

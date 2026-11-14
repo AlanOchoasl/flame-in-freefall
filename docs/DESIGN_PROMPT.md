@@ -1,5 +1,7 @@
 # Design prompt v1 — Flame in Freefall (for Claude Design)
 
+> Historical mockup prompt, **superseded** by `docs/design/DIRECTION_CONCEPT.md` and `docs/design/direction-concept.html`. Its light-only and sample-data instructions are not implementation requirements. Keep this file for reference; use the approved concept and verified application data instead.
+
 How to use: paste everything below the line into Claude Design. Ask for one self-contained `.html` (or a `.zip` with HTML/CSS/JS), then port the tokens to `app/src/styles.css`.
 Sources of every constraint: `openspec/changes/screen-specs`, `investigation-ranking`, `investigation-comparator`, `coverage-map`, `ai-summaries`, `app-shell`.
 
