@@ -24,7 +24,7 @@ const summary = (accession: string, o2: [number, number], fuels: string[]): Inve
 const rowOf = (model: ReturnType<typeof buildComparison>, id: string) => model.rows.find((r) => r.id === id)!;
 
 describe('markerFor', () => {
-  const cell = (...values: string[]): Cell => ({ values, missingReason: values.length ? null : 'not-in-record', unreviewed: false });
+  const cell = (...values: string[]): Cell => ({ values, missingReason: values.length ? null : 'not-in-psi-record', unreviewed: false });
 
   it('marks equal sets as same regardless of order and case', () => {
     expect(markerFor([cell('Gas', 'Solid'), cell('solid', 'gas')])).toBe('same');
@@ -61,7 +61,7 @@ describe('buildComparison', () => {
     const model = buildComparison([record('PSI-1'), record('PSI-2')], [summary('PSI-1', [0.21, 0.5], ['methane'])]);
     const o2 = rowOf(model, 'o2Range');
     expect(o2.marker).toBe('differs');
-    expect(o2.cells[1]).toMatchObject({ values: [], missingReason: 'no-test-data' });
+    expect(o2.cells[1]).toMatchObject({ values: [], missingReason: 'no-normalized-test-data' });
   });
 
   it('marks dates missing in both as all-missing', () => {
@@ -72,7 +72,7 @@ describe('buildComparison', () => {
   it('keeps long text rows without a marker', () => {
     const model = buildComparison([record('PSI-1', { objectives: 'x' }), record('PSI-2')], []);
     expect(rowOf(model, 'objectives').marker).toBeNull();
-    expect(rowOf(model, 'objectives').cells[1].missingReason).toBe('not-in-record');
+    expect(rowOf(model, 'objectives').cells[1].missingReason).toBe('not-in-psi-record');
   });
 
   it('flags unreviewed curated values and explains empty unreviewed ones', () => {
@@ -80,6 +80,6 @@ describe('buildComparison', () => {
     const model = buildComparison([a, record('PSI-2')], []);
     expect(rowOf(model, 'fuelPhase').cells[0]).toMatchObject({ values: ['gas'], unreviewed: true });
     expect(rowOf(model, 'topics').cells[0].missingReason).toBe('not-reviewed');
-    expect(rowOf(model, 'topics').cells[1].missingReason).toBe('not-in-record');
+    expect(rowOf(model, 'topics').cells[1].missingReason).toBe('not-in-psi-record');
   });
 });

@@ -1,6 +1,7 @@
+import type { MissingReason } from '../../components/labelText';
 import type { CatalogRecord, InvestigationSummary } from '../../data/types';
 
-export type MissingReason = 'not-in-record' | 'no-test-data' | 'not-reviewed';
+export type { MissingReason };
 export type RowMarker = 'same' | 'differs' | 'all-missing';
 type Range = [number, number] | [null, null];
 
@@ -28,16 +29,16 @@ const present = (values: string[], unreviewed = false): Cell => ({ values, missi
 const missing = (reason: MissingReason): Cell => ({ values: [], missingReason: reason, unreviewed: false });
 
 function textCell(value: string | null): Cell {
-  return value && value.trim() ? present([value.trim()]) : missing('not-in-record');
+  return value && value.trim() ? present([value.trim()]) : missing('not-in-psi-record');
 }
 
 function listCell(values: string[]): Cell {
-  return values.length > 0 ? present(values) : missing('not-in-record');
+  return values.length > 0 ? present(values) : missing('not-in-psi-record');
 }
 
 function curatedCell(field: { value: string[]; reviewed: boolean }): Cell {
   if (field.value.length > 0) return present(field.value, !field.reviewed);
-  return missing(field.reviewed ? 'not-in-record' : 'not-reviewed');
+  return missing(field.reviewed ? 'not-in-psi-record' : 'not-reviewed');
 }
 
 function hasTestData(summary: InvestigationSummary | undefined): summary is InvestigationSummary {
@@ -53,13 +54,13 @@ function rangeText(range: Range, unit: string): string | null {
 }
 
 function testCell(summary: InvestigationSummary | undefined, pick: (s: InvestigationSummary) => string[]): Cell {
-  if (!hasTestData(summary)) return missing('no-test-data');
+  if (!hasTestData(summary)) return missing('no-normalized-test-data');
   const values = pick(summary);
-  return values.length > 0 ? present(values) : missing('no-test-data');
+  return values.length > 0 ? present(values) : missing('no-normalized-test-data');
 }
 
 function datesCell(record: CatalogRecord): Cell {
-  if (!record.startDate && !record.endDate) return missing('not-in-record');
+  if (!record.startDate && !record.endDate) return missing('not-in-psi-record');
   return present([`${record.startDate ?? '?'} to ${record.endDate ?? '?'}`]);
 }
 
