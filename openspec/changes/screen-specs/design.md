@@ -7,7 +7,7 @@ Six screens, one shared frame, static JSON data, React + TypeScript (see `app-sh
 ## Goals / Non-Goals
 
 **Goals:** one consistent frame; the same four states everywhere; every block named so tasks and tests can point at it.
-**Non-Goals:** visual identity, final palette, typography, motion, dark mode, new data.
+**Non-Goals:** dark mode, motion, new data. The visual layer (palette, typography, component looks) is specified in `design-system`.
 
 ## Decisions
 
@@ -17,7 +17,7 @@ Six screens, one shared frame, static JSON data, React + TypeScript (see `app-sh
 4. **One state helper** renders loading, failed (names the file), empty and normal, so views do not each invent error text. It uses `NotAvailable` and `DataSourceNote` from `app-shell`.
 5. **Detail screen is the only new content.** It assembles fields that already exist in `catalog.json`, `experiments.json` (per-investigation ranges) and `summaries.json`; no new field is required. Ranking position per profile is computed by the ranking function.
 6. **Mobile first at 360 px**, single column; wide screens only add side-by-side areas where noted in the wireframes.
-7. **Wireframes are ASCII**, low fidelity, below. They fix order and grouping, not pixels.
+7. **Wireframes are ASCII**, low fidelity, below. They fix order and grouping, not pixels. The clickable mockup in `docs/design/` is the visual reference; where it and this spec differ on order or states, this spec wins.
 
 Data flow: `data/processed/*.json` → data-access module → state helper → screen blocks.
 
@@ -103,5 +103,5 @@ Not found: "Nothing at #/xyz"  [Go to Ranking]
 
 ## Open Questions
 
-- Do we want the project name and a short tagline in the header? Cosmetic; decided during build.
+- ~~Project name and tagline in the header?~~ Decided from the mockup: name with a small inline-SVG mark, no tagline.
 - Should Ranking items offer "add to Compare" for several items at once? Not required; the one-item link is the Must.

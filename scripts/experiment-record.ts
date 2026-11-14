@@ -1,4 +1,4 @@
-import type { CsvRow } from './read-csv.ts';
+import type { CsvRow } from './csv-row.ts';
 import type { DataQualityEntry } from './clean-number.ts';
 
 export type FlameType = 'normal' | 'inverse';

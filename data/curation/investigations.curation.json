@@ -13,14 +13,14 @@
           "gas"
         ],
         "source": "Objectives text: C2H4 and CH4 flames",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
           "flame-fundamentals"
         ],
         "source": "Objectives text: soot inception, flame temperature and extinction limits",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -30,7 +30,7 @@
           "thermocouples"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-20": {
@@ -39,7 +39,30 @@
         "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
         "reviewed": true
       },
-      "doi": "10.60555/vb93-3y72"
+      "doi": "10.60555/vb93-3y72",
+      "fuelPhase": {
+        "value": [
+          "gas"
+        ],
+        "source": "Objectives text: CH4/N2 and C2H4/N2 mixtures on porous burners",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "material-flammability",
+          "flame-fundamentals"
+        ],
+        "source": "Objectives text: burning conditions \"in terms of material properties\", flammability map and extinction limits; fuel conditions related to condensed fuels",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "burner surface temperature",
+          "heat flux sensor"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-21": {
       "hardwareGroup": {
@@ -47,7 +70,32 @@
         "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
         "reviewed": true
       },
-      "doi": "10.60555/23e1-9950"
+      "doi": "10.60555/23e1-9950",
+      "fuelPhase": {
+        "value": [
+          "gas"
+        ],
+        "source": "Objectives text: methane and ethylene coflow diffusion flames",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "flame-fundamentals",
+          "modeling"
+        ],
+        "source": "Objectives text: rigorous testing of computational models; soot sub-models and sooting tendencies",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "OH* and CH* chemiluminescence",
+          "soot luminosity",
+          "laser extinction",
+          "thin-filament pyrometry"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-22": {
       "hardwareGroup": {
@@ -55,7 +103,31 @@
         "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
         "reviewed": true
       },
-      "doi": "10.60555/se5a-8c73"
+      "doi": "10.60555/se5a-8c73",
+      "fuelPhase": {
+        "value": [
+          "gas"
+        ],
+        "source": "Approach text: gas-fueled flames, methane and ethylene",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "flame-fundamentals"
+        ],
+        "source": "Objectives text: electric-field effects on laminar diffusion flames, soot formation and lifted flames",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "voltage-current curves (chemi-ion current)",
+          "high-resolution cameras",
+          "spectral imaging with filters",
+          "thermopile detectors"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-23": {
       "hardwareGroup": {
@@ -63,7 +135,31 @@
         "source": "Challenge statement, Hardware section: the six ACME experiments use the same ACME hardware in the Combustion Integrated Rack; membership from the PSI title and hardware field",
         "reviewed": true
       },
-      "doi": "10.60555/k57n-p030"
+      "doi": "10.60555/k57n-p030",
+      "fuelPhase": {
+        "value": [
+          "gas"
+        ],
+        "source": "Approach text: hydrogen, methane and ethylene",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "flame-fundamentals",
+          "modeling"
+        ],
+        "source": "Objectives text: transient structure, extinction limits and pulsating instabilities compared with detailed numerical simulation",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "spectrally resolved images",
+          "flame and burner temperatures",
+          "radiative flux measurements"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-25": {
       "hardwareGroup": {
@@ -71,7 +167,31 @@
         "source": "Challenge statement, Hardware section: BASS, BASS-II, SPICE and SLICE run in the Microgravity Science Glovebox with the SPICE flow duct; the PSI hardware field names the Glovebox",
         "reviewed": true
       },
-      "doi": "10.60555/4qc4-de67"
+      "doi": "10.60555/4qc4-de67",
+      "fuelPhase": {
+        "value": [
+          "solid"
+        ],
+        "source": "Objectives text: solid fuels (slabs, cylinders, rods, films, fabric sheets)",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "material-flammability",
+          "modeling"
+        ],
+        "source": "Objectives text: bridge NASA-STD-6001 Test #1 and real material flammability; results feed combustion computational models",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "imaging supplied by the Microgravity Science Glovebox",
+          "flame growth and spread rates",
+          "flame appearance"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-26": {
       "hardwareGroup": {
@@ -79,7 +199,30 @@
         "source": "Challenge statement, Hardware section: BASS, BASS-II, SPICE and SLICE run in the Microgravity Science Glovebox with the SPICE flow duct; the PSI hardware field names the Glovebox",
         "reviewed": true
       },
-      "doi": "10.60555/58h4-dy80"
+      "doi": "10.60555/58h4-dy80",
+      "fuelPhase": {
+        "value": [
+          "solid"
+        ],
+        "source": "Approach text: cotton-fiberglass fabric, Nomex and Ultem",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "material-flammability",
+          "suppression"
+        ],
+        "source": "Objectives text: bridge NASA-STD-6001 Test #1 gap; effectiveness of an inert gaseous extinguishing agent",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "top and edge profile flame observation",
+          "flame size, shape, color and spread rate"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-39": {
       "hardwareGroup": {
@@ -93,7 +236,7 @@
           "liquid-droplet"
         ],
         "source": "Objectives text: n-dodecane droplets",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -101,7 +244,7 @@
           "suppression"
         ],
         "source": "Objectives text: cool flames and helium dilution effects",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -111,7 +254,7 @@
           "narrow-band and wide-band radiometers"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-47": {
@@ -120,7 +263,29 @@
         "source": "PSI Experiment Hardware field names \"TSI P-Trak\", which is not one of the three hardware groups in the statement",
         "reviewed": true
       },
-      "doi": "10.60555/ztgj-d202"
+      "doi": "10.60555/ztgj-d202",
+      "fuelPhase": {
+        "value": [
+          "aerosol-dust"
+        ],
+        "source": "Approach text: Arizona Red Dust aerosolized with GN2",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "detection"
+        ],
+        "source": "Objectives text: reliability of a particle counter for smoke aerosol measurement (SAME)",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "modified TSI P-Trak particle counter",
+          "DustTrak CNC"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-60": {
       "hardwareGroup": {
@@ -134,7 +299,7 @@
           "gas"
         ],
         "source": "Sub-research area: Gaseous; Approach text: coflow flames",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -142,7 +307,7 @@
           "modeling"
         ],
         "source": "Objectives text: soot formation and computational modeling",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -151,7 +316,7 @@
           "soot volume fraction"
         ],
         "source": "Approach text",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-62": {
@@ -166,7 +331,7 @@
           "solid"
         ],
         "source": "Approach text: PMMA samples and wax cylinders",
-        "reviewed": false
+        "reviewed": true
       },
       "topics": {
         "value": [
@@ -174,7 +339,7 @@
           "modeling"
         ],
         "source": "Objectives text: flammability limits and FGM flame-spread modeling",
-        "reviewed": false
+        "reviewed": true
       },
       "measurements": {
         "value": [
@@ -183,7 +348,7 @@
           "temperature and soot volume fraction"
         ],
         "source": "Approach text: evaluation metrics",
-        "reviewed": false
+        "reviewed": true
       }
     },
     "PSI-68": {
@@ -192,7 +357,31 @@
         "source": "Challenge statement, Hardware section: FLEX, FLEX-2 and CFI use the Multi-user Droplet Combustion Apparatus in the CIR; the PSI hardware field also names it",
         "reviewed": true
       },
-      "doi": "10.60555/byp8-h018"
+      "doi": "10.60555/byp8-h018",
+      "fuelPhase": {
+        "value": [
+          "liquid-droplet"
+        ],
+        "source": "Objectives text: pure and bi-component fuel droplets",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "flame-fundamentals",
+          "modeling"
+        ],
+        "source": "Objectives text: extinction mechanisms, soot formation, benchmark data to validate numerical simulations",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "high-speed photography",
+          "color camera video",
+          "chamber pressure and temperature data"
+        ],
+        "source": "Approach text",
+        "reviewed": true
+      }
     },
     "PSI-69": {
       "hardwareGroup": {
@@ -200,7 +389,30 @@
         "source": "Challenge statement, Hardware section: FLEX, FLEX-2 and CFI use the Multi-user Droplet Combustion Apparatus in the CIR; the PSI hardware field also names it",
         "reviewed": true
       },
-      "doi": "10.60555/mbq8-0451"
+      "doi": "10.60555/mbq8-0451",
+      "fuelPhase": {
+        "value": [
+          "liquid-droplet"
+        ],
+        "source": "Objectives text: liquid fuel droplets",
+        "reviewed": true
+      },
+      "topics": {
+        "value": [
+          "suppression",
+          "flame-fundamentals"
+        ],
+        "source": "Objectives text: effectiveness of CO2, He and SF6 suppressants; flammability limits and Limiting Oxygen Index",
+        "reviewed": true
+      },
+      "measurements": {
+        "value": [
+          "extinction droplet diameter",
+          "Limiting Oxygen Index (LOI) test series"
+        ],
+        "source": "Approach text; the instruments are not named, only what is measured",
+        "reviewed": true
+      }
     },
     "PSI-98": {
       "hardwareGroup": {

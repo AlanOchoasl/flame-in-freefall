@@ -14,8 +14,8 @@ Depends on: `investigation-catalog` types (task 1.1) for the record shape.
 Depends on: 1.2 and `app-shell` 2.1, 4.1.
 
 - [x] 2.1 (Sun by 09:30, ≤2h) Build the Ranking view: profile selector, ranked list, per-investigation expandable breakdown, fuel-phase and topic filters with counts; verify switching profile re-ranks and filters show the match count.
-- [ ] 2.2 (Sun by 10:30, ≤1h) Add the "How this ranking works" panel with the factor table, rationale and disclaimer; verify the text matches `profiles.json`.
-- [ ] 2.3 (Sun by 11:30, ≤1h) Make not-assessed and unreviewed markers visible and understandable; verify with an investigation that has no test rows.
+- [x] 2.2 (Sun by 10:30, ≤1h) Add the "How this ranking works" panel with the factor table, rationale and disclaimer; verify the text matches `profiles.json`.
+- [x] 2.3 (Sun by 11:30, ≤1h) Make not-assessed and unreviewed markers visible and understandable; verify with an investigation that has no test rows.
 
 ## 3. Review
 

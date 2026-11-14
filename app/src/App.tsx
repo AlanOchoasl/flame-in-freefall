@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import type { MouseEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { KeyboardEvent, MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { matchRoute } from './router/matchRoute';
 import { useHashLocation } from './router/useHashLocation';
@@ -12,8 +12,21 @@ export function App() {
   const match = matchRoute(hash, views);
   const currentPath = match?.view.path;
   const mainRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  useRouteChrome(match?.view.title ?? 'Not found', hash);
+  // Any route change closes the menu, including the browser's Back button.
+  useEffect(() => setMenuOpen(false), [hash]);
+
+  const closeMenuOnEscape = (event: KeyboardEvent) => {
+    if (event.key !== 'Escape' || !menuOpen) return;
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
+  };
+
+  const accession = match?.params.accession;
+  const screenTitle = match ? [match.view.title, accession].filter(Boolean).join(' ') : 'Not found';
+  useRouteChrome(screenTitle, hash);
 
   // A plain #anchor would change the hash and the router would see an unknown route.
   const skipToContent = (event: MouseEvent) => {
@@ -26,9 +39,19 @@ export function App() {
       <a className="skip-link" href="#main-content" onClick={skipToContent}>
         Skip to content
       </a>
-      <header>
+      <header onKeyDown={closeMenuOnEscape}>
         <strong>Flame in Freefall</strong>
-        <nav aria-label="Main">
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className="menu-button"
+          aria-expanded={menuOpen}
+          aria-controls="main-nav"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          Menu
+        </button>
+        <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={() => setMenuOpen(false)}>
           <ul>
             {views
               .filter((view) => view.inNav)

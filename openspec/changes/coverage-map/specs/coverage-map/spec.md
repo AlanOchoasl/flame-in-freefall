@@ -61,3 +61,45 @@ The view SHALL let a user download the filtered records as a file generated in t
 #### Scenario: Download
 - **WHEN** a user downloads with a filter applied
 - **THEN** the file contains exactly the filtered records and their source links
+
+### Requirement: Readable axes
+Both axes SHALL show tick marks with numeric values and units: O2 in percent from 0 to 100 with a tick at least every 20, and pressure in bar over the plotted range with at most six ticks. Each axis SHALL have a title and light gridlines at the ticks. A reader SHALL be able to read a point's approximate conditions from the axes alone.
+
+#### Scenario: Reading a point from the axes
+- **WHEN** the map is shown with its default data
+- **THEN** every tick on both axes has a numeric label with its unit, so the position of any point can be read off
+
+### Requirement: Overlay labels never hide data
+Overlay areas SHALL be drawn behind the points. Overlay labels SHALL NOT overlap any plotted point: each label SHALL sit in the plot margin or outside the plot area and be tied to its overlay by position, a leader line or the legend entry. The overlays SHALL remain listed with their values and sources below the chart.
+
+#### Scenario: Earth air label
+- **WHEN** many points lie near 21 % O2 and 1 bar
+- **THEN** the "Earth air" label is still fully readable and no point is drawn over its text
+
+### Requirement: Narrow viewports keep the plot legible
+The plot SHALL keep a minimum width of 480 px. When the container is narrower, the plot area SHALL scroll horizontally inside its own region (focusable, labeled) while the page itself does not scroll; the toolbar, legend, overlay descriptions, insight and details SHALL stay in the single column outside that region.
+
+#### Scenario: 360 px viewport
+- **WHEN** the viewport is 360 px wide
+- **THEN** the plot is 480 px wide inside a horizontally scrollable region, its ticks and markers are as readable as on desktop, and the page has no horizontal scroll
+
+### Requirement: Keyboard stepping through points
+When the chart has focus, the arrow keys SHALL move the selection between points, Home and End SHALL jump to the first and last point in the current order, and Escape SHALL clear the selection. The point-details panel SHALL be a polite live region so the new selection is announced. This is Nice-to-have; the table alternative remains the Must for keyboard users.
+
+#### Scenario: Stepping
+- **WHEN** a user focuses the chart and presses the right arrow key
+- **THEN** the next point is selected and its details are announced
+
+### Requirement: Large tables are paged
+The table alternative SHALL show the first 50 filtered records and a "Show 50 more rows" button that appends the next 50 until all are shown, and SHALL state "showing N of M". The download SHALL always contain all filtered records, not only the visible rows.
+
+#### Scenario: Paging
+- **WHEN** 442 records are filtered and the table is shown
+- **THEN** 50 rows appear with "showing 50 of 442", and activating the button shows 100
+
+### Requirement: Deep link from an investigation
+The map SHALL accept an `investigation` parameter in its address (for example `#/map?investigation=PSI-159`) that preselects the investigation filter. The Investigation detail screen SHALL show a "See on the Coverage map" link only for investigations that have plotted tests. This is Nice-to-have.
+
+#### Scenario: Link from Detail
+- **WHEN** a user follows "See on the Coverage map" on PSI-159
+- **THEN** the map opens with the investigation filter set to PSI-159 and the count updated

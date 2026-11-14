@@ -1,11 +1,16 @@
 import { describe, expect, it } from 'vitest';
+import type { SummaryEntry } from '../data/types';
 import { summariseAiUse } from './aiUse';
 
-const entry = (overrides: Partial<Parameters<typeof summariseAiUse>[0][number]> = {}) => ({
+const entry = (overrides: Partial<SummaryEntry> = {}): SummaryEntry => ({
   accession: 'PSI-159',
+  summary: 'A plain-language summary.',
+  fireSafetyRelevance: 'A relevance note.',
+  aiGenerated: true,
   model: 'model-a',
   generatedAt: '2026-11-14',
   promptVersion: 'v1',
+  sourceFields: ['objectives'],
   reviewed: false,
   ...overrides,
 });

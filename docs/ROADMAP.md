@@ -66,7 +66,7 @@ Risk review every 4 hours. Blocked > 45 min → plan B (cached sample, mock, red
 - [x] Stack: React + TypeScript + Vite (team, 2026-11-14). Architecture: static only (option A). Nest backend deferred; only for `ask-the-data` after milestone 2
 - [x] Extensibility (team request, 2026-11-14): data-access module, view list, data-driven profiles and vocabularies, `schemaVersion` on every data file, mapper list, `docs/EXTENDING.md`. About +2 h of task caps (measured: tasks 2.1, 3.1 and the new 5.3 in `app-shell`); no plugin systems or extra infrastructure
 - [ ] Verify 2026 judging criteria (Judging & Awards Guide)
-- [ ] Choose license (recommended Apache-2.0; see `AGENTS.md`)
+- [x] Choose license: Apache-2.0 (team, 2026-11-14); `LICENSE` and `THIRD_PARTY_LICENSES.md` added
 - [ ] Capture DOI of each investigation used ("Cite this Investigation" on its PSI page)
 - [ ] Decide who curates the tags for the 26 investigations (needs science reading)
 - [x] AI access: Gemini via API key (team, 2026-11-14). Still to verify: model, limits, structured-output style (in Google's docs)

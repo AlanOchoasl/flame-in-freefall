@@ -4,11 +4,11 @@
 
 ## Why
 
-The four views (ranking, comparator, coverage map, summaries) need one web app that loads the data, navigates between views, labels AI text, cites NASA, and runs from a public URL. Without a shared shell each view would reinvent these.
+The screens (ranking, comparator, coverage map, investigation detail, with the AI summaries shown inside them, plus About) need one web app that loads the data, navigates between views, labels AI text, cites NASA, and runs from a public URL. Without a shared shell each view would reinvent these.
 
 ## What Changes
 
-- A static React + TypeScript + Vite app in `app/`, with hash-based navigation between four views and an About section.
+- A static React + TypeScript + Vite app in `app/`, with hash-based navigation between four views (Ranking, Compare, Coverage map, Investigation detail) and an About screen at `#/about`; the bare address redirects to Ranking.
 - Loads `catalog.json`, `experiments.json` and `summaries.json` as static files; one failed file must not break the other views.
 - Shared pieces: AI-generated label, PSI citation/link, and a "not available" display that always says why.
 - Works offline and is deployed to a public URL.
