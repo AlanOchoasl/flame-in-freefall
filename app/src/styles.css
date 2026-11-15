@@ -304,7 +304,6 @@ header {
 .theme-switch { display: flex; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-2); background: var(--surface-2); }
 .theme-switch button { display: inline-flex; align-items: center; justify-content: center; min-width: var(--target-size); min-height: var(--target-size); padding: 0; border: 0; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); }
 .theme-switch button[aria-pressed='true'] { background: var(--brand); color: #ffffff; }
-.dataset-state { color: var(--text-muted); font: 12px var(--mono); white-space: nowrap; }
 
 nav ul {
   display: flex;
@@ -582,14 +581,9 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
   .console-header nav.open { display: block; }
   nav ul { flex-direction: column; }
   .console-header .menu-button { margin-left: auto; }
-  .console-header .dataset-state { display: none; }
   .console-header .theme-switch { order: 4; }
   .console-tag { display: none; }
   .console-header nav a { width: 100%; }
-}
-
-@media (max-width: 940px) {
-  .console-header .dataset-state { display: none; }
 }
 
 @media (max-width: 420px) {
@@ -764,8 +758,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .key-facts dd { margin: 4px 0 0; font: 600 var(--fs-lg, 18px) var(--mono); }
 .key-facts .key-note { margin: 2px 0 0; color: var(--text-secondary); font: var(--fs-sm) var(--font-body, inherit); }
 
-/* Between 940 and 1180 px the header row is full: the brand tag gives way so "Cached PSI data" stays on the line. */
-@media (max-width: 1180px) {
+/* Below 900 px the header row is full: the brand tag gives way so everything stays on one line. */
+@media (max-width: 900px) {
   .console-tag { display: none; }
 }
 

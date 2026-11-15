@@ -144,7 +144,6 @@ export function App() {
             </button>
           ))}
         </div>
-        <span className="dataset-state">CACHED PSI DATA</span>
       </header>
       <main id="main-content" ref={mainRef} tabIndex={-1}>
         {match ? <match.view.component params={match.params} query={match.query} section={match.view.section} /> : <NotFound requested={hash} />}
