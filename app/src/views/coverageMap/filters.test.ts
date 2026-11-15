@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { ExperimentRecord, ExperimentsFile } from '../../data/types';
 import {
+  isFilterUseful,
   NO_FILTERS,
   OUTCOME_LABELS,
   OUTCOMES,
@@ -158,5 +159,18 @@ describe('the committed dataset', () => {
       fuels: ['butane', 'ethane', 'propane'],
       outcomes: ['yes', 'no', 'flash'],
     });
+  });
+});
+
+describe('isFilterUseful', () => {
+  it('hides a filter with a single choice', () => {
+    expect(isFilterUseful(['PSI-159'], null)).toBe(false);
+    expect(isFilterUseful([], null)).toBe(false);
+  });
+  it('shows a filter with several choices', () => {
+    expect(isFilterUseful(['a', 'b'], null)).toBe(true);
+  });
+  it('keeps a filter that is already set, so it can be cleared', () => {
+    expect(isFilterUseful(['PSI-159'], 'PSI-159')).toBe(true);
   });
 });

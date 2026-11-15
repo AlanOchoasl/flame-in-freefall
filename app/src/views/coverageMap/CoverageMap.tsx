@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
 import type { ExperimentRecord } from '../../data/types';
@@ -14,6 +14,7 @@ import {
   filterOptions,
   filtersFromExplorer,
   hasActiveFilters,
+  isFilterUseful,
   NO_FILTERS, ZONE_ONLY,
   OUTCOME_LABELS,
   OUTCOMES,
@@ -86,7 +87,26 @@ function PointDetails({ record }: { record: ExperimentRecord | null }) {
   );
 }
 
-function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (record: ExperimentRecord) => void }) {
+const formatO2 = (record: ExperimentRecord): string => (record.o2Fraction === null ? '—' : `${Math.round(record.o2Fraction * 1000) / 10} %`);
+const formatBar = (record: ExperimentRecord): string => (record.pressureBar === null ? '—' : `${record.pressureIsApproximate ? '≈ ' : ''}${Math.round(record.pressureBar * 1000) / 1000} bar`);
+
+// What shows while the pointer is over a dot. It only repeats the key numbers; the full test opens on click.
+function PointTooltip({ active, payload }: { active?: boolean; payload?: { payload?: PlotPoint }[] }) {
+  const record = active ? payload?.[0]?.payload?.record : undefined;
+  if (!record) return null;
+  return (
+    <div className="map-tooltip">
+      <strong>{record.id}</strong>
+      <span>
+        O2 {formatO2(record)} · {formatBar(record)}
+      </span>
+      <span>{OUTCOME_LABELS[record.outcome as keyof typeof OUTCOME_LABELS] ?? record.outcome}</span>
+      <span className="map-tooltip-hint">Click the dot for the full test</span>
+    </div>
+  );
+}
+
+function Chart({ records, selectedId, onSelect }: { records: ExperimentRecord[]; selectedId: string | null; onSelect: (record: ExperimentRecord) => void }) {
   const series = pointsByOutcome(records);
   return (
     <div className="map-plot-region" tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens">
@@ -147,11 +167,12 @@ function Chart({ records, onSelect }: { records: ExperimentRecord[]; onSelect: (
               strokeWidth={2.5}
               label={{ content: SUIT_LABEL }}
             />
+            <Tooltip cursor={false} content={<PointTooltip />} isAnimationActive={false} />
             {OUTCOMES.map((outcome) => (
               <Scatter
                 key={outcome}
                 name={OUTCOME_LABELS[outcome]}
-                data={series[outcome]}
+                data={series[outcome].map((point) => ({ ...point, selected: point.record.id === selectedId }))}
                 shape={SHAPE_OF[outcome]}
                 isAnimationActive={false}
                 onClick={(item) => {
@@ -190,10 +211,18 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
       <p className="map-lead">Each dot is one real test from NASA PSI, placed by its O2 (%) and its pressure (bar).</p>
       <fieldset className="map-filters">
         <legend>Filters</legend>
-        <FilterSelect label="Investigation" value={filters.accession} options={options.accessions} onChange={set('accession')} />
-        <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
-        <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
-        <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+        {isFilterUseful(options.accessions, filters.accession) ? (
+          <FilterSelect label="Investigation" value={filters.accession} options={options.accessions} onChange={set('accession')} />
+        ) : null}
+        {isFilterUseful(options.flameTypes, filters.flameType) ? (
+          <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
+        ) : null}
+        {isFilterUseful(options.fuels, filters.fuel) ? (
+          <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
+        ) : null}
+        {isFilterUseful(options.outcomes, filters.outcome) ? (
+          <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+        ) : null}
         <label className="map-field">
           <span>Moon-base zone</span>
           <select value={filters.zone ?? ''} onChange={(event) => set('zone')(event.target.value || null)}>
@@ -239,9 +268,14 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
           ) : (
             <div className="map-card">
               <OutcomeLegend />
-              <Chart records={matching} onSelect={setSelected} />
+              <Chart records={matching} selectedId={selected?.id ?? null} onSelect={setSelected} />
             </div>
           )}
+
+          <section className="map-card" aria-labelledby="details-title">
+            <h2 id="details-title">Selected test</h2>
+            <PointDetails record={selected} />
+          </section>
 
           <OverlayList />
         </div>
@@ -264,10 +298,6 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
                 <li key={limit}>{limit}</li>
               ))}
             </ul>
-          </section>
-          <section className="map-card" aria-labelledby="details-title">
-            <h2 id="details-title">Selected test</h2>
-            <PointDetails record={selected} />
           </section>
         </aside>
       </div>

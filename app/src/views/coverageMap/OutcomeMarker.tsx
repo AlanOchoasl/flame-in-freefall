@@ -38,7 +38,7 @@ const MARKER_OPACITY = 0.55; // many tests share conditions, so markers must sho
 interface ScatterShapeProps {
   cx?: number;
   cy?: number;
-  payload?: { record: { inMoonBaseZone: boolean } };
+  payload?: { record: { inMoonBaseZone: boolean }; selected?: boolean };
 }
 
 /**
@@ -50,6 +50,7 @@ export function scatterShapeFor(outcome: Outcome) {
     if (cx === undefined || cy === undefined || !payload) return <g />;
     return (
       <g transform={`translate(${cx}, ${cy})`}>
+        {payload.selected ? <circle r={MARKER_RADIUS * 2.8} fill="none" stroke="var(--text-primary)" strokeWidth={2} /> : null}
         <MarkerPath outcome={outcome} radius={MARKER_RADIUS} inZone={payload.record.inMoonBaseZone} opacity={MARKER_OPACITY} />
       </g>
     );
