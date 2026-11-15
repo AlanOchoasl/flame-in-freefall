@@ -30,8 +30,8 @@ How the text is produced and kept honest:
 
 ## In the development process
 
-- An AI coding assistant helped the team write code, tests, the OpenSpec change documents and the project documentation. The team directed the work, ran the tests and the license checks, and reviewed and merged every change.
-- The same kind of assistant produced a Spanish reading aid used only inside the team to review the summaries (`docs/review-summaries-es.html`). It is not part of the app and was not reviewed by a person as a translation.
+- **Claude Code (by Anthropic)** helped the team write code, tests, the OpenSpec change documents and the project documentation. The team directed the work, ran the tests and the license checks, and reviewed and merged every change. The commits carry a "Co-Authored-By" line that records it.
+- The same assistant produced a Spanish reading aid used only inside the team to review the summaries (`docs/review-summaries-es.html`). It is not part of the app and was not reviewed by a person as a translation.
 - The project logos in `app/public/branding/` were made with an AI tool; their C2PA metadata says so. They are project marks, not NASA insignia.
 
 ## Known limits

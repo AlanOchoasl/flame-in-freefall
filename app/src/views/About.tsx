@@ -94,6 +94,10 @@ export function About() {
         app does not call any AI service while you use it. The ranking and the coverage map are computed by ordinary
         code from the data and use no AI.
       </p>
+      <p>
+        The summaries were written with Google Gemini. The app&rsquo;s code, tests and documentation were written with
+        the help of an AI coding assistant, Claude Code (Anthropic), directed and reviewed by the team.
+      </p>
       <AiUseDetails />
       </section>
 
