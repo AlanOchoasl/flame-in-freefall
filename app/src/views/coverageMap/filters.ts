@@ -8,12 +8,13 @@ export interface MapFilters {
   accession: string | null;
   flameType: string | null;
   fuel: string | null;
-  outcome: string | null;
+  /** Ignition results left out (the legend entries that are switched off). */
+  hidden: string[];
   /** "in" keeps only the tests inside the expected Moon-base zone. */
   zone: string | null;
 }
 
-export const NO_FILTERS: MapFilters = { accession: null, flameType: null, fuel: null, outcome: null, zone: null };
+export const NO_FILTERS: MapFilters = { accession: null, flameType: null, fuel: null, hidden: [], zone: null };
 
 export const ZONE_ONLY = 'in';
 
@@ -54,7 +55,7 @@ export function matchesFilters(record: ExperimentRecord, filters: MapFilters): b
     (filters.accession === null || record.accession === filters.accession) &&
     (filters.flameType === null || record.flameType === filters.flameType) &&
     (filters.fuel === null || record.fuel.species === filters.fuel) &&
-    (filters.outcome === null || record.outcome === filters.outcome) &&
+    !filters.hidden.includes(record.outcome) &&
     (filters.zone === null || record.inMoonBaseZone)
   );
 }
@@ -92,15 +93,15 @@ export function filterOptions(records: ExperimentRecord[]): FilterOptions {
 }
 
 export function hasActiveFilters(filters: MapFilters): boolean {
-  return Object.values(filters).some((value) => value !== null);
+  return Object.values(filters).some((value) => (Array.isArray(value) ? value.length > 0 : value !== null));
 }
 
-/** The map's filters as the explorer reads them from the address (`investigation`, `flame`, `fuel`, `outcome`). */
+/** The map's filters as the explorer reads them from the address (`investigation`, `flame`, `fuel`, `hide`, `zone`). */
 export const filtersFromExplorer = (state: ExplorerState): MapFilters => ({
   accession: state.investigation,
   flameType: state.flame,
   fuel: state.fuel,
-  outcome: state.outcome,
+  hidden: state.hide,
   zone: state.zone,
 });
 
@@ -109,6 +110,6 @@ export const explorerPatchFromFilters = (filters: MapFilters): Partial<ExplorerS
   investigation: filters.accession,
   flame: filters.flameType,
   fuel: filters.fuel,
-  outcome: filters.outcome,
+  hide: filters.hidden,
   zone: filters.zone,
 });

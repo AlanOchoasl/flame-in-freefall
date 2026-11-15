@@ -14,7 +14,8 @@ export interface ExplorerState {
   investigation: string | null;
   flame: string | null;
   fuel: string | null;
-  outcome: string | null;
+  /** Ignition results the map leaves out, e.g. ["no", "flash"]. */
+  hide: string[];
   /** "in": the map shows only the tests inside the expected Moon-base zone. */
   zone: string | null;
 }
@@ -26,12 +27,12 @@ export const NO_EXPLORER_STATE: ExplorerState = {
   investigation: null,
   flame: null,
   fuel: null,
-  outcome: null,
+  hide: [],
   zone: null,
 };
 
 // The order the parameters are written in, so the same state always gives the same address.
-const KEYS = ['profile', 'selected', 'ids', 'investigation', 'flame', 'fuel', 'outcome', 'zone'] as const;
+const KEYS = ['profile', 'selected', 'ids', 'investigation', 'flame', 'fuel', 'hide', 'zone'] as const;
 
 const text = (query: URLSearchParams, key: string): string | null => {
   const value = query.get(key)?.trim();
@@ -49,7 +50,7 @@ export function parseExplorerQuery(query: URLSearchParams): ExplorerState {
     investigation: text(query, 'investigation'),
     flame: text(query, 'flame'),
     fuel: text(query, 'fuel'),
-    outcome: text(query, 'outcome'),
+    hide: unique((query.get('hide') ?? '').split(',').map((value) => value.trim()).filter(Boolean)),
     zone: text(query, 'zone'),
   };
 }
@@ -79,7 +80,7 @@ export function cleanExplorerState(state: ExplorerState, known: KnownValues): Ex
     investigation: accepted(state.investigation, known.accessionsWithTests),
     flame: accepted(state.flame, known.flames),
     fuel: accepted(state.fuel, known.fuels),
-    outcome: accepted(state.outcome, known.outcomes),
+    hide: state.hide.filter((value) => known.outcomes === undefined || known.outcomes.includes(value)),
     zone: accepted(state.zone, known.zones),
   };
 }
@@ -93,13 +94,13 @@ export const mergeExplorerState = (state: ExplorerState, patch: Partial<Explorer
 export function serializeExplorerQuery(state: ExplorerState): string {
   const params = new URLSearchParams();
   for (const key of KEYS) {
-    if (key === 'ids') {
-      if (state.ids.length > 0) params.set('ids', state.ids.join(','));
+    if (key === 'ids' || key === 'hide') {
+      if (state[key].length > 0) params.set(key, state[key].join(','));
     } else if (state[key] !== null) {
       params.set(key, state[key]);
     }
   }
-  // Commas in the comparison stay readable: "ids=PSI-47,PSI-25".
+  // Commas in a list stay readable: "ids=PSI-47,PSI-25".
   return params.toString().replace(/%2C/g, ',');
 }
 

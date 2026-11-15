@@ -17,7 +17,7 @@ import {
   hasActiveFilters,
   isFilterUseful,
   NO_FILTERS, ZONE_ONLY,
-  OUTCOME_LABELS,
+  OUTCOMES,
   type MapFilters,
 } from './filters';
 import { computeInsight, describeCoverage, describeInsight } from './insight';
@@ -51,7 +51,7 @@ const MIN_Y_SPAN = 0.1; // bar
 const WHEEL_ZOOM_STEP = 1.25;
 const DRAG_THRESHOLD_PX = 4;
 
-function FilterSelect({ label, value, options, labelOf = (option) => option, onChange }: { label: string; value: string | null; options: string[]; labelOf?: (option: string) => string; onChange: (v: string | null) => void }) {
+function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
   return (
     <label className="map-field">
       <span>{label}</span>
@@ -59,7 +59,7 @@ function FilterSelect({ label, value, options, labelOf = (option) => option, onC
         <option value="">All</option>
         {options.map((option) => (
           <option key={option} value={option}>
-            {labelOf(option)}
+            {option}
           </option>
         ))}
       </select>
@@ -261,14 +261,18 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
   const [selected, setSelected] = useState<PlotPoint | null>(null);
   // The picked circle keeps its ring on the chart after the dialog closes.
   const [detailOpen, setDetailOpen] = useState(false);
-  const [hidden, setHidden] = useState<ReadonlySet<Outcome>>(new Set());
   const [asTable, setAsTable] = useState(false);
   const options = filterOptions(records);
   const matching = applyFilters(records, filters);
   const counts = countPlotted(matching);
-  const legendCounts = outcomeCounts(matching);
-  const points = pointsByCondition(matching.filter((record) => !isOutcome(record.outcome) || !hidden.has(record.outcome)));
-  const toggleOutcome = (outcome: Outcome) => setHidden((current) => new Set(current.has(outcome) ? [...current].filter((o) => o !== outcome) : [...current, outcome]));
+  // The legend is the ignition filter: its entries are switched off in the address, and everything below follows.
+  // Its counts ignore that one filter, so an entry that is off still says how many tests it would bring back.
+  const hidden: ReadonlySet<Outcome> = new Set(filters.hidden.filter(isOutcome));
+  const legendCounts = outcomeCounts(applyFilters(records, { ...filters, hidden: [] }));
+  const points = pointsByCondition(matching);
+  const toggleOutcome = (outcome: Outcome) =>
+    setFilters({ ...filters, hidden: OUTCOMES.filter((candidate) => (candidate === outcome ? !hidden.has(candidate) : hidden.has(candidate))) });
+  const legend = (help: boolean) => <OutcomeLegend counts={legendCounts} hidden={hidden} onToggle={toggleOutcome} example={help ? exampleCircle(points) : null} help={help} />;
   const insightData = computeInsight(matching);
   const insight = describeInsight(insightData);
   const set = (key: keyof MapFilters) => (value: string | null) => setFilters({ ...filters, [key]: value });
@@ -286,9 +290,6 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
         ) : null}
         {isFilterUseful(options.fuels, filters.fuel) ? (
           <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
-        ) : null}
-        {isFilterUseful(options.outcomes, filters.outcome) ? (
-          <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} labelOf={(value) => OUTCOME_LABELS[value as keyof typeof OUTCOME_LABELS] ?? value} onChange={set('outcome')} />
         ) : null}
         <label className="map-field">
           <span>Moon-base zone</span>
@@ -332,17 +333,23 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
           </div>
 
           {counts.total === 0 ? (
-            <div role="status" className="map-card">
-              <p>No test matches the filters.</p>
-              <button type="button" onClick={() => setFilters(NO_FILTERS)}>
-                Clear filters
-              </button>
+            <div className="map-card">
+              {legend(false)}
+              <div role="status">
+                <p>No test matches the filters.</p>
+                <button type="button" onClick={() => setFilters(NO_FILTERS)}>
+                  Clear filters
+                </button>
+              </div>
             </div>
           ) : asTable ? (
-            <ResultsTable key={JSON.stringify(filters)} records={matching} />
+            <>
+              <div className="map-card">{legend(false)}</div>
+              <ResultsTable key={JSON.stringify(filters)} records={matching} />
+            </>
           ) : (
             <div className="map-card">
-              <OutcomeLegend counts={legendCounts} hidden={hidden} onToggle={toggleOutcome} example={exampleCircle(points)} />
+              {legend(true)}
               <Chart
                 points={points}
                 selected={selected}
