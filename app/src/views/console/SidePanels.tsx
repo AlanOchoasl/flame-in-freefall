@@ -302,16 +302,3 @@ export function InterpretationDialog({ open, onClose, onBack, record, entry, que
     </ConsoleDialog>
   );
 }
-
-// The limits of the explorer, kept to one line under the console instead of a panel of their own.
-export function ConsoleFootnote({ query }: { query: URLSearchParams }) {
-  return (
-    <footer className="console-footnote">
-      <p>
-        This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. The lunar zone is expected from the
-        challenge statement, not a final habitat specification. AI text is precomputed and labeled.{' '}
-        <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
-      </p>
-    </footer>
-  );
-}

@@ -13,7 +13,7 @@ import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../covera
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
-import { ConsoleFootnote, RankingPanel } from './SidePanels';
+import { RankingPanel } from './SidePanels';
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -142,7 +142,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         <CompareBody query={query} />
       </Panel>
 
-      <ConsoleFootnote query={query} />
     </div>
   );
 }

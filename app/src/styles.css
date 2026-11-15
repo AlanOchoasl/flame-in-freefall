@@ -500,7 +500,6 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .research-panel h2:first-child { margin-top: 0; padding-bottom: var(--space-2); border-bottom: 1px solid var(--line); }
 .research-panel p, .research-panel li { max-width: 75ch; }
 .research-panel p:last-child, .research-panel ul:last-child { margin-bottom: 0; }
-.detail-title { max-width: 75ch; color: var(--text-secondary); }
 .ranking-list > li h3 { max-width: 80ch; }
 .ranking-list > li p { margin: var(--space-2) 0; }
 .ranking-score { font: 600 var(--fs-base) var(--mono); color: var(--action); }
@@ -652,7 +651,9 @@ progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
   .panel-head { flex-wrap: wrap; }
 }
 
-.back-link { margin: calc(-1 * var(--space-2)) 0 var(--space-4); }
+.back-link { margin: 0 0 var(--space-3); }
+.back-link a { display: inline-block; padding: 4px 12px; font-size: var(--fs-sm); text-decoration: none; border: 1px solid var(--line-strong); border-radius: 999px; }
+.back-link a:hover { background: var(--surface-hover); }
 
 /* Profile picker: a visible label and one line saying what the selected environment weighs. */
 .profile-picker { display: grid; gap: var(--space-2); justify-items: start; }
@@ -719,6 +720,16 @@ body:has(dialog[open]) { overflow: hidden; }
 .fire-note { margin: var(--space-3) 0; padding: var(--space-3) var(--space-4); background: var(--surface-2); border-left: 3px solid var(--zone); border-radius: var(--radius-2); }
 .fire-note strong { color: var(--zone); font: 600 12px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
 .fire-note p { margin: var(--space-1) 0 0; }
-.console-footnote { padding-top: var(--space-3); color: var(--text-muted); font-size: var(--fs-sm); border-top: 1px solid var(--line); }
-.console-footnote p { max-width: 90ch; margin: 0; }
 .dialog-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); }
+
+/* Detail: the numbers that matter, as tiles above the sections. */
+.key-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-3); max-width: 1100px; margin: 0 0 var(--space-4); }
+.key-facts > div { padding: var(--space-3) var(--space-4); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.key-facts dt { color: var(--text-muted); font: 12px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.key-facts dd { margin: 4px 0 0; font: 600 var(--fs-lg, 18px) var(--mono); }
+.key-facts .key-note { margin: 2px 0 0; color: var(--text-secondary); font: var(--fs-sm) var(--font-body, inherit); }
+
+/* Between 940 and 1180 px the header row is full: the brand tag gives way so "Cached PSI data" stays on the line. */
+@media (max-width: 1180px) {
+  .console-tag { display: none; }
+}

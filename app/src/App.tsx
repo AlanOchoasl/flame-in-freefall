@@ -136,7 +136,10 @@ export function App() {
       </main>
       <footer>
         <DataSourceNote />
-        <p>Independent research exploration · AI-generated text is always labeled.</p>
+        <p>
+          Experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. AI-generated text is always labeled.{' '}
+          <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
+        </p>
         <p role="status" className="offline-state">
           {offlineReady ? 'Available offline' : ''}
         </p>
