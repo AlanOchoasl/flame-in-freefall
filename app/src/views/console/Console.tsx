@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DataState } from '../../components/DataState';
 import { MetricTile, Panel } from '../../components/Panel';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
@@ -10,11 +10,10 @@ import { SECTION_CHANGE, visibleSection, type Band, type ConsoleSectionId } from
 import { CompareBody } from '../compare/Compare';
 import { parseSelection } from '../compare/selection';
 import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../coverageMap/CoverageMap';
-import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
-import { ConsoleFootnote, InterpretationDialog, RankingPanel } from './SidePanels';
+import { ConsoleFootnote, RankingPanel } from './SidePanels';
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -24,8 +23,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
   const summaries = useDataResult(getSummaries);
   // The profile, the selected investigation, the comparison and the map filters live in the address.
   const explorer = parseExplorerQuery(query);
-  // "Interpret" on a ranking row opens the plain-language summary in a dialog.
-  const [interpretOpen, setInterpretOpen] = useState(false);
 
   // While the page scrolls, tell the header which section is being read so its menu follows.
   useEffect(() => {
@@ -128,21 +125,10 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             selected={interpreted?.accession ?? null}
                             compareIds={parseSelection(query, catalogFile.records.map((r) => r.accession))}
                             query={query}
-                            onSelect={(accession) => {
-                              replaceExplorerState({ selected: accession });
-                              setInterpretOpen(true);
-                            }}
+                            summaries={entries}
+                            onSelect={(accession) => replaceExplorerState({ selected: accession })}
                             onProfileChange={(id) => replaceExplorerState({ profile: id === profilesFile.profiles[0].id ? null : id })}
                           />
-                          {interpreted ? (
-                            <InterpretationDialog
-                              open={interpretOpen}
-                              onClose={() => setInterpretOpen(false)}
-                              record={interpreted}
-                              entry={findSummary(entries, interpreted.accession)}
-                              query={query}
-                            />
-                          ) : null}
                         </>
                       );
                     }}

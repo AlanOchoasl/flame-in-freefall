@@ -6,6 +6,7 @@ import { PsiLink } from '../../components/PsiLink';
 import type { CatalogRecord, SummaryEntry } from '../../data/types';
 import type { InvestigationTestCoverage, RankedInvestigation, RankingProfile } from '../../lib/ranking';
 import { carryExplorerState, explorerHash, mergeExplorerState, parseExplorerQuery } from '../../router/explorerQuery';
+import { findSummary } from '../detailModel';
 import { addToSelection } from '../compare/selection';
 import { Breakdown, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
@@ -21,6 +22,7 @@ interface RankingPanelProps {
   coverage: Record<string, InvestigationTestCoverage>;
   /** The investigation last opened for interpretation, if any. */
   selected: string | null;
+  summaries: SummaryEntry[];
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
@@ -175,8 +177,12 @@ function AllRankedList({ ranked, profileLabel, renderRow, onClose }: { ranked: R
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
+export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, summaries, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
+  // "Interpret" opens the summary in a second dialog; when it came from the full list, that list can be reopened from it.
+  const [interpretOpen, setInterpretOpen] = useState(false);
+  const [cameFromList, setCameFromList] = useState(false);
+  const interpreted = records.find((record) => record.accession === selected) ?? null;
   const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
   const closeDialog = () => setDialogOpen(false);
   const top = topRows(filterRanked(ranked, NO_RANKING_FILTERS));
@@ -193,7 +199,9 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
       query={query}
       onSelect={(accession) => {
         onSelect(accession);
+        setCameFromList(inDialog);
         if (inDialog) closeDialog();
+        setInterpretOpen(true);
       }}
       onAction={inDialog ? closeDialog : undefined}
     />
@@ -223,13 +231,30 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
       <ConsoleDialog open={dialogOpen} onClose={closeDialog} titleId="ranking-dialog-title">
         <AllRankedList ranked={ranked} profileLabel={profile.label} renderRow={renderRow(true)} onClose={closeDialog} />
       </ConsoleDialog>
+      {interpreted ? (
+        <InterpretationDialog
+          open={interpretOpen}
+          onClose={() => setInterpretOpen(false)}
+          onBack={
+            cameFromList
+              ? () => {
+                  setInterpretOpen(false);
+                  setDialogOpen(true);
+                }
+              : undefined
+          }
+          record={interpreted}
+          entry={findSummary(summaries, interpreted.accession)}
+          query={query}
+        />
+      ) : null}
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
     </Panel>
   );
 }
 
-export function InterpretationDialog({ open, onClose, record, entry, query }: { open: boolean; onClose: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
+export function InterpretationDialog({ open, onClose, onBack, record, entry, query }: { open: boolean; onClose: () => void; /** Set when the dialog was opened from the full ranking list. */ onBack?: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
   return (
     <ConsoleDialog open={open} onClose={onClose} titleId="interpretation-title" className="interpret-dialog">
       <div className="ranking-dialog-body">
@@ -241,9 +266,16 @@ export function InterpretationDialog({ open, onClose, record, entry, query }: { 
             </h2>
             <p className="ranking-dialog-sub">{record.accession} · plain-language interpretation</p>
           </div>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
+          <div className="dialog-buttons">
+            {onBack ? (
+              <button type="button" onClick={onBack}>
+                ← Back to the ranking
+              </button>
+            ) : null}
+            <button type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
         </div>
         {entry ? (
           <>

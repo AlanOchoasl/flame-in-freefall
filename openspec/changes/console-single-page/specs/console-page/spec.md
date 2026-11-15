@@ -42,6 +42,10 @@ The side column SHALL show the relevance ranking (first five investigations, "Sh
 - **WHEN** a user activates "Show all N"
 - **THEN** a modal dialog lists every ranked investigation with the filters, the page behind does not grow, Esc or Close closes it and focus returns to "Show all N"
 
+#### Scenario: Interpreting from the full list
+- **WHEN** a user activates "Interpret" inside the full-list dialog
+- **THEN** the list closes, the interpretation dialog opens with a "Back to the ranking" button that reopens the list, and Close closes the interpretation without reopening it
+
 ### Requirement: Each panel fails alone
 Each panel SHALL load and fail independently, naming the file it could not load, without blocking the others.
 
