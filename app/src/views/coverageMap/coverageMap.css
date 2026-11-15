@@ -73,8 +73,8 @@
 }
 
 .map-primary, .map-side { min-width: 0; }
-/* Dot-matrix plot background (design.md 3.2): a 20px dot grid over the panel surface. */
-.map-plot-region .recharts-surface { background: radial-gradient(var(--plot-grid) 1px, transparent 1px) 0 0 / 20px 20px, var(--surface-1); }
+/* A clean plot surface: faint dashed gridlines only, so the markers carry the picture. */
+.map-plot-region .recharts-surface { background: var(--surface-1); border-radius: var(--radius-1); }
 .map-plot-region .recharts-cartesian-axis-tick-value,
 .map-plot-region .recharts-label { font: 12px var(--mono); }
 .map-plot-region .recharts-reference-area path { fill-opacity: var(--zone-fill-opacity); }
@@ -152,18 +152,60 @@
   color: var(--muted);
 }
 
+.map-legend-block { display: grid; gap: var(--space-2); }
+
 .map-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-5);
+  gap: var(--space-2);
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: var(--fs-sm);
 }
 
-.map-legend li {
+/* Each legend entry is a toggle chip: marker, name and how many tests it stands for. */
+.map-legend-item {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text-primary);
 }
+.map-legend-item[aria-pressed='false'] { opacity: 0.45; text-decoration: line-through; }
+.map-legend-item[aria-pressed='true']:not(.theme-switch button) { background: var(--surface-2); border-color: var(--line-strong); color: var(--text-primary); }
+.map-legend-count { padding: 1px 7px; border-radius: 999px; background: var(--surface-hover); color: var(--text-secondary); font: 12px var(--mono); }
+
+.map-legend-note { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); }
+.map-legend-ring { display: inline-flex; align-items: center; gap: 4px; margin-left: var(--space-3); white-space: nowrap; }
+
+.map-tooltip {
+  display: grid;
+  gap: 2px;
+  max-width: 260px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-1);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-card);
+}
+.map-tooltip span { color: var(--text-secondary); }
+.map-tooltip em { color: var(--text-muted); font-size: 12px; }
+
+.map-point-tests { margin: var(--space-3) 0 0; padding-left: var(--space-4); font-size: var(--fs-sm); max-height: 220px; overflow-y: auto; }
+
+/* Zoom controls above the plot; the wheel and a drag do the same on the plot itself. */
+.map-zoom-controls { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.map-zoom-hint { margin-right: auto; color: var(--text-muted); font-size: var(--fs-sm); }
+.map-zoom-controls button { min-width: var(--target-size); }
+/* Once zoomed in, the open hand shows over the whole plot (the recharts svg sets its own cursor, so it is set
+   on the children too); it closes while dragging. At full size the cursor stays the normal arrow. Markers
+   keep their pointing hand. */
+.map-plot-region.is-zoomed, .map-plot-region.is-zoomed svg, .map-plot-region.is-zoomed .recharts-wrapper { cursor: grab !important; }
+.map-plot-region.is-zoomed:active, .map-plot-region.is-zoomed:active svg, .map-plot-region.is-zoomed:active .recharts-wrapper { cursor: grabbing !important; }
