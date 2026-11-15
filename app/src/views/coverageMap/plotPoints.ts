@@ -6,6 +6,8 @@ export interface PlotPoint {
   x: number;
   y: number;
   record: ExperimentRecord;
+  /** True for the test the user picked; the marker draws a ring around it. */
+  selected?: boolean;
 }
 
 export function toPoint(record: ExperimentRecord): PlotPoint | null {

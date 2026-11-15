@@ -3,11 +3,10 @@ import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { Panel } from '../../components/Panel';
 import { PsiLink } from '../../components/PsiLink';
-import type { CatalogRecord, ExperimentRecord, SummaryEntry } from '../../data/types';
+import type { CatalogRecord, SummaryEntry } from '../../data/types';
 import type { InvestigationTestCoverage, RankedInvestigation, RankingProfile } from '../../lib/ranking';
 import { carryExplorerState, explorerHash, mergeExplorerState, parseExplorerQuery } from '../../router/explorerQuery';
 import { addToSelection } from '../compare/selection';
-import { computeInsight, describeInsight } from '../coverageMap/insight';
 import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
 import { profileDescription, topRows } from './consoleModel';
@@ -253,28 +252,6 @@ export function InterpretationPanel({ id, record, entry, query }: { id: string; 
         <a href={carryExplorerState(`/investigation/${record.accession}`, query)}>Open the investigation detail</a>
         <PsiLink accession={record.accession} doi={record.doi} />
       </p>
-    </Panel>
-  );
-}
-
-export function GapsPanel({ id, tests }: { id: string; tests: ExperimentRecord[] }) {
-  const data = computeInsight(tests);
-  const insight = describeInsight(data);
-  return (
-    <Panel id={id} title="Coverage gaps" tag="Interpret with care">
-      <p className="progress-row">
-        <span>Plotted tests in the expected Moon-base zone</span>
-        <strong>
-          {data.inZone} / {data.plotted}
-        </strong>
-      </p>
-      <progress value={data.inZone} max={Math.max(data.plotted, 1)} aria-label="Share of plotted tests in the expected Moon-base zone" />
-      <ul className="map-limits">
-        {insight.limits.map((limit) => (
-          <li key={limit}>{limit}</li>
-        ))}
-      </ul>
-      <p className="panel-note">An empty area of the map means no recorded test, never evidence of safety.</p>
     </Panel>
   );
 }

@@ -14,7 +14,7 @@ import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
-import { BoundariesPanel, GapsPanel, InterpretationPanel, RankingPanel } from './SidePanels';
+import { BoundariesPanel, InterpretationPanel, RankingPanel } from './SidePanels';
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -134,7 +134,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             onProfileChange={(id) => replaceExplorerState({ profile: id === profilesFile.profiles[0].id ? null : id })}
                           />
                           <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} query={query} />
-                          <GapsPanel id="gaps" tests={experimentsFile.records} />
                         </>
                       );
                     }}
