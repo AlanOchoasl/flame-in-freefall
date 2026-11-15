@@ -361,21 +361,23 @@ main h1:focus {
   padding: var(--space-6) var(--gutter);
 }
 
-.footer-brand, .footer-institution { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+.footer-brand { display: flex; align-items: center; justify-self: center; gap: var(--space-3); min-width: 0; margin-inline-start: var(--space-4); }
+.footer-brand .brand-mark { width: 56px; height: 56px; }
 .footer-brand div { display: grid; gap: var(--space-1); }
-.footer-brand strong { color: var(--text-primary); font-family: var(--font-heading); font-size: var(--fs-base); line-height: 1.2; }
+.footer-brand strong { color: var(--text-primary); font-family: var(--font-heading); font-size: 18px; line-height: 1.2; }
 .footer-brand span { color: var(--text-muted); }
-.footer-info { max-width: 72ch; }
+.footer-info { max-width: 72ch; margin-inline: auto; text-align: center; }
 .site-footer p { margin: 0 0 var(--space-2); }
 .site-footer p:last-child { margin-bottom: 0; }
 .site-footer a { color: var(--action); text-underline-offset: 3px; }
-.footer-institution { justify-self: end; color: var(--text-muted); }
-.footer-institution-icon { display: grid; width: 48px; height: 48px; flex: none; place-items: center; border: 1px dashed var(--line-strong); border-radius: var(--radius-1); }
-.footer-institution-icon svg { width: 24px; height: 24px; stroke-width: 1.75; }
+.footer-institution { display: grid; justify-self: center; gap: 2px; min-width: 0; margin-inline-end: var(--space-4); text-align: center; line-height: 1.15; }
+.footer-institution span { color: var(--text-secondary); font-size: var(--fs-base); font-weight: 400; }
+.footer-institution strong { color: var(--text-primary); font-family: var(--font-heading); font-size: 28px; font-weight: 600; letter-spacing: 0.04em; }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .footer-inner { grid-template-columns: minmax(0, 1fr); }
-  .footer-institution { justify-self: start; }
+  .footer-brand { margin-inline-start: 0; }
+  .footer-institution { margin-inline-end: 0; }
 }
 
 dl.facts {

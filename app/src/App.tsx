@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
-import { Building2, Menu, Moon, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { AmbientGlow } from './components/AmbientGlow';
 import { carryExplorerState } from './router/explorerQuery';
@@ -162,8 +162,8 @@ export function App() {
             </p>
           </div>
           <div className="footer-institution">
-            <span className="footer-institution-icon"><Building2 aria-hidden="true" /></span>
-            <span>Institution logo pending</span>
+            <span>Universidad de{' '}</span>
+            <strong>LA PUNTA</strong>
           </div>
         </div>
       </footer>
