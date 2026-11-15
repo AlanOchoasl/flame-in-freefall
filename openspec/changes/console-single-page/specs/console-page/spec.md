@@ -25,29 +25,33 @@ The four tiles (investigations, test records, plotted tests, tests in the expect
 - **THEN** the tiles show the new totals with no code change
 
 ### Requirement: Environment profile buttons
-The Relevance ranking panel SHALL offer one button per profile in the profiles file, with the selected one marked by `aria-pressed`. Selecting a profile SHALL re-rank the list and change the default interpreted investigation.
+The Relevance ranking panel SHALL offer one button per profile in the profiles file, with the selected one marked by `aria-pressed`. Selecting a profile SHALL re-rank the list and re-rank the list.
 
 #### Scenario: Switching profile
 - **WHEN** a user selects Fire detection
 - **THEN** the ranking shows the detection order and its heading names the profile
 
 ### Requirement: Side column
-The side column SHALL show the relevance ranking (first five investigations, "Show all N" opens the full list, with its fuel-phase and topic filters, in a modal dialog), the interpretation of the selected investigation (AI summary with its label, or the PSI text) and the coverage gaps with the count of plotted tests in the expected zone. Each ranking row SHALL show its score out of the maximum, a "No normalized test rows" mark when it has none, and links to the detail, to add it to the comparison and to PSI.
+The side column SHALL show the relevance ranking (first five investigations, "Show all N" opens the full list, with its fuel-phase and topic filters, in a modal dialog). "Interpret" on a row SHALL open the interpretation of that investigation (AI summary with its label and a highlighted fire-safety note, or the PSI text) in a modal dialog. The count of plotted tests in the expected zone lives in the map card "What the data shows", which follows the map filters. Each ranking row SHALL show its score out of the maximum, a "No normalized test rows" mark when it has none, and links to the detail, to add it to the comparison and to PSI.
 
 #### Scenario: Interpreting a row
 - **WHEN** a user activates "Interpret" on a ranking row
-- **THEN** the interpretation panel shows that investigation and the row is marked selected
+- **THEN** a modal dialog shows the interpretation of that investigation and the row is marked
 
 #### Scenario: Opening the full ranking
 - **WHEN** a user activates "Show all N"
 - **THEN** a modal dialog lists every ranked investigation with the filters, the page behind does not grow, Esc or Close closes it and focus returns to "Show all N"
+
+#### Scenario: Interpreting from the full list
+- **WHEN** a user activates "Interpret" inside the full-list dialog
+- **THEN** the list closes, the interpretation dialog opens with a "Back to the ranking" button that reopens the list, and Close closes the interpretation without reopening it
 
 ### Requirement: Each panel fails alone
 Each panel SHALL load and fail independently, naming the file it could not load, without blocking the others.
 
 #### Scenario: Missing summaries file
 - **WHEN** the summaries file cannot be loaded
-- **THEN** the ranking, the map and the comparison work and the interpretation shows the PSI text
+- **THEN** the ranking, the map and the comparison work and the interpretation dialog shows the PSI text
 
 ### Requirement: Focus and layout
 Moving to a section route SHALL move focus to that section's heading. The page SHALL have one `h1`. Below 1024 px the columns SHALL stack, and no screen SHALL scroll sideways at 360 px except tables and the plot inside their own area.

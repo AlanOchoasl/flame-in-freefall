@@ -10,11 +10,10 @@ import { SECTION_CHANGE, visibleSection, type Band, type ConsoleSectionId } from
 import { CompareBody } from '../compare/Compare';
 import { parseSelection } from '../compare/selection';
 import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../coverageMap/CoverageMap';
-import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
-import { BoundariesPanel, GapsPanel, InterpretationPanel, RankingPanel } from './SidePanels';
+import { ConsoleFootnote, RankingPanel } from './SidePanels';
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -24,8 +23,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
   const summaries = useDataResult(getSummaries);
   // The profile, the selected investigation, the comparison and the map filters live in the address.
   const explorer = parseExplorerQuery(query);
-  const knownSelected =
-    catalog.status === 'ok' && catalog.data.records.some((record) => record.accession === explorer.selected) ? explorer.selected : null;
 
   // While the page scrolls, tell the header which section is being read so its menu follows.
   useEffect(() => {
@@ -98,9 +95,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
               )}
             </DataState>
           </Panel>
-          <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
-            <CompareBody query={query} />
-          </Panel>
         </div>
 
         <div className="side-column">
@@ -113,9 +107,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                       const profile = profilesFile.profiles.find((p) => p.id === explorer.profile) ?? profilesFile.profiles[0];
                       const coverage = testCoverageByAccession(experimentsFile.investigations);
                       const ranked = rankInvestigations(catalogFile.records, profile, coverage);
-                      const firstRanked = ranked[0].investigation.accession;
-                      const record = catalogFile.records.find((r) => r.accession === explorer.selected) ?? catalogFile.records.find((r) => r.accession === firstRanked)!;
-                      const selectedAccession = record.accession;
+                      const interpreted = catalogFile.records.find((r) => r.accession === explorer.selected) ?? null;
                       const entries = summaries.status === 'ok' ? summaries.data.entries : [];
                       return (
                         <>
@@ -127,14 +119,13 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             profiles={profilesFile.profiles}
                             sourceUrl={profilesFile.source.url}
                             coverage={coverage}
-                            selected={selectedAccession}
+                            selected={interpreted?.accession ?? null}
                             compareIds={parseSelection(query, catalogFile.records.map((r) => r.accession))}
                             query={query}
-                            onSelect={(accession) => replaceExplorerState({ selected: accession === firstRanked ? null : accession })}
+                            summaries={entries}
+                            onSelect={(accession) => replaceExplorerState({ selected: accession })}
                             onProfileChange={(id) => replaceExplorerState({ profile: id === profilesFile.profiles[0].id ? null : id })}
                           />
-                          <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} query={query} />
-                          <GapsPanel id="gaps" tests={experimentsFile.records} />
                         </>
                       );
                     }}
@@ -146,7 +137,12 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         </div>
       </div>
 
-      <BoundariesPanel id="boundaries" selected={knownSelected} query={query} />
+      {/* The comparison table needs the whole width, so it sits under the map and the ranking. */}
+      <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
+        <CompareBody query={query} />
+      </Panel>
+
+      <ConsoleFootnote query={query} />
     </div>
   );
 }

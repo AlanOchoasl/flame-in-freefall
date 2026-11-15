@@ -14,6 +14,7 @@ import {
   filterOptions,
   filtersFromExplorer,
   hasActiveFilters,
+  isFilterUseful,
   NO_FILTERS, ZONE_ONLY,
   OUTCOME_LABELS,
   OUTCOMES,
@@ -336,10 +337,18 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
       <p className="map-lead">Each dot is one real test from NASA PSI, placed by its O2 (%) and its pressure (bar).</p>
       <fieldset className="map-filters">
         <legend>Filters</legend>
-        <FilterSelect label="Investigation" value={filters.accession} options={options.accessions} onChange={set('accession')} />
-        <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
-        <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
-        <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+        {isFilterUseful(options.accessions, filters.accession) ? (
+          <FilterSelect label="Investigation" value={filters.accession} options={options.accessions} onChange={set('accession')} />
+        ) : null}
+        {isFilterUseful(options.flameTypes, filters.flameType) ? (
+          <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
+        ) : null}
+        {isFilterUseful(options.fuels, filters.fuel) ? (
+          <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
+        ) : null}
+        {isFilterUseful(options.outcomes, filters.outcome) ? (
+          <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+        ) : null}
         <label className="map-field">
           <span>Moon-base zone</span>
           <select value={filters.zone ?? ''} onChange={(event) => set('zone')(event.target.value || null)}>
@@ -389,6 +398,12 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
             </div>
           )}
 
+
+          <section className="map-card" aria-labelledby="details-title">
+            <h2 id="details-title">Selected test</h2>
+            <PointDetails point={selected} />
+          </section>
+
           <OverlayList />
         </div>
 
@@ -410,10 +425,6 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
                 <li key={limit}>{limit}</li>
               ))}
             </ul>
-          </section>
-          <section className="map-card" aria-labelledby="details-title">
-            <h2 id="details-title">Selected test</h2>
-            <PointDetails point={selected} />
           </section>
         </aside>
       </div>

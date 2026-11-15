@@ -51,6 +51,11 @@ export function matchesFilters(record: ExperimentRecord, filters: MapFilters): b
   );
 }
 
+/** A filter with a single choice filters nothing, so it is hidden unless it is already set (an address can set it). */
+export function isFilterUseful(options: string[], current: string | null): boolean {
+  return options.length > 1 || current !== null;
+}
+
 /** Every test that matches the filters, including the ones that cannot be plotted. */
 export function applyFilters(records: ExperimentRecord[], filters: MapFilters): ExperimentRecord[] {
   return records.filter((record) => matchesFilters(record, filters));

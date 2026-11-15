@@ -3,12 +3,12 @@ import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { Panel } from '../../components/Panel';
 import { PsiLink } from '../../components/PsiLink';
-import type { CatalogRecord, ExperimentRecord, SummaryEntry } from '../../data/types';
+import type { CatalogRecord, SummaryEntry } from '../../data/types';
 import type { InvestigationTestCoverage, RankedInvestigation, RankingProfile } from '../../lib/ranking';
 import { carryExplorerState, explorerHash, mergeExplorerState, parseExplorerQuery } from '../../router/explorerQuery';
+import { findSummary } from '../detailModel';
 import { addToSelection } from '../compare/selection';
-import { computeInsight, describeInsight } from '../coverageMap/insight';
-import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
+import { Breakdown, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
 import { profileDescription, topRows } from './consoleModel';
 
@@ -20,7 +20,9 @@ interface RankingPanelProps {
   profiles: RankingProfile[];
   sourceUrl: string;
   coverage: Record<string, InvestigationTestCoverage>;
-  selected: string;
+  /** The investigation last opened for interpretation, if any. */
+  selected: string | null;
+  summaries: SummaryEntry[];
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
@@ -70,7 +72,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         {item.note ? <span className="evidence-mark">{item.note}</span> : null}
       </p>
       <p className="row-actions">
-        <button type="button" aria-pressed={selected} aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
+        <button type="button" aria-haspopup="dialog" aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
           Interpret
         </button>
         <a href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
@@ -98,7 +100,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
 }
 
 // The full list opens in a native <dialog>: it traps focus, closes on Esc and returns focus to the button that opened it.
-function RankingDialog({ open, onClose, children }: { open: boolean; onClose: () => void; children: ReactNode }) {
+export function ConsoleDialog({ open, onClose, titleId, className, children }: { open: boolean; onClose: () => void; titleId: string; className?: string; children: ReactNode }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = ref.current;
@@ -109,8 +111,8 @@ function RankingDialog({ open, onClose, children }: { open: boolean; onClose: ()
   return (
     <dialog
       ref={ref}
-      className="ranking-dialog"
-      aria-labelledby="ranking-dialog-title"
+      className={className ? `ranking-dialog ${className}` : 'ranking-dialog'}
+      aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
@@ -175,8 +177,12 @@ function AllRankedList({ ranked, profileLabel, renderRow, onClose }: { ranked: R
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
+export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, summaries, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
+  // "Interpret" opens the summary in a second dialog; when it came from the full list, that list can be reopened from it.
+  const [interpretOpen, setInterpretOpen] = useState(false);
+  const [cameFromList, setCameFromList] = useState(false);
+  const interpreted = records.find((record) => record.accession === selected) ?? null;
   const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
   const closeDialog = () => setDialogOpen(false);
   const top = topRows(filterRanked(ranked, NO_RANKING_FILTERS));
@@ -193,10 +199,9 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
       query={query}
       onSelect={(accession) => {
         onSelect(accession);
-        if (inDialog) {
-          closeDialog();
-          document.getElementById('interpretation')?.scrollIntoView();
-        }
+        setCameFromList(inDialog);
+        if (inDialog) closeDialog();
+        setInterpretOpen(true);
       }}
       onAction={inDialog ? closeDialog : undefined}
     />
@@ -223,84 +228,90 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
           Show all {ranked.length}
         </button>
       ) : null}
-      <RankingDialog open={dialogOpen} onClose={closeDialog}>
+      <ConsoleDialog open={dialogOpen} onClose={closeDialog} titleId="ranking-dialog-title">
         <AllRankedList ranked={ranked} profileLabel={profile.label} renderRow={renderRow(true)} onClose={closeDialog} />
-      </RankingDialog>
+      </ConsoleDialog>
+      {interpreted ? (
+        <InterpretationDialog
+          open={interpretOpen}
+          onClose={() => setInterpretOpen(false)}
+          onBack={
+            cameFromList
+              ? () => {
+                  setInterpretOpen(false);
+                  setDialogOpen(true);
+                }
+              : undefined
+          }
+          record={interpreted}
+          entry={findSummary(summaries, interpreted.accession)}
+          query={query}
+        />
+      ) : null}
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
     </Panel>
   );
 }
 
-export function InterpretationPanel({ id, record, entry, query }: { id: string; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
+export function InterpretationDialog({ open, onClose, onBack, record, entry, query }: { open: boolean; onClose: () => void; /** Set when the dialog was opened from the full ranking list. */ onBack?: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
   return (
-    <Panel id={id} title="Plain-language interpretation" subtitle={`${record.accession} · source-grounded summary`}>
-      {entry ? (
-        <>
-          <AiLabel model={entry.model} reviewed={entry.reviewed} />
-          <p>{entry.summary}</p>
-          <p>
-            <strong>Fire-safety note:</strong> {entry.fireSafetyRelevance}
-          </p>
-        </>
-      ) : (
-        <>
-          <PsiTextLabel />
-          <p>{record.objectives ?? <NotAvailable reason="not-in-psi-record" />}</p>
-        </>
-      )}
-      <p className="row-actions">
-        <a href={carryExplorerState(`/investigation/${record.accession}`, query)}>Open the investigation detail</a>
-        <PsiLink accession={record.accession} doi={record.doi} />
-      </p>
-    </Panel>
-  );
-}
-
-export function GapsPanel({ id, tests }: { id: string; tests: ExperimentRecord[] }) {
-  const data = computeInsight(tests);
-  const insight = describeInsight(data);
-  return (
-    <Panel id={id} title="Coverage gaps" tag="Interpret with care">
-      <p className="progress-row">
-        <span>Plotted tests in the expected Moon-base zone</span>
-        <strong>
-          {data.inZone} / {data.plotted}
-        </strong>
-      </p>
-      <progress value={data.inZone} max={Math.max(data.plotted, 1)} aria-label="Share of plotted tests in the expected Moon-base zone" />
-      <ul className="map-limits">
-        {insight.limits.map((limit) => (
-          <li key={limit}>{limit}</li>
-        ))}
-      </ul>
-      <p className="panel-note">An empty area of the map means no recorded test, never evidence of safety.</p>
-    </Panel>
-  );
-}
-
-export function BoundariesPanel({ id, selected, query }: { id: string; selected: string | null; query: URLSearchParams }) {
-  return (
-    <div className="bottom-line">
-      <Panel id={`${id}-detail`} title="Investigation detail route" tag="Drill-down">
-        <p>
-          Study objective, approach, hypothesis, measurements, test ranges, ranking positions, AI summary, DOI and PSI citation. Missing
-          fields keep their reason.
-        </p>
-        {selected ? (
-          <p className="row-actions">
-            <a href={carryExplorerState(`/investigation/${selected}`, query)}>Open {selected}</a>
-          </p>
-        ) : null}
-      </Panel>
-      <Panel id={id} title="Interpretation boundaries" tag="About / sources">
-        <p>{DISCLAIMER}</p>
-        <p>This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor.</p>
-        <p>The lunar zone is expected from the challenge statement, not a final habitat specification. AI text is precomputed and labeled.</p>
+    <ConsoleDialog open={open} onClose={onClose} titleId="interpretation-title" className="interpret-dialog">
+      <div className="ranking-dialog-body">
+        <div className="ranking-dialog-head">
+          <div>
+            <h2 id="interpretation-title">
+              {record.acronym ? `${record.acronym}: ` : ''}
+              {record.title}
+            </h2>
+            <p className="ranking-dialog-sub">{record.accession} · plain-language interpretation</p>
+          </div>
+          <div className="dialog-buttons">
+            {onBack ? (
+              <button type="button" onClick={onBack}>
+                ← Back to the ranking
+              </button>
+            ) : null}
+            <button type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        </div>
+        {entry ? (
+          <>
+            <AiLabel model={entry.model} reviewed={entry.reviewed} />
+            <p>{entry.summary}</p>
+            <div className="fire-note">
+              <strong>Fire-safety note</strong>
+              <p>{entry.fireSafetyRelevance}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <PsiTextLabel />
+            <p>{record.objectives ?? <NotAvailable reason="not-in-psi-record" />}</p>
+          </>
+        )}
         <p className="row-actions">
-          <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
+          <a href={carryExplorerState(`/investigation/${record.accession}`, query)} onClick={onClose}>
+            Open the investigation detail
+          </a>
+          <PsiLink accession={record.accession} doi={record.doi} />
         </p>
-      </Panel>
-    </div>
+      </div>
+    </ConsoleDialog>
+  );
+}
+
+// The limits of the explorer, kept to one line under the console instead of a panel of their own.
+export function ConsoleFootnote({ query }: { query: URLSearchParams }) {
+  return (
+    <footer className="console-footnote">
+      <p>
+        This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. The lunar zone is expected from the
+        challenge statement, not a final habitat specification. AI text is precomputed and labeled.{' '}
+        <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
+      </p>
+    </footer>
   );
 }

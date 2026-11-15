@@ -7,7 +7,7 @@ Defines the visual and interaction contract of the research-console presentation
 ## ADDED Requirements
 
 ### Requirement: Research-console frame
-The app SHALL show a consistent compact header, current-route navigation, PSI attribution on every route, without representing cached data as live spacecraft telemetry. The methodological statement (an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor) is shown in the Interpretation boundaries panel and no longer as a band under the header.
+The app SHALL show a consistent compact header, current-route navigation, PSI attribution on every route, without representing cached data as live spacecraft telemetry. The methodological statement (an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor) is shown in a one-line footnote under the console and no longer as a band under the header.
 
 #### Scenario: Navigate between existing routes
 - **WHEN** a visitor opens Ranking, Compare, Coverage map, Investigation detail or About
