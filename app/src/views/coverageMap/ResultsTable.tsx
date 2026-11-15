@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pager } from '../../components/Pager';
 import type { ExperimentRecord } from '../../data/types';
+import { clampPage, pageCount, pageRange, pageSlice } from '../../lib/pagination';
 import { OUTCOME_SHORT_LABELS } from './filters';
-import { clampPage, pageCount, pageItems, pageRange, pageSlice } from './pagination';
 
 // The filtered tests as a table (keyboard-friendly alternative to the chart), 10 rows per page.
 // The map keys this component by its filters, so a new filter starts again on page 1.
@@ -53,36 +53,7 @@ export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
       <p role="status" className="table-status">
         showing {from}–{to} of {records.length}
       </p>
-      {count > 1 ? (
-        <nav className="table-pager" aria-label="Table pages">
-          <button type="button" className="icon-action" onClick={() => setRequested(page - 1)} disabled={page === 1}>
-            <ChevronLeft className="action-icon" aria-hidden="true" />
-            Previous
-          </button>
-          {pageItems(page, count).map((item, index) =>
-            item === 'gap' ? (
-              <span key={`gap-${index}`} className="table-pager-gap" aria-hidden="true">
-                …
-              </span>
-            ) : (
-              <button
-                key={item}
-                type="button"
-                className="table-pager-page"
-                aria-label={`Page ${item} of ${count}`}
-                aria-current={item === page ? 'page' : undefined}
-                onClick={() => setRequested(item)}
-              >
-                {item}
-              </button>
-            ),
-          )}
-          <button type="button" className="icon-action" onClick={() => setRequested(page + 1)} disabled={page === count}>
-            Next
-            <ChevronRight className="action-icon" aria-hidden="true" />
-          </button>
-        </nav>
-      ) : null}
+      <Pager page={page} count={count} onChange={setRequested} label="Table pages" />
     </section>
   );
 }
