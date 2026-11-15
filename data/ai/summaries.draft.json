@@ -2,22 +2,6 @@
   "schemaVersion": "1.0.0",
   "entries": [
     {
-      "accession": "PSI-10",
-      "summary": "The Advanced Combustion via Microgravity Experiments / Flame Design investigation studies normal and inverse spherical diffusion flames using C2H4 and CH4 fuels. Its purpose is to determine soot-inception limits, flame characteristics, and extinction limits under varying flow rates, pressures, and diluents like N2 and CO2. Testing is conducted in drop towers and aboard the International Space Station using cameras, radiometers, photomultiplier tubes, and thermocouples. The study evaluates hypotheses regarding soot formation conditions, the existence of steady-state spherical flames, and flame extinction occurring when peak temperatures fall below 1130 K.",
-      "fireSafetyRelevance": "The source text does not state a direct spacecraft fire-safety application, focusing instead on flame fundamentals and terrestrial combustor efficiency.",
-      "aiGenerated": true,
-      "model": "gemini-3.6-flash",
-      "generatedAt": "2026-11-14",
-      "promptVersion": "1.0.0",
-      "sourceFields": [
-        "objectives",
-        "approach",
-        "hypothesis",
-        "earthBenefits"
-      ],
-      "reviewed": true
-    },
-    {
       "accession": "PSI-20",
       "summary": "The Advanced Combustion via Microgravity Experiments - Burning Rate Emulator (BRE) investigation examined whether quasi-steady burning of condensed fuels occurs in microgravity without airflow based on material properties. Aboard the International Space Station (ISS), researchers burned fuel mixtures on porous circular burners under various oxygen concentrations and pressures. The investigation demonstrated that flames simulating materials such as PMMA and Nylon can continue burning without airflow in elevated-oxygen atmospheres considered for future human spaceflight, whereas flames in normal atmospheres extinguished quickly. These results help guide the use of NASA Test 2 cone calorimeter data to establish flammability maps for real materials.",
       "fireSafetyRelevance": "This investigation informs material flammability and flame fundamentals for spacecraft fire safety. It demonstrated that burning can continue without airflow in elevated-oxygen atmospheres considered for future spacecraft missions, despite ventilation shut-off being a standard fire response. The work supports using NASA Test 2 cone calorimeter data to establish flammability maps for spacecraft materials in microgravity.",
@@ -223,7 +207,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-99",
@@ -239,7 +223,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-100",
@@ -255,7 +239,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-101",
@@ -271,7 +255,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-102",
@@ -287,7 +271,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-106",
@@ -303,7 +287,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-107",
@@ -319,7 +303,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-108",
@@ -335,7 +319,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-115",
@@ -351,7 +335,55 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
+    },
+    {
+      "accession": "PSI-117",
+      "summary": "Researchers conducted a ground study to examine how external heat and convection affect the dynamics, stability, and extinction of cool flames around droplets in microgravity. Using data from NASA's Flame Extinguishment Experiment (FLEX) obtained through PSI, the team created a three-dimensional CFD model in OpenFOAM. The model simulated n-alkane droplet cool flames by combining fluid flow, low-temperature chemistry, heat and mass transfer, and radiation. By testing deliberate heating and drift-induced convection on large and small droplets, the study produced stability maps for ignition, sustained oscillation, warm-flame transitions, and extinction. These models help explain run-to-run variability in microgravity experiments.",
+      "fireSafetyRelevance": "This investigation informs spacecraft fire-safety modeling and flame fundamentals in microgravity crew environments. By resolving cool-flame and extinction behavior under thermal and convective perturbations, the findings leverage FLEX data to help define safer operating envelopes and materials for spacecraft.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
+    },
+    {
+      "accession": "PSI-142",
+      "summary": "This investigation used Flame Extinguishment (FLEX) data from the Physical Sciences Informatics (PSI) system to study how hot flames transition to cool flames. Researchers conducted numerical modeling and ground-based experiments using ozone-sensitized counterflow flames, n-heptane/air mixtures, and dimethyl ether (DME)/air mixtures. The project examined how oxygen concentration, pressure up to 20 atmospheres, diffusion, and convection affect flammability limits, helping verify International Space Station (ISS) observations. The study revealed that warm flames have a double reaction zone structure critical to cool-to-hot flame transitions. Increased pressure expands warm and cool flame flammable regions due to enhanced low- and intermediate-temperature reactivity.",
+      "fireSafetyRelevance": "This investigation informs flame fundamentals regarding flammability limits, extinction limits, and flame regime transitions in microgravity environments with long residence times. The source text does not state a direct crew fire-safety application.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
+    },
+    {
+      "accession": "PSI-159",
+      "summary": "This investigation plans and supports flight testing aboard the International Space Station (ISS) to understand cool diffusion flames. Researchers perform spherical porous burner tests using fuels such as propane, n-butane, and n-pentane under a range of reactant dilutions, flow rates, and pressures for normal and inverse flames. Using advanced Computational Fluid Dynamics (CFD) simulations and diagnostic instruments like cameras, radiometers, photomultiplier tubes, and thermocouples, the study aims to identify chemical kinetics mechanisms for cool flames with peak temperatures between 500 and 1000 Kelvin. The primary purpose is to advance cool flame kinetics to help develop more efficient internal combustion engines.",
+      "fireSafetyRelevance": "The source states no direct fire-safety application for crew environments, focusing instead on fundamental cool flame kinetics to improve internal combustion engine efficiency on Earth.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
     },
     {
       "accession": "PSI-181",
@@ -367,7 +399,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     }
   ]
 }

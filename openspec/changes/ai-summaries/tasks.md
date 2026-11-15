@@ -16,16 +16,16 @@ Depends on: `investigation-catalog` types and stub (task 1.1).
 Depends on: 1.1. Tasks 2.1 and 2.2 are independent; split by accession range.
 
 - [x] 2.1 (Sat by 20:00, ≤2h) Draft summaries for the first 13 investigations with Gemini (app or API, per team decision) into the draft file; verify the check script passes on them.
-- [ ] 2.2 (Sat by 20:00, ≤2h) Same for the last 13 investigations; verify the check script passes.
+- [x] 2.2 (Sat by 20:00, ≤2h) Same for the last 13 investigations; verify the check script passes.
 - [x] 2.3 (Sun by 11:00, ≤3h) Review each draft against its source, fix wording, set `reviewed: true` only when satisfied; verify strict mode lists only the entries not yet reviewed. Plan B: leave unreviewed ones labeled, or drop them so the app falls back to PSI text.
 
 ## 3. Output and use
 
 Depends on: 1.2, 2.x and `app-shell` 4.1.
 
-- [ ] 3.1 (Sun by 11:30, ≤30 min) Write `data/processed/summaries.json` from the reviewed drafts; verify the app shows the AI label with model name and review status.
-- [ ] 3.2 (Sun by 14:00, ≤30 min) Collect model, dates and prompt version into the AI-use description for the project page; verify the text matches the file.
-- [ ] 3.3 (Sun by 14:00, ≤15 min) Confirm no keys are in the repo and `.env` is ignored; verify with a search of the repo.
+- [x] 3.1 (Sun by 11:30, ≤30 min) Write `data/processed/summaries.json` from the reviewed drafts; verify the app shows the AI label with model name and review status.
+- [x] 3.2 (Sun by 14:00, ≤30 min) Collect model, dates and prompt version into the AI-use description for the project page; verify the text matches the file.
+- [x] 3.3 (Sun by 14:00, ≤15 min) Confirm no keys are in the repo and `.env` is ignored; verify with a search of the repo.
 
 ## Workflow follow-up
 
