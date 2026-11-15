@@ -30,11 +30,23 @@ export function Panel({ id, title, subtitle, tag, routeFocus, children }: PanelP
   );
 }
 
-export function MetricTile({ value, label }: { value: number; label: string }) {
-  return (
-    <article className="metric-card">
+export function MetricTile({ value, label, href, hint }: { value: number; label: string; href?: string; hint?: string }) {
+  const content = (
+    <>
       <p className="metric">{value}</p>
       <p className="metric-label">{label}</p>
+      {hint ? <p className="metric-hint">{hint}</p> : null}
+    </>
+  );
+  return (
+    <article className="metric-card">
+      {href ? (
+        <a className="metric-link" href={href}>
+          {content}
+        </a>
+      ) : (
+        content
+      )}
     </article>
   );
 }

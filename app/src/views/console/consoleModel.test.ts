@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { CatalogFile, ExperimentsFile } from '../../data/types';
-import { COLLAPSED_ROWS, consoleMetrics, visibleRows } from './consoleModel';
+import type { RankingProfile } from '../../lib/ranking';
+import { COLLAPSED_ROWS, consoleMetrics, profileDescription, visibleRows } from './consoleModel';
 
 const read = <T>(name: string): T =>
   JSON.parse(readFileSync(new URL(`../../../../data/processed/${name}`, import.meta.url), 'utf8')) as T;
@@ -9,10 +10,10 @@ const read = <T>(name: string): T =>
 describe('consoleMetrics', () => {
   it('counts what the loaded files contain', () => {
     const metrics = consoleMetrics(26, {
-      plottableCount: 2,
+      investigations: [{ records: 3 }, { records: 0 }] as ExperimentsFile['investigations'],
       records: [{ inMoonBaseZone: true }, { inMoonBaseZone: false }, { inMoonBaseZone: false }] as ExperimentsFile['records'],
     });
-    expect(metrics).toEqual({ investigations: 26, tests: 3, plotted: 2, inZone: 1 });
+    expect(metrics).toEqual({ investigations: 26, tests: 3, withTests: 1, inZone: 1 });
   });
 
   it('matches the committed data files', () => {
@@ -21,8 +22,8 @@ describe('consoleMetrics', () => {
     const metrics = consoleMetrics(catalog.records.length, experiments);
     expect(metrics.investigations).toBe(catalog.recordCount);
     expect(metrics.tests).toBe(experiments.records.length);
-    expect(metrics.plotted).toBeLessThanOrEqual(metrics.tests);
-    expect(metrics.inZone).toBeLessThanOrEqual(metrics.plotted);
+    expect(metrics.withTests).toBeLessThanOrEqual(metrics.investigations);
+    expect(metrics.inZone).toBeLessThanOrEqual(metrics.tests);
   });
 });
 
@@ -35,5 +36,16 @@ describe('visibleRows', () => {
 
   it('shows every row when expanded', () => {
     expect(visibleRows(rows, true)).toHaveLength(12);
+  });
+});
+
+describe('profileDescription', () => {
+  it('is the rationale of the topic factor, taken from the profiles file', () => {
+    const profile = { id: 'x', label: 'X', factors: { topicMatch: { rationale: 'Because of the topic.' } } } as unknown as RankingProfile;
+    expect(profileDescription(profile)).toBe('Because of the topic.');
+  });
+
+  it('is empty when the profile has no topic factor', () => {
+    expect(profileDescription({ id: 'x', label: 'X', factors: {} })).toBe('');
   });
 });

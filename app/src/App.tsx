@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { carryExplorerState } from './router/explorerQuery';
+import { SECTION_CHANGE, SECTION_PATHS, type ConsoleSectionId } from './router/visibleSection';
+import { readStoredTheme, storeTheme, type Theme } from './theme';
 import { useOfflineReady } from './offline';
 import { matchRoute } from './router/matchRoute';
 import { useHashLocation } from './router/useHashLocation';
@@ -19,7 +21,9 @@ export function App() {
   const mainRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [theme, setTheme] = useState<Theme | null>(readStoredTheme);
+  // The console routes are sections of one page: the menu follows the one being read.
+  const [readingPath, setReadingPath] = useState<string | null>(null);
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() =>
     window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark',
   );
@@ -29,6 +33,17 @@ export function App() {
     const onChange = () => setSystemTheme(preference.matches ? 'light' : 'dark');
     preference.addEventListener('change', onChange);
     return () => preference.removeEventListener('change', onChange);
+  }, []);
+
+  const chooseTheme = (choice: Theme) => {
+    setTheme(choice);
+    storeTheme(choice);
+  };
+
+  useEffect(() => {
+    const onSection = (event: Event) => setReadingPath(SECTION_PATHS[(event as CustomEvent<ConsoleSectionId>).detail]);
+    window.addEventListener(SECTION_CHANGE, onSection);
+    return () => window.removeEventListener(SECTION_CHANGE, onSection);
   }, []);
 
   useEffect(() => {
@@ -42,6 +57,9 @@ export function App() {
 
   // Any route change closes the menu, including the browser's Back button.
   useEffect(() => setMenuOpen(false), [route]);
+
+  // A new route starts from its own section until the page is scrolled again.
+  useEffect(() => setReadingPath(null), [route]);
 
   const closeMenuOnEscape = (event: KeyboardEvent) => {
     if (event.key !== 'Escape' || !menuOpen) return;
@@ -86,7 +104,7 @@ export function App() {
               .filter((view) => view.inNav)
               .map((view) => (
                 <li key={view.path}>
-                  <a href={carryExplorerState(view.path, query)} aria-current={view.path === currentPath ? 'page' : undefined}>
+                  <a href={carryExplorerState(view.path, query)} aria-current={view.path === (match?.view.section ? (readingPath ?? currentPath) : currentPath) ? 'page' : undefined}>
                     {view.title}
                   </a>
                 </li>
@@ -95,17 +113,13 @@ export function App() {
         </nav>
         <div className="theme-switch" role="group" aria-label="Color theme">
           {(['light', 'dark'] as const).map((choice) => (
-            <button key={choice} type="button" aria-pressed={(theme ?? systemTheme) === choice} onClick={() => setTheme(choice)}>
+            <button key={choice} type="button" aria-pressed={(theme ?? systemTheme) === choice} onClick={() => chooseTheme(choice)}>
               {choice === 'light' ? 'Light' : 'Dark'}
             </button>
           ))}
         </div>
         <span className="dataset-state">CACHED PSI DATA</span>
       </header>
-      <div className="console-notice">
-        <strong>EXPERIMENTAL DATA EXPLORER</strong>
-        <span>Not a spacecraft monitor or operational fire-risk predictor.</span>
-      </div>
       <main id="main-content" ref={mainRef} tabIndex={-1}>
         {match ? <match.view.component params={match.params} query={match.query} section={match.view.section} /> : <NotFound requested={hash} />}
       </main>

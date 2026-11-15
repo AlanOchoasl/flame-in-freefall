@@ -22,8 +22,15 @@ describe('explorerQuery', () => {
       flame: 'normal',
       fuel: 'propane',
       outcome: 'yes',
+      zone: 'in',
     };
     expect(parse(serializeExplorerQuery(state))).toEqual(state);
+  });
+
+  it('writes the zone filter as a parameter and ignores values the map does not offer', () => {
+    expect(serializeExplorerQuery({ ...NO_EXPLORER_STATE, zone: 'in' })).toBe('zone=in');
+    expect(cleanExplorerState({ ...NO_EXPLORER_STATE, zone: 'anything' }, { zones: ['in'] }).zone).toBeNull();
+    expect(cleanExplorerState({ ...NO_EXPLORER_STATE, zone: 'in' }, { zones: ['in'] }).zone).toBe('in');
   });
 
   it('leaves defaults out of the address', () => {

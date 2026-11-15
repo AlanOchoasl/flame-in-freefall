@@ -212,6 +212,7 @@ export function BoundariesPanel({ id, selected, query }: { id: string; selected:
       </Panel>
       <Panel id={id} title="Interpretation boundaries" tag="About / sources">
         <p>{DISCLAIMER}</p>
+        <p>This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor.</p>
         <p>The lunar zone is expected from the challenge statement, not a final habitat specification. AI text is precomputed and labeled.</p>
         <p className="row-actions">
           <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
