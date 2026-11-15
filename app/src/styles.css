@@ -622,7 +622,22 @@ main:has(> .console-page) { max-width: none; padding: 0; }
 .workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 440px); gap: var(--space-4); align-items: start; }
 .main-column, .side-column { display: grid; gap: var(--space-4); min-width: 0; }
 
-.panel { min-width: 0; background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-2); box-shadow: var(--shadow-card); }
+.panel { min-width: 0; background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-2); box-shadow: var(--shadow-card); position: relative; }
+/* The panel a menu click just scrolled to: a ring in the action color for two seconds (see sectionScroll.ts).
+   The ring is its own layer that only fades in opacity: animating the panel's own shadow or border would repaint
+   it while its backdrop blur sits over the moving ambient glow, which glitches in Chrome. */
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--action);
+  border-radius: calc(var(--radius-2) + 3px);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--action) 40%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease-out;
+}
+.panel.is-highlighted::after { opacity: 1; }
 .metric-card, .map-card { box-shadow: var(--shadow-card); }
 .metric-card { padding: var(--space-4) var(--space-5); transition: border-color 150ms ease-out; }
 .metric-card:hover { border-color: var(--line-strong); }

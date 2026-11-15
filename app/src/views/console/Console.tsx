@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { DataState } from '../../components/DataState';
 import { MetricTile, Panel } from '../../components/Panel';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
@@ -47,8 +47,13 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
     };
   }, []);
 
-  // Opening the page on a section, or moving to another one from the menu, scrolls there smoothly.
-  useEffect(() => scrollToSection(section), [section]);
+  // Opening the page on a section, or moving to another one from the menu, scrolls there smoothly. Only a move
+  // the user makes rings the panel; the first load does not.
+  const previousSection = useRef<string | null>(null);
+  useEffect(() => {
+    scrollToSection(section, { highlight: previousSection.current !== null && previousSection.current !== section });
+    previousSection.current = section;
+  }, [section]);
 
   return (
     <div className="console-page">
