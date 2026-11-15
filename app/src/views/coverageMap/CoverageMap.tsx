@@ -222,15 +222,14 @@ function Chart({ points, selected, onSelect }: ChartProps) {
     <>
       <div className="map-zoom-controls">
         <span className="map-zoom-hint">Scroll to zoom, drag to move.</span>
-        <button type="button" aria-label="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
+        <button type="button" aria-label="Zoom in" title="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
           <ZoomIn className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" aria-label="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
+        <button type="button" aria-label="Zoom out" title="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
           <ZoomOut className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" className="icon-action" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
+        <button type="button" className="icon-action icon-only" aria-label="Reset zoom" title="Reset zoom" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
           <RotateCcw className="action-icon" aria-hidden="true" />
-          Reset zoom
         </button>
       </div>
       <div ref={regionRef} className={zoomed ? 'map-plot-region is-zoomed' : 'map-plot-region'} tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens. Scroll the wheel over it to zoom.">
@@ -379,9 +378,15 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
                 {asTable ? <ChartScatter className="action-icon" aria-hidden="true" /> : <Table2 className="action-icon" aria-hidden="true" />}
                 {asTable ? 'Show as chart' : 'Show as table'}
               </button>
-              <button type="button" className="icon-action" onClick={() => downloadCsv(matching)} disabled={matching.length === 0}>
+              <button
+                type="button"
+                className="icon-action"
+                title="Download the tests that match the filters as a CSV file"
+                onClick={() => downloadCsv(matching)}
+                disabled={matching.length === 0}
+              >
                 <Download className="action-icon" aria-hidden="true" />
-                Download filtered data (CSV)
+                Download CSV
               </button>
             </div>
           </div>

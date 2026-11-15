@@ -111,10 +111,11 @@ export function App() {
           className="menu-button"
           aria-expanded={menuOpen}
           aria-controls="main-nav"
+          aria-label="Menu"
+          title="Menu"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X className="action-icon" aria-hidden="true" /> : <Menu className="action-icon" aria-hidden="true" />}
-          Menu
         </button>
         <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={onNavClick}>
           <ul>

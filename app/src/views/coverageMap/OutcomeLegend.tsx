@@ -1,4 +1,4 @@
-import { OUTCOMES, OUTCOME_LABELS } from './filters';
+import { OUTCOMES, OUTCOME_SHORT_LABELS } from './filters';
 import { OutcomeDot, ZoneRingSample } from './OutcomeMarker';
 import type { Outcome } from './outcomeStyle';
 import type { OutcomeCounts } from './plotPoints';
@@ -16,12 +16,15 @@ interface OutcomeLegendProps {
 export function OutcomeLegend({ counts, hidden, onToggle }: OutcomeLegendProps) {
   return (
     <div className="map-legend-block">
-      <ul className="map-legend" aria-label="Legend: what the colors mean. Select an entry to show or hide it.">
+      <ul className="map-legend" aria-label="Ignition result. Select an entry to show or hide it.">
+        <li className="map-legend-title" aria-hidden="true">
+          Ignition
+        </li>
         {OUTCOMES.map((outcome) => (
           <li key={outcome}>
             <button type="button" className="map-legend-item" aria-pressed={!hidden.has(outcome)} onClick={() => onToggle(outcome)}>
               <OutcomeDot outcome={outcome} />
-              <span>{OUTCOME_LABELS[outcome]}</span>
+              <span>{OUTCOME_SHORT_LABELS[outcome]}</span>
               <span className="map-legend-count">{counts[outcome]}</span>
             </button>
           </li>

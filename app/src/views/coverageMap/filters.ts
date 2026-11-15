@@ -27,6 +27,14 @@ export const OUTCOME_LABELS: Record<(typeof OUTCOMES)[number], string> = {
   'not-reported': 'Ignition: not reported',
 };
 
+/** The same outcomes without the "Ignition: " prefix, for places that already say it is the ignition result. */
+export const OUTCOME_SHORT_LABELS: Record<(typeof OUTCOMES)[number], string> = {
+  yes: 'yes',
+  no: 'no',
+  flash: 'flash',
+  'not-reported': 'not reported',
+};
+
 export interface PlotCounts {
   /** Tests that match the filters, plotted or not. */
   total: number;
