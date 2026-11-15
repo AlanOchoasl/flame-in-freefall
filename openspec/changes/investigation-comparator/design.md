@@ -15,7 +15,7 @@ Depends on `investigation-catalog` (text, hardware, fuel phase, topics, measurem
 2. **"Same/differs" compares normalized values** (arrays as sets, ranges by min and max, text excluded). Alternative (compare raw strings): false differences from spacing and case.
 3. **Selection stored in the hash** (`#/compare?ids=PSI-159,PSI-25`), consistent with the app's router.
 4. **Layout:** a table with a sticky first column, inside its own horizontal scroll on narrow screens.
-5. **Search** is a plain case-insensitive match over accession, acronym and title; no search library.
+5. **Searchable menus.** Three menus, one per investigation, each a text box with a list under it (WAI-ARIA combobox with a listbox; `app/src/components/SearchSelect.tsx`, pure filtering in `searchOptions.ts`, no library). Typing narrows the list; every word must appear in the accession, acronym or title. With 26 investigations a plain `<select>` was slow to scan, so the menus are searchable (changed on 2026-11-15 at the team's request). A choice is written to `ids` in the address like before.
 
 Data flow: `catalog.json` + `experiments.json` (+ `summaries.json`) → comparison model → Compare view.
 

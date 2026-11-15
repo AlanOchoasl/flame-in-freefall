@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Plus, Search, X } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { DataState } from '../../components/DataState';
 import { NotAvailable } from '../../components/NotAvailable';
+import type { SearchOption } from '../../components/searchOptions';
+import { SearchSelect } from '../../components/SearchSelect';
 import { PsiLink } from '../../components/PsiLink';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
 import type { CatalogRecord, SummaryEntry } from '../../data/types';
@@ -13,13 +13,7 @@ import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { buildComparison, type Cell, type RowMarker } from './comparisonModel';
-import {
-  addToSelection,
-  candidatesFor,
-  MIN_TO_COMPARE,
-  parseSelection,
-  removeFromSelection,
-} from './selection';
+import { chooseInSlot, MIN_TO_COMPARE, parseSelection, SLOT_COUNT, slotsFromIds } from './selection';
 
 const LONG_TEXT = 280;
 
@@ -29,67 +23,49 @@ const MARKER_TEXT: Record<RowMarker, (count: number) => string> = {
   'all-missing': (count) => (count === 2 ? 'both missing' : 'all missing'),
 };
 
-export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
-  const [text, setText] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
+const menuLabel = (record: CatalogRecord): string => [record.accession, record.acronym ?? record.title].filter(Boolean).join(' · ');
 
-  const select = (next: string[]) => {
-    replaceExplorerState({ ids: next });
-  };
-  const add = (accession: string) => {
-    const result = addToSelection(ids, accession);
-    setMessage(result.message);
-    if (!result.message) select(result.ids);
-  };
-  const matches = candidatesFor(records, ids, text);
+const toOption = (record: CatalogRecord): SearchOption => ({
+  value: record.accession,
+  label: menuLabel(record),
+  detail: record.acronym && record.title ? record.title : undefined,
+  search: [record.accession, record.acronym, record.title].filter(Boolean).join(' '),
+});
+
+// Three searchable menus, one per investigation. The third is optional; a menu opens once the one before it has a choice.
+export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
+  const slots = slotsFromIds(ids);
 
   return (
     <section className="compare-picker" aria-labelledby="picker-title">
       <h2 id="picker-title">Choose investigations</h2>
-      <p role="status">{ids.length} of 3 selected</p>
-      <ul className="compare-selected" aria-label="Selected investigations">
-        {ids.map((id) => (
-          <li key={id}>
-            <span className="compare-accession">{id}</span>{' '}
-            <button
-              className="icon-action icon-only"
-              type="button"
-              aria-label={`Remove ${id}`}
-              data-tip="Remove from the comparison"
-              onClick={() => {
-                setMessage(null);
-                select(removeFromSelection(ids, id));
-              }}
-            >
-              <X className="action-icon" aria-hidden="true" />
-            </button>
-          </li>
-        ))}
-      </ul>
-      <span className="search-field">
-        <Search className="action-icon search-icon" aria-hidden="true" />
-        <input
-          type="search"
-          className="compare-search"
-          aria-label="Search by title, acronym or accession"
-          placeholder="Search by title, acronym or accession"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-        />
-      </span>
-      {message ? <p role="alert">{message}</p> : null}
-      <ul className="compare-options" aria-label="Investigations to add" hidden={matches.length === 0}>
-        {matches.slice(0, 8).map((record) => (
-          <li key={record.accession}>
-            <span className="compare-accession">{record.accession}</span> {record.acronym ? `(${record.acronym}) ` : ''}
-            {record.title}{' '}
-            <button type="button" className="icon-action icon-only" aria-label={`Add ${record.accession}`} data-tip="Add to the comparison" onClick={() => add(record.accession)}>
-              <Plus className="action-icon" aria-hidden="true" />
-            </button>
-          </li>
-        ))}
-      </ul>
-      {text.trim() !== '' && matches.length === 0 ? <p>No investigation matches.</p> : null}
+      <p role="status">
+        {ids.length} of {SLOT_COUNT} selected
+      </p>
+      <div className="compare-slots">
+        {slots.map((value, slot) => {
+          const inOtherMenus = new Set(slots.filter((other, index) => index !== slot && other !== ''));
+          const id = `compare-slot-${slot + 1}`;
+          const name = `Investigation ${slot + 1}${slot >= MIN_TO_COMPARE ? ' (optional)' : ''}`;
+          return (
+            <div className="compare-slot" key={id}>
+              <label htmlFor={id} className="profile-label">
+                {name}
+              </label>
+              <SearchSelect
+                id={id}
+                value={value}
+                options={records.filter((record) => !inOtherMenus.has(record.accession)).map(toOption)}
+                placeholder="Search by name or PSI number"
+                emptyText="No investigation matches."
+                clearLabel={`Empty ${name}`}
+                disabled={slot > 0 && slots[slot - 1] === ''}
+                onChange={(accession) => replaceExplorerState({ ids: chooseInSlot(ids, slot, accession) })}
+              />
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
@@ -216,6 +192,7 @@ export function CompareBody({ query }: { query: URLSearchParams }) {
           const selected = ids.flatMap((id) => file.records.filter((record) => record.accession === id));
           return (
             <>
+              <Picker records={file.records} ids={ids} />
               {selected.length < MIN_TO_COMPARE ? (
                 <div role="status" className="compare-empty">
                   <p>Select at least {MIN_TO_COMPARE} investigations to compare them.</p>
@@ -228,7 +205,6 @@ export function CompareBody({ query }: { query: URLSearchParams }) {
               ) : (
                 <ComparisonTable records={selected} summaries={summaries.status === 'ok' ? summaries.data.entries : []} />
               )}
-              <Picker records={file.records} ids={ids} />
             </>
           );
         }}

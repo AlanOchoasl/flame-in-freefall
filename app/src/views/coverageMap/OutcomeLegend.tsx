@@ -34,7 +34,7 @@ function ReadingExample({ point }: { point: PlotPoint }) {
 }
 
 // Sits right above the chart or the table. Lists all four outcomes, always. Each entry is a button that shows or hides
-// that ignition result everywhere: the chart, the counts, the table, the CSV and the summary.
+// that ignition result everywhere: the chart, the counts, the table and the summary.
 export function OutcomeLegend({ counts, hidden, onToggle, example, help = true }: OutcomeLegendProps) {
   return (
     <div className="map-legend-block">

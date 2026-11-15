@@ -1,5 +1,3 @@
-import type { CatalogRecord } from '../../data/types';
-
 export const MAX_SELECTED = 3;
 export const MIN_TO_COMPARE = 2;
 
@@ -20,21 +18,14 @@ export function addToSelection(ids: string[], accession: string): AddResult {
   return { ids: [...ids, accession], message: null };
 }
 
-export function removeFromSelection(ids: string[], accession: string): string[] {
-  return ids.filter((id) => id !== accession);
-}
+export const SLOT_COUNT = MAX_SELECTED;
 
-// The picker lists candidates only once something is typed; an empty box lists none, so the table stays in view.
-export function candidatesFor(records: CatalogRecord[], ids: string[], text: string): CatalogRecord[] {
-  if (text.trim() === '') return [];
-  return searchInvestigations(records, text).filter((record) => !ids.includes(record.accession));
-}
+/** The investigation chosen in each menu, '' when empty. The comparison fills the menus from the first. */
+export const slotsFromIds = (ids: string[]): string[] => Array.from({ length: SLOT_COUNT }, (_, index) => ids[index] ?? '');
 
-// Case-insensitive match over accession, acronym and title; no search library.
-export function searchInvestigations(records: CatalogRecord[], text: string): CatalogRecord[] {
-  const needle = text.trim().toLowerCase();
-  if (needle === '') return records;
-  return records.filter((record) =>
-    [record.accession, record.acronym, record.title].some((field) => field?.toLowerCase().includes(needle)),
-  );
+/** The comparison after menu `slot` (0 to 2) is set to `accession` ('' empties it): empty menus close up and repeats are dropped. */
+export function chooseInSlot(ids: string[], slot: number, accession: string): string[] {
+  const slots = slotsFromIds(ids);
+  slots[slot] = accession;
+  return [...new Set(slots.filter((id) => id !== ''))];
 }

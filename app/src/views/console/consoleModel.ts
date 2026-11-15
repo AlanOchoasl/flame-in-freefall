@@ -22,13 +22,6 @@ export function consoleMetrics(
   };
 }
 
-// How many ranked investigations the side panel lists; "Show all" opens the full list in a dialog.
-export const TOP_ROWS = 5;
-
-export function topRows<T>(rows: T[]): T[] {
-  return rows.slice(0, TOP_ROWS);
-}
-
 // One line under the profile buttons: why this environment ranks the way it does, from the profiles file.
 export function profileDescription(profile: RankingProfile): string {
   return profile.factors.topicMatch?.rationale ?? '';

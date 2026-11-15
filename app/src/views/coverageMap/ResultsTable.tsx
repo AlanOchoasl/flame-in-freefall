@@ -1,23 +1,17 @@
 import { useState } from 'react';
+import { Pager } from '../../components/Pager';
 import type { ExperimentRecord } from '../../data/types';
-import { buildCsv, CSV_FILE_NAME, CSV_MIME_TYPE } from './csv';
+import { clampPage, pageCount, pageRange, pageSlice } from '../../lib/pagination';
 import { OUTCOME_SHORT_LABELS } from './filters';
 
-const PAGE = 50;
-
-export function downloadCsv(records: ExperimentRecord[]) {
-  const url = URL.createObjectURL(new Blob([buildCsv(records)], { type: CSV_MIME_TYPE }));
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = CSV_FILE_NAME;
-  link.click();
-  URL.revokeObjectURL(url);
-}
-
-// The filtered tests as a table (keyboard-friendly alternative to the chart), paged by 50.
+// The filtered tests as a table (keyboard-friendly alternative to the chart), 10 rows per page.
+// The map keys this component by its filters, so a new filter starts again on page 1.
 export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
-  const [shown, setShown] = useState(PAGE);
-  const rows = records.slice(0, shown);
+  const [requested, setRequested] = useState(1);
+  const page = clampPage(requested, records.length);
+  const count = pageCount(records.length);
+  const rows = pageSlice(records, page);
+  const { from, to } = pageRange(page, records.length);
   return (
     <section aria-label="Tests as a table">
       <div className="table-scroll" tabIndex={0} role="region" aria-label="Filtered tests">
@@ -56,14 +50,10 @@ export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
           </tbody>
         </table>
       </div>
-      <p role="status">
-        showing {Math.min(shown, records.length)} of {records.length}
+      <p role="status" className="table-status">
+        showing {from}–{to} of {records.length}
       </p>
-      {shown < records.length ? (
-        <button type="button" onClick={() => setShown(shown + PAGE)}>
-          Show {PAGE} more rows
-        </button>
-      ) : null}
+      <Pager page={page} count={count} onChange={setRequested} label="Table pages" />
     </section>
   );
 }

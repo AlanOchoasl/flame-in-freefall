@@ -546,22 +546,29 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 
 .compare-picker { padding: var(--space-4); margin-top: var(--space-4); border: 1px solid var(--line); background: var(--surface-1); border-radius: var(--radius-2); }
 .compare-picker h2 { margin-top: 0; }
-.compare-picker input { max-width: 100%; }
-.search-field { position: relative; display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
-.search-field .search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  pointer-events: none;
-}
-.compare-picker .compare-search { width: 100%; padding-left: 40px; }
-.compare-selected, .compare-options { list-style: none; padding: 0; }
-.compare-selected li, .compare-options li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2); border-bottom: 1px solid var(--line); }
-.compare-picker button { flex: none; }
+/* Three menus side by side; one column on a phone. Each label uses the same small mono caption as "Environment profile". */
+.compare-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-2); }
+.compare-slot { display: grid; gap: var(--space-2); min-width: 0; }
+.compare-slot .profile-label { display: block; }
+.compare-slot input:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* A searchable menu: a text box with a list under it. The list is above the page, not inside the flow. */
+.combo { position: relative; min-width: 0; }
+.combo input { width: 100%; min-width: 0; padding-right: 72px; text-overflow: ellipsis; }
+.combo-chevron { position: absolute; right: 12px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.combo .combo-clear { position: absolute; right: 34px; top: 50%; width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 0; transform: translateY(-50%); border-color: transparent; background: transparent; }
+.combo .combo-clear:hover { background: var(--surface-hover); }
+.combo-list { position: absolute; z-index: 30; top: calc(100% + 4px); left: 0; right: 0; max-height: 300px; margin: 0; padding: var(--space-1); overflow-y: auto; list-style: none; background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-1); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); }
+.combo-list[hidden] { display: none; }
+.combo-option { display: grid; gap: 2px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-1); cursor: pointer; }
+.combo-option.is-active { background: var(--surface-hover); }
+.combo-option[aria-selected='true'] { box-shadow: inset 3px 0 0 var(--action); }
+.combo-label { font-variant-numeric: tabular-nums; }
+.combo-detail { color: var(--text-muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.combo-empty { padding: var(--space-3); color: var(--text-muted); font-size: var(--fs-sm); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-width: 760px) { .compare-slots { grid-template-columns: minmax(0, 1fr); } }
+.compare-picker + .compare-empty { margin-top: var(--space-4); }
 .compare-accession { font-family: var(--mono); font-size: 0.9em; font-variant-numeric: tabular-nums; }
 
 /* Tables scroll inside their own area; the first column stays visible. */
@@ -637,6 +644,7 @@ button { font-weight: 500; }
 .panel-body > :first-child { margin-top: 0; }
 .panel-note { margin: var(--space-3) 0 0; color: var(--text-muted); font-size: var(--fs-sm); }
 .panel-filters { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-3); }
+.profile-picker + .panel-filters { margin-top: var(--space-4); }
 .panel-filters label { display: grid; gap: 4px; color: var(--text-secondary); font-size: var(--fs-sm); }
 
 .ranked-list { display: grid; margin: 0; padding: 0; list-style: none; }
@@ -656,7 +664,6 @@ button { font-weight: 500; }
 .evidence-marks { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
 .evidence-mark { padding: 2px 6px; border: 1px solid var(--line-strong); border-radius: 3px; color: var(--text-secondary); font-size: 12px; }
 .row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-2) 0 0; }
-.show-all { margin-top: var(--space-3); }
 
 .progress-row { display: flex; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-2); font-size: var(--fs-sm); }
 progress { width: 100%; height: 8px; appearance: none; border: 0; border-radius: 2px; background: var(--surface-2); accent-color: var(--zone); }
@@ -724,13 +731,6 @@ body:has(dialog[open]) { overflow: hidden; }
 .ranking-toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); padding: var(--space-3); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
 .ranking-toolbar .panel-filters { margin: 0; }
 .ranking-toolbar .result-count { margin: 0; }
-.ranking-dialog .ranked-list { gap: var(--space-3); }
-.ranking-dialog .ranked-row,
-.ranking-dialog .ranked-row:first-child { padding: var(--space-3) var(--space-4); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
-.ranking-dialog .ranked-row:hover { border-color: var(--line-strong); }
-.ranking-dialog .ranked-row.is-selected { padding-left: var(--space-4); border-color: var(--action); box-shadow: inset 3px 0 0 var(--action); }
-.ranking-dialog .rank-no { min-width: 36px; padding: 2px 8px; text-align: center; color: var(--text-primary); background: var(--surface-hover); border-radius: 999px; }
-.ranking-dialog .study-name { margin: var(--space-2) 0 4px; font-size: var(--fs-base); }
 .ranking-dialog .row-actions { gap: var(--space-2); padding-top: var(--space-3); border-top: 1px solid var(--line); }
 .ranking-dialog .row-actions a,
 .ranking-dialog .row-actions button { padding: 4px 12px; font-size: 13px; line-height: 1.4; border: 1px solid var(--line-strong); border-radius: 999px; text-decoration: none; }
@@ -741,7 +741,6 @@ body:has(dialog[open]) { overflow: hidden; }
 .ranking-dialog .row-actions span a { padding: 0; border: 0; }
 .ranking-dialog .row-actions a.icon-only,
 .ranking-dialog .row-actions a.icon-only:hover { padding: 0; }
-.ranking-dialog .evidence-marks:empty { display: none; }
 
 /* Interpretation dialog and the one-line footnote that replaced the bottom panels. */
 .interpret-dialog { width: min(640px, calc(100vw - 2 * var(--space-4))); }
@@ -793,8 +792,6 @@ body:has(dialog[open]) { overflow: hidden; }
 /* Controls at the right edge open their tooltip toward the left, so it never leaves the screen. */
 .row-actions > [data-tip]:last-child::after,
 .map-zoom-controls > [data-tip]:last-child::after,
-.compare-selected [data-tip]::after,
-.compare-options [data-tip]::after { left: auto; right: 0; transform: none; }
 /* In the header the tooltip opens downward: there is no room above. */
 .console-header [data-tip]::after { bottom: auto; top: calc(100% + 6px); }
 .console-header .theme-switch [data-tip]:last-child::after,
@@ -809,3 +806,10 @@ body:has(dialog[open]) { overflow: hidden; }
   .panel-action-text { display: none; }
   .panel-action { min-width: var(--target-size); padding: 0; }
 }
+
+/* Page buttons under a paged list (the results table and the ranking). The current page looks like a pressed button elsewhere. */
+.pager { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+.pager-page { min-width: var(--target-size); padding-inline: var(--space-2); font-variant-numeric: tabular-nums; }
+.pager-page[aria-current='page'] { background: var(--brand); border-color: var(--action); color: #ffffff; }
+.pager-gap { padding-inline: var(--space-1); color: var(--text-muted); }
+.pager button:disabled { opacity: 0.5; cursor: not-allowed; }

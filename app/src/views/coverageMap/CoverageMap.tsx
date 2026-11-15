@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChartScatter, Download, RotateCcw, Table2, ZoomIn, ZoomOut } from 'lucide-react';
+import { ChartScatter, RotateCcw, Table2, ZoomIn, ZoomOut } from 'lucide-react';
 import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
@@ -29,7 +29,7 @@ import { OverlayList } from './OverlayList';
 import { PointDialog } from './PointDialog';
 import { formatO2, formatPressure } from './pointDetails';
 import { describeOutcomeCounts, exampleCircle, outcomeCounts, pointsByCondition, type PlotPoint } from './plotPoints';
-import { downloadCsv, ResultsTable } from './ResultsTable';
+import { ResultsTable } from './ResultsTable';
 import { isZoomed, niceTicks, panRange, zoomRange, type Range } from './viewRange';
 import './coverageMap.css';
 
@@ -48,7 +48,7 @@ const FULL_X: Range = [0, O2_AXIS_MAX_PERCENT];
 const FULL_Y: Range = [0, PRESSURE_AXIS_MAX_BAR];
 const MIN_X_SPAN = 2; // percent of O2
 const MIN_Y_SPAN = 0.1; // bar
-const WHEEL_ZOOM_STEP = 1.25;
+const ZOOM_STEP = 1.25;
 const DRAG_THRESHOLD_PX = 4;
 
 function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
@@ -104,28 +104,20 @@ function Chart({ points, selected, onSelect }: ChartProps) {
   const dragged = useRef(false);
   const zoomed = isZoomed(view.x, FULL_X) || isZoomed(view.y, FULL_Y);
 
-  const zoomBy = (factor: number, anchorX = 0.5, anchorY = 0.5) =>
+  // The buttons zoom around the centre of the plot. The mouse wheel does not zoom: it scrolls the page.
+  const zoomBy = (factor: number) =>
     setView((current) => ({
-      x: zoomRange(current.x, FULL_X, anchorX, factor, MIN_X_SPAN),
-      y: zoomRange(current.y, FULL_Y, anchorY, factor, MIN_Y_SPAN),
+      x: zoomRange(current.x, FULL_X, 0.5, factor, MIN_X_SPAN),
+      y: zoomRange(current.y, FULL_Y, 0.5, factor, MIN_Y_SPAN),
     }));
 
   // The plotting area on screen, found from the grid recharts draws, to turn the cursor into data positions.
   const plotBox = (): DOMRect | null => regionRef.current?.querySelector('.recharts-cartesian-grid')?.getBoundingClientRect() ?? null;
 
-  // The mouse wheel zooms around the cursor and a drag pans. The wheel listener is not passive so the page
-  // does not scroll at the same time; touch keeps its normal scrolling.
+  // A drag with the mouse pans the plot; touch keeps its normal scrolling.
   useEffect(() => {
     const region = regionRef.current;
     if (!region) return;
-    const onWheel = (event: WheelEvent) => {
-      const box = plotBox();
-      if (!box || box.width === 0 || box.height === 0) return;
-      event.preventDefault();
-      const anchorX = Math.min(Math.max((event.clientX - box.left) / box.width, 0), 1);
-      const anchorY = Math.min(Math.max(1 - (event.clientY - box.top) / box.height, 0), 1);
-      zoomBy(event.deltaY > 0 ? WHEEL_ZOOM_STEP : 1 / WHEEL_ZOOM_STEP, anchorX, anchorY);
-    };
     const onPointerDown = (event: PointerEvent) => {
       const box = plotBox();
       if (event.pointerType !== 'mouse' || event.button !== 0 || !box) return;
@@ -147,10 +139,8 @@ function Chart({ points, selected, onSelect }: ChartProps) {
       window.addEventListener('pointermove', onMove);
       window.addEventListener('pointerup', onUp);
     };
-    region.addEventListener('wheel', onWheel, { passive: false });
     region.addEventListener('pointerdown', onPointerDown);
     return () => {
-      region.removeEventListener('wheel', onWheel);
       region.removeEventListener('pointerdown', onPointerDown);
     };
   }, []);
@@ -158,18 +148,18 @@ function Chart({ points, selected, onSelect }: ChartProps) {
   return (
     <>
       <div className="map-zoom-controls">
-        <span className="map-zoom-hint">Scroll to zoom, drag to move.</span>
-        <button type="button" aria-label="Zoom in" data-tip="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
+        <span className="map-zoom-hint">Use the buttons to zoom, drag to move.</span>
+        <button type="button" aria-label="Zoom in" data-tip="Zoom in" onClick={() => zoomBy(1 / ZOOM_STEP)}>
           <ZoomIn className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" aria-label="Zoom out" data-tip="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
+        <button type="button" aria-label="Zoom out" data-tip="Zoom out" onClick={() => zoomBy(ZOOM_STEP)} disabled={!zoomed}>
           <ZoomOut className="action-icon" aria-hidden="true" />
         </button>
         <button type="button" className="icon-action icon-only" aria-label="Reset zoom" data-tip="Reset zoom" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
           <RotateCcw className="action-icon" aria-hidden="true" />
         </button>
       </div>
-      <div ref={regionRef} className={zoomed ? 'map-plot-region is-zoomed' : 'map-plot-region'} tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens. Scroll the wheel over it to zoom.">
+      <div ref={regionRef} className={zoomed ? 'map-plot-region is-zoomed' : 'map-plot-region'} tabIndex={0} role="region" aria-label="Coverage map, scrolls sideways on narrow screens.">
         <div style={{ width: '100%', minWidth: 480, height: PLOT_HEIGHT }}>
           <ResponsiveContainer>
             <ScatterChart margin={{ top: 24, right: 128, bottom: 40, left: 12 }}>
@@ -318,16 +308,6 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
               <button type="button" className="icon-action" aria-pressed={asTable} onClick={() => setAsTable(!asTable)}>
                 {asTable ? <ChartScatter className="action-icon" aria-hidden="true" /> : <Table2 className="action-icon" aria-hidden="true" />}
                 {asTable ? 'Show as chart' : 'Show as table'}
-              </button>
-              <button
-                type="button"
-                className="icon-action"
-                title="Download the tests that match the filters as a CSV file"
-                onClick={() => downloadCsv(matching)}
-                disabled={matching.length === 0}
-              >
-                <Download className="action-icon" aria-hidden="true" />
-                Download CSV
               </button>
             </div>
           </div>

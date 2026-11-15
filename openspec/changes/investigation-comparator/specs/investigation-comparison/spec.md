@@ -7,11 +7,34 @@ Defines the side-by-side comparison of investigations, so users can see at a gla
 ## ADDED Requirements
 
 ### Requirement: Select two or three investigations
-The system SHALL let a user pick investigations by title, acronym or accession, up to three. Comparison SHALL start with at least two selected.
+The system SHALL let a user pick investigations with three menus, one per investigation. The third menu SHALL be optional. A menu SHALL be unavailable until the one before it has a choice, an investigation chosen in one menu SHALL NOT be offered in the others, and emptying a menu SHALL close the gap. Comparison SHALL start with at least two selected, and no more than three can be selected.
+
+#### Scenario: Choosing two investigations
+- **WHEN** a user chooses PSI-25 in the first menu and PSI-26 in the second
+- **THEN** the comparison table shows both, and PSI-25 is not offered in the second menu
+
+#### Scenario: Third investigation is optional
+- **WHEN** two investigations are chosen
+- **THEN** the third menu is available and labeled optional, and leaving it empty keeps the two-way comparison
 
 #### Scenario: Limit reached
-- **WHEN** three investigations are selected and a user tries to add a fourth
+- **WHEN** three investigations are selected and a user tries to add a fourth from another control (for example "Add compare" on a ranking row)
 - **THEN** the fourth is not added and a message explains the limit
+
+### Requirement: Menus can be searched
+Each menu SHALL be searchable. Typing SHALL narrow its list to the investigations whose accession, acronym or title contain every word typed, in any order and ignoring case. The arrow keys SHALL move through the list, Enter SHALL choose the highlighted investigation and Escape SHALL close the list without changing the choice.
+
+#### Scenario: Finding an investigation by typing
+- **WHEN** a user types "aerosol" in a menu
+- **THEN** only the investigations whose accession, acronym or title contain "aerosol" are listed
+
+#### Scenario: Nothing matches
+- **WHEN** a user types a word that no investigation contains
+- **THEN** the list says that no investigation matches
+
+#### Scenario: Keyboard only
+- **WHEN** a user types "bass", presses the down arrow and then Enter
+- **THEN** the highlighted investigation is chosen and the list closes
 
 ### Requirement: Comparison rows
 The comparison SHALL show these rows for each selected investigation: objectives, flight platform, hardware, fuel phase, topics, measurements, O2 range, pressure range, fuels tested, dates, related investigations and earth benefits.

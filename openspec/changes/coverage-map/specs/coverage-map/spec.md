@@ -55,12 +55,12 @@ The view SHALL offer the same filtered records as a table, reachable by keyboard
 - **WHEN** a user activates "Show as table"
 - **THEN** the filtered records appear as rows with the same fields
 
-### Requirement: Download filtered data
-The view SHALL let a user download the filtered records as a file generated in the browser.
+### Requirement: No wheel zoom
+The map SHALL zoom only with its zoom buttons, so that scrolling the page with the mouse over the map scrolls the page. A drag with the mouse SHALL still move a zoomed map.
 
-#### Scenario: Download
-- **WHEN** a user downloads with a filter applied
-- **THEN** the file contains exactly the filtered records and their source links
+#### Scenario: Wheel over the map
+- **WHEN** a user turns the mouse wheel with the pointer over the map
+- **THEN** the page scrolls and the map keeps its zoom
 
 ### Requirement: Readable axes
 Both axes SHALL show tick marks with numeric values and units: O2 in percent from 0 to 100 with a tick at least every 20, and pressure in bar over the plotted range with at most six ticks. Each axis SHALL have a title and light gridlines at the ticks. A reader SHALL be able to read a point's approximate conditions from the axes alone.
@@ -91,11 +91,19 @@ When the chart has focus, the arrow keys SHALL move the selection between points
 - **THEN** the next point is selected and its details are announced
 
 ### Requirement: Large tables are paged
-The table alternative SHALL show the first 50 filtered records and a "Show 50 more rows" button that appends the next 50 until all are shown, and SHALL state "showing N of M". The download SHALL always contain all filtered records, not only the visible rows.
+The table alternative SHALL show 10 filtered records per page, with Previous and Next buttons and numbered page buttons (the first and last page and those next to the current one, with a gap between groups), and SHALL state "showing FIRST–LAST of M". The current page SHALL be marked, Previous SHALL be unavailable on the first page and Next on the last, a change of filters SHALL return to the first page, and no page buttons SHALL appear when the records fit on one page.
 
 #### Scenario: Paging
 - **WHEN** 333 records are filtered and the table is shown
-- **THEN** 50 rows appear with "showing 50 of 333", and activating the button shows 100
+- **THEN** 10 rows appear with "showing 1–10 of 333" and 34 pages, and activating Next shows rows 11 to 20
+
+#### Scenario: Last page
+- **WHEN** the last page is shown
+- **THEN** it holds the remaining 3 rows with "showing 331–333 of 333" and Next is unavailable
+
+#### Scenario: Changing a filter
+- **WHEN** a user is on page 3 and changes a filter
+- **THEN** the table shows page 1 of the new result
 
 ### Requirement: Deep link from an investigation
 The map SHALL accept an `investigation` parameter in its address (for example `#/map?investigation=PSI-159`) that preselects the investigation filter. The Investigation detail screen SHALL show a "See on the Coverage map" link only for investigations that have plotted tests. This is Nice-to-have.
