@@ -44,11 +44,17 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   return (
     <li className={selected ? 'ranked-row is-selected' : 'ranked-row'}>
       <p className="ranked-top">
-        <span className="accession">
-          #{rank} · {accession}
+        <span className="rank-line">
+          <span className="rank-no">#{rank}</span>
+          <span className="accession">{accession}</span>
         </span>
-        <span className="score">
-          {item.score} / {item.maximumScore} pts
+        <span className="score-cell">
+          <span className="score">
+            {item.score} / {item.maximumScore} pts
+          </span>
+          <span className="score-bar" aria-hidden="true">
+            <span style={{ width: `${item.maximumScore > 0 ? Math.round((item.score / item.maximumScore) * 100) : 0}%` }} />
+          </span>
         </span>
       </p>
       <h3 className="study-name">
@@ -115,18 +121,22 @@ function RankingDialog({ open, onClose, children }: { open: boolean; onClose: ()
   );
 }
 
-function AllRankedList({ ranked, renderRow, onClose }: { ranked: RankedInvestigation[]; renderRow: (row: { item: RankedInvestigation; rank: number }) => ReactNode; onClose: () => void }) {
+function AllRankedList({ ranked, profileLabel, renderRow, onClose }: { ranked: RankedInvestigation[]; profileLabel: string; renderRow: (row: { item: RankedInvestigation; rank: number }) => ReactNode; onClose: () => void }) {
   const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
   const options = rankingFilterOptions(ranked);
   const shown = filterRanked(ranked, filters);
   return (
     <div className="ranking-dialog-body">
       <div className="ranking-dialog-head">
-        <h2 id="ranking-dialog-title">All {ranked.length} investigations, ranked</h2>
+        <div>
+          <h2 id="ranking-dialog-title">All {ranked.length} investigations, ranked</h2>
+          <p className="ranking-dialog-sub">{profileLabel} · team heuristic, not a NASA safety rating</p>
+        </div>
         <button type="button" onClick={onClose}>
           Close
         </button>
       </div>
+      <div className="ranking-toolbar">
       <div className="panel-filters">
         <label>
           Fuel phase
@@ -150,6 +160,7 @@ function AllRankedList({ ranked, renderRow, onClose }: { ranked: RankedInvestiga
       <p role="status" className="result-count">
         {shown.length} of {ranked.length} investigations
       </p>
+      </div>
       {shown.length === 0 ? (
         <div role="status">
           <p>No investigation matches the filters.</p>
@@ -213,7 +224,7 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
         </button>
       ) : null}
       <RankingDialog open={dialogOpen} onClose={closeDialog}>
-        <AllRankedList ranked={ranked} renderRow={renderRow(true)} onClose={closeDialog} />
+        <AllRankedList ranked={ranked} profileLabel={profile.label} renderRow={renderRow(true)} onClose={closeDialog} />
       </RankingDialog>
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
