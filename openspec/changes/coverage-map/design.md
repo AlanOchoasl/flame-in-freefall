@@ -16,14 +16,14 @@ Depends on `data-pipeline` (`isPlottable`, `inMoonBaseZone`, `pressureIsApproxim
 3. **Axes:** x 0–100 % O2; y pressure in bar from 0 to about 3.5. Reference overlays use bar values converted from psi with 1 psi = 0.0689476 bar, shown with both units.
 4. **Insight text is built from the data** by a pure function and tested; no hard-coded numbers.
 5. **Overplotting:** many tests share conditions; use semi-transparent markers and show the count when several points coincide.
-6. **Table and download:** the same filtered array feeds the table and the file (CSV or JSON, built with `Blob`); no libraries.
+6. **Table:** the same filtered array feeds the table; no libraries. The filtered-data download was dropped on 2026-11-15 at the team's request (irrelevant to the demo).
 7. **Standard disclaimers are constants** reused by the About section.
 
 8. **Axes and labels (from the mockup review).** The mockup drew no tick values and put overlay labels over the data. The plot reserves a margin for tick labels and overlay labels; overlays are drawn first so points sit on top; labels use the margin or leader lines. Ticks: O2 every 20 %, pressure at most six ticks with the unit in the axis title.
 9. **Narrow screens.** The plot keeps a 480 px minimum inside a scrollable, focusable region; everything else stacks in one column. Alternative: shrink the plot (the mockup did, and it became unreadable at about 230 px).
 10. **Table paging** is a 50-row slice of the same filtered array; no virtualization library.
 
-Data flow: `experiments.json` → filter → chart / table / insight / download.
+Data flow: `experiments.json` → filter → chart / table / insight.
 
 ## Risks / Trade-offs
 

@@ -1,18 +1,8 @@
 import { useState } from 'react';
 import type { ExperimentRecord } from '../../data/types';
-import { buildCsv, CSV_FILE_NAME, CSV_MIME_TYPE } from './csv';
 import { OUTCOME_SHORT_LABELS } from './filters';
 
 const PAGE = 50;
-
-export function downloadCsv(records: ExperimentRecord[]) {
-  const url = URL.createObjectURL(new Blob([buildCsv(records)], { type: CSV_MIME_TYPE }));
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = CSV_FILE_NAME;
-  link.click();
-  URL.revokeObjectURL(url);
-}
 
 // The filtered tests as a table (keyboard-friendly alternative to the chart), paged by 50.
 export function ResultsTable({ records }: { records: ExperimentRecord[] }) {

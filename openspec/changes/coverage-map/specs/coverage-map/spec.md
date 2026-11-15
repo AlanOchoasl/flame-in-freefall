@@ -55,12 +55,12 @@ The view SHALL offer the same filtered records as a table, reachable by keyboard
 - **WHEN** a user activates "Show as table"
 - **THEN** the filtered records appear as rows with the same fields
 
-### Requirement: Download filtered data
-The view SHALL let a user download the filtered records as a file generated in the browser.
+### Requirement: No wheel zoom
+The map SHALL zoom only with its zoom buttons, so that scrolling the page with the mouse over the map scrolls the page. A drag with the mouse SHALL still move a zoomed map.
 
-#### Scenario: Download
-- **WHEN** a user downloads with a filter applied
-- **THEN** the file contains exactly the filtered records and their source links
+#### Scenario: Wheel over the map
+- **WHEN** a user turns the mouse wheel with the pointer over the map
+- **THEN** the page scrolls and the map keeps its zoom
 
 ### Requirement: Readable axes
 Both axes SHALL show tick marks with numeric values and units: O2 in percent from 0 to 100 with a tick at least every 20, and pressure in bar over the plotted range with at most six ticks. Each axis SHALL have a title and light gridlines at the ticks. A reader SHALL be able to read a point's approximate conditions from the axes alone.
