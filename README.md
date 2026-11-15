@@ -17,6 +17,9 @@ A static web dashboard that ranks, compares and maps the 26 PSI combustion inves
 
 The app runs from static files, makes no request outside its own origin and calls no AI service at runtime.
 
+## Typography
+The app bundles three Google Fonts locally so the demo works offline: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for page and section headings, [Inter](https://fonts.google.com/specimen/Inter) for interface text, and [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) for data and identifiers. All three use the SIL Open Font License 1.1; their copyright notices and full licenses ship alongside the font files in `app/public/fonts/`. The team approved this font license exception on 2026-11-14. See `THIRD_PARTY_LICENSES.md`.
+
 ## NASA data used
 All data comes from the NASA Physical Sciences Informatics (PSI) Combustion Science repository: https://psi.nasa.gov/physci/repo/search?q=combustion
 

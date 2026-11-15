@@ -91,8 +91,10 @@ El diseño admite **Modo Oscuro (Dark Mode - predeterminado)** y **Modo Claro (L
 ## 3. Tipografía y Estilo de Componentes
 
 ### 3.1 Familias Tipográficas
-- **Interfaz y Lectura (UI & Body):** `Hanken Grotesk`, `Inter` o fuentes del sistema sans-serif (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`).
-- **Datos Numéricos, Rangos y Códigos:** Monospace de alta legibilidad (`JetBrains Mono`, `ui-monospace`, `SFMono-Regular`, `Menlo`, `monospace`).
+- **Títulos de página y sección, logomarca:** `Space Grotesk` 600, con `Inter` y fuentes del sistema como respaldo.
+- **Subtítulos, controles y párrafos (UI & Body):** `Inter` 400–700, con fuentes del sistema como respaldo. Los títulos compactos de nivel 3 usan Inter 600.
+- **Datos Numéricos, Rangos y Códigos:** `JetBrains Mono` 400–600, con monospace del sistema como respaldo. Usar cifras tabulares donde las columnas deban alinearse.
+- Las tres fuentes son archivos WOFF2 locales (SIL OFL 1.1, excepción aprobada por el equipo); no hay solicitudes a Google Fonts en tiempo de ejecución.
 
 ### 3.2 Escala y Geometría
 - **Corner Radius:** 4px a 6px (estilo técnico plano, sin redondeces exageradas estilo app móvil de consumo).
