@@ -5,6 +5,7 @@ import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '..
 import { useDataResult } from '../../data/useDataResult';
 import { rankInvestigations } from '../../lib/ranking';
 import { explorerHash, parseExplorerQuery, replaceExplorerState } from '../../router/explorerQuery';
+import { scrollToSection } from '../../router/sectionScroll';
 import { SECTION_CHANGE, visibleSection, type Band, type ConsoleSectionId } from '../../router/visibleSection';
 import { CompareBody } from '../compare/Compare';
 import { parseSelection } from '../compare/selection';
@@ -14,8 +15,6 @@ import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
 import { BoundariesPanel, GapsPanel, InterpretationPanel, RankingPanel } from './SidePanels';
-
-const SECTION_IDS: Record<string, string> = { compare: 'comparison', map: 'coverage' };
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -51,11 +50,8 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
     };
   }, []);
 
-  // A deep link to a section scrolls there on the first load; later route changes move focus instead.
-  useEffect(() => {
-    const target = SECTION_IDS[section];
-    if (target) document.getElementById(target)?.scrollIntoView();
-  }, []);
+  // Opening the page on a section, or moving to another one from the menu, scrolls there smoothly.
+  useEffect(() => scrollToSection(section), [section]);
 
   return (
     <div className="console-page">
