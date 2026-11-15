@@ -55,15 +55,16 @@ describe('matchesFilters / applyFilters', () => {
     expect(ids(applyFilters(records, filters({ flameType: 'inverse' })))).toEqual(['b', 'c']);
   });
 
-  it('filters by investigation, fuel species and outcome', () => {
+  it('filters by investigation, fuel species and the ignition results left out', () => {
     expect(ids(applyFilters(records, filters({ accession: 'PSI-10' })))).toEqual(['c']);
     expect(ids(applyFilters(records, filters({ fuel: 'ethylene' })))).toEqual(['c']);
-    expect(ids(applyFilters(records, filters({ outcome: 'no' })))).toEqual(['b']);
+    expect(ids(applyFilters(records, filters({ hidden: ['yes', 'not-reported'] })))).toEqual(['b']);
+    expect(ids(applyFilters(records, filters({ hidden: ['no'] })))).toEqual(['a', 'c']);
   });
 
   it('combines filters with AND', () => {
     expect(ids(applyFilters(records, filters({ flameType: 'inverse', accession: 'PSI-159' })))).toEqual(['b']);
-    expect(applyFilters(records, filters({ flameType: 'normal', outcome: 'no' }))).toEqual([]);
+    expect(applyFilters(records, filters({ flameType: 'normal', hidden: ['yes'] }))).toEqual([]);
   });
 
   it('never matches a test with an unknown fuel species when a fuel is chosen', () => {
@@ -74,7 +75,7 @@ describe('matchesFilters / applyFilters', () => {
 
   it('does not mutate its input', () => {
     const copy = [...records];
-    applyFilters(records, filters({ outcome: 'yes' }));
+    applyFilters(records, filters({ hidden: ['yes'] }));
     expect(records).toEqual(copy);
   });
 });
@@ -119,6 +120,7 @@ describe('hasActiveFilters and labels', () => {
   it('detects any active filter', () => {
     expect(hasActiveFilters(NO_FILTERS)).toBe(false);
     expect(hasActiveFilters(filters({ fuel: 'ethane' }))).toBe(true);
+    expect(hasActiveFilters(filters({ hidden: ['no'] }))).toBe(true);
   });
 
   it('labels every outcome, keeping not-reported apart from no', () => {
@@ -150,7 +152,7 @@ describe('the committed dataset', () => {
 
   it('has no test of PSI-10, which is excluded for having no license, and so no not-reported outcome', () => {
     expect(applyFilters(records, filters({ accession: 'PSI-10' }))).toEqual([]);
-    expect(applyFilters(records, filters({ outcome: 'not-reported' }))).toEqual([]);
+    expect(applyFilters(records, filters({ hidden: ['yes', 'no', 'flash'] }))).toEqual([]);
   });
 
   it('offers the investigations, fuels and outcomes that exist', () => {

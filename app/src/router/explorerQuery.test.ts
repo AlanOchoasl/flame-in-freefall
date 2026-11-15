@@ -21,7 +21,7 @@ describe('explorerQuery', () => {
       investigation: 'PSI-159',
       flame: 'normal',
       fuel: 'propane',
-      outcome: 'yes',
+      hide: ['no', 'flash'],
       zone: 'in',
     };
     expect(parse(serializeExplorerQuery(state))).toEqual(state);
@@ -56,6 +56,14 @@ describe('explorerQuery', () => {
 
   it('treats empty values as not set', () => {
     expect(parse('profile=&selected=%20')).toEqual(NO_EXPLORER_STATE);
+  });
+
+  it('writes the hidden ignition results as a readable list and drops values the data lacks', () => {
+    const state = { ...NO_EXPLORER_STATE, hide: ['no', 'flash'] };
+    expect(serializeExplorerQuery(state)).toBe('hide=no,flash');
+    expect(parse('hide=no,,flash,no').hide).toEqual(['no', 'flash']);
+    expect(cleanExplorerState({ ...NO_EXPLORER_STATE, hide: ['no', 'sideways'] }, { outcomes: ['yes', 'no'] }).hide).toEqual(['no']);
+    expect(parse('outcome=yes').hide).toEqual([]);
   });
 
   it('merges a patch without touching the other choices', () => {

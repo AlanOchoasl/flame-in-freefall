@@ -11,6 +11,8 @@ interface OutcomeLegendProps {
   onToggle: (outcome: Outcome) => void;
   /** A real circle of the chart, drawn and described to show how to read one. */
   example: PlotPoint | null;
+  /** Shows "how to read a circle" and the notes; off where there is no chart (table, empty result). */
+  help?: boolean;
 }
 
 // A real circle of the chart, drawn and spelled out, so the reader does not have to guess what size and slices mean.
@@ -31,9 +33,9 @@ function ReadingExample({ point }: { point: PlotPoint }) {
   );
 }
 
-// Sits right above the chart. Lists all four outcomes, always. Each entry is a button that shows or hides
-// that outcome on the chart.
-export function OutcomeLegend({ counts, hidden, onToggle, example }: OutcomeLegendProps) {
+// Sits right above the chart or the table. Lists all four outcomes, always. Each entry is a button that shows or hides
+// that ignition result everywhere: the chart, the counts, the table, the CSV and the summary.
+export function OutcomeLegend({ counts, hidden, onToggle, example, help = true }: OutcomeLegendProps) {
   return (
     <div className="map-legend-block">
       <ul className="map-legend" aria-label="Ignition result. Select an entry to show or hide it.">
@@ -50,7 +52,8 @@ export function OutcomeLegend({ counts, hidden, onToggle, example }: OutcomeLege
           </li>
         ))}
       </ul>
-      {example ? <ReadingExample point={example} /> : null}
+      {help && example ? <ReadingExample point={example} /> : null}
+      {help ? (
       <p className="map-legend-note">
         Each circle is one combination of oxygen and pressure. Its size and the number inside are how many tests were run there; its colors are how they ended.
         <span className="map-legend-ring">
@@ -60,6 +63,7 @@ export function OutcomeLegend({ counts, hidden, onToggle, example }: OutcomeLege
           <CrossSample /> A cross marks a reference atmosphere (Earth air, spacesuit), not a test.
         </span>
       </p>
+      ) : null}
     </div>
   );
 }
