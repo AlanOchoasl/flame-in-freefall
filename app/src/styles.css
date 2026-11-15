@@ -302,7 +302,7 @@ header {
 }
 
 .theme-switch { display: flex; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-2); background: var(--surface-2); }
-.theme-switch button { display: inline-flex; align-items: center; gap: 6px; min-height: var(--target-size); padding: 0 9px; border: 0; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); }
+.theme-switch button { display: inline-flex; align-items: center; justify-content: center; min-width: var(--target-size); min-height: var(--target-size); padding: 0; border: 0; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); }
 .theme-switch button[aria-pressed='true'] { background: var(--brand); color: #ffffff; }
 .dataset-state { color: var(--text-muted); font: 12px var(--mono); white-space: nowrap; }
 

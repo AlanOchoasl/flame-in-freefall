@@ -131,9 +131,15 @@ export function App() {
         </nav>
         <div className="theme-switch" role="group" aria-label="Color theme">
           {(['light', 'dark'] as const).map((choice) => (
-            <button key={choice} type="button" aria-pressed={(theme ?? systemTheme) === choice} onClick={() => chooseTheme(choice)}>
+            <button
+              key={choice}
+              type="button"
+              aria-pressed={(theme ?? systemTheme) === choice}
+              aria-label={choice === 'light' ? 'Light theme' : 'Dark theme'}
+              title={choice === 'light' ? 'Light theme' : 'Dark theme'}
+              onClick={() => chooseTheme(choice)}
+            >
               {choice === 'light' ? <Sun className="action-icon" aria-hidden="true" /> : <Moon className="action-icon" aria-hidden="true" />}
-              {choice === 'light' ? 'Light' : 'Dark'}
             </button>
           ))}
         </div>
