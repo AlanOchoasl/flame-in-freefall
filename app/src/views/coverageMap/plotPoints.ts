@@ -1,26 +1,52 @@
 import type { ExperimentRecord } from '../../data/types';
 import { OUTCOMES, plottedOnly } from './filters';
+import { isOutcome, type Outcome } from './outcomeStyle';
 
 // Converts tests into chart points: x is O2 in percent, y is pressure in bar.
+// Tests with the same O2 and pressure share one point, so a stack of identical conditions is one marker
+// whose size is the number of tests and whose slices are how they ended; `records` keeps every test.
+export type OutcomeCounts = Record<Outcome, number>;
+
 export interface PlotPoint {
   x: number;
   y: number;
-  record: ExperimentRecord;
-  /** True for the test the user picked; the marker draws a ring around it. */
-  selected?: boolean;
+  records: ExperimentRecord[];
+  counts: OutcomeCounts;
 }
 
-export function toPoint(record: ExperimentRecord): PlotPoint | null {
+export const MIN_MARKER_RADIUS = 5;
+export const MAX_MARKER_RADIUS = 16;
+
+/** Marker radius in pixels: grows with the square root of the tests it stands for, up to a cap. */
+export function markerRadius(testCount: number): number {
+  return Math.min(MAX_MARKER_RADIUS, MIN_MARKER_RADIUS + 2 * Math.sqrt(Math.max(testCount, 1) - 1));
+}
+
+const emptyCounts = (): OutcomeCounts => Object.fromEntries(OUTCOMES.map((outcome) => [outcome, 0])) as OutcomeCounts;
+
+export function toCoordinates(record: ExperimentRecord): { x: number; y: number } | null {
   if (record.o2Fraction === null || record.pressureBar === null) return null;
-  return { x: Math.round(record.o2Fraction * 1000) / 10, y: record.pressureBar, record };
+  return { x: Math.round(record.o2Fraction * 1000) / 10, y: record.pressureBar };
 }
 
-/** One series per outcome, so each outcome gets its own shape and legend entry. */
-export function pointsByOutcome(records: ExperimentRecord[]): Record<string, PlotPoint[]> {
-  const series: Record<string, PlotPoint[]> = Object.fromEntries(OUTCOMES.map((outcome) => [outcome, []]));
+/** Plottable tests per outcome, the numbers the legend shows. */
+export function outcomeCounts(records: ExperimentRecord[]): OutcomeCounts {
+  const counts = emptyCounts();
+  for (const record of plottedOnly(records)) if (isOutcome(record.outcome)) counts[record.outcome] += 1;
+  return counts;
+}
+
+/** One point per distinct O2 and pressure; each keeps its tests and how many ended each way. */
+export function pointsByCondition(records: ExperimentRecord[]): PlotPoint[] {
+  const points = new Map<string, PlotPoint>();
   for (const record of plottedOnly(records)) {
-    const point = toPoint(record);
-    if (point && record.outcome in series) series[record.outcome].push(point);
+    const coordinates = toCoordinates(record);
+    if (!coordinates || !isOutcome(record.outcome)) continue;
+    const key = `${coordinates.x}|${coordinates.y}`;
+    const point = points.get(key) ?? { ...coordinates, records: [], counts: emptyCounts() };
+    point.records.push(record);
+    point.counts[record.outcome] += 1;
+    points.set(key, point);
   }
-  return series;
+  return [...points.values()];
 }

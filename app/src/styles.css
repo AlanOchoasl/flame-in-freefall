@@ -42,7 +42,6 @@
   --accent-red: #fc3d21;
   --logo-ring: #3c4960;
   --plot-grid: #3c4960;
-  --canvas-mark: #1b2331;
   /* Existing component aliases keep route styles in the same palette. */
   --text: var(--text-primary);
   --background: var(--canvas);
@@ -65,10 +64,11 @@
   --status-error: #ffb0aa;
   --status-error-weak: #4a2d36;
   --status-na: var(--text-muted);
-  --outcome-yes: var(--action);
-  --outcome-no: var(--action);
-  --outcome-flash: var(--action);
-  --outcome-nr: var(--action);
+  /* Chart outcome colors; each outcome also keeps its own shape, so color is never the only signal. */
+  --outcome-yes: #ff5a4d;
+  --outcome-no: #5cc8ff;
+  --outcome-flash: #b784ff;
+  --outcome-nr: #9ba5b5;
   --zone-moon: var(--zone);
   --zone-moon-edge: var(--zone);
   --zone-earth: var(--text-secondary);
@@ -121,7 +121,6 @@
   --accent-red: #c8321b;
   --logo-ring: #b5bcc9;
   --plot-grid: #b6c3d8;
-  --canvas-mark: #e9eff8;
   --ai: #3b3179;
   --ai-weak: #e8e6f6;
   --psi: #3d4450;
@@ -133,6 +132,10 @@
   --status-differs: #913100;
   --status-error: #a92227;
   --status-error-weak: #f3e0de;
+  --outcome-yes: #d4301f;
+  --outcome-no: #1f8fd6;
+  --outcome-flash: #7a3fe0;
+  --outcome-nr: #6b7385;
 }
 
 @media (prefers-color-scheme: light) {
@@ -154,7 +157,6 @@
     --accent-red: #c8321b;
     --logo-ring: #b5bcc9;
     --plot-grid: #b6c3d8;
-    --canvas-mark: #e9eff8;
     --ai: #3b3179;
     --ai-weak: #e8e6f6;
     --psi: #3d4450;
@@ -166,6 +168,10 @@
     --status-differs: #913100;
     --status-error: #a92227;
     --status-error-weak: #f3e0de;
+    --outcome-yes: #d4301f;
+    --outcome-no: #1f8fd6;
+    --outcome-flash: #7a3fe0;
+    --outcome-nr: #6b7385;
   }
 }
 
