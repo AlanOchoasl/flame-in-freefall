@@ -37,6 +37,7 @@
   --text-muted: #9aa6ba;
   --action: #0099ff;
   --brand: #0b3d91;
+  --brand-mark-image: url('/branding/ffl-icon-dark.svg');
   --zone: #ffbb00;
   --zone-fill-opacity: 0.16;
   --accent-red: #fc3d21;
@@ -115,6 +116,7 @@
   --text-muted: #5b6475;
   --action: #0b3d91;
   --brand: #0b3d91;
+  --brand-mark-image: url('/branding/ffl-icon-light.svg');
   --zone: #a15c00;
   --zone-fill-opacity: 0.12;
   --accent-red: #c8321b;
@@ -150,6 +152,7 @@
     --text-muted: #5b6475;
     --action: #0b3d91;
     --brand: #0b3d91;
+    --brand-mark-image: url('/branding/ffl-icon-light.svg');
     --zone: #a15c00;
     --zone-fill-opacity: 0.12;
     --accent-red: #c8321b;
@@ -265,13 +268,14 @@ header {
   white-space: nowrap;
 }
 
-.console-mark {
+.brand-mark {
+  display: inline-block;
   width: 48px;
-  height: 40px;
+  height: 48px;
   flex: none;
-  /* Transparent PNG so the red swoosh can extend past the blue disc. */
-  background: url('/nasa-logo.png') center / contain no-repeat;
+  background: var(--brand-mark-image) center / contain no-repeat;
 }
+.console-mark { width: 40px; height: 40px; }
 
 .console-tag {
   padding: 4px 6px;
@@ -339,17 +343,39 @@ main h1:focus {
   outline: none;
 }
 
-footer {
-  padding: 8px var(--gutter);
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.875rem;
-  max-width: 1600px;
-  margin: 0 auto;
+.site-footer {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
 }
 
-footer p {
-  margin: 4px 0;
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-5);
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--gutter);
+}
+
+.footer-brand, .footer-institution { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+.footer-brand div { display: grid; gap: var(--space-1); }
+.footer-brand strong { color: var(--text-primary); font-family: var(--font-heading); font-size: var(--fs-base); line-height: 1.2; }
+.footer-brand span { color: var(--text-muted); }
+.footer-info { max-width: 72ch; }
+.site-footer p { margin: 0 0 var(--space-2); }
+.site-footer p:last-child { margin-bottom: 0; }
+.site-footer a { color: var(--action); text-underline-offset: 3px; }
+.footer-institution { justify-self: end; color: var(--text-muted); }
+.footer-institution-icon { display: grid; width: 48px; height: 48px; flex: none; place-items: center; border: 1px dashed var(--line-strong); border-radius: var(--radius-1); }
+.footer-institution-icon svg { width: 24px; height: 24px; stroke-width: 1.75; }
+
+@media (max-width: 900px) {
+  .footer-inner { grid-template-columns: minmax(0, 1fr); }
+  .footer-institution { justify-self: start; }
 }
 
 dl.facts {
