@@ -24,8 +24,8 @@ The app bundles three Google Fonts locally so the demo works offline: [Space Gro
 All data comes from the NASA Physical Sciences Informatics (PSI) Combustion Science repository: https://psi.nasa.gov/physci/repo/search?q=combustion
 
 - **Catalog:** the 26 investigations returned by PSI's search, cached in `data/sample/psi-catalog/`. Each one links to its PSI page and DOI.
-- **Test tables:** the experimental tables of PSI-159 and PSI-10, cached in `data/sample/psi/` and normalized into `data/processed/experiments.json` (see `data/processed/README.md`).
-- **Licenses of the cited datasets** (checked 2026-11-14, recorded in `experiments.json`): PSI-159 is CC0-1.0. **PSI-10 declares no license** and is not assumed to be CC0; this must be confirmed with PSI before submission.
+- **Test tables:** the experimental tables of PSI-159, cached in `data/sample/psi/` and normalized into `data/processed/experiments.json` (see `data/processed/README.md`).
+- **Licenses of the cited datasets** (checked 2026-11-14, recorded in `experiments.json`): PSI-159 is CC0-1.0. **PSI-10 declares no license**, so its tables are excluded: the app uses no dataset without a verified license (see `data/processed/README.md`, "Excluded datasets").
 
 ## How AI was used
 Plain-language summaries are written beforehand by a Gemini model from each investigation's own PSI text, checked by a script (no invented numbers, length limits), reviewed by a person and shown with the label "AI-generated", the model and the review status. When no summary exists, the app shows NASA's own text, labeled as PSI text. The prompt and scripts are in the repository (`prompts/`, `scripts/`, `docs/AI_SUMMARIES.md`); no API key is stored.
@@ -63,9 +63,6 @@ The public site is deployed from `main` on Vercel with `app/vercel.json`.
 - `docs/SMOKE.md`: manual checklist to run on the public URL.
 - `docs/CURATION.md` and `docs/AI_SUMMARIES.md`: how tags and summaries are produced and reviewed.
 - `openspec/`: the specifications behind each feature.
-
-## Team
-_TBD: names and roles._
 
 ## License
 Apache-2.0, see `LICENSE`. Third-party packages and their licenses: `THIRD_PARTY_LICENSES.md`.
