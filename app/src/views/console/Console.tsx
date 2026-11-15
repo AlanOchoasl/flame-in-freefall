@@ -1,3 +1,4 @@
+import { RotateCcw } from 'lucide-react';
 import { useEffect } from 'react';
 import { DataState } from '../../components/DataState';
 import { MetricTile, Panel } from '../../components/Panel';
@@ -138,7 +139,25 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
       </div>
 
       {/* The comparison table needs the whole width, so it sits under the map and the ranking. */}
-      <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
+      <Panel
+        id="comparison"
+        title="Compare investigations"
+        subtitle="Shared and different evidence · PSI source-linked"
+        routeFocus={section === 'compare'}
+        action={
+          <button
+            type="button"
+            className="icon-action panel-action"
+            aria-label="Clear the selected investigations"
+            data-tip="Clear the selection"
+            disabled={explorer.ids.length === 0}
+            onClick={() => replaceExplorerState({ ids: [] })}
+          >
+            <RotateCcw className="action-icon" aria-hidden="true" />
+            <span className="panel-action-text">Clear selection</span>
+          </button>
+        }
+      >
         <CompareBody query={query} />
       </Panel>
 
