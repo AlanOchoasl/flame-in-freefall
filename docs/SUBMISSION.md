@@ -2,7 +2,7 @@
 
 Drafts for the fields of the project page (https://www.spaceappschallenge.org/resources/project-submission-guide/). Everything must be **in English**. The numbers below are computed from the committed data files (26 investigations, 25 reviewed summaries, 333 tests, 165 combinations of oxygen and pressure, 48 tests in the expected Moon-base zone, 41 of them with ignition); check them again if the data changes.
 
-Before pasting, fill the two marks in **[BRACKETS]**: the demo link and the logo sentence in "Use of SI". The form's character limits are not known; each block is written so it can be cut from the bottom.
+Before pasting, fill the mark in **[BRACKETS]**: the demo link. The form's character limits are not known; each block is written so it can be cut from the bottom.
 
 ## 1. Project Name
 
@@ -43,7 +43,7 @@ NASA has published decades of microgravity combustion experiments in its PSI rep
 
 - **Code, tests and documents.** Claude Code (by Anthropic), an AI coding assistant, helped write much of the code, the automated tests, the OpenSpec specifications and the documentation. The team chose what to build, ran the tests and the license checks, and reviewed and merged every change. Commits carry a "Co-Authored-By" line that records it.
 - **Data: plain-language summaries.** 25 summaries and fire-safety notes were drafted with Google Gemini (`gemini-3.6-flash`, prompt version 1.0.0, `prompts/summary.md`) from each investigation's own PSI text only. A script rejects any number that is not in the source and any text over the length limit, and a person read every summary against its source before it was published. The app labels each one "AI-generated (model), reviewed by a person". The model, date, prompt version and source fields are stored in `data/processed/summaries.json`.
-- **Images.** [LOGO SENTENCE: write it after Pipo's decision. If the logos stay: "The project logos in app/public/branding/ were generated with an AI tool; their C2PA metadata says so and they carry a visible AI-generated mark." If they are replaced: "No image in the project was generated with AI."]
+- **Images.** The project logo (`app/public/branding/`) was generated with an AI tool. Its C2PA content credentials, embedded in the files, say so, and the app shows a visible "Logo made with AI" label next to it in the header and the footer, plus an "AI" mark on the logo itself. No other image in the project was generated with AI.
 - **Team-only aid.** A Spanish reading aid used to review the summaries was produced by an AI assistant. It is not part of the app.
 - **What SI did not do.** It did not come up with the idea. The test data, the totals, the map, the ranking and the comparison come from NASA PSI tables and ordinary code, and no AI runs inside the app. No NASA logo or mark was generated or modified.
 
