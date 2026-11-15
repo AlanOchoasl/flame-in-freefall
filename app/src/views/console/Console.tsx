@@ -95,9 +95,6 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
               )}
             </DataState>
           </Panel>
-          <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
-            <CompareBody query={query} />
-          </Panel>
         </div>
 
         <div className="side-column">
@@ -139,6 +136,11 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
           </DataState>
         </div>
       </div>
+
+      {/* The comparison table needs the whole width, so it sits under the map and the ranking. */}
+      <Panel id="comparison" title="Compare investigations" subtitle="Shared and different evidence · PSI source-linked" routeFocus={section === 'compare'}>
+        <CompareBody query={query} />
+      </Panel>
 
       <ConsoleFootnote query={query} />
     </div>
