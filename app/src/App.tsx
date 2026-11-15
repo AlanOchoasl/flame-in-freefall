@@ -112,7 +112,7 @@ export function App() {
           aria-expanded={menuOpen}
           aria-controls="main-nav"
           aria-label="Menu"
-          title="Menu"
+          data-tip="Menu"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X className="action-icon" aria-hidden="true" /> : <Menu className="action-icon" aria-hidden="true" />}
@@ -137,7 +137,7 @@ export function App() {
               type="button"
               aria-pressed={(theme ?? systemTheme) === choice}
               aria-label={choice === 'light' ? 'Light theme' : 'Dark theme'}
-              title={choice === 'light' ? 'Light theme' : 'Dark theme'}
+              data-tip={choice === 'light' ? 'Light theme' : 'Dark theme'}
               onClick={() => chooseTheme(choice)}
             >
               {choice === 'light' ? <Sun className="action-icon" aria-hidden="true" /> : <Moon className="action-icon" aria-hidden="true" />}

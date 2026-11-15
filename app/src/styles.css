@@ -768,3 +768,41 @@ body:has(dialog[open]) { overflow: hidden; }
 @media (max-width: 1180px) {
   .console-tag { display: none; }
 }
+
+/* Instant tooltip for icon-only controls: it names the action on hover and on keyboard focus (and on tap, for touch).
+   The accessible name is the aria-label; this is only the visual hint. */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  z-index: 30;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-1, 4px);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after { opacity: 1; }
+@media (hover: none) { [data-tip]:focus::after { opacity: 1; } }
+/* Controls at the right edge open their tooltip toward the left, so it never leaves the screen. */
+.row-actions > [data-tip]:last-child::after,
+.map-zoom-controls > [data-tip]:last-child::after,
+.compare-selected [data-tip]::after,
+.compare-options [data-tip]::after { left: auto; right: 0; transform: none; }
+/* In the header the tooltip opens downward: there is no room above. */
+.console-header [data-tip]::after { bottom: auto; top: calc(100% + 6px); }
+.console-header .theme-switch [data-tip]:last-child::after,
+.console-header .menu-button::after { left: auto; right: 0; transform: none; }
+@media (prefers-reduced-motion: reduce) { [data-tip]::after { transition: none; } }

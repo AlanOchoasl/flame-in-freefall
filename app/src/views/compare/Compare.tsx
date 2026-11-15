@@ -55,7 +55,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
               className="icon-action icon-only"
               type="button"
               aria-label={`Remove ${id}`}
-              title="Remove"
+              data-tip="Remove from the comparison"
               onClick={() => {
                 setMessage(null);
                 select(removeFromSelection(ids, id));
@@ -83,7 +83,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
           <li key={record.accession}>
             <span className="compare-accession">{record.accession}</span> {record.acronym ? `(${record.acronym}) ` : ''}
             {record.title}{' '}
-            <button type="button" className="icon-action icon-only" aria-label={`Add ${record.accession}`} title="Add to the comparison" onClick={() => add(record.accession)}>
+            <button type="button" className="icon-action icon-only" aria-label={`Add ${record.accession}`} data-tip="Add to the comparison" onClick={() => add(record.accession)}>
               <Plus className="action-icon" aria-hidden="true" />
             </button>
           </li>

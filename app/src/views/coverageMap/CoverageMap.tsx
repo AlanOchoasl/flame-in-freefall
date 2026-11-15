@@ -222,13 +222,13 @@ function Chart({ points, selected, onSelect }: ChartProps) {
     <>
       <div className="map-zoom-controls">
         <span className="map-zoom-hint">Scroll to zoom, drag to move.</span>
-        <button type="button" aria-label="Zoom in" title="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
+        <button type="button" aria-label="Zoom in" data-tip="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
           <ZoomIn className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" aria-label="Zoom out" title="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
+        <button type="button" aria-label="Zoom out" data-tip="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
           <ZoomOut className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" className="icon-action icon-only" aria-label="Reset zoom" title="Reset zoom" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
+        <button type="button" className="icon-action icon-only" aria-label="Reset zoom" data-tip="Reset zoom" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
           <RotateCcw className="action-icon" aria-hidden="true" />
         </button>
       </div>
