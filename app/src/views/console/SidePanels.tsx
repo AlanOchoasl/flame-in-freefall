@@ -10,19 +10,21 @@ import { addToSelection } from '../compare/selection';
 import { computeInsight, describeInsight } from '../coverageMap/insight';
 import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
-import { visibleRows } from './consoleModel';
+import { profileDescription, visibleRows } from './consoleModel';
 
 interface RankingPanelProps {
   id: string;
   ranked: RankedInvestigation[];
   records: CatalogRecord[];
   profile: RankingProfile;
+  profiles: RankingProfile[];
   sourceUrl: string;
   coverage: Record<string, InvestigationTestCoverage>;
   selected: string;
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
+  onProfileChange: (profileId: string) => void;
 }
 
 function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect }: {
@@ -81,7 +83,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage, selected, compareIds, query, onSelect }: RankingPanelProps) {
+export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
   const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
   const [expanded, setExpanded] = useState(false);
   const options = rankingFilterOptions(ranked);
@@ -91,6 +93,19 @@ export function RankingPanel({ id, ranked, records, profile, sourceUrl, coverage
 
   return (
     <Panel id={id} title="Relevance ranking" subtitle={`${profile.label} · heuristic`} tag={`${ranked.length} studies`}>
+      <div className="profile-picker">
+        <p id="profile-label" className="profile-label">
+          Environment profile
+        </p>
+        <div className="profile-control" role="group" aria-labelledby="profile-label">
+          {profiles.map((option) => (
+            <button key={option.id} type="button" aria-pressed={option.id === profile.id} onClick={() => onProfileChange(option.id)}>
+              {option.label}
+            </button>
+          ))}
+        </div>
+        <p className="profile-description">{profileDescription(profile)}</p>
+      </div>
       <div className="panel-filters">
         <label>
           Fuel phase

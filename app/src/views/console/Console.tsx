@@ -12,7 +12,7 @@ import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../covera
 import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
-import { consoleMetrics, profileDescription } from './consoleModel';
+import { consoleMetrics } from './consoleModel';
 import { BoundariesPanel, GapsPanel, InterpretationPanel, RankingPanel } from './SidePanels';
 
 const SECTION_IDS: Record<string, string> = { compare: 'comparison', map: 'coverage' };
@@ -61,34 +61,9 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
     <div className="console-page">
       <section className="page-heading" aria-labelledby="console-title">
         <div>
-          <p className="eyebrow">EXPLORATION CONTEXT / RELEVANCE RANKING</p>
+          <p className="eyebrow">EXPLORATION CONTEXT / COMBUSTION INVESTIGATIONS</p>
           <h1 id="console-title">Investigation explorer</h1>
         </div>
-        <DataState state={profiles} label="The ranking profiles">
-          {(file) => {
-            const active = file.profiles.find((profile) => profile.id === explorer.profile) ?? file.profiles[0];
-            return (
-              <div className="profile-picker">
-                <p id="profile-label" className="profile-label">
-                  Environment profile
-                </p>
-                <div className="profile-control" role="group" aria-labelledby="profile-label">
-                  {file.profiles.map((profile) => (
-                    <button
-                      key={profile.id}
-                      type="button"
-                      aria-pressed={profile.id === active.id}
-                      onClick={() => replaceExplorerState({ profile: profile.id === file.profiles[0].id ? null : profile.id })}
-                    >
-                      {profile.label}
-                    </button>
-                  ))}
-                </div>
-                <p className="profile-description">{profileDescription(active)}</p>
-              </div>
-            );
-          }}
-        </DataState>
       </section>
 
       <DataState state={catalog} label="The dataset totals">
@@ -153,12 +128,14 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             ranked={ranked}
                             records={catalogFile.records}
                             profile={profile}
+                            profiles={profilesFile.profiles}
                             sourceUrl={profilesFile.source.url}
                             coverage={coverage}
                             selected={selectedAccession}
                             compareIds={parseSelection(query, catalogFile.records.map((r) => r.accession))}
                             query={query}
                             onSelect={(accession) => replaceExplorerState({ selected: accession === firstRanked ? null : accession })}
+                            onProfileChange={(id) => replaceExplorerState({ profile: id === profilesFile.profiles[0].id ? null : id })}
                           />
                           <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} query={query} />
                           <GapsPanel id="gaps" tests={experimentsFile.records} />
