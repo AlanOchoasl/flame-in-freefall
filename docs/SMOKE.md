@@ -39,10 +39,10 @@ Run in the browser pane against the public URL after Vercel finished the deploy;
 ## Known gaps (found in this run)
 
 1. **Not-found title:** `#/investigation/PSI-9999` shows "Not found" in the page but the tab title still says "Investigation PSI-9999". Minor.
-2. **PSI-159 has no AI summary** (13 of 26 have one, none for the only investigation with tests): its Detail says so and shows the NASA text. The summary needs Jose's generation and a person's review.
+2. **PSI-159 has an AI summary now (fixed):** it was generated on 2026-11-15 and reviewed by a person. Not re-checked on the public URL yet.
 3. **Offline:** the service worker and its cache were checked on the public URL (see the last run), but the reload with the network disconnected was not. Run it by hand, then remove this gap.
 4. **Compare number format (fixed):** Compare now shows "12–85 % O2" and "0.50–3.31 bar" like Detail, using `formatO2Range` and `formatPressureRange`. Ranges are rounded, so two ranges that differ only beyond the rounding show as the same.
 5. **Map points are not keyboard-focusable;** the table is the keyboard alternative.
 6. **Ranking panel copy:** "Weights and wording come from the official challenge statement" overstates it: the rationales quote the statement, the point values are the team's judgment. Also "up to 1 points".
-7. **Summaries cover 13 of 26 investigations** (all reviewed, model gemini-3.6-flash, prompt 1.0.0). The other 13 show NASA text, as the spec allows. Checked on the public URL: About (13 of 13 reviewed), Detail for PSI-69 and 13 AI labels on Ranking.
+7. **Summaries cover 25 of 26 investigations** (all reviewed, model gemini-3.6-flash, prompt 1.0.0, generated 2026-11-14 and 2026-11-15). PSI-10 has none because it is not used (no license declared) and shows NASA text, as the spec allows. Run again on the public URL after this change: About should say 25 of 25 reviewed.
 8. **Not done:** grayscale review (`design-system` 4.1), `Marker`/`TagChip`/`CountLine`/`CitationBlock`/`ScoreBreakdown` components (2.2, 2.3), contrast script (1.3). The Menu fixes are in PR #28.

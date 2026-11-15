@@ -338,6 +338,54 @@
       "reviewed": true
     },
     {
+      "accession": "PSI-117",
+      "summary": "Researchers conducted a ground study to examine how external heat and convection affect the dynamics, stability, and extinction of cool flames around droplets in microgravity. Using data from NASA's Flame Extinguishment Experiment (FLEX) obtained through PSI, the team created a three-dimensional CFD model in OpenFOAM. The model simulated n-alkane droplet cool flames by combining fluid flow, low-temperature chemistry, heat and mass transfer, and radiation. By testing deliberate heating and drift-induced convection on large and small droplets, the study produced stability maps for ignition, sustained oscillation, warm-flame transitions, and extinction. These models help explain run-to-run variability in microgravity experiments.",
+      "fireSafetyRelevance": "This investigation informs spacecraft fire-safety modeling and flame fundamentals in microgravity crew environments. By resolving cool-flame and extinction behavior under thermal and convective perturbations, the findings leverage FLEX data to help define safer operating envelopes and materials for spacecraft.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
+    },
+    {
+      "accession": "PSI-142",
+      "summary": "This investigation used Flame Extinguishment (FLEX) data from the Physical Sciences Informatics (PSI) system to study how hot flames transition to cool flames. Researchers conducted numerical modeling and ground-based experiments using ozone-sensitized counterflow flames, n-heptane/air mixtures, and dimethyl ether (DME)/air mixtures. The project examined how oxygen concentration, pressure up to 20 atmospheres, diffusion, and convection affect flammability limits, helping verify International Space Station (ISS) observations. The study revealed that warm flames have a double reaction zone structure critical to cool-to-hot flame transitions. Increased pressure expands warm and cool flame flammable regions due to enhanced low- and intermediate-temperature reactivity.",
+      "fireSafetyRelevance": "This investigation informs flame fundamentals regarding flammability limits, extinction limits, and flame regime transitions in microgravity environments with long residence times. The source text does not state a direct crew fire-safety application.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
+    },
+    {
+      "accession": "PSI-159",
+      "summary": "This investigation plans and supports flight testing aboard the International Space Station (ISS) to understand cool diffusion flames. Researchers perform spherical porous burner tests using fuels such as propane, n-butane, and n-pentane under a range of reactant dilutions, flow rates, and pressures for normal and inverse flames. Using advanced Computational Fluid Dynamics (CFD) simulations and diagnostic instruments like cameras, radiometers, photomultiplier tubes, and thermocouples, the study aims to identify chemical kinetics mechanisms for cool flames with peak temperatures between 500 and 1000 Kelvin. The primary purpose is to advance cool flame kinetics to help develop more efficient internal combustion engines.",
+      "fireSafetyRelevance": "The source states no direct fire-safety application for crew environments, focusing instead on fundamental cool flame kinetics to improve internal combustion engine efficiency on Earth.",
+      "aiGenerated": true,
+      "model": "gemini-3.6-flash",
+      "generatedAt": "2026-11-15",
+      "promptVersion": "1.0.0",
+      "sourceFields": [
+        "objectives",
+        "approach",
+        "hypothesis",
+        "earthBenefits"
+      ],
+      "reviewed": true
+    },
+    {
       "accession": "PSI-181",
       "summary": "This study examines how microgravity affects solder joint formation and reliability under extreme temperatures ranging from -157ºC to +121ºC. Researchers analyzed lead-based (40Pb-60Sn and 50Pb-50Sn) and lead-free (95.5Sn-3.8Ag-0.7Cu) solder alloys processed on Earth and aboard the International Space Station during the In-Space Soldering Investigation. They evaluated microstructures, void formation, Marangoni convection, and micromechanical performance. The study demonstrated that suppressed buoyancy and natural convection in microgravity cause gas bubbles and voids to remain trapped inside solder joints. This internal porosity impairs thermal conductivity, electrical conductivity, and joint strength, providing guidance for future metal joining protocols during space missions.",
       "fireSafetyRelevance": "The source text states no direct fire-safety application for this solder joint investigation.",

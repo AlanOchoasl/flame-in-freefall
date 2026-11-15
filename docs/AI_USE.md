@@ -9,10 +9,10 @@ Text for the project page of the NASA Space Apps Challenge 2026 submission ("Fla
 | What AI wrote | A plain-language summary (at most 120 words) and a fire-safety note (at most 60 words) for each investigation |
 | Model | Gemini `gemini-3.6-flash`, through the Gemini API |
 | Prompt | `prompts/summary.md`, version 1.0.0 (`ai.config.json`) |
-| Generated on | 2026-11-14 |
-| Summaries published | 22 |
-| Reviewed by a person | 22 of 22 |
-| Not summarized | PSI-10 (its tables declare no license and are not used), and any investigation without a reviewed summary; these show NASA's own text, labeled "NASA PSI text" |
+| Generated on | 2026-11-14 and 2026-11-15 |
+| Summaries published | 25 of 26 investigations |
+| Reviewed by a person | 25 of 25 |
+| Not summarized | PSI-10 (it declares no license and is not used); it shows NASA's own text, labeled "NASA PSI text" |
 
 How the text is produced and kept honest:
 
