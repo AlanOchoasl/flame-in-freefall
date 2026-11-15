@@ -80,7 +80,7 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --canvas: #e6e9ef;
+  --canvas: #cbd3df;
   --surface-1: #e9eff8;
   --surface-2: #dbe4f1;
   --surface-hover: #cdd9ea;
@@ -113,7 +113,7 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
-    --canvas: #e6e9ef;
+    --canvas: #cbd3df;
     --surface-1: #e9eff8;
     --surface-2: #dbe4f1;
     --surface-hover: #cdd9ea;
@@ -159,6 +159,39 @@ body {
   line-height: var(--lh);
 }
 
+/* Ambient background: a soft glow in the top-right corner that breathes (its intensity slowly rises and falls,
+   no movement or resizing), so it always blends into the page background. Palette colors in dark mode, a blue
+   veil in light mode. Static under prefers-reduced-motion. */
+:root { --glow-max: 1; }
+:root[data-theme='light'] { --glow-max: 0.6; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) { --glow-max: 0.6; } }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 75% at 100% 0%, color-mix(in srgb, var(--action) 60%, transparent) 0%, color-mix(in srgb, var(--action) 24%, transparent) 40%, transparent 78%),
+    radial-gradient(60% 65% at 90% 18%, color-mix(in srgb, var(--brand) 90%, transparent) 0%, color-mix(in srgb, var(--brand) 32%, transparent) 42%, transparent 80%),
+    radial-gradient(45% 50% at 100% 36%, color-mix(in srgb, var(--ai) 40%, transparent) 0%, transparent 78%);
+  opacity: var(--glow-max);
+  animation: ambient-breathe 8s ease-in-out infinite;
+}
+:root[data-theme='light'] body::before { background: var(--glow-light); }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) body::before { background: var(--glow-light); } }
+:root {
+  --glow-light:
+    radial-gradient(70% 75% at 100% 0%, rgba(70, 140, 255, 0.9) 0%, rgba(70, 140, 255, 0.35) 40%, rgba(70, 140, 255, 0) 78%),
+    radial-gradient(60% 65% at 90% 18%, rgba(110, 170, 255, 0.8) 0%, rgba(110, 170, 255, 0.28) 42%, rgba(110, 170, 255, 0) 80%),
+    radial-gradient(45% 50% at 100% 36%, rgba(60, 110, 230, 0.5) 0%, rgba(60, 110, 230, 0) 78%);
+}
+@keyframes ambient-breathe {
+  0%, 100% { opacity: calc(var(--glow-max) * 0.45); }
+  50% { opacity: var(--glow-max); }
+}
+@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+
 ::selection { background: var(--brand); color: #ffffff; }
 html { scrollbar-color: var(--line-strong) var(--canvas); }
 input, select { caret-color: var(--action); }
@@ -178,7 +211,7 @@ header {
   margin: auto;
   padding: 8px var(--gutter);
   gap: 8px 16px;
-  background: var(--canvas);
+  background: transparent;
 }
 
 .console-brand {
@@ -592,4 +625,11 @@ progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
 /* On small screens the ranking comes first: it answers the main question. */
 @media (max-width: 1023px) {
   .side-column { order: -1; }
+}
+
+/* Glass panels: 78% opaque over the ambient background, so text contrast is unchanged. */
+.panel, .metric-card, .map-card, .console-notice {
+  background: color-mix(in srgb, var(--surface-1) 78%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
