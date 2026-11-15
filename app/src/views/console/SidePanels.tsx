@@ -77,27 +77,44 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
           <BookOpen className="action-icon" aria-hidden="true" />
           Interpret
         </button>
-        <a className="icon-action" href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
+        <a
+          className="icon-action icon-only"
+          href={carryExplorerState(`/investigation/${accession}`, query)}
+          onClick={onAction}
+          aria-label={`Open the detail of ${accession}`}
+          title="Open the detail"
+        >
           <ArrowUpRight className="action-icon" aria-hidden="true" />
-          Detail
         </a>
         {coverage && coverage.rowCount > 0 ? (
-          <a className="icon-action" href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))} onClick={onAction}>
+          <a
+            className="icon-action icon-only"
+            href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))}
+            onClick={onAction}
+            aria-label={`Show the tests of ${accession} on the map`}
+            title="Show its tests on the map"
+          >
             <Map className="action-icon" aria-hidden="true" />
-            Show tests on the map
           </a>
         ) : (
-          <span className="evidence-mark">Nothing to show on the map</span>
+          <span className="icon-action icon-only is-disabled" role="img" aria-label="Nothing to show on the map" title="Nothing to show on the map: this investigation has no normalized tests">
+            <Map className="action-icon" aria-hidden="true" />
+          </span>
         )}
         {compareIds.includes(accession) ? (
           <span className="evidence-mark">In comparison</span>
         ) : addResult.message ? null : (
-          <a className="icon-action" href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))} onClick={onAction}>
+          <a
+            className="icon-action icon-only"
+            href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))}
+            onClick={onAction}
+            aria-label={`Add ${accession} to the comparison`}
+            title="Add to the comparison"
+          >
             <Plus className="action-icon" aria-hidden="true" />
-            Add compare
           </a>
         )}
-        <PsiLink accession={accession} />
+        <PsiLink accession={accession} iconOnly />
       </p>
       <Breakdown item={item} />
     </li>

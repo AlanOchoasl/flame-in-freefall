@@ -5,6 +5,7 @@ import {
   isFilterUseful,
   NO_FILTERS,
   OUTCOME_LABELS,
+  OUTCOME_SHORT_LABELS,
   OUTCOMES,
   applyFilters,
   countPlotted,
@@ -159,6 +160,12 @@ describe('the committed dataset', () => {
       fuels: ['butane', 'ethane', 'propane'],
       outcomes: ['yes', 'no', 'flash'],
     });
+  });
+});
+
+describe('OUTCOME_SHORT_LABELS', () => {
+  it('is the long label without its prefix, for every outcome', () => {
+    for (const outcome of OUTCOMES) expect(OUTCOME_LABELS[outcome]).toBe(`Ignition: ${OUTCOME_SHORT_LABELS[outcome]}`);
   });
 });
 

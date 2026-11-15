@@ -469,6 +469,11 @@ input {
 button { cursor: pointer; }
 .icon-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .action-icon { width: 17px; height: 17px; flex: none; stroke-width: 1.75; }
+/* An action shown as an icon alone: a square touch target; its name lives in aria-label and title. */
+.icon-only { min-width: var(--target-size); min-height: var(--target-size); padding-inline: 0; }
+.is-disabled { opacity: 0.4; cursor: not-allowed; }
+/* The arrow after a link that opens another site. */
+.link-icon { width: 0.85em; height: 0.85em; margin-left: 3px; vertical-align: -0.05em; stroke-width: 2; }
 button:hover:not(:disabled) { background: var(--surface-hover); }
 .theme-switch button:hover:not(:disabled) { color: var(--text-primary); }
 .theme-switch button[aria-pressed='true']:hover { background: var(--brand); color: #ffffff; }
@@ -656,7 +661,7 @@ button { font-weight: 500; }
 .study-meta { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); }
 .evidence-marks { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
 .evidence-mark { padding: 2px 6px; border: 1px solid var(--line-strong); border-radius: 3px; color: var(--text-secondary); font-size: 12px; }
-.row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); margin: var(--space-2) 0 0; }
+.row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-2) 0 0; }
 .show-all { margin-top: var(--space-3); }
 
 .progress-row { display: flex; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-2); font-size: var(--fs-sm); }
@@ -740,6 +745,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .ranking-dialog .row-actions button { color: var(--action); border-color: var(--action); background: transparent; }
 .ranking-dialog .row-actions button[aria-pressed='true'] { color: var(--canvas); background: var(--action); }
 .ranking-dialog .row-actions span a { padding: 0; border: 0; }
+.ranking-dialog .row-actions a.icon-only,
+.ranking-dialog .row-actions a.icon-only:hover { padding: 0; }
 .ranking-dialog .evidence-marks:empty { display: none; }
 
 /* Interpretation dialog and the one-line footnote that replaced the bottom panels. */

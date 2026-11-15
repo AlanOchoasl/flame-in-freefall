@@ -211,3 +211,4 @@
 .map-plot-region.is-zoomed:active, .map-plot-region.is-zoomed:active svg, .map-plot-region.is-zoomed:active .recharts-wrapper { cursor: grabbing !important; }
 
 .map-primary { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.map-legend-title { align-self: center; color: var(--text-muted); font: 12px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
