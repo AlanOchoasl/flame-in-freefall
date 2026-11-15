@@ -16,10 +16,11 @@ function Swatch({ index }: { index: number }) {
 }
 
 // The references stay listed with their values and sources below the chart, whatever the labels on it.
+// Folded by default: the chart already labels them, and the full text is one click away.
 export function OverlayList() {
   return (
-    <section aria-labelledby="map-overlays-title">
-      <h2 id="map-overlays-title">Reference atmospheres drawn on the map</h2>
+    <details className="map-overlays-details">
+      <summary>Reference atmospheres drawn on the map, with their sources</summary>
       <ul className="map-overlays">
         {OVERLAY_DESCRIPTIONS.map((description, index) => (
           <li key={description.title}>
@@ -30,6 +31,6 @@ export function OverlayList() {
           </li>
         ))}
       </ul>
-    </section>
+    </details>
   );
 }

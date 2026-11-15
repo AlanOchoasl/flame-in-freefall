@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChartScatter, Download, RotateCcw, Table2, ZoomIn, ZoomOut } from 'lucide-react';
+import { ChartScatter, Download, RotateCcw, Table2, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
@@ -82,8 +82,7 @@ const describeOutcomes = (counts: OutcomeCounts): string =>
     .join(' · ');
 
 // The tests behind one chart point share O2 and pressure; they differ in the test and may differ in outcome.
-function PointDetails({ point }: { point: PlotPoint | null }) {
-  if (!point) return <p>Select a point on the map to see its test.</p>;
+function PointDetails({ point }: { point: PlotPoint }) {
   const { records } = point;
   const [first] = records;
   return (
@@ -321,6 +320,13 @@ interface CoverageMapBodyProps {
 export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageMapBodyProps) {
   const setFilters = onFiltersChange;
   const [selected, setSelected] = useState<PlotPoint | null>(null);
+  const detailsRef = useRef<HTMLElement>(null);
+  // The card appears under a tall chart, so bring it into view when a circle is picked.
+  useEffect(() => {
+    if (!selected) return;
+    const behavior: ScrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    detailsRef.current?.scrollIntoView({ block: 'nearest', behavior });
+  }, [selected]);
   const [hidden, setHidden] = useState<ReadonlySet<Outcome>>(new Set());
   const [asTable, setAsTable] = useState(false);
   const options = filterOptions(records);
@@ -408,10 +414,20 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
           )}
 
 
-          <section className="map-card" aria-labelledby="details-title">
-            <h2 id="details-title">Selected test</h2>
-            <PointDetails point={selected} />
-          </section>
+          {/* The card exists only while a circle is selected; the live region announces it. */}
+          <div aria-live="polite">
+            {selected ? (
+              <section ref={detailsRef} className="map-card" aria-labelledby="details-title">
+                <div className="map-card-head">
+                  <h2 id="details-title">Selected test</h2>
+                  <button type="button" className="icon-action icon-only" aria-label="Close the selected test" data-tip="Close" onClick={() => setSelected(null)}>
+                    <X className="action-icon" aria-hidden="true" />
+                  </button>
+                </div>
+                <PointDetails point={selected} />
+              </section>
+            ) : null}
+          </div>
 
           <OverlayList />
         </div>
