@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Building2, Menu, Moon, Sun, X } from 'lucide-react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { AmbientGlow } from './components/AmbientGlow';
 import { carryExplorerState } from './router/explorerQuery';
@@ -54,6 +54,11 @@ export function App() {
     else delete document.documentElement.dataset.theme;
   }, [theme]);
 
+  useEffect(() => {
+    const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (favicon) favicon.href = `/branding/ffl-icon-${theme ?? systemTheme}.svg`;
+  }, [theme, systemTheme]);
+
   // The route is the hash without its parameters: a change of profile, filter or comparison does not
   // count as a new screen, so it must not close the menu or move focus.
   const route = hash.split('?')[0];
@@ -96,7 +101,7 @@ export function App() {
       </a>
       <header className="console-header" onKeyDown={closeMenuOnEscape}>
         <a className="console-brand" href={carryExplorerState('/ranking', query)} aria-label="Flame in Freefall — Ranking">
-          <span className="console-mark" aria-hidden="true" />
+          <span className="brand-mark console-mark" aria-hidden="true" />
           <strong>FLAME IN FREEFALL</strong>
           <span className="console-tag">PSI RESEARCH CONSOLE</span>
         </a>
@@ -137,15 +142,30 @@ export function App() {
       <main id="main-content" ref={mainRef} tabIndex={-1}>
         {match ? <match.view.component params={match.params} query={match.query} section={match.view.section} /> : <NotFound requested={hash} />}
       </main>
-      <footer>
-        <DataSourceNote />
-        <p>
-          Experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. AI-generated text is always labeled.{' '}
-          <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
-        </p>
-        <p role="status" className="offline-state">
-          {offlineReady ? 'Available offline' : ''}
-        </p>
+      <footer className="site-footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="brand-mark" aria-hidden="true" />
+            <div>
+              <strong>Flame in Freefall</strong>
+              <span>Independent research explorer</span>
+            </div>
+          </div>
+          <div className="footer-info">
+            <DataSourceNote />
+            <p>
+              Experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. AI-generated text is always labeled.{' '}
+              <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
+            </p>
+            <p role="status" className="offline-state">
+              {offlineReady ? 'Available offline' : ''}
+            </p>
+          </div>
+          <div className="footer-institution">
+            <span className="footer-institution-icon"><Building2 aria-hidden="true" /></span>
+            <span>Institution logo pending</span>
+          </div>
+        </div>
       </footer>
     </>
   );

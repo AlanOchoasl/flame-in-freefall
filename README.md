@@ -32,6 +32,8 @@ All data comes from the NASA Physical Sciences Informatics (PSI) Combustion Scie
 ## How AI was used
 Plain-language summaries are written beforehand by a Gemini model from each investigation's own PSI text, checked by a script (no invented numbers, length limits), reviewed by a person and shown with the label "AI-generated", the model and the review status. When no summary exists, the app shows NASA's own text, labeled as PSI text. The prompt and scripts are in the repository (`prompts/`, `scripts/`, `docs/AI_SUMMARIES.md`); no API key is stored.
 
+The team-provided project logos in `app/public/branding/` contain C2PA metadata identifying Claude as a creation tool. Dark and light SVG variants are provided for the full logo and icon; the icon is used in the favicon, header and footer according to the selected theme. These are project marks, not the official NASA insignia.
+
 ## Run locally
 Needs Node 22 or newer.
 
