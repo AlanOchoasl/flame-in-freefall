@@ -33,6 +33,18 @@ describe('pageSlice and pageRange', () => {
   });
 });
 
+describe('a page size other than 10', () => {
+  const rows = Array.from({ length: 26 }, (_, index) => index + 1);
+  it('pages 26 rows by 5 into 6 pages', () => {
+    expect(pageCount(26, 5)).toBe(6);
+    expect(pageSlice(rows, 1, 5)).toEqual([1, 2, 3, 4, 5]);
+    expect(pageSlice(rows, 6, 5)).toEqual([26]);
+    expect(pageRange(2, 26, 5)).toEqual({ from: 6, to: 10 });
+    expect(pageRange(6, 26, 5)).toEqual({ from: 26, to: 26 });
+    expect(clampPage(9, 26, 5)).toBe(6);
+  });
+});
+
 describe('pageItems', () => {
   it('shows every page when there are few', () => {
     expect(pageItems(1, 1)).toEqual([1]);

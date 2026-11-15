@@ -22,6 +22,10 @@ export function consoleMetrics(
   };
 }
 
+// How many ranked investigations the side panel lists per page. Five keeps the side column about as tall as the
+// map and comparison column; with ten it was much taller and left an empty area next to the map.
+export const RANKING_PAGE_SIZE = 5;
+
 // One line under the profile buttons: why this environment ranks the way it does, from the profiles file.
 export function profileDescription(profile: RankingProfile): string {
   return profile.factors.topicMatch?.rationale ?? '';

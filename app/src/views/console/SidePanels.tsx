@@ -14,7 +14,7 @@ import { findSummary } from '../detailModel';
 import { addToSelection } from '../compare/selection';
 import { Breakdown, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
-import { profileDescription } from './consoleModel';
+import { profileDescription, RANKING_PAGE_SIZE } from './consoleModel';
 
 interface RankingPanelProps {
   id: string;
@@ -125,10 +125,13 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
   // The page belongs to one profile and one set of filters: changing either starts again on page 1.
   const listKey = `${profile.id}|${filters.fuelPhase}|${filters.topic}`;
   const [paging, setPaging] = useState({ key: listKey, page: 1 });
+  // A page chosen under another profile or filter is forgotten at once, so it cannot come back later when
+  // that same combination is selected again.
+  if (paging.key !== listKey) setPaging({ key: listKey, page: 1 });
   const options = rankingFilterOptions(ranked);
   const shown = filterRanked(ranked, filters);
-  const page = clampPage(paging.key === listKey ? paging.page : 1, shown.length);
-  const { from, to } = pageRange(page, shown.length);
+  const page = clampPage(paging.key === listKey ? paging.page : 1, shown.length, RANKING_PAGE_SIZE);
+  const { from, to } = pageRange(page, shown.length, RANKING_PAGE_SIZE);
   const interpreted = records.find((record) => record.accession === selected) ?? null;
   const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
 
@@ -179,7 +182,7 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
         </div>
       ) : (
         <ol className="ranked-list">
-          {pageSlice(shown, page).map(({ item, rank }) => (
+          {pageSlice(shown, page, RANKING_PAGE_SIZE).map(({ item, rank }) => (
             <RankedRow
               key={item.investigation.accession}
               item={item}
@@ -197,7 +200,7 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
           ))}
         </ol>
       )}
-      <Pager page={page} count={pageCount(shown.length)} onChange={(next) => setPaging({ key: listKey, page: next })} label="Ranking pages" />
+      <Pager page={page} count={pageCount(shown.length, RANKING_PAGE_SIZE)} onChange={(next) => setPaging({ key: listKey, page: next })} label="Ranking pages" />
       {interpreted ? (
         <InterpretationDialog open={interpretOpen} onClose={() => setInterpretOpen(false)} record={interpreted} entry={findSummary(summaries, interpreted.accession)} query={query} />
       ) : null}
