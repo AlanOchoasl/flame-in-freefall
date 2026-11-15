@@ -1,6 +1,6 @@
 # Smoke checklist (manual)
 
-Run it on the public URL (https://flame-in-freefall-indol.vercel.app) after each deploy and before submission. Open each screen directly by its address. Mark any failure in "Known gaps".
+Run it on the public URL (https://alanochoasl.github.io/flame-in-freefall/, GitHub Pages) after each deploy and before submission. Open each screen directly by its address. Mark any failure in "Known gaps".
 
 ## Checklist
 

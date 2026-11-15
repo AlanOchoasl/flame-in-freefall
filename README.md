@@ -2,7 +2,7 @@
 
 > NASA Space Apps Challenge 2026 · San Luis, Argentina · Challenge: **Flame in Freefall**
 
-**Live demo:** https://flame-in-freefall-indol.vercel.app · **Not an official NASA product.**
+**Live demo:** https://alanochoasl.github.io/flame-in-freefall/ · **Not an official NASA product.**
 
 ## Problem
 NASA's microgravity combustion results are public in the PSI repository, but they are hard to find, compare and interpret for fire safety in crewed spacecraft and Moon bases.
@@ -60,7 +60,7 @@ node scripts/catalog/cli.ts   # data/processed/catalog.json
 npm run build:data            # data/processed/experiments.json
 ```
 
-The public site is deployed from `main` on Vercel with `app/vercel.json`. The same build is also published to GitHub Pages by `.github/workflows/pages.yml` (https://alanochoasl.github.io/flame-in-freefall/ once Pages is enabled with the source "GitHub Actions"); the app uses relative paths, so it works under either address.
+The public site is published to GitHub Pages from `main` by `.github/workflows/pages.yml` (https://alanochoasl.github.io/flame-in-freefall/; Settings > Pages > Source: "GitHub Actions"). The app uses relative paths, so the same build also works from the root of another host: `app/vercel.json` deploys it to Vercel (https://flame-in-freefall-indol.vercel.app), which stopped deploying on 2026-11-15 because of its build limit and may show an older version.
 
 ## More documentation
 - `docs/EXTENDING.md`: add a screen, a ranking profile, a table mapper or an investigation.
