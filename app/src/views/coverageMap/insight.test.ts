@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { ExperimentRecord, ExperimentsFile } from '../../data/types';
-import { INSIGHT_LIMITS, computeInsight, describeInsight } from './insight';
+import { INSIGHT_LIMITS, computeInsight, describeCoverage, describeInsight } from './insight';
 
 const record = (overrides: Partial<ExperimentRecord> = {}): ExperimentRecord => ({
   id: 'PSI-159:1',
@@ -123,5 +123,28 @@ describe('the committed dataset', () => {
     const text = describeInsight(insight);
     expect(text.headline).toContain('48 of 333 plotted (14.4 %)');
     expect(text.limits).toHaveLength(3);
+  });
+});
+
+describe('describeCoverage', () => {
+  const at = (id: string, o2Fraction: number, pressureBar: number, outcome: string, inMoonBaseZone: boolean) =>
+    record({ id, o2Fraction, pressureBar, outcome, inMoonBaseZone, isPlottable: true });
+
+  it('counts tests and the distinct conditions, and how many in the zone ignited', () => {
+    const records = [
+      at('a', 0.85, 2.2, 'yes', false),
+      at('b', 0.85, 2.2, 'no', false),
+      at('c', 0.4, 0.5, 'yes', true),
+      at('d', 0.4, 0.5, 'yes', true),
+      at('e', 0.5, 0.6, 'no', true),
+    ];
+    expect(describeCoverage(records)).toBe(
+      '5 tests at 3 combinations of oxygen and pressure. 3 fall inside the expected Moon-base zone; the flame ignited in 2 of them.',
+    );
+  });
+
+  it('says so when nothing falls in the zone, or nothing is plotted', () => {
+    expect(describeCoverage([at('a', 0.2, 1, 'yes', false)])).toBe('1 test at 1 combination of oxygen and pressure. None falls inside the expected Moon-base zone.');
+    expect(describeCoverage([])).toBe('No test is plotted with the current filters.');
   });
 });

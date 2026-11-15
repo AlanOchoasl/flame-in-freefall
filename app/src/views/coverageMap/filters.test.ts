@@ -164,8 +164,10 @@ describe('the committed dataset', () => {
 });
 
 describe('OUTCOME_SHORT_LABELS', () => {
-  it('is the long label without its prefix, for every outcome', () => {
-    for (const outcome of OUTCOMES) expect(OUTCOME_LABELS[outcome]).toBe(`Ignition: ${OUTCOME_SHORT_LABELS[outcome]}`);
+  it('names every outcome in words, each different, and never as a bare yes or no', () => {
+    const words = OUTCOMES.map((outcome) => OUTCOME_SHORT_LABELS[outcome]);
+    expect(new Set(words).size).toBe(OUTCOMES.length);
+    for (const word of words) expect(['yes', 'no', '']).not.toContain(word);
   });
 });
 

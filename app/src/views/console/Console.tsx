@@ -88,7 +88,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
 
       <div className="workspace">
         <div className="main-column">
-          <Panel id="coverage" title="Test conditions · O₂ × pressure" subtitle="The quantitative coverage map · one point per plottable test" routeFocus={section === 'map'}>
+          <Panel id="coverage" title="Test conditions · O₂ × pressure" subtitle="Where PSI ran tests, and how each one ended · one circle per combination" routeFocus={section === 'map'}>
             <DataState state={experiments} label="The test data">
               {(file) => (
                 <CoverageMapBody records={file.records} filters={mapFiltersFromQuery(query, file.records)} onFiltersChange={writeMapFilters} />

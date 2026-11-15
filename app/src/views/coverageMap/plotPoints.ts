@@ -1,5 +1,5 @@
 import type { ExperimentRecord } from '../../data/types';
-import { OUTCOMES, plottedOnly } from './filters';
+import { OUTCOMES, OUTCOME_SHORT_LABELS, plottedOnly } from './filters';
 import { isOutcome, type Outcome } from './outcomeStyle';
 
 // Converts tests into chart points: x is O2 in percent, y is pressure in bar.
@@ -20,6 +20,20 @@ export const MAX_MARKER_RADIUS = 16;
 /** Marker radius in pixels: grows with the square root of the tests it stands for, up to a cap. */
 export function markerRadius(testCount: number): number {
   return Math.min(MAX_MARKER_RADIUS, MIN_MARKER_RADIUS + 2 * Math.sqrt(Math.max(testCount, 1) - 1));
+}
+
+/** "ignited 25 · no ignition 1": how the tests at one point ended, in words. */
+export function describeOutcomeCounts(counts: OutcomeCounts): string {
+  return OUTCOMES.filter((outcome) => counts[outcome] > 0)
+    .map((outcome) => `${OUTCOME_SHORT_LABELS[outcome]} ${counts[outcome]}`)
+    .join(' · ');
+}
+
+/** The circle that best teaches how to read one: the biggest whose tests ended in more than one way, else the biggest. */
+export function exampleCircle(points: PlotPoint[]): PlotPoint | null {
+  const mixed = (point: PlotPoint) => OUTCOMES.filter((outcome) => point.counts[outcome] > 0).length > 1;
+  const biggest = (list: PlotPoint[]) => list.reduce<PlotPoint | null>((best, point) => (best === null || point.records.length > best.records.length ? point : best), null);
+  return biggest(points.filter(mixed)) ?? biggest(points);
 }
 
 const emptyCounts = (): OutcomeCounts => Object.fromEntries(OUTCOMES.map((outcome) => [outcome, 0])) as OutcomeCounts;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ExperimentRecord } from '../../data/types';
 import { buildCsv, CSV_FILE_NAME, CSV_MIME_TYPE } from './csv';
+import { OUTCOME_SHORT_LABELS } from './filters';
 
 const PAGE = 50;
 
@@ -44,7 +45,7 @@ export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
                 <td>
                   {r.pressureBar === null ? '—' : `${r.pressureIsApproximate ? '≈ ' : ''}${Math.round(r.pressureBar * 1000) / 1000}`}
                 </td>
-                <td>{r.outcome}</td>
+                <td>{OUTCOME_SHORT_LABELS[r.outcome as keyof typeof OUTCOME_SHORT_LABELS] ?? r.outcome}</td>
                 <td>
                   <a href={r.pageUrl} target="_blank" rel="noopener noreferrer">
                     PSI

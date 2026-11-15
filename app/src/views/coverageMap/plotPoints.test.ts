@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_MARKER_RADIUS, MIN_MARKER_RADIUS, markerRadius, outcomeCounts, pointsByCondition, toCoordinates } from './plotPoints';
+import { MAX_MARKER_RADIUS, MIN_MARKER_RADIUS, describeOutcomeCounts, exampleCircle, markerRadius, outcomeCounts, pointsByCondition, toCoordinates } from './plotPoints';
 import type { ExperimentRecord } from '../../data/types';
 
 const record = (overrides: Partial<ExperimentRecord>): ExperimentRecord =>
@@ -41,5 +41,31 @@ describe('markerRadius', () => {
   it('grows with the number of tests and stops at the cap', () => {
     expect(markerRadius(5)).toBeGreaterThan(markerRadius(2));
     expect(markerRadius(1000)).toBe(MAX_MARKER_RADIUS);
+  });
+});
+
+describe('describeOutcomeCounts', () => {
+  it('names each outcome in words with its count, skipping the ones with none', () => {
+    const counts = { yes: 25, no: 1, flash: 0, 'not-reported': 0 };
+    expect(describeOutcomeCounts(counts)).toBe('ignited 25 · no ignition 1');
+  });
+});
+
+describe('exampleCircle', () => {
+  const circles = pointsByCondition([
+    record({ id: '1', o2Fraction: 0.2, pressureBar: 1, outcome: 'yes' }),
+    record({ id: '2', o2Fraction: 0.2, pressureBar: 1, outcome: 'yes' }),
+    record({ id: '3', o2Fraction: 0.2, pressureBar: 1, outcome: 'yes' }),
+    record({ id: '4', o2Fraction: 0.5, pressureBar: 2, outcome: 'yes' }),
+    record({ id: '5', o2Fraction: 0.5, pressureBar: 2, outcome: 'no' }),
+  ]);
+
+  it('prefers the biggest circle whose tests ended in more than one way', () => {
+    expect(exampleCircle(circles)?.x).toBe(50);
+  });
+
+  it('falls back to the biggest circle, and to nothing for an empty chart', () => {
+    expect(exampleCircle(circles.slice(0, 1))?.records).toHaveLength(3);
+    expect(exampleCircle([])).toBeNull();
   });
 });

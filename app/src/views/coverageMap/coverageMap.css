@@ -218,3 +218,9 @@
 .map-overlays-details > summary { cursor: pointer; color: var(--text-secondary); font-weight: 600; }
 .map-card-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .map-card-head h2 { margin: 0; }
+
+/* The one-sentence answer above the chart, and the worked example in the legend. */
+.map-lead { color: var(--text-primary); font-size: var(--fs-base); font-weight: 500; }
+.map-legend-example { display: flex; align-items: center; gap: var(--space-3); margin: 0; padding: var(--space-2) var(--space-3); color: var(--text-secondary); font-size: var(--fs-sm); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.map-legend-example svg { flex: none; }
+.map-legend-example strong { color: var(--text-primary); }
