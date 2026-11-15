@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addToSelection, LIMIT_MESSAGE, parseSelection, removeFromSelection, searchInvestigations } from './selection';
+import { addToSelection, candidatesFor, LIMIT_MESSAGE, parseSelection, removeFromSelection, searchInvestigations } from './selection';
 import type { CatalogRecord } from '../../data/types';
 
 const known = ['PSI-1', 'PSI-2', 'PSI-3', 'PSI-4'];
@@ -36,5 +36,19 @@ describe('searchInvestigations', () => {
     expect(searchInvestigations(records, 'saffire').map((r) => r.accession)).toEqual(['PSI-1']);
     expect(searchInvestigations(records, 'psi-2').map((r) => r.accession)).toEqual(['PSI-2']);
     expect(searchInvestigations(records, 'FLAME').map((r) => r.accession)).toEqual(['PSI-2']);
+  });
+});
+
+describe('candidatesFor', () => {
+  const records = [
+    { accession: 'PSI-1', acronym: 'SAFFIRE', title: 'Spacecraft fire' },
+    { accession: 'PSI-2', acronym: null, title: 'Spacecraft flame design' },
+  ] as CatalogRecord[];
+  it('lists nothing until something is typed', () => {
+    expect(candidatesFor(records, [], '')).toEqual([]);
+    expect(candidatesFor(records, [], '   ')).toEqual([]);
+  });
+  it('lists matches that are not already selected', () => {
+    expect(candidatesFor(records, ['PSI-1'], 'spacecraft').map((r) => r.accession)).toEqual(['PSI-2']);
   });
 });

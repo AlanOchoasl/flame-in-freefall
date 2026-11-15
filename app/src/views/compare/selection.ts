@@ -24,6 +24,12 @@ export function removeFromSelection(ids: string[], accession: string): string[] 
   return ids.filter((id) => id !== accession);
 }
 
+// The picker lists candidates only once something is typed; an empty box lists none, so the table stays in view.
+export function candidatesFor(records: CatalogRecord[], ids: string[], text: string): CatalogRecord[] {
+  if (text.trim() === '') return [];
+  return searchInvestigations(records, text).filter((record) => !ids.includes(record.accession));
+}
+
 // Case-insensitive match over accession, acronym and title; no search library.
 export function searchInvestigations(records: CatalogRecord[], text: string): CatalogRecord[] {
   const needle = text.trim().toLowerCase();

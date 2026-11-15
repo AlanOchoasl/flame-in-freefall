@@ -471,7 +471,7 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .ranking-profile { display: inline-flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
 .ranking-filters { margin-bottom: var(--space-3); }
 
-.compare-picker { padding: var(--space-4); margin-bottom: var(--space-4); border: 1px solid var(--line); background: var(--surface-1); border-radius: var(--radius-2); }
+.compare-picker { padding: var(--space-4); margin-top: var(--space-4); border: 1px solid var(--line); background: var(--surface-1); border-radius: var(--radius-2); }
 .compare-picker h2 { margin-top: 0; }
 .compare-picker input { max-width: 100%; }
 .search-field { position: relative; display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
@@ -633,3 +633,7 @@ progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
+
+/* Nothing to compare yet: the hint and a one-click starting pair. */
+.compare-empty { display: grid; gap: var(--space-2); justify-items: start; }
+.compare-empty p { margin: 0; }
