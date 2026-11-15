@@ -80,6 +80,25 @@ export function OutcomeDot({ outcome }: { outcome: Outcome }) {
   );
 }
 
+/** An X for a reference atmosphere (Earth air, spacesuit): it marks a condition, not a set of tests. */
+export function ReferenceCross({ cx, cy, color }: { cx?: number; cy?: number; color: string }) {
+  if (cx === undefined || cy === undefined) return <g />;
+  return (
+    <g transform={`translate(${cx}, ${cy})`}>
+      <path d="M -6 -6 L 6 6 M -6 6 L 6 -6" fill="none" stroke={color} strokeWidth={3} strokeLinecap="round" />
+    </g>
+  );
+}
+
+/** A sample of the reference cross for the legend note. */
+export function CrossSample() {
+  return (
+    <svg width="20" height="20" viewBox="-10 -10 20 20" aria-hidden="true" focusable="false">
+      <path d="M -5 -5 L 5 5 M -5 5 L 5 -5" fill="none" stroke="var(--text-secondary)" strokeWidth={2.5} strokeLinecap="round" />
+    </svg>
+  );
+}
+
 /** A sample of the zone ring for the legend note. */
 export function ZoneRingSample() {
   return (

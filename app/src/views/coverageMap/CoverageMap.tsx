@@ -18,16 +18,15 @@ import {
   isFilterUseful,
   NO_FILTERS, ZONE_ONLY,
   OUTCOME_LABELS,
-  OUTCOMES,
   type MapFilters,
 } from './filters';
-import { computeInsight, describeInsight } from './insight';
+import { computeInsight, describeCoverage, describeInsight } from './insight';
 import { marginLabel } from './OverlayLabel';
-import { PointShape } from './OutcomeMarker';
+import { PointShape, ReferenceCross } from './OutcomeMarker';
 import { isOutcome, type Outcome } from './outcomeStyle';
 import { OutcomeLegend } from './OutcomeLegend';
 import { OverlayList } from './OverlayList';
-import { outcomeCounts, pointsByCondition, type OutcomeCounts, type PlotPoint } from './plotPoints';
+import { describeOutcomeCounts, exampleCircle, outcomeCounts, pointsByCondition, type PlotPoint } from './plotPoints';
 import { downloadCsv, ResultsTable } from './ResultsTable';
 import { isZoomed, niceTicks, panRange, zoomRange, type Range } from './viewRange';
 import './coverageMap.css';
@@ -50,7 +49,7 @@ const MIN_Y_SPAN = 0.1; // bar
 const WHEEL_ZOOM_STEP = 1.25;
 const DRAG_THRESHOLD_PX = 4;
 
-function FilterSelect({ label, value, options, onChange }: { label: string; value: string | null; options: string[]; onChange: (v: string | null) => void }) {
+function FilterSelect({ label, value, options, labelOf = (option) => option, onChange }: { label: string; value: string | null; options: string[]; labelOf?: (option: string) => string; onChange: (v: string | null) => void }) {
   return (
     <label className="map-field">
       <span>{label}</span>
@@ -58,7 +57,7 @@ function FilterSelect({ label, value, options, onChange }: { label: string; valu
         <option value="">All</option>
         {options.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {labelOf(option)}
           </option>
         ))}
       </select>
@@ -75,11 +74,7 @@ const formatO2 = (record: ExperimentRecord): string => (record.o2Fraction === nu
 
 const outcomeLabel = (record: ExperimentRecord): string => OUTCOME_LABELS[record.outcome as keyof typeof OUTCOME_LABELS] ?? record.outcome;
 
-// "Ignition: yes 18 · no 2": how the tests at one point ended, in words.
-const describeOutcomes = (counts: OutcomeCounts): string =>
-  OUTCOMES.filter((outcome) => counts[outcome] > 0)
-    .map((outcome) => `${OUTCOME_LABELS[outcome].replace('Ignition: ', '')} ${counts[outcome]}`)
-    .join(' · ');
+const describeOutcomes = describeOutcomeCounts;
 
 // The tests behind one chart point share O2 and pressure; they differ in the test and may differ in outcome.
 function PointDetails({ point }: { point: PlotPoint }) {
@@ -273,7 +268,7 @@ function Chart({ points, selected, onSelect }: ChartProps) {
                 strokeDasharray="6 4"
                 label={{ content: ZONE_LABEL }}
               />
-              {/* Guide from the Earth-air ring to its label in the margin; it is drawn behind the points. */}
+              {/* Guide from the Earth-air cross to its label in the margin; it is drawn behind the points. */}
               <ReferenceLine
                 segment={[{ x: EARTH_AIR.o2Percent, y: EARTH_AIR.pressureBar }, { x: O2_AXIS_MAX_PERCENT, y: EARTH_AIR.pressureBar }]}
                 stroke={OVERLAY_COLORS.earth}
@@ -281,14 +276,12 @@ function Chart({ points, selected, onSelect }: ChartProps) {
                 strokeDasharray="2 4"
                 label={{ content: EARTH_LABEL }}
               />
-              <ReferenceDot x={EARTH_AIR.o2Percent} y={EARTH_AIR.pressureBar} r={6} fill="none" stroke={OVERLAY_COLORS.earth} strokeWidth={2.5} />
+              {/* References are crosses, never circles: a circle is always a set of tests. */}
+              <ReferenceDot x={EARTH_AIR.o2Percent} y={EARTH_AIR.pressureBar} shape={<ReferenceCross color={OVERLAY_COLORS.earth} />} />
               <ReferenceDot
                 x={SPACESUIT.o2Percent}
                 y={SPACESUIT.pressureBar}
-                r={6}
-                fill="none"
-                stroke={OVERLAY_COLORS.suit}
-                strokeWidth={2.5}
+                shape={<ReferenceCross color={OVERLAY_COLORS.suit} />}
                 label={{ content: SUIT_LABEL }}
               />
               <Tooltip cursor={false} isAnimationActive={false} content={<PointTooltip />} />
@@ -341,7 +334,7 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
 
   return (
     <>
-      <p className="map-lead">Each dot is one real test from NASA PSI, placed by its O2 (%) and its pressure (bar).</p>
+      <p className="map-lead">{describeCoverage(matching)}</p>
       <fieldset className="map-filters">
         <legend>Filters</legend>
         {isFilterUseful(options.accessions, filters.accession) ? (
@@ -354,7 +347,7 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
           <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
         ) : null}
         {isFilterUseful(options.outcomes, filters.outcome) ? (
-          <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+          <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} labelOf={(value) => OUTCOME_LABELS[value as keyof typeof OUTCOME_LABELS] ?? value} onChange={set('outcome')} />
         ) : null}
         <label className="map-field">
           <span>Moon-base zone</span>
@@ -408,7 +401,7 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
             <ResultsTable key={JSON.stringify(filters)} records={matching} />
           ) : (
             <div className="map-card">
-              <OutcomeLegend counts={legendCounts} hidden={hidden} onToggle={toggleOutcome} />
+              <OutcomeLegend counts={legendCounts} hidden={hidden} onToggle={toggleOutcome} example={exampleCircle(points)} />
               <Chart points={points} selected={selected} onSelect={setSelected} />
             </div>
           )}

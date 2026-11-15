@@ -1,6 +1,7 @@
 import type { ExperimentRecord } from '../../data/types';
 import { MOON_BASE_ZONE, formatPressure } from './constants';
 import { plottedOnly } from './filters';
+import { pointsByCondition } from './plotPoints';
 
 // The insight panel text. Every number is computed from the records; only the wording of the
 // limits is fixed. The zone membership comes from the `inMoonBaseZone` flag of experiments.json.
@@ -51,6 +52,21 @@ export function computeInsight(records: ExperimentRecord[]): Insight {
     investigations: countBy(inZone, (record) => record.accession),
     fuels: countBy(inZone, (record) => record.fuel.species ?? record.fuel.raw ?? 'unknown fuel'),
   };
+}
+
+/** The one-sentence answer above the chart, from the tests that match the filters. */
+export function describeCoverage(records: ExperimentRecord[]): string {
+  const plotted = plottedOnly(records);
+  if (plotted.length === 0) return 'No test is plotted with the current filters.';
+  const conditions = pointsByCondition(plotted).length;
+  const zone = plotted.filter((record) => record.inMoonBaseZone);
+  const ignited = zone.filter((record) => record.outcome === 'yes').length;
+  const tests = `${plotted.length} ${plotted.length === 1 ? 'test' : 'tests'} at ${conditions} ${conditions === 1 ? 'combination' : 'combinations'} of oxygen and pressure.`;
+  const inZone =
+    zone.length === 0
+      ? 'None falls inside the expected Moon-base zone.'
+      : `${zone.length} ${zone.length === 1 ? 'falls' : 'fall'} inside the expected Moon-base zone; the flame ignited in ${ignited} of them.`;
+  return `${tests} ${inZone}`;
 }
 
 const formatCounts = (counts: InsightCount[]): string =>

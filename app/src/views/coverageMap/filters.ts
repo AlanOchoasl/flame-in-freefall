@@ -21,17 +21,17 @@ export const OUTCOMES = ['yes', 'no', 'flash', 'not-reported'] as const;
 
 // A table with no outcome column is "not-reported", a value of its own and never "no". No table in use has that today.
 export const OUTCOME_LABELS: Record<(typeof OUTCOMES)[number], string> = {
-  yes: 'Ignition: yes',
-  no: 'Ignition: no',
-  flash: 'Ignition: flash',
-  'not-reported': 'Ignition: not reported',
+  yes: 'Ignited',
+  no: 'No ignition',
+  flash: 'Flash only',
+  'not-reported': 'Ignition not reported',
 };
 
-/** The same outcomes without the "Ignition: " prefix, for places that already say it is the ignition result. */
+/** Lower-case words for places that already say the numbers are ignition results (the legend, the tooltip, the table). */
 export const OUTCOME_SHORT_LABELS: Record<(typeof OUTCOMES)[number], string> = {
-  yes: 'yes',
-  no: 'no',
-  flash: 'flash',
+  yes: 'ignited',
+  no: 'no ignition',
+  flash: 'flash only',
   'not-reported': 'not reported',
 };
 
