@@ -608,7 +608,12 @@ button { font-weight: 500; }
 .ranked-row:first-child { padding-top: 0; border-top: 0; }
 .ranked-row.is-selected { padding-left: var(--space-3); box-shadow: inset 3px 0 0 var(--action); }
 .ranked-top { display: flex; justify-content: space-between; gap: var(--space-3); margin: 0; }
+.rank-line { display: inline-flex; align-items: center; gap: 8px; }
+.rank-no { color: var(--text-secondary); font: 600 12px var(--mono); }
 .accession { color: var(--text-muted); font: 12px var(--mono); }
+.score-cell { display: grid; justify-items: end; gap: 4px; }
+.score-bar { display: block; width: 72px; height: 4px; overflow: hidden; background: var(--line); border-radius: 2px; }
+.score-bar > span { display: block; height: 100%; background: var(--action); }
 .score { color: var(--action); font: 600 14px var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .study-name { margin: 4px 0; font-size: var(--fs-base); }
 .study-meta { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); }
@@ -666,3 +671,36 @@ progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
 /* Nothing to compare yet: the hint and a one-click starting pair. */
 .compare-empty { display: grid; gap: var(--space-2); justify-items: start; }
 .compare-empty p { margin: 0; }
+
+/* "Show all" opens the whole ranking in a dialog with its own scroll, so the page does not grow. */
+.ranking-dialog { width: min(760px, calc(100vw - 2 * var(--space-4))); max-height: calc(100vh - 2 * var(--space-5)); padding: 0; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.ranking-dialog::backdrop { background: rgb(0 0 0 / 0.6); }
+.ranking-dialog-body { padding: var(--space-4); }
+.ranking-dialog-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-3); padding: var(--space-3) var(--space-4); background: var(--surface-1); border-bottom: 1px solid var(--line); }
+.ranking-dialog-head h2 { margin: 0; font-size: var(--fs-lg, 18px); }
+body:has(dialog[open]) { overflow: hidden; }
+@media (max-width: 599px) {
+  .ranking-dialog { width: 100vw; max-width: none; height: 100vh; max-height: none; border-radius: 0; }
+}
+
+/* Dialog: each investigation is a card with a rank badge, a score bar and pill actions. */
+.ranking-dialog-head h2 + .ranking-dialog-sub { margin: 2px 0 0; color: var(--text-muted); font-size: var(--fs-sm); }
+.ranking-toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); padding: var(--space-3); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.ranking-toolbar .panel-filters { margin: 0; }
+.ranking-toolbar .result-count { margin: 0; }
+.ranking-dialog .ranked-list { gap: var(--space-3); }
+.ranking-dialog .ranked-row,
+.ranking-dialog .ranked-row:first-child { padding: var(--space-3) var(--space-4); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.ranking-dialog .ranked-row:hover { border-color: var(--line-strong); }
+.ranking-dialog .ranked-row.is-selected { padding-left: var(--space-4); border-color: var(--action); box-shadow: inset 3px 0 0 var(--action); }
+.ranking-dialog .rank-no { min-width: 36px; padding: 2px 8px; text-align: center; color: var(--text-primary); background: var(--surface-hover); border-radius: 999px; }
+.ranking-dialog .study-name { margin: var(--space-2) 0 4px; font-size: var(--fs-base); }
+.ranking-dialog .row-actions { gap: var(--space-2); padding-top: var(--space-3); border-top: 1px solid var(--line); }
+.ranking-dialog .row-actions a,
+.ranking-dialog .row-actions button { padding: 4px 12px; font-size: 13px; line-height: 1.4; border: 1px solid var(--line-strong); border-radius: 999px; text-decoration: none; }
+.ranking-dialog .row-actions a:hover,
+.ranking-dialog .row-actions button:hover { background: var(--surface-hover); }
+.ranking-dialog .row-actions button { color: var(--action); border-color: var(--action); background: transparent; }
+.ranking-dialog .row-actions button[aria-pressed='true'] { color: var(--canvas); background: var(--action); }
+.ranking-dialog .row-actions span a { padding: 0; border: 0; }
+.ranking-dialog .evidence-marks:empty { display: none; }

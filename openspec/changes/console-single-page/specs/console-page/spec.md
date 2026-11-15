@@ -32,11 +32,15 @@ The Relevance ranking panel SHALL offer one button per profile in the profiles f
 - **THEN** the ranking shows the detection order and its heading names the profile
 
 ### Requirement: Side column
-The side column SHALL show the relevance ranking (first five investigations, "Show all N" for the rest), the interpretation of the selected investigation (AI summary with its label, or the PSI text) and the coverage gaps with the count of plotted tests in the expected zone. Each ranking row SHALL show its score out of the maximum, a "No normalized test rows" mark when it has none, and links to the detail, to add it to the comparison and to PSI.
+The side column SHALL show the relevance ranking (first five investigations, "Show all N" opens the full list, with its fuel-phase and topic filters, in a modal dialog), the interpretation of the selected investigation (AI summary with its label, or the PSI text) and the coverage gaps with the count of plotted tests in the expected zone. Each ranking row SHALL show its score out of the maximum, a "No normalized test rows" mark when it has none, and links to the detail, to add it to the comparison and to PSI.
 
 #### Scenario: Interpreting a row
 - **WHEN** a user activates "Interpret" on a ranking row
 - **THEN** the interpretation panel shows that investigation and the row is marked selected
+
+#### Scenario: Opening the full ranking
+- **WHEN** a user activates "Show all N"
+- **THEN** a modal dialog lists every ranked investigation with the filters, the page behind does not grow, Esc or Close closes it and focus returns to "Show all N"
 
 ### Requirement: Each panel fails alone
 Each panel SHALL load and fail independently, naming the file it could not load, without blocking the others.
