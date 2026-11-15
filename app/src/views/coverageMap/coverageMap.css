@@ -231,3 +231,9 @@
 .zone-check.is-inside { border-left-color: var(--zone); }
 .map-caution { margin: var(--space-3) 0 0; color: var(--text-secondary); font-size: var(--fs-sm); }
 .map-caution strong { color: var(--text-primary); }
+
+/* Clicking a circle focuses the SVG layer that holds it (recharts gives its layers tabindex -1), and the browser then draws
+   a focus ring around the whole plot. Those layers cannot be reached with the keyboard, so they need no ring; the chart itself
+   (role application) and the scrollable region keep theirs. */
+.map-plot-region g[tabindex]:focus,
+.map-plot-region g[tabindex]:focus-visible { outline: none; }
