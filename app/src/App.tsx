@@ -100,10 +100,12 @@ export function App() {
         Skip to content
       </a>
       <header className="console-header" onKeyDown={closeMenuOnEscape}>
-        <a className="console-brand" href={carryExplorerState('/ranking', query)} aria-label="Flame in Freefall — Ranking">
+        <a className="console-brand" href={carryExplorerState('/ranking', query)} aria-label="Flame in Freefall — Ranking. Logo made with AI">
           <span className="brand-mark console-mark" aria-hidden="true" />
-          <strong>FLAME IN FREEFALL</strong>
-          <span className="console-tag">PSI RESEARCH CONSOLE</span>
+          <span className="brand-name">
+            <strong>FLAME IN FREEFALL</strong>
+            <span className="brand-disclosure">Logo made with AI</span>
+          </span>
         </a>
         <button
           ref={menuButtonRef}
@@ -155,6 +157,7 @@ export function App() {
             <div>
               <strong>Flame in Freefall</strong>
               <span>Independent research explorer</span>
+              <span className="brand-disclosure">Logo made with AI</span>
             </div>
           </div>
           <div className="footer-info">
