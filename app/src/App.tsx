@@ -6,6 +6,7 @@ import { SECTION_CHANGE, SECTION_PATHS, type ConsoleSectionId } from './router/v
 import { readStoredTheme, storeTheme, type Theme } from './theme';
 import { useOfflineReady } from './offline';
 import { matchRoute } from './router/matchRoute';
+import { scrollToSection } from './router/sectionScroll';
 import { useHashLocation } from './router/useHashLocation';
 import { useRouteChrome } from './router/useRouteChrome';
 import { views } from './views';
@@ -67,6 +68,14 @@ export function App() {
     menuButtonRef.current?.focus();
   };
 
+  // Clicking the link of the section you are already on changes no address, so scroll there directly.
+  const onNavClick = (event: MouseEvent<HTMLElement>) => {
+    setMenuOpen(false);
+    const link = (event.target as HTMLElement).closest('a');
+    const clicked = link ? matchRoute(link.getAttribute('href') ?? '', views) : null;
+    if (clicked && clicked.view.path === currentPath && clicked.view.section) scrollToSection(clicked.view.section);
+  };
+
   const accession = match?.params.accession;
   const screenTitle = match ? [match.view.title, accession].filter(Boolean).join(' ') : 'Not found';
   useRouteChrome(screenTitle, route);
@@ -98,7 +107,7 @@ export function App() {
         >
           Menu
         </button>
-        <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={() => setMenuOpen(false)}>
+        <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={onNavClick}>
           <ul>
             {views
               .filter((view) => view.inNav)
