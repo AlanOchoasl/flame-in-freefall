@@ -3,7 +3,7 @@
 Generated with `node scripts/check-licenses.mjs <dir> --write` and merged here. Policy: `scripts/license-policy.json`.
 The `lightningcss*` packages (MPL-2.0) are a team-approved exception recorded in that policy.
 
-Three fonts are bundled (team-approved SIL Open Font License 1.1 exception, 2026-11-14); no icons, images or audio are bundled. Each font's full license and copyright notice ship with its binary. Data comes from NASA PSI (https://psi.nasa.gov/physci/repo/search?q=combustion) and is cited in the README and in the app.
+Three fonts are bundled (team-approved SIL Open Font License 1.1 exception, 2026-11-14); each font's full license and copyright notice ship with its binary. Interface icons are bundled from Lucide React (ISC; icons derived from Feather also carry MIT, Copyright (c) 2013-present Cole Bemis; [license text](https://github.com/lucide-icons/lucide/blob/main/LICENSE)). The team-provided logo is in `app/public/branding/`; no third-party photos or audio are bundled. Data comes from NASA PSI (https://psi.nasa.gov/physci/repo/search?q=combustion) and is cited in the README and in the app.
 
 | Font | Role | License | Source | Bundled license |
 |---|---|---|---|---|
@@ -59,6 +59,7 @@ Three fonts are bundled (team-approved SIL Open Font License 1.1 exception, 2026
 | lightningcss | 1.33.0 | MPL-2.0 |
 | lightningcss-linux-x64-gnu | 1.33.0 | MPL-2.0 |
 | lightningcss-linux-x64-musl | 1.33.0 | MPL-2.0 |
+| lucide-react | 1.73.0 | ISC (some icons: MIT attribution) |
 | nanoid | 3.3.20 | MIT |
 | picocolors | 1.1.1 | ISC |
 | picomatch | 4.0.7 | MIT |

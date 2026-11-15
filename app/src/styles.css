@@ -298,7 +298,7 @@ header {
 }
 
 .theme-switch { display: flex; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-2); background: var(--surface-2); }
-.theme-switch button { min-height: var(--target-size); padding: 0 9px; border: 0; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); }
+.theme-switch button { display: inline-flex; align-items: center; gap: 6px; min-height: var(--target-size); padding: 0 9px; border: 0; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); }
 .theme-switch button[aria-pressed='true'] { background: var(--brand); color: #ffffff; }
 .dataset-state { color: var(--text-muted); font: 12px var(--mono); white-space: nowrap; }
 
@@ -439,6 +439,8 @@ input {
 }
 
 button { cursor: pointer; }
+.icon-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.action-icon { width: 17px; height: 17px; flex: none; stroke-width: 1.75; }
 button:hover:not(:disabled) { background: var(--surface-hover); }
 .theme-switch button:hover:not(:disabled) { color: var(--text-primary); }
 .theme-switch button[aria-pressed='true']:hover { background: var(--brand); color: #ffffff; }
@@ -514,19 +516,15 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .compare-picker h2 { margin-top: 0; }
 .compare-picker input { max-width: 100%; }
 .search-field { position: relative; display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
-/* Magnifier drawn as an inline SVG mask so it follows the theme's muted text color (no icon dependency). */
-.search-field::before {
-  content: '';
+.search-field .search-icon {
   position: absolute;
   left: 12px;
   top: 50%;
   width: 18px;
   height: 18px;
   transform: translateY(-50%);
-  background: var(--text-muted);
+  color: var(--text-muted);
   pointer-events: none;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .compare-picker .compare-search { width: 100%; padding-left: 40px; }
 .compare-selected, .compare-options { list-style: none; padding: 0; }
@@ -543,7 +541,7 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .table-scroll tbody th { position: sticky; left: 0; background: var(--surface); }
 
 /* Menu button: below 640 px the navigation collapses behind it. */
-.menu-button { display: none; }
+.menu-button { display: none; align-items: center; gap: 6px; }
 
 @media (max-width: 639px) {
   .menu-button { display: inline-flex; align-items: center; }

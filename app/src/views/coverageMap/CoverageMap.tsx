@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ChartScatter, Download, RotateCcw, Table2, ZoomIn, ZoomOut } from 'lucide-react';
 import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
@@ -222,12 +223,13 @@ function Chart({ points, selected, onSelect }: ChartProps) {
       <div className="map-zoom-controls">
         <span className="map-zoom-hint">Scroll to zoom, drag to move.</span>
         <button type="button" aria-label="Zoom in" onClick={() => zoomBy(1 / WHEEL_ZOOM_STEP)}>
-          +
+          <ZoomIn className="action-icon" aria-hidden="true" />
         </button>
         <button type="button" aria-label="Zoom out" onClick={() => zoomBy(WHEEL_ZOOM_STEP)} disabled={!zoomed}>
-          −
+          <ZoomOut className="action-icon" aria-hidden="true" />
         </button>
-        <button type="button" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
+        <button type="button" className="icon-action" onClick={() => setView({ x: FULL_X, y: FULL_Y })} disabled={!zoomed}>
+          <RotateCcw className="action-icon" aria-hidden="true" />
           Reset zoom
         </button>
       </div>
@@ -373,10 +375,12 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
               {counts.notPlotted > 0 ? <span> · {counts.notPlotted} not plotted: O2 or pressure missing</span> : null}
             </p>
             <div className="map-actions">
-              <button type="button" aria-pressed={asTable} onClick={() => setAsTable(!asTable)}>
+              <button type="button" className="icon-action" aria-pressed={asTable} onClick={() => setAsTable(!asTable)}>
+                {asTable ? <ChartScatter className="action-icon" aria-hidden="true" /> : <Table2 className="action-icon" aria-hidden="true" />}
                 {asTable ? 'Show as chart' : 'Show as table'}
               </button>
-              <button type="button" onClick={() => downloadCsv(matching)} disabled={matching.length === 0}>
+              <button type="button" className="icon-action" onClick={() => downloadCsv(matching)} disabled={matching.length === 0}>
+                <Download className="action-icon" aria-hidden="true" />
                 Download filtered data (CSV)
               </button>
             </div>

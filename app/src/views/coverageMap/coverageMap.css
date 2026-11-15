@@ -203,7 +203,7 @@
 /* Zoom controls above the plot; the wheel and a drag do the same on the plot itself. */
 .map-zoom-controls { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
 .map-zoom-hint { margin-right: auto; color: var(--text-muted); font-size: var(--fs-sm); }
-.map-zoom-controls button { min-width: var(--target-size); }
+.map-zoom-controls button { display: inline-flex; align-items: center; justify-content: center; min-width: var(--target-size); }
 /* Once zoomed in, the open hand shows over the whole plot (the recharts svg sets its own cursor, so it is set
    on the children too); it closes while dragging. At full size the cursor stays the normal arrow. Markers
    keep their pointing hand. */

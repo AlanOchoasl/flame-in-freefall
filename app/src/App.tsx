@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { DataSourceNote } from './components/DataSourceNote';
 import { AmbientGlow } from './components/AmbientGlow';
 import { carryExplorerState } from './router/explorerQuery';
@@ -107,6 +108,7 @@ export function App() {
           aria-controls="main-nav"
           onClick={() => setMenuOpen(!menuOpen)}
         >
+          {menuOpen ? <X className="action-icon" aria-hidden="true" /> : <Menu className="action-icon" aria-hidden="true" />}
           Menu
         </button>
         <nav id="main-nav" aria-label="Main" className={menuOpen ? 'open' : undefined} onClick={onNavClick}>
@@ -125,6 +127,7 @@ export function App() {
         <div className="theme-switch" role="group" aria-label="Color theme">
           {(['light', 'dark'] as const).map((choice) => (
             <button key={choice} type="button" aria-pressed={(theme ?? systemTheme) === choice} onClick={() => chooseTheme(choice)}>
+              {choice === 'light' ? <Sun className="action-icon" aria-hidden="true" /> : <Moon className="action-icon" aria-hidden="true" />}
               {choice === 'light' ? 'Light' : 'Dark'}
             </button>
           ))}

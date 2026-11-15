@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { ArrowUpRight, BookOpen, Map, Plus } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { Panel } from '../../components/Panel';
@@ -72,14 +73,17 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         {item.note ? <span className="evidence-mark">{item.note}</span> : null}
       </p>
       <p className="row-actions">
-        <button type="button" aria-haspopup="dialog" aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
+        <button type="button" className="icon-action" aria-haspopup="dialog" aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
+          <BookOpen className="action-icon" aria-hidden="true" />
           Interpret
         </button>
-        <a href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
-            Detail
-          </a>
+        <a className="icon-action" href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
+          <ArrowUpRight className="action-icon" aria-hidden="true" />
+          Detail
+        </a>
         {coverage && coverage.rowCount > 0 ? (
-          <a href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))} onClick={onAction}>
+          <a className="icon-action" href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))} onClick={onAction}>
+            <Map className="action-icon" aria-hidden="true" />
             Show tests on the map
           </a>
         ) : (
@@ -88,7 +92,8 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         {compareIds.includes(accession) ? (
           <span className="evidence-mark">In comparison</span>
         ) : addResult.message ? null : (
-          <a href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))} onClick={onAction}>
+          <a className="icon-action" href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))} onClick={onAction}>
+            <Plus className="action-icon" aria-hidden="true" />
             Add compare
           </a>
         )}

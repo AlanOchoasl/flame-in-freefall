@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Plus, Search, X } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { DataState } from '../../components/DataState';
 import { NotAvailable } from '../../components/NotAvailable';
@@ -51,6 +52,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
           <li key={id}>
             <span className="compare-accession">{id}</span>{' '}
             <button
+              className="icon-action"
               type="button"
               aria-label={`Remove ${id}`}
               onClick={() => {
@@ -58,12 +60,14 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
                 select(removeFromSelection(ids, id));
               }}
             >
+              <X className="action-icon" aria-hidden="true" />
               Remove
             </button>
           </li>
         ))}
       </ul>
       <span className="search-field">
+        <Search className="action-icon search-icon" aria-hidden="true" />
         <input
           type="search"
           className="compare-search"
@@ -79,7 +83,8 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
           <li key={record.accession}>
             <span className="compare-accession">{record.accession}</span> {record.acronym ? `(${record.acronym}) ` : ''}
             {record.title}{' '}
-            <button type="button" aria-label={`Add ${record.accession}`} onClick={() => add(record.accession)}>
+            <button type="button" className="icon-action" aria-label={`Add ${record.accession}`} onClick={() => add(record.accession)}>
+              <Plus className="action-icon" aria-hidden="true" />
               Add
             </button>
           </li>
