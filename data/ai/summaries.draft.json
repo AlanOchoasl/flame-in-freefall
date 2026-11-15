@@ -2,22 +2,6 @@
   "schemaVersion": "1.0.0",
   "entries": [
     {
-      "accession": "PSI-10",
-      "summary": "The Advanced Combustion via Microgravity Experiments / Flame Design investigation studies normal and inverse spherical diffusion flames using C2H4 and CH4 fuels. Its purpose is to determine soot-inception limits, flame characteristics, and extinction limits under varying flow rates, pressures, and diluents like N2 and CO2. Testing is conducted in drop towers and aboard the International Space Station using cameras, radiometers, photomultiplier tubes, and thermocouples. The study evaluates hypotheses regarding soot formation conditions, the existence of steady-state spherical flames, and flame extinction occurring when peak temperatures fall below 1130 K.",
-      "fireSafetyRelevance": "The source text does not state a direct spacecraft fire-safety application, focusing instead on flame fundamentals and terrestrial combustor efficiency.",
-      "aiGenerated": true,
-      "model": "gemini-3.6-flash",
-      "generatedAt": "2026-11-14",
-      "promptVersion": "1.0.0",
-      "sourceFields": [
-        "objectives",
-        "approach",
-        "hypothesis",
-        "earthBenefits"
-      ],
-      "reviewed": true
-    },
-    {
       "accession": "PSI-20",
       "summary": "The Advanced Combustion via Microgravity Experiments - Burning Rate Emulator (BRE) investigation examined whether quasi-steady burning of condensed fuels occurs in microgravity without airflow based on material properties. Aboard the International Space Station (ISS), researchers burned fuel mixtures on porous circular burners under various oxygen concentrations and pressures. The investigation demonstrated that flames simulating materials such as PMMA and Nylon can continue burning without airflow in elevated-oxygen atmospheres considered for future human spaceflight, whereas flames in normal atmospheres extinguished quickly. These results help guide the use of NASA Test 2 cone calorimeter data to establish flammability maps for real materials.",
       "fireSafetyRelevance": "This investigation informs material flammability and flame fundamentals for spacecraft fire safety. It demonstrated that burning can continue without airflow in elevated-oxygen atmospheres considered for future spacecraft missions, despite ventilation shut-off being a standard fire response. The work supports using NASA Test 2 cone calorimeter data to establish flammability maps for spacecraft materials in microgravity.",
@@ -223,7 +207,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-99",
@@ -239,7 +223,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-100",
@@ -255,7 +239,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-101",
@@ -271,7 +255,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-102",
@@ -287,7 +271,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-106",
@@ -303,7 +287,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-107",
@@ -319,7 +303,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-108",
@@ -335,7 +319,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-115",
@@ -351,7 +335,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "accession": "PSI-181",
@@ -367,7 +351,7 @@
         "hypothesis",
         "earthBenefits"
       ],
-      "reviewed": false
+      "reviewed": true
     }
   ]
 }
