@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DataState } from '../../components/DataState';
 import { MetricTile, Panel } from '../../components/Panel';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
@@ -14,7 +14,7 @@ import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
 import { consoleMetrics } from './consoleModel';
-import { BoundariesPanel, InterpretationPanel, RankingPanel } from './SidePanels';
+import { ConsoleFootnote, InterpretationDialog, RankingPanel } from './SidePanels';
 
 // The routes #/ranking, #/compare and #/map open this one page and scroll to their section.
 export function Console({ query, section = 'ranking' }: ViewProps) {
@@ -24,8 +24,8 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
   const summaries = useDataResult(getSummaries);
   // The profile, the selected investigation, the comparison and the map filters live in the address.
   const explorer = parseExplorerQuery(query);
-  const knownSelected =
-    catalog.status === 'ok' && catalog.data.records.some((record) => record.accession === explorer.selected) ? explorer.selected : null;
+  // "Interpret" on a ranking row opens the plain-language summary in a dialog.
+  const [interpretOpen, setInterpretOpen] = useState(false);
 
   // While the page scrolls, tell the header which section is being read so its menu follows.
   useEffect(() => {
@@ -113,9 +113,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                       const profile = profilesFile.profiles.find((p) => p.id === explorer.profile) ?? profilesFile.profiles[0];
                       const coverage = testCoverageByAccession(experimentsFile.investigations);
                       const ranked = rankInvestigations(catalogFile.records, profile, coverage);
-                      const firstRanked = ranked[0].investigation.accession;
-                      const record = catalogFile.records.find((r) => r.accession === explorer.selected) ?? catalogFile.records.find((r) => r.accession === firstRanked)!;
-                      const selectedAccession = record.accession;
+                      const interpreted = catalogFile.records.find((r) => r.accession === explorer.selected) ?? null;
                       const entries = summaries.status === 'ok' ? summaries.data.entries : [];
                       return (
                         <>
@@ -127,13 +125,24 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                             profiles={profilesFile.profiles}
                             sourceUrl={profilesFile.source.url}
                             coverage={coverage}
-                            selected={selectedAccession}
+                            selected={interpreted?.accession ?? null}
                             compareIds={parseSelection(query, catalogFile.records.map((r) => r.accession))}
                             query={query}
-                            onSelect={(accession) => replaceExplorerState({ selected: accession === firstRanked ? null : accession })}
+                            onSelect={(accession) => {
+                              replaceExplorerState({ selected: accession });
+                              setInterpretOpen(true);
+                            }}
                             onProfileChange={(id) => replaceExplorerState({ profile: id === profilesFile.profiles[0].id ? null : id })}
                           />
-                          <InterpretationPanel id="interpretation" record={record} entry={findSummary(entries, record.accession)} query={query} />
+                          {interpreted ? (
+                            <InterpretationDialog
+                              open={interpretOpen}
+                              onClose={() => setInterpretOpen(false)}
+                              record={interpreted}
+                              entry={findSummary(entries, interpreted.accession)}
+                              query={query}
+                            />
+                          ) : null}
                         </>
                       );
                     }}
@@ -145,7 +154,7 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
         </div>
       </div>
 
-      <BoundariesPanel id="boundaries" selected={knownSelected} query={query} />
+      <ConsoleFootnote query={query} />
     </div>
   );
 }

@@ -7,7 +7,7 @@ import type { CatalogRecord, SummaryEntry } from '../../data/types';
 import type { InvestigationTestCoverage, RankedInvestigation, RankingProfile } from '../../lib/ranking';
 import { carryExplorerState, explorerHash, mergeExplorerState, parseExplorerQuery } from '../../router/explorerQuery';
 import { addToSelection } from '../compare/selection';
-import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
+import { Breakdown, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
 import { profileDescription, topRows } from './consoleModel';
 
@@ -19,7 +19,8 @@ interface RankingPanelProps {
   profiles: RankingProfile[];
   sourceUrl: string;
   coverage: Record<string, InvestigationTestCoverage>;
-  selected: string;
+  /** The investigation last opened for interpretation, if any. */
+  selected: string | null;
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
@@ -69,7 +70,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         {item.note ? <span className="evidence-mark">{item.note}</span> : null}
       </p>
       <p className="row-actions">
-        <button type="button" aria-pressed={selected} aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
+        <button type="button" aria-haspopup="dialog" aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
           Interpret
         </button>
         <a href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
@@ -97,7 +98,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
 }
 
 // The full list opens in a native <dialog>: it traps focus, closes on Esc and returns focus to the button that opened it.
-function RankingDialog({ open, onClose, children }: { open: boolean; onClose: () => void; children: ReactNode }) {
+export function ConsoleDialog({ open, onClose, titleId, className, children }: { open: boolean; onClose: () => void; titleId: string; className?: string; children: ReactNode }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = ref.current;
@@ -108,8 +109,8 @@ function RankingDialog({ open, onClose, children }: { open: boolean; onClose: ()
   return (
     <dialog
       ref={ref}
-      className="ranking-dialog"
-      aria-labelledby="ranking-dialog-title"
+      className={className ? `ranking-dialog ${className}` : 'ranking-dialog'}
+      aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
@@ -192,10 +193,7 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
       query={query}
       onSelect={(accession) => {
         onSelect(accession);
-        if (inDialog) {
-          closeDialog();
-          document.getElementById('interpretation')?.scrollIntoView();
-        }
+        if (inDialog) closeDialog();
       }}
       onAction={inDialog ? closeDialog : undefined}
     />
@@ -222,62 +220,66 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
           Show all {ranked.length}
         </button>
       ) : null}
-      <RankingDialog open={dialogOpen} onClose={closeDialog}>
+      <ConsoleDialog open={dialogOpen} onClose={closeDialog} titleId="ranking-dialog-title">
         <AllRankedList ranked={ranked} profileLabel={profile.label} renderRow={renderRow(true)} onClose={closeDialog} />
-      </RankingDialog>
+      </ConsoleDialog>
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
     </Panel>
   );
 }
 
-export function InterpretationPanel({ id, record, entry, query }: { id: string; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
+export function InterpretationDialog({ open, onClose, record, entry, query }: { open: boolean; onClose: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
   return (
-    <Panel id={id} title="Plain-language interpretation" subtitle={`${record.accession} · source-grounded summary`}>
-      {entry ? (
-        <>
-          <AiLabel model={entry.model} reviewed={entry.reviewed} />
-          <p>{entry.summary}</p>
-          <p>
-            <strong>Fire-safety note:</strong> {entry.fireSafetyRelevance}
-          </p>
-        </>
-      ) : (
-        <>
-          <PsiTextLabel />
-          <p>{record.objectives ?? <NotAvailable reason="not-in-psi-record" />}</p>
-        </>
-      )}
-      <p className="row-actions">
-        <a href={carryExplorerState(`/investigation/${record.accession}`, query)}>Open the investigation detail</a>
-        <PsiLink accession={record.accession} doi={record.doi} />
-      </p>
-    </Panel>
+    <ConsoleDialog open={open} onClose={onClose} titleId="interpretation-title" className="interpret-dialog">
+      <div className="ranking-dialog-body">
+        <div className="ranking-dialog-head">
+          <div>
+            <h2 id="interpretation-title">
+              {record.acronym ? `${record.acronym}: ` : ''}
+              {record.title}
+            </h2>
+            <p className="ranking-dialog-sub">{record.accession} · plain-language interpretation</p>
+          </div>
+          <button type="button" onClick={onClose}>
+            Close
+          </button>
+        </div>
+        {entry ? (
+          <>
+            <AiLabel model={entry.model} reviewed={entry.reviewed} />
+            <p>{entry.summary}</p>
+            <div className="fire-note">
+              <strong>Fire-safety note</strong>
+              <p>{entry.fireSafetyRelevance}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <PsiTextLabel />
+            <p>{record.objectives ?? <NotAvailable reason="not-in-psi-record" />}</p>
+          </>
+        )}
+        <p className="row-actions">
+          <a href={carryExplorerState(`/investigation/${record.accession}`, query)} onClick={onClose}>
+            Open the investigation detail
+          </a>
+          <PsiLink accession={record.accession} doi={record.doi} />
+        </p>
+      </div>
+    </ConsoleDialog>
   );
 }
 
-export function BoundariesPanel({ id, selected, query }: { id: string; selected: string | null; query: URLSearchParams }) {
+// The limits of the explorer, kept to one line under the console instead of a panel of their own.
+export function ConsoleFootnote({ query }: { query: URLSearchParams }) {
   return (
-    <div className="bottom-line">
-      <Panel id={`${id}-detail`} title="Investigation detail route" tag="Drill-down">
-        <p>
-          Study objective, approach, hypothesis, measurements, test ranges, ranking positions, AI summary, DOI and PSI citation. Missing
-          fields keep their reason.
-        </p>
-        {selected ? (
-          <p className="row-actions">
-            <a href={carryExplorerState(`/investigation/${selected}`, query)}>Open {selected}</a>
-          </p>
-        ) : null}
-      </Panel>
-      <Panel id={id} title="Interpretation boundaries" tag="About / sources">
-        <p>{DISCLAIMER}</p>
-        <p>This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor.</p>
-        <p>The lunar zone is expected from the challenge statement, not a final habitat specification. AI text is precomputed and labeled.</p>
-        <p className="row-actions">
-          <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
-        </p>
-      </Panel>
-    </div>
+    <footer className="console-footnote">
+      <p>
+        This is an experimental data explorer, not a spacecraft monitor or an operational fire-risk predictor. The lunar zone is expected from the
+        challenge statement, not a final habitat specification. AI text is precomputed and labeled.{' '}
+        <a href={carryExplorerState('/about', query)}>About, sources and licenses</a>
+      </p>
+    </footer>
   );
 }
