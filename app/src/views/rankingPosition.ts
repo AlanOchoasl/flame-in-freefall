@@ -13,6 +13,11 @@ export interface ProfilePosition {
   note: string | null;
 }
 
+/** The profile where the investigation ranks highest (the first one on a tie); null when it is in none. */
+export function bestPosition(positions: ProfilePosition[]): ProfilePosition | null {
+  return positions.reduce<ProfilePosition | null>((best, item) => (best === null || item.position < best.position ? item : best), null);
+}
+
 export function testCoverageByAccession(summaries: InvestigationSummary[]): Record<string, InvestigationTestCoverage> {
   return Object.fromEntries(
     summaries.map((summary) => [summary.accession, { rowCount: summary.records, moonBaseZoneCount: summary.inMoonBaseZone }]),

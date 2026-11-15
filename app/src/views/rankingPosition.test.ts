@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { CatalogFile, ExperimentsFile } from '../data/types';
 import { rankInvestigations, type RankingProfilesFile } from '../lib/ranking';
-import { rankingPositions, testCoverageByAccession } from './rankingPosition';
+import { bestPosition, rankingPositions, testCoverageByAccession, type ProfilePosition } from './rankingPosition';
 
 const readJson = <T>(path: string): T =>
   JSON.parse(readFileSync(new URL(`../../../data/${path}`, import.meta.url), 'utf8')) as T;
@@ -40,5 +40,15 @@ describe('testCoverageByAccession', () => {
     expect(
       testCoverageByAccession([{ accession: 'PSI-10', records: 5, plottable: 4, inMoonBaseZone: 2, o2Range: [null, null], pressureBarRange: [null, null], fuels: [] }]),
     ).toEqual({ 'PSI-10': { rowCount: 5, moonBaseZoneCount: 2 } });
+  });
+});
+
+describe('bestPosition', () => {
+  const at = (profileId: string, position: number) => ({ profileId, position }) as ProfilePosition;
+  it('picks the profile with the lowest position, the first on a tie', () => {
+    expect(bestPosition([at('a', 5), at('b', 2), at('c', 2)])?.profileId).toBe('b');
+  });
+  it('is null without positions', () => {
+    expect(bestPosition([])).toBeNull();
   });
 });

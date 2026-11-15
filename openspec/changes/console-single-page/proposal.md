@@ -9,7 +9,7 @@ The team chose `docs/design/direction-concept.html` as the design: a single rese
 ## What Changes
 
 - `#/ranking`, `#/compare` and `#/map` open one page, the console, and scroll to their section. The three routes share one component, so moving between them keeps the page state (profile, selected investigation, filters, comparison).
-- The console shows, in order: title and environment profile buttons, four dataset tiles computed from the data files, the coverage map beside a side column with the relevance ranking, then the comparison across the full width; "Interpret" on a ranking row opens the plain-language interpretation in a dialog; a one-line footnote states the limits and links to About.
+- The console shows, in order: title and environment profile buttons, four dataset tiles computed from the data files, the coverage map beside a side column with the relevance ranking, then the comparison across the full width; "Interpret" on a ranking row opens the plain-language interpretation in a dialog; the footer shared by every screen states the limits and links to About.
 - Investigation detail (`#/investigation/<accession>`) and About (`#/about`) stay as their own screens.
 - Supersedes the separate Ranking, Compare and Coverage map screens of `screen-specs`. `scenario-explorer` (a different home screen) is not compatible and stays on hold.
 

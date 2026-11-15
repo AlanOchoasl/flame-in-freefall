@@ -1,7 +1,7 @@
 import { DataState } from '../components/DataState';
 import { PsiLink } from '../components/PsiLink';
 import { PSI_SEARCH_URL } from '../components/labelText';
-import { getCatalog, getSummaries } from '../data/dataAccess';
+import { getCatalog, getExperiments, getSummaries } from '../data/dataAccess';
 import { useDataResult } from '../data/useDataResult';
 import { summariseAiUse } from './aiUse';
 
@@ -33,19 +33,40 @@ function AiUseDetails() {
   );
 }
 
+function DataCoverage() {
+  const experiments = useDataResult(getExperiments);
+  return (
+    <DataState state={experiments} label="The test data">
+      {(file) => {
+        const plottable = file.records.filter((record) => record.isPlottable).length;
+        const withTests = file.investigations.filter((summary) => summary.records > 0).length;
+        return (
+          <p>
+            Today the app holds {file.records.length} normalized tests from {withTests} investigation{withTests === 1 ? '' : 's'}; {plottable} of them have both
+            oxygen and pressure and appear on the coverage map.
+          </p>
+        );
+      }}
+    </DataState>
+  );
+}
+
 function InvestigationSources() {
   const catalog = useDataResult(getCatalog);
 
   return (
     <DataState state={catalog} label="The list of investigations">
       {(file) => (
-        <ul>
-          {file.records.map((record) => (
-            <li key={record.accession}>
-              {record.title ?? record.accession} — <PsiLink accession={record.accession} doi={record.doi} />
-            </li>
-          ))}
-        </ul>
+        <details>
+          <summary>The {file.records.length} investigations and their PSI pages</summary>
+          <ul>
+            {file.records.map((record) => (
+              <li key={record.accession}>
+                {record.title ?? record.accession} — <PsiLink accession={record.accession} doi={record.doi} />
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
     </DataState>
   );
@@ -84,6 +105,7 @@ export function About() {
         </a>
         . The test conditions on the coverage map come from the experimental tables of PSI-159 (license CC0-1.0).
       </p>
+      <DataCoverage />
       <InvestigationSources />
       </section>
 
@@ -111,7 +133,8 @@ export function About() {
         <a href={LICENSES_URL} target="_blank" rel="noopener noreferrer">
           Third-party licenses
         </a>{' '}
-        lists the libraries this app uses.
+        lists the libraries this app uses. The fonts (Space Grotesk, Inter and JetBrains Mono) are bundled with the app under the SIL Open Font License 1.1, so
+        no font is requested from another site.
       </p>
       </section>
     </>

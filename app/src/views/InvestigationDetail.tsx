@@ -7,7 +7,7 @@ import type { CatalogRecord } from '../data/types';
 import { useDataResult } from '../data/useDataResult';
 import { findSummary, formatO2Range, formatPressureRange, relatedLinks } from './detailModel';
 import { NotFound } from './placeholders';
-import { rankingPositions } from './rankingPosition';
+import { bestPosition, rankingPositions } from './rankingPosition';
 import { carryExplorerState } from '../router/explorerQuery';
 import type { ViewProps } from './types';
 
@@ -37,14 +37,7 @@ function Summary({ record }: { record: CatalogRecord }) {
 
   const entry = summaries.status === 'ok' ? findSummary(summaries.data.entries, record.accession) : undefined;
   if (!entry) {
-    return (
-      <>
-        <PsiTextLabel />
-        <p>
-          <PsiText value={record.objectives} />
-        </p>
-      </>
-    );
+    return <p>No plain-language summary has been generated for this investigation yet. The text written by NASA PSI is below.</p>;
   }
   return (
     <>
@@ -53,6 +46,38 @@ function Summary({ record }: { record: CatalogRecord }) {
       <h3>Fire-safety relevance</h3>
       <p>{entry.fireSafetyRelevance}</p>
     </>
+  );
+}
+
+// The four numbers a visitor looks for first, above the long sections.
+function KeyFacts({ record, records }: { record: CatalogRecord; records: CatalogRecord[] }) {
+  const experiments = useDataResult(getExperiments);
+  const profiles = useDataResult(getRankingProfiles);
+  if (experiments.status !== 'ok' || profiles.status !== 'ok') return null;
+  const summary = experiments.data.investigations.find((item) => item.accession === record.accession);
+  const hasTests = summary !== undefined && summary.records > 0;
+  const best = bestPosition(rankingPositions(record.accession, profiles.data.profiles, records, experiments.data.investigations));
+  const none = <NotAvailable reason="no-normalized-test-data" />;
+  return (
+    <dl className="key-facts" aria-label="Key facts">
+      <div>
+        <dt>Tests</dt>
+        <dd>{hasTests ? summary.records : 'none'}</dd>
+      </div>
+      <div>
+        <dt>Oxygen</dt>
+        <dd>{hasTests ? (formatO2Range(summary.o2Range) ?? none) : none}</dd>
+      </div>
+      <div>
+        <dt>Pressure</dt>
+        <dd>{hasTests ? (formatPressureRange(summary.pressureBarRange) ?? none) : none}</dd>
+      </div>
+      <div>
+        <dt>Best ranking</dt>
+        <dd>{best ? `#${best.position} of ${best.total}` : '—'}</dd>
+        {best ? <dd className="key-note">{best.label}</dd> : null}
+      </div>
+    </dl>
   );
 }
 
@@ -177,14 +202,9 @@ function DetailBody({ record, records, query }: { record: CatalogRecord; records
   const known = new Set(records.map((item) => item.accession));
   return (
     <>
-      <p className="detail-title">
-        <strong>{record.title ?? record.accession}</strong>
-        {record.acronym ? ` (${record.acronym})` : ''}
-      </p>
+      <KeyFacts record={record} records={records} />
 
       <section className="research-panel"><h2>Summary</h2><Summary record={record} /></section>
-
-      <section className="research-panel"><h2>Facts</h2><Facts record={record} /></section>
 
       <section className="research-panel"><h2>Test conditions</h2><TestConditions record={record} /></section>
 
@@ -209,6 +229,8 @@ function DetailBody({ record, records, query }: { record: CatalogRecord; records
       </p>
       </section>
 
+      <section className="research-panel"><h2>Facts</h2><Facts record={record} /></section>
+
       <section className="research-panel"><h2>Related investigations</h2><Related record={record} known={known} query={query} /></section>
 
       <section className="research-panel"><h2>Cite this investigation</h2>
@@ -231,10 +253,20 @@ export function InvestigationDetail({ params, query }: ViewProps) {
 
   return (
     <>
-      <h1>Investigation {accession}</h1>
       <p className="back-link">
         <a href={carryExplorerState('/ranking', query)}>← Back to the explorer</a>
       </p>
+      {record ? (
+        <>
+          <p className="eyebrow">INVESTIGATION {accession}</p>
+          <h1>
+            {record.title ?? accession}
+            {record.acronym ? ` (${record.acronym})` : ''}
+          </h1>
+        </>
+      ) : (
+        <h1>Investigation {accession}</h1>
+      )}
       <DataState state={catalog} label="The catalog">
         {(file) => <DetailBody record={record as CatalogRecord} records={file.records} query={query} />}
       </DataState>
