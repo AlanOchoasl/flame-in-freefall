@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ArrowUpRight, BookOpen, Map, Plus } from 'lucide-react';
+import { ArrowUpRight, BookOpen, ListOrdered, Map, Plus } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { Panel } from '../../components/Panel';
@@ -230,7 +230,24 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
   );
 
   return (
-    <Panel id={id} title="Relevance ranking" subtitle={`${profile.label} · heuristic`} tag={`${ranked.length} studies`}>
+    <Panel
+      id={id}
+      title="Relevance ranking"
+      subtitle={`${profile.label} · heuristic`}
+      action={
+        <button
+          type="button"
+          className="icon-action panel-action"
+          aria-haspopup="dialog"
+          aria-label={`See all ${ranked.length} investigations in the ranking`}
+          data-tip="Open the full ranking"
+          onClick={() => setDialogOpen(true)}
+        >
+          <ListOrdered className="action-icon" aria-hidden="true" />
+          <span className="panel-action-text">See all {ranked.length}</span>
+        </button>
+      }
+    >
       <div className="profile-picker">
         <p id="profile-label" className="profile-label">
           Environment profile
@@ -244,6 +261,9 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
         </div>
         <p className="profile-description">{profileDescription(profile)}</p>
       </div>
+      <p className="ranking-caption">
+        Top {top.length} of {ranked.length} investigations
+      </p>
       <ol className="ranked-list">{top.map(renderRow(false))}</ol>
       {ranked.length > top.length ? (
         <button type="button" className="show-all" aria-haspopup="dialog" onClick={() => setDialogOpen(true)}>

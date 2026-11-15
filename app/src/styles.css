@@ -806,3 +806,12 @@ body:has(dialog[open]) { overflow: hidden; }
 .console-header .theme-switch [data-tip]:last-child::after,
 .console-header .menu-button::after { left: auto; right: 0; transform: none; }
 @media (prefers-reduced-motion: reduce) { [data-tip]::after { transition: none; } }
+
+/* The ranking panel: a button in the header opens the full list, and a caption says the rows below are a cut. */
+.panel-action { flex: none; min-height: var(--target-size); padding: 0 12px; font-size: var(--fs-sm); }
+.panel-head [data-tip]::after { left: auto; right: 0; transform: none; }
+.ranking-caption { margin: var(--space-3) 0 var(--space-1); color: var(--text-muted); font: 12px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 639px) {
+  .panel-action-text { display: none; }
+  .panel-action { min-width: var(--target-size); padding: 0; }
+}
