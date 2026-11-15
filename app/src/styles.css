@@ -546,22 +546,14 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 
 .compare-picker { padding: var(--space-4); margin-top: var(--space-4); border: 1px solid var(--line); background: var(--surface-1); border-radius: var(--radius-2); }
 .compare-picker h2 { margin-top: 0; }
-.compare-picker input { max-width: 100%; }
-.search-field { position: relative; display: block; width: min(100%, 560px); margin: var(--space-2) 0 var(--space-3); }
-.search-field .search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  pointer-events: none;
-}
-.compare-picker .compare-search { width: 100%; padding-left: 40px; }
-.compare-selected, .compare-options { list-style: none; padding: 0; }
-.compare-selected li, .compare-options li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2); border-bottom: 1px solid var(--line); }
-.compare-picker button { flex: none; }
+/* Three menus side by side; one column on a phone. Each label uses the same small mono caption as "Environment profile". */
+.compare-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-2); }
+.compare-slot { display: grid; gap: var(--space-2); min-width: 0; }
+.compare-slot .profile-label { display: block; }
+.compare-slot select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.compare-slot select:disabled { opacity: 0.55; cursor: not-allowed; }
+@media (max-width: 760px) { .compare-slots { grid-template-columns: minmax(0, 1fr); } }
+.compare-picker + .compare-empty { margin-top: var(--space-4); }
 .compare-accession { font-family: var(--mono); font-size: 0.9em; font-variant-numeric: tabular-nums; }
 
 /* Tables scroll inside their own area; the first column stays visible. */
@@ -793,8 +785,6 @@ body:has(dialog[open]) { overflow: hidden; }
 /* Controls at the right edge open their tooltip toward the left, so it never leaves the screen. */
 .row-actions > [data-tip]:last-child::after,
 .map-zoom-controls > [data-tip]:last-child::after,
-.compare-selected [data-tip]::after,
-.compare-options [data-tip]::after { left: auto; right: 0; transform: none; }
 /* In the header the tooltip opens downward: there is no room above. */
 .console-header [data-tip]::after { bottom: auto; top: calc(100% + 6px); }
 .console-header .theme-switch [data-tip]:last-child::after,

@@ -7,10 +7,18 @@ Defines the side-by-side comparison of investigations, so users can see at a gla
 ## ADDED Requirements
 
 ### Requirement: Select two or three investigations
-The system SHALL let a user pick investigations by title, acronym or accession, up to three. Comparison SHALL start with at least two selected.
+The system SHALL let a user pick investigations with three drop-down menus, one per investigation, each listing every investigation by accession and acronym (or title). The third menu SHALL be optional. A menu SHALL be unavailable until the one before it has a choice, an investigation chosen in one menu SHALL NOT be offered in the others, and emptying a menu SHALL close the gap. Comparison SHALL start with at least two selected, and no more than three can be selected.
+
+#### Scenario: Choosing two investigations
+- **WHEN** a user chooses PSI-25 in the first menu and PSI-26 in the second
+- **THEN** the comparison table shows both, and PSI-25 is not offered in the second menu
+
+#### Scenario: Third investigation is optional
+- **WHEN** two investigations are chosen
+- **THEN** the third menu is available and labeled optional, and leaving it empty keeps the two-way comparison
 
 #### Scenario: Limit reached
-- **WHEN** three investigations are selected and a user tries to add a fourth
+- **WHEN** three investigations are selected and a user tries to add a fourth from another control (for example "Add compare" on a ranking row)
 - **THEN** the fourth is not added and a message explains the limit
 
 ### Requirement: Comparison rows
