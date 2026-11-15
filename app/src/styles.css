@@ -40,7 +40,6 @@
   --zone: #ffbb00;
   --zone-fill-opacity: 0.16;
   --accent-red: #fc3d21;
-  --logo-ring: #3c4960;
   --plot-grid: #3c4960;
   /* Existing component aliases keep route styles in the same palette. */
   --text: var(--text-primary);
@@ -119,7 +118,6 @@
   --zone: #a15c00;
   --zone-fill-opacity: 0.12;
   --accent-red: #c8321b;
-  --logo-ring: #b5bcc9;
   --plot-grid: #b6c3d8;
   --ai: #3b3179;
   --ai-weak: #e8e6f6;
@@ -155,7 +153,6 @@
     --zone: #a15c00;
     --zone-fill-opacity: 0.12;
     --accent-red: #c8321b;
-    --logo-ring: #b5bcc9;
     --plot-grid: #b6c3d8;
     --ai: #3b3179;
     --ai-weak: #e8e6f6;
@@ -269,12 +266,11 @@ header {
 }
 
 .console-mark {
-  width: 26px;
-  height: 26px;
+  width: 48px;
+  height: 40px;
   flex: none;
-  border: 1px solid var(--logo-ring);
-  border-radius: 50%;
-  background: radial-gradient(circle at center, var(--action) 2px, transparent 3px);
+  /* Transparent PNG so the red swoosh can extend past the blue disc. */
+  background: url('/nasa-logo.png') center / contain no-repeat;
 }
 
 .console-tag {
