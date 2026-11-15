@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChartScatter, Download, RotateCcw, Table2, X, ZoomIn, ZoomOut } from 'lucide-react';
+import { ChartScatter, Download, RotateCcw, Table2, ZoomIn, ZoomOut } from 'lucide-react';
 import { CartesianGrid, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { DataState } from '../../components/DataState';
 import { getExperiments } from '../../data/dataAccess';
@@ -26,6 +26,8 @@ import { PointShape, ReferenceCross } from './OutcomeMarker';
 import { isOutcome, type Outcome } from './outcomeStyle';
 import { OutcomeLegend } from './OutcomeLegend';
 import { OverlayList } from './OverlayList';
+import { PointDialog } from './PointDialog';
+import { formatO2, formatPressure } from './pointDetails';
 import { describeOutcomeCounts, exampleCircle, outcomeCounts, pointsByCondition, type PlotPoint } from './plotPoints';
 import { downloadCsv, ResultsTable } from './ResultsTable';
 import { isZoomed, niceTicks, panRange, zoomRange, type Range } from './viewRange';
@@ -65,67 +67,8 @@ function FilterSelect({ label, value, options, labelOf = (option) => option, onC
   );
 }
 
-const formatPressure = (record: ExperimentRecord): string =>
-  record.pressureBar === null
-    ? 'Not available'
-    : `${record.pressureIsApproximate ? '≈ ' : ''}${Math.round(record.pressureBar * 1000) / 1000} bar${record.pressureIsApproximate ? ' (approximate)' : ''}`;
-
-const formatO2 = (record: ExperimentRecord): string => (record.o2Fraction === null ? 'Not available' : `${Math.round(record.o2Fraction * 1000) / 10} %`);
-
-const outcomeLabel = (record: ExperimentRecord): string => OUTCOME_LABELS[record.outcome as keyof typeof OUTCOME_LABELS] ?? record.outcome;
 
 const describeOutcomes = describeOutcomeCounts;
-
-// The tests behind one chart point share O2 and pressure; they differ in the test and may differ in outcome.
-function PointDetails({ point }: { point: PlotPoint }) {
-  const { records } = point;
-  const [first] = records;
-  return (
-    <>
-      <dl className="facts">
-        <dt>{records.length === 1 ? 'Test' : 'Tests at this point'}</dt>
-        <dd>{records.length === 1 ? `${first.id} (${first.accession}, ${first.flameType} flame)` : `${records.length} with the same O2 and pressure`}</dd>
-        <dt>O2</dt>
-        <dd>{formatO2(first)}</dd>
-        <dt>Pressure</dt>
-        <dd>{formatPressure(first)}</dd>
-        <dt>Ignition</dt>
-        <dd>{records.length === 1 ? outcomeLabel(first) : describeOutcomes(point.counts)}</dd>
-        <dt>In expected Moon-base zone</dt>
-        <dd>{records.some((record) => record.inMoonBaseZone) ? 'yes' : 'no'}</dd>
-        {records.length === 1 ? (
-          <>
-            <dt>Fuel</dt>
-            <dd>
-              {first.fuel.species ?? 'Not available'}
-              {first.fuel.inferred ? ' (inferred)' : ''}
-            </dd>
-            <dt>Source</dt>
-            <dd>
-              <a href={first.pageUrl} target="_blank" rel="noopener noreferrer">
-                {first.accession} on NASA PSI
-              </a>
-            </dd>
-          </>
-        ) : null}
-      </dl>
-      {records.length > 1 ? (
-        <ul className="map-point-tests" aria-label="Tests at this point">
-          {records.map((record) => (
-            <li key={record.id}>
-              <span>
-                {record.id} · {record.accession} · {record.fuel.species ?? 'fuel not available'} · {outcomeLabel(record)}
-              </span>{' '}
-              <a href={record.pageUrl} target="_blank" rel="noopener noreferrer">
-                PSI
-              </a>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </>
-  );
-}
 
 // Shown while hovering a marker; the same facts the details panel gives, without having to click.
 function PointTooltip({ active, payload }: { active?: boolean; payload?: ReadonlyArray<{ payload?: PlotPoint }> }) {
@@ -292,7 +235,10 @@ function Chart({ points, selected, onSelect }: ChartProps) {
                 isAnimationActive={false}
                 onClick={(item) => {
                   const point = item.payload as PlotPoint | undefined;
-                  if (point && !dragged.current) onSelect(point);
+                  if (!point || dragged.current) return;
+                  // Back to the full axes, so the circle is seen against the whole map and the Moon-base zone.
+                  setView({ x: FULL_X, y: FULL_Y });
+                  onSelect(point);
                 }}
               />
             </ScatterChart>
@@ -313,13 +259,8 @@ interface CoverageMapBodyProps {
 export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageMapBodyProps) {
   const setFilters = onFiltersChange;
   const [selected, setSelected] = useState<PlotPoint | null>(null);
-  const detailsRef = useRef<HTMLElement>(null);
-  // The card appears under a tall chart, so bring it into view when a circle is picked.
-  useEffect(() => {
-    if (!selected) return;
-    const behavior: ScrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-    detailsRef.current?.scrollIntoView({ block: 'nearest', behavior });
-  }, [selected]);
+  // The picked circle keeps its ring on the chart after the dialog closes.
+  const [detailOpen, setDetailOpen] = useState(false);
   const [hidden, setHidden] = useState<ReadonlySet<Outcome>>(new Set());
   const [asTable, setAsTable] = useState(false);
   const options = filterOptions(records);
@@ -402,25 +343,19 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
           ) : (
             <div className="map-card">
               <OutcomeLegend counts={legendCounts} hidden={hidden} onToggle={toggleOutcome} example={exampleCircle(points)} />
-              <Chart points={points} selected={selected} onSelect={setSelected} />
+              <Chart
+                points={points}
+                selected={selected}
+                onSelect={(point) => {
+                  setSelected(point);
+                  setDetailOpen(true);
+                }}
+              />
             </div>
           )}
 
 
-          {/* The card exists only while a circle is selected; the live region announces it. */}
-          <div aria-live="polite">
-            {selected ? (
-              <section ref={detailsRef} className="map-card" aria-labelledby="details-title">
-                <div className="map-card-head">
-                  <h2 id="details-title">Selected test</h2>
-                  <button type="button" className="icon-action icon-only" aria-label="Close the selected test" data-tip="Close" onClick={() => setSelected(null)}>
-                    <X className="action-icon" aria-hidden="true" />
-                  </button>
-                </div>
-                <PointDetails point={selected} />
-              </section>
-            ) : null}
-          </div>
+          <PointDialog point={selected} open={detailOpen} onClose={() => setDetailOpen(false)} />
 
           <OverlayList />
         </div>

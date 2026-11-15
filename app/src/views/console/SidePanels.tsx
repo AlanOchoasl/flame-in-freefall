@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { ArrowUpRight, BookOpen, ListOrdered, Map, Plus } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
+import { ConsoleDialog } from '../../components/Dialog';
 import { Panel } from '../../components/Panel';
 import { PsiLink } from '../../components/PsiLink';
 import type { CatalogRecord, SummaryEntry } from '../../data/types';
@@ -118,30 +119,6 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
       </p>
       <Breakdown item={item} />
     </li>
-  );
-}
-
-// The full list opens in a native <dialog>: it traps focus, closes on Esc and returns focus to the button that opened it.
-export function ConsoleDialog({ open, onClose, titleId, className, children }: { open: boolean; onClose: () => void; titleId: string; className?: string; children: ReactNode }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    const dialog = ref.current;
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
-  }, [open]);
-  return (
-    <dialog
-      ref={ref}
-      className={className ? `ranking-dialog ${className}` : 'ranking-dialog'}
-      aria-labelledby={titleId}
-      onClose={onClose}
-      onClick={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
-    >
-      {open ? children : null}
-    </dialog>
   );
 }
 
