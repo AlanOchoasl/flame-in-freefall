@@ -597,3 +597,14 @@ progress::-moz-progress-bar { background: var(--zone); border-radius: 2px; }
 /* Nothing to compare yet: the hint and a one-click starting pair. */
 .compare-empty { display: grid; gap: var(--space-2); justify-items: start; }
 .compare-empty p { margin: 0; }
+
+/* "Show all" opens the whole ranking in a dialog with its own scroll, so the page does not grow. */
+.ranking-dialog { width: min(760px, calc(100vw - 2 * var(--space-4))); max-height: calc(100vh - 2 * var(--space-5)); padding: 0; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-2); }
+.ranking-dialog::backdrop { background: rgb(0 0 0 / 0.6); }
+.ranking-dialog-body { padding: var(--space-4); }
+.ranking-dialog-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-3); padding: var(--space-3) var(--space-4); background: var(--surface-1); border-bottom: 1px solid var(--line); }
+.ranking-dialog-head h2 { margin: 0; font-size: var(--fs-lg, 18px); }
+body:has(dialog[open]) { overflow: hidden; }
+@media (max-width: 599px) {
+  .ranking-dialog { width: 100vw; max-width: none; height: 100vh; max-height: none; border-radius: 0; }
+}

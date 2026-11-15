@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { Panel } from '../../components/Panel';
@@ -10,7 +10,7 @@ import { addToSelection } from '../compare/selection';
 import { computeInsight, describeInsight } from '../coverageMap/insight';
 import { Breakdown, DISCLAIMER, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
-import { profileDescription, visibleRows } from './consoleModel';
+import { profileDescription, topRows } from './consoleModel';
 
 interface RankingPanelProps {
   id: string;
@@ -27,7 +27,7 @@ interface RankingPanelProps {
   onProfileChange: (profileId: string) => void;
 }
 
-function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect }: {
+function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect, onAction }: {
   item: RankedInvestigation;
   rank: number;
   record: CatalogRecord;
@@ -36,6 +36,8 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
+  /** Called when a link of the row moves the page, so a dialog holding the row can close. */
+  onAction?: () => void;
 }) {
   const { accession, curated } = item.investigation;
   const addResult = addToSelection(compareIds, accession);
@@ -65,16 +67,22 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         <button type="button" aria-pressed={selected} aria-label={`Interpret ${accession}`} onClick={() => onSelect(accession)}>
           Interpret
         </button>
-        <a href={carryExplorerState(`/investigation/${accession}`, query)}>Detail</a>
+        <a href={carryExplorerState(`/investigation/${accession}`, query)} onClick={onAction}>
+            Detail
+          </a>
         {coverage && coverage.rowCount > 0 ? (
-          <a href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))}>Show tests on the map</a>
+          <a href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))} onClick={onAction}>
+            Show tests on the map
+          </a>
         ) : (
           <span className="evidence-mark">Nothing to show on the map</span>
         )}
         {compareIds.includes(accession) ? (
           <span className="evidence-mark">In comparison</span>
         ) : addResult.message ? null : (
-          <a href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))}>Add compare</a>
+          <a href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))} onClick={onAction}>
+            Add compare
+          </a>
         )}
         <PsiLink accession={accession} />
       </p>
@@ -83,28 +91,41 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
+// The full list opens in a native <dialog>: it traps focus, closes on Esc and returns focus to the button that opened it.
+function RankingDialog({ open, onClose, children }: { open: boolean; onClose: () => void; children: ReactNode }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = ref.current;
+    if (!dialog) return;
+    if (open && !dialog.open) dialog.showModal();
+    if (!open && dialog.open) dialog.close();
+  }, [open]);
+  return (
+    <dialog
+      ref={ref}
+      className="ranking-dialog"
+      aria-labelledby="ranking-dialog-title"
+      onClose={onClose}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      {open ? children : null}
+    </dialog>
+  );
+}
+
+function AllRankedList({ ranked, renderRow, onClose }: { ranked: RankedInvestigation[]; renderRow: (row: { item: RankedInvestigation; rank: number }) => ReactNode; onClose: () => void }) {
   const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
-  const [expanded, setExpanded] = useState(false);
   const options = rankingFilterOptions(ranked);
   const shown = filterRanked(ranked, filters);
-  const rows = visibleRows(shown, expanded);
-  const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
-
   return (
-    <Panel id={id} title="Relevance ranking" subtitle={`${profile.label} · heuristic`} tag={`${ranked.length} studies`}>
-      <div className="profile-picker">
-        <p id="profile-label" className="profile-label">
-          Environment profile
-        </p>
-        <div className="profile-control" role="group" aria-labelledby="profile-label">
-          {profiles.map((option) => (
-            <button key={option.id} type="button" aria-pressed={option.id === profile.id} onClick={() => onProfileChange(option.id)}>
-              {option.label}
-            </button>
-          ))}
-        </div>
-        <p className="profile-description">{profileDescription(profile)}</p>
+    <div className="ranking-dialog-body">
+      <div className="ranking-dialog-head">
+        <h2 id="ranking-dialog-title">All {ranked.length} investigations, ranked</h2>
+        <button type="button" onClick={onClose}>
+          Close
+        </button>
       </div>
       <div className="panel-filters">
         <label>
@@ -137,27 +158,63 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
           </button>
         </div>
       ) : (
-        <ol className="ranked-list">
-          {rows.map(({ item, rank }) => (
-            <RankedRow
-              key={item.investigation.accession}
-              item={item}
-              rank={rank}
-              record={recordOf(item.investigation.accession)}
-              coverage={coverage[item.investigation.accession]}
-              selected={item.investigation.accession === selected}
-              compareIds={compareIds}
-              query={query}
-              onSelect={onSelect}
-            />
-          ))}
-        </ol>
+        <ol className="ranked-list">{shown.map(renderRow)}</ol>
       )}
-      {shown.length > rows.length || expanded ? (
-        <button type="button" className="show-all" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
-          {expanded ? 'Show fewer' : `Show all ${shown.length}`}
+    </div>
+  );
+}
+
+export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
+  const closeDialog = () => setDialogOpen(false);
+  const top = topRows(filterRanked(ranked, NO_RANKING_FILTERS));
+
+  const renderRow = (inDialog: boolean) => ({ item, rank }: { item: RankedInvestigation; rank: number }) => (
+    <RankedRow
+      key={item.investigation.accession}
+      item={item}
+      rank={rank}
+      record={recordOf(item.investigation.accession)}
+      coverage={coverage[item.investigation.accession]}
+      selected={item.investigation.accession === selected}
+      compareIds={compareIds}
+      query={query}
+      onSelect={(accession) => {
+        onSelect(accession);
+        if (inDialog) {
+          closeDialog();
+          document.getElementById('interpretation')?.scrollIntoView();
+        }
+      }}
+      onAction={inDialog ? closeDialog : undefined}
+    />
+  );
+
+  return (
+    <Panel id={id} title="Relevance ranking" subtitle={`${profile.label} · heuristic`} tag={`${ranked.length} studies`}>
+      <div className="profile-picker">
+        <p id="profile-label" className="profile-label">
+          Environment profile
+        </p>
+        <div className="profile-control" role="group" aria-labelledby="profile-label">
+          {profiles.map((option) => (
+            <button key={option.id} type="button" aria-pressed={option.id === profile.id} onClick={() => onProfileChange(option.id)}>
+              {option.label}
+            </button>
+          ))}
+        </div>
+        <p className="profile-description">{profileDescription(profile)}</p>
+      </div>
+      <ol className="ranked-list">{top.map(renderRow(false))}</ol>
+      {ranked.length > top.length ? (
+        <button type="button" className="show-all" aria-haspopup="dialog" onClick={() => setDialogOpen(true)}>
+          Show all {ranked.length}
         </button>
       ) : null}
+      <RankingDialog open={dialogOpen} onClose={closeDialog}>
+        <AllRankedList ranked={ranked} renderRow={renderRow(true)} onClose={closeDialog} />
+      </RankingDialog>
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
     </Panel>

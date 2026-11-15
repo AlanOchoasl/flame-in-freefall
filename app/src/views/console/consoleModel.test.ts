@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { CatalogFile, ExperimentsFile } from '../../data/types';
 import type { RankingProfile } from '../../lib/ranking';
-import { COLLAPSED_ROWS, consoleMetrics, profileDescription, visibleRows } from './consoleModel';
+import { consoleMetrics, profileDescription, TOP_ROWS, topRows } from './consoleModel';
 
 const read = <T>(name: string): T =>
   JSON.parse(readFileSync(new URL(`../../../../data/processed/${name}`, import.meta.url), 'utf8')) as T;
@@ -27,15 +27,14 @@ describe('consoleMetrics', () => {
   });
 });
 
-describe('visibleRows', () => {
-  const rows = Array.from({ length: 12 }, (_, i) => i);
-
-  it('shows the first rows when collapsed', () => {
-    expect(visibleRows(rows, false)).toHaveLength(COLLAPSED_ROWS);
+describe('topRows', () => {
+  it('keeps the first rows, in order', () => {
+    const rows = Array.from({ length: 12 }, (_, i) => i);
+    expect(topRows(rows)).toEqual(rows.slice(0, TOP_ROWS));
   });
 
-  it('shows every row when expanded', () => {
-    expect(visibleRows(rows, true)).toHaveLength(12);
+  it('keeps a short list whole', () => {
+    expect(topRows([1, 2])).toEqual([1, 2]);
   });
 });
 
