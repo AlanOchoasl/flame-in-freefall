@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { DataSourceNote } from './components/DataSourceNote';
+import { AmbientGlow } from './components/AmbientGlow';
 import { carryExplorerState } from './router/explorerQuery';
 import { SECTION_CHANGE, SECTION_PATHS, type ConsoleSectionId } from './router/visibleSection';
 import { readStoredTheme, storeTheme, type Theme } from './theme';
@@ -88,6 +89,7 @@ export function App() {
 
   return (
     <>
+      <AmbientGlow />
       <a className="skip-link" href="#main-content" onClick={skipToContent}>
         Skip to content
       </a>

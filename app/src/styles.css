@@ -190,38 +190,48 @@ body {
   line-height: var(--lh);
 }
 
-/* Ambient background: a soft glow in the top-right corner that breathes (its intensity slowly rises and falls,
-   no movement or resizing), so it always blends into the page background. Palette colors in dark mode, a blue
-   veil in light mode. Static under prefers-reduced-motion. */
-:root { --glow-max: 1; }
+#root { isolation: isolate; }
+
+/* All color fades inside the ellipse, before the moving layer's rectangular boundary. */
+:root {
+  --glow-max: 1;
+  --glow-core: color-mix(in srgb, var(--action) 52%, transparent);
+  --glow-halo: color-mix(in srgb, var(--brand) 48%, transparent);
+  --glow-accent: color-mix(in srgb, var(--ai) 22%, transparent);
+}
 :root[data-theme='light'] { --glow-max: 0.6; }
 @media (prefers-color-scheme: light) { :root:not([data-theme]) { --glow-max: 0.6; } }
-body::before {
-  content: '';
+.ambient-glow {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  width: min(760px, 92vw);
+  height: min(640px, 80vh);
   z-index: -1;
   pointer-events: none;
+  border-radius: 50%;
   background:
-    radial-gradient(70% 75% at 100% 0%, color-mix(in srgb, var(--action) 60%, transparent) 0%, color-mix(in srgb, var(--action) 24%, transparent) 40%, transparent 78%),
-    radial-gradient(60% 65% at 90% 18%, color-mix(in srgb, var(--brand) 90%, transparent) 0%, color-mix(in srgb, var(--brand) 32%, transparent) 42%, transparent 80%),
-    radial-gradient(45% 50% at 100% 36%, color-mix(in srgb, var(--ai) 40%, transparent) 0%, transparent 78%);
+    radial-gradient(ellipse 44% 42% at 48% 46%, var(--glow-core) 0%, transparent 100%),
+    radial-gradient(ellipse 48% 46% at 50% 50%, var(--glow-halo) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 32% at 60% 55%, var(--glow-accent) 0%, transparent 100%);
+  /* The mask supplies a second falloff so overlapping halos cannot reveal a straight edge. */
+  -webkit-mask-image: radial-gradient(ellipse closest-side, #000 30%, transparent 98%);
+  mask-image: radial-gradient(ellipse closest-side, #000 30%, transparent 98%);
+  filter: blur(24px);
   opacity: var(--glow-max);
-  animation: ambient-breathe 8s ease-in-out infinite;
 }
-:root[data-theme='light'] body::before { background: var(--glow-light); }
-@media (prefers-color-scheme: light) { :root:not([data-theme]) body::before { background: var(--glow-light); } }
-:root {
-  --glow-light:
-    radial-gradient(70% 75% at 100% 0%, rgba(70, 140, 255, 0.9) 0%, rgba(70, 140, 255, 0.35) 40%, rgba(70, 140, 255, 0) 78%),
-    radial-gradient(60% 65% at 90% 18%, rgba(110, 170, 255, 0.8) 0%, rgba(110, 170, 255, 0.28) 42%, rgba(110, 170, 255, 0) 80%),
-    radial-gradient(45% 50% at 100% 36%, rgba(60, 110, 230, 0.5) 0%, rgba(60, 110, 230, 0) 78%);
+:root[data-theme='light'] .ambient-glow {
+  --glow-core: rgba(70, 140, 255, 0.8);
+  --glow-halo: rgba(110, 170, 255, 0.65);
+  --glow-accent: rgba(60, 110, 230, 0.4);
 }
-@keyframes ambient-breathe {
-  0%, 100% { opacity: calc(var(--glow-max) * 0.45); }
-  50% { opacity: var(--glow-max); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .ambient-glow {
+    --glow-core: rgba(70, 140, 255, 0.8);
+    --glow-halo: rgba(110, 170, 255, 0.65);
+    --glow-accent: rgba(60, 110, 230, 0.4);
+  }
 }
-@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
 
 ::selection { background: var(--brand); color: #ffffff; }
 html { scrollbar-color: var(--line-strong) var(--canvas); }
