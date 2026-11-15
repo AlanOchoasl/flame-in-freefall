@@ -82,7 +82,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
           href={carryExplorerState(`/investigation/${accession}`, query)}
           onClick={onAction}
           aria-label={`Open the detail of ${accession}`}
-          title="Open the detail"
+          data-tip="Open the investigation detail"
         >
           <ArrowUpRight className="action-icon" aria-hidden="true" />
         </a>
@@ -92,12 +92,12 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
             href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))}
             onClick={onAction}
             aria-label={`Show the tests of ${accession} on the map`}
-            title="Show its tests on the map"
+            data-tip="Show its tests on the map"
           >
             <Map className="action-icon" aria-hidden="true" />
           </a>
         ) : (
-          <span className="icon-action icon-only is-disabled" role="img" aria-label="Nothing to show on the map" title="Nothing to show on the map: this investigation has no normalized tests">
+          <span className="icon-action icon-only is-disabled" role="img" aria-label="Nothing to show on the map" data-tip="No tests to show on the map">
             <Map className="action-icon" aria-hidden="true" />
           </span>
         )}
@@ -109,7 +109,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
             href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))}
             onClick={onAction}
             aria-label={`Add ${accession} to the comparison`}
-            title="Add to the comparison"
+            data-tip="Add to the comparison"
           >
             <Plus className="action-icon" aria-hidden="true" />
           </a>

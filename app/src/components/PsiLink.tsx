@@ -7,7 +7,7 @@ export function PsiLink({ accession, doi, iconOnly = false }: { accession: strin
   const text = `${accession} on NASA PSI`;
   if (iconOnly) {
     return (
-      <a className="icon-action icon-only" href={psiInvestigationUrl(accession)} target="_blank" rel="noopener noreferrer" aria-label={`${text} (opens in a new tab)`} title={text}>
+      <a className="icon-action icon-only" href={psiInvestigationUrl(accession)} target="_blank" rel="noopener noreferrer" aria-label={`${text} (opens in a new tab)`} data-tip="Open on NASA PSI (new tab)">
         <ExternalLink className="action-icon" aria-hidden="true" />
       </a>
     );
