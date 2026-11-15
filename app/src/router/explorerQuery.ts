@@ -15,6 +15,8 @@ export interface ExplorerState {
   flame: string | null;
   fuel: string | null;
   outcome: string | null;
+  /** "in": the map shows only the tests inside the expected Moon-base zone. */
+  zone: string | null;
 }
 
 export const NO_EXPLORER_STATE: ExplorerState = {
@@ -25,10 +27,11 @@ export const NO_EXPLORER_STATE: ExplorerState = {
   flame: null,
   fuel: null,
   outcome: null,
+  zone: null,
 };
 
 // The order the parameters are written in, so the same state always gives the same address.
-const KEYS = ['profile', 'selected', 'ids', 'investigation', 'flame', 'fuel', 'outcome'] as const;
+const KEYS = ['profile', 'selected', 'ids', 'investigation', 'flame', 'fuel', 'outcome', 'zone'] as const;
 
 const text = (query: URLSearchParams, key: string): string | null => {
   const value = query.get(key)?.trim();
@@ -47,6 +50,7 @@ export function parseExplorerQuery(query: URLSearchParams): ExplorerState {
     flame: text(query, 'flame'),
     fuel: text(query, 'fuel'),
     outcome: text(query, 'outcome'),
+    zone: text(query, 'zone'),
   };
 }
 
@@ -60,6 +64,7 @@ export interface KnownValues {
   flames?: string[];
   fuels?: string[];
   outcomes?: string[];
+  zones?: string[];
 }
 
 const accepted = (value: string | null, known: string[] | undefined): string | null =>
@@ -75,6 +80,7 @@ export function cleanExplorerState(state: ExplorerState, known: KnownValues): Ex
     flame: accepted(state.flame, known.flames),
     fuel: accepted(state.fuel, known.fuels),
     outcome: accepted(state.outcome, known.outcomes),
+    zone: accepted(state.zone, known.zones),
   };
 }
 

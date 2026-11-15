@@ -4,14 +4,15 @@ import { MetricTile, Panel } from '../../components/Panel';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
 import { useDataResult } from '../../data/useDataResult';
 import { rankInvestigations } from '../../lib/ranking';
-import { parseExplorerQuery, replaceExplorerState } from '../../router/explorerQuery';
+import { explorerHash, parseExplorerQuery, replaceExplorerState } from '../../router/explorerQuery';
+import { SECTION_CHANGE, visibleSection, type Band, type ConsoleSectionId } from '../../router/visibleSection';
 import { CompareBody } from '../compare/Compare';
 import { parseSelection } from '../compare/selection';
 import { CoverageMapBody, mapFiltersFromQuery, writeMapFilters } from '../coverageMap/CoverageMap';
 import { findSummary } from '../detailModel';
 import { testCoverageByAccession } from '../rankingPosition';
 import type { ViewProps } from '../types';
-import { consoleMetrics } from './consoleModel';
+import { consoleMetrics, profileDescription } from './consoleModel';
 import { BoundariesPanel, GapsPanel, InterpretationPanel, RankingPanel } from './SidePanels';
 
 const SECTION_IDS: Record<string, string> = { compare: 'comparison', map: 'coverage' };
@@ -26,6 +27,29 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
   const explorer = parseExplorerQuery(query);
   const knownSelected =
     catalog.status === 'ok' && catalog.data.records.some((record) => record.accession === explorer.selected) ? explorer.selected : null;
+
+  // While the page scrolls, tell the header which section is being read so its menu follows.
+  useEffect(() => {
+    const ids: ConsoleSectionId[] = ['ranking', 'comparison', 'coverage'];
+    let frame = 0;
+    const report = () => {
+      frame = 0;
+      const bands: Partial<Record<ConsoleSectionId, Band>> = {};
+      for (const id of ids) {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        if (rect) bands[id] = { top: rect.top, bottom: rect.bottom };
+      }
+      window.dispatchEvent(new CustomEvent(SECTION_CHANGE, { detail: visibleSection(bands, window.innerHeight * 0.35) }));
+    };
+    const onScroll = () => {
+      if (frame === 0) frame = window.requestAnimationFrame(report);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   // A deep link to a section scrolls there on the first load; later route changes move focus instead.
   useEffect(() => {
@@ -44,17 +68,23 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
           {(file) => {
             const active = file.profiles.find((profile) => profile.id === explorer.profile) ?? file.profiles[0];
             return (
-              <div className="profile-control" role="group" aria-label="Environment profile">
-                {file.profiles.map((profile) => (
-                  <button
-                    key={profile.id}
-                    type="button"
-                    aria-pressed={profile.id === active.id}
-                    onClick={() => replaceExplorerState({ profile: profile.id === file.profiles[0].id ? null : profile.id })}
-                  >
-                    {profile.label}
-                  </button>
-                ))}
+              <div className="profile-picker">
+                <p id="profile-label" className="profile-label">
+                  Environment profile
+                </p>
+                <div className="profile-control" role="group" aria-labelledby="profile-label">
+                  {file.profiles.map((profile) => (
+                    <button
+                      key={profile.id}
+                      type="button"
+                      aria-pressed={profile.id === active.id}
+                      onClick={() => replaceExplorerState({ profile: profile.id === file.profiles[0].id ? null : profile.id })}
+                    >
+                      {profile.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="profile-description">{profileDescription(active)}</p>
               </div>
             );
           }}
@@ -70,8 +100,17 @@ export function Console({ query, section = 'ranking' }: ViewProps) {
                 <section className="metrics" aria-label="Dataset totals">
                   <MetricTile value={metrics.investigations} label="investigations in catalog" />
                   <MetricTile value={metrics.tests} label="normalized test records" />
-                  <MetricTile value={metrics.plotted} label="with O₂ and pressure plotted" />
-                  <MetricTile value={metrics.inZone} label="inside expected lunar zone" />
+                  <MetricTile
+                    value={metrics.withTests}
+                    label={`of ${metrics.investigations} investigations have test data`}
+                    hint="The map shows only these"
+                  />
+                  <MetricTile
+                    value={metrics.inZone}
+                    label="inside expected lunar zone"
+                    hint="Show them on the map"
+                    href={explorerHash('/map', { ...explorer, zone: 'in' })}
+                  />
                 </section>
               );
             }}

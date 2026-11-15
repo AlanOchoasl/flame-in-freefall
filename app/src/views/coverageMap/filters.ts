@@ -9,9 +9,13 @@ export interface MapFilters {
   flameType: string | null;
   fuel: string | null;
   outcome: string | null;
+  /** "in" keeps only the tests inside the expected Moon-base zone. */
+  zone: string | null;
 }
 
-export const NO_FILTERS: MapFilters = { accession: null, flameType: null, fuel: null, outcome: null };
+export const NO_FILTERS: MapFilters = { accession: null, flameType: null, fuel: null, outcome: null, zone: null };
+
+export const ZONE_ONLY = 'in';
 
 export const OUTCOMES = ['yes', 'no', 'flash', 'not-reported'] as const;
 
@@ -42,7 +46,8 @@ export function matchesFilters(record: ExperimentRecord, filters: MapFilters): b
     (filters.accession === null || record.accession === filters.accession) &&
     (filters.flameType === null || record.flameType === filters.flameType) &&
     (filters.fuel === null || record.fuel.species === filters.fuel) &&
-    (filters.outcome === null || record.outcome === filters.outcome)
+    (filters.outcome === null || record.outcome === filters.outcome) &&
+    (filters.zone === null || record.inMoonBaseZone)
   );
 }
 
@@ -83,6 +88,7 @@ export const filtersFromExplorer = (state: ExplorerState): MapFilters => ({
   flameType: state.flame,
   fuel: state.fuel,
   outcome: state.outcome,
+  zone: state.zone,
 });
 
 /** The address change that makes the map show `filters`. */
@@ -91,4 +97,5 @@ export const explorerPatchFromFilters = (filters: MapFilters): Partial<ExplorerS
   flame: filters.flameType,
   fuel: filters.fuel,
   outcome: filters.outcome,
+  zone: filters.zone,
 });

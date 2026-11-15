@@ -14,7 +14,7 @@ import {
   filterOptions,
   filtersFromExplorer,
   hasActiveFilters,
-  NO_FILTERS,
+  NO_FILTERS, ZONE_ONLY,
   OUTCOME_LABELS,
   OUTCOMES,
   type MapFilters,
@@ -194,6 +194,13 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
         <FilterSelect label="Flame type" value={filters.flameType} options={options.flameTypes} onChange={set('flameType')} />
         <FilterSelect label="Fuel" value={filters.fuel} options={options.fuels} onChange={set('fuel')} />
         <FilterSelect label="Ignition" value={filters.outcome} options={options.outcomes} onChange={set('outcome')} />
+        <label className="map-field">
+          <span>Moon-base zone</span>
+          <select value={filters.zone ?? ''} onChange={(event) => set('zone')(event.target.value || null)}>
+            <option value="">All tests</option>
+            <option value={ZONE_ONLY}>Only inside the expected zone</option>
+          </select>
+        </label>
         {hasActiveFilters(filters) ? (
           <button type="button" onClick={() => setFilters(NO_FILTERS)}>
             Clear filters
@@ -271,7 +278,7 @@ export function CoverageMapBody({ records, filters, onFiltersChange }: CoverageM
 /** The map's filters taken from the address and cleaned against the data: unknown values are ignored. */
 export function mapFiltersFromQuery(query: URLSearchParams, records: ExperimentRecord[]): MapFilters {
   const options = filterOptions(records);
-  const known = { accessionsWithTests: options.accessions, flames: options.flameTypes, fuels: options.fuels, outcomes: options.outcomes };
+  const known = { accessionsWithTests: options.accessions, flames: options.flameTypes, fuels: options.fuels, outcomes: options.outcomes, zones: [ZONE_ONLY] };
   return filtersFromExplorer(cleanExplorerState(parseExplorerQuery(query), known));
 }
 
