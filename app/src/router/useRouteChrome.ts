@@ -16,7 +16,8 @@ export function useRouteChrome(screenTitle: string, hash: string): void {
     const heading = document.querySelector<HTMLElement>('main [data-route-focus]') ?? document.querySelector<HTMLElement>('main h1');
     if (heading) {
       heading.tabIndex = -1;
-      heading.focus();
+      // A section names its own focus target and scrolls to it smoothly itself (see sectionScroll.ts).
+      heading.focus({ preventScroll: heading.hasAttribute('data-route-focus') });
     }
   }, [screenTitle, hash]);
 }
