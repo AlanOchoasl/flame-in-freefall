@@ -77,7 +77,7 @@ export function About() {
     <>
       <h1>About</h1>
 
-      <section className="research-panel"><h2>What this is</h2>
+      <section className="research-panel"><h2>What is this</h2>
       <p>
         A dashboard to find, rank and compare the NASA combustion investigations on fire in microgravity, built for the
         NASA Space Apps Challenge 2026, challenge &ldquo;Flame in Freefall&rdquo;.
