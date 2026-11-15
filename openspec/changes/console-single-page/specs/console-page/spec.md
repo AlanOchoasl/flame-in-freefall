@@ -25,7 +25,7 @@ The four tiles (investigations, test records, plotted tests, tests in the expect
 - **THEN** the tiles show the new totals with no code change
 
 ### Requirement: Environment profile buttons
-The console SHALL offer one button per profile in the profiles file, with the selected one marked by `aria-pressed`. Selecting a profile SHALL re-rank the list and change the default interpreted investigation.
+The Relevance ranking panel SHALL offer one button per profile in the profiles file, with the selected one marked by `aria-pressed`. Selecting a profile SHALL re-rank the list and change the default interpreted investigation.
 
 #### Scenario: Switching profile
 - **WHEN** a user selects Fire detection
