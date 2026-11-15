@@ -72,7 +72,7 @@
   border-radius: var(--radius-2);
 }
 
-.map-primary, .map-side { min-width: 0; }
+.map-primary, .map-side, .map-card { min-width: 0; }
 /* A clean plot surface: faint dashed gridlines only, so the markers carry the picture. */
 .map-plot-region .recharts-surface { background: var(--surface-1); border-radius: var(--radius-1); }
 .map-plot-region .recharts-cartesian-axis-tick-value,
@@ -152,7 +152,7 @@
   color: var(--muted);
 }
 
-.map-legend-block { display: grid; gap: var(--space-2); }
+.map-legend-block { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
 
 .map-legend {
   display: flex;
@@ -181,7 +181,7 @@
 .map-legend-count { padding: 1px 7px; border-radius: 999px; background: var(--surface-hover); color: var(--text-secondary); font: 12px var(--mono); }
 
 .map-legend-note { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); }
-.map-legend-ring { display: inline-flex; align-items: center; gap: 4px; margin-left: var(--space-3); white-space: nowrap; }
+.map-legend-ring { display: inline-flex; align-items: center; gap: 4px; margin-left: var(--space-3); }
 
 .map-tooltip {
   display: grid;
@@ -210,4 +210,4 @@
 .map-plot-region.is-zoomed, .map-plot-region.is-zoomed svg, .map-plot-region.is-zoomed .recharts-wrapper { cursor: grab !important; }
 .map-plot-region.is-zoomed:active, .map-plot-region.is-zoomed:active svg, .map-plot-region.is-zoomed:active .recharts-wrapper { cursor: grabbing !important; }
 
-.map-primary { display: grid; gap: var(--space-4); }
+.map-primary { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
