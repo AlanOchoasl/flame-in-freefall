@@ -49,7 +49,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
       <ul className="compare-selected" aria-label="Selected investigations">
         {ids.map((id) => (
           <li key={id}>
-            {id}{' '}
+            <span className="compare-accession">{id}</span>{' '}
             <button
               type="button"
               aria-label={`Remove ${id}`}
@@ -77,7 +77,7 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
       <ul className="compare-options" aria-label="Investigations to add" hidden={matches.length === 0}>
         {matches.slice(0, 8).map((record) => (
           <li key={record.accession}>
-            {record.accession} {record.acronym ? `(${record.acronym}) ` : ''}
+            <span className="compare-accession">{record.accession}</span> {record.acronym ? `(${record.acronym}) ` : ''}
             {record.title}{' '}
             <button type="button" aria-label={`Add ${record.accession}`} onClick={() => add(record.accession)}>
               Add
@@ -149,7 +149,7 @@ export function ComparisonTable({ records, summaries }: { records: CatalogRecord
                   <th scope="col">Row</th>
                   {records.map((record) => (
                     <th scope="col" key={record.accession}>
-                      <a href={`#/investigation/${record.accession}`}>{record.accession}</a>
+                      <a className="compare-accession" href={`#/investigation/${record.accession}`}>{record.accession}</a>
                       <br />
                       {record.acronym ?? record.title}
                     </th>

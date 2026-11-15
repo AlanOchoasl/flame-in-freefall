@@ -3,8 +3,13 @@
 Generated with `node scripts/check-licenses.mjs <dir> --write` and merged here. Policy: `scripts/license-policy.json`.
 The `lightningcss*` packages (MPL-2.0) are a team-approved exception recorded in that policy.
 
-No fonts, icons, images or audio are bundled: the app uses system fonts. Data comes from NASA PSI
-(https://psi.nasa.gov/physci/repo/search?q=combustion) and is cited in the README and in the app.
+Three fonts are bundled (team-approved SIL Open Font License 1.1 exception, 2026-11-14); no icons, images or audio are bundled. Each font's full license and copyright notice ship with its binary. Data comes from NASA PSI (https://psi.nasa.gov/physci/repo/search?q=combustion) and is cited in the README and in the app.
+
+| Font | Role | License | Source | Bundled license |
+|---|---|---|---|---|
+| Inter | Body and UI | OFL-1.1 | [Google Fonts](https://fonts.google.com/specimen/Inter) | `app/public/fonts/Inter-OFL.txt` |
+| Space Grotesk | Headings | OFL-1.1 | [Google Fonts](https://fonts.google.com/specimen/Space+Grotesk) | `app/public/fonts/SpaceGrotesk-OFL.txt` |
+| JetBrains Mono | Numbers and identifiers | OFL-1.1 | [Google Fonts](https://fonts.google.com/specimen/JetBrains+Mono) | `app/public/fonts/JetBrainsMono-OFL.txt` |
 
 ## App (`app/`, ships to the browser)
 
