@@ -12,7 +12,7 @@ Depends on: `investigation-catalog` types and stub (task 1.1).
 
 Depends on: 1.1 and `app-shell` 2.1, 4.1.
 
-- [x] 2.1 (Sun by 09:30, ≤1.5h) Build the picker (three drop-down menus, the third optional, limit of three) and the comparison table with a sticky first column; verify the limit message, that each selected chip has a "Remove PSI-xx" accessible name (see `screen-layouts`, Compare picker interaction) and that the table scrolls inside itself at 360 px.
+- [x] 2.1 (Sun by 09:30, ≤1.5h) Build the picker (three searchable menus, the third optional, limit of three) and the comparison table with a sticky first column; verify the limit message, that each selected chip has a "Remove PSI-xx" accessible name (see `screen-layouts`, Compare picker interaction) and that the table scrolls inside itself at 360 px.
 - [x] 2.2 (Sun by 10:30, ≤1h) Store the selection in the URL hash and restore it; verify opening a copied URL shows the same two investigations.
 - [x] 2.3 (Sun by 11:30, ≤1h) Show AI summaries with the label when present and the PSI objectives otherwise; verify an investigation with no summary shows the fallback with the PSI-text label.
 

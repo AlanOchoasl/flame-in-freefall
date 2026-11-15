@@ -550,8 +550,23 @@ summary { cursor: pointer; padding: var(--space-2) 0; min-height: var(--target-s
 .compare-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-2); }
 .compare-slot { display: grid; gap: var(--space-2); min-width: 0; }
 .compare-slot .profile-label { display: block; }
-.compare-slot select { width: 100%; min-width: 0; text-overflow: ellipsis; }
-.compare-slot select:disabled { opacity: 0.55; cursor: not-allowed; }
+.compare-slot input:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* A searchable menu: a text box with a list under it. The list is above the page, not inside the flow. */
+.combo { position: relative; min-width: 0; }
+.combo input { width: 100%; min-width: 0; padding-right: 72px; text-overflow: ellipsis; }
+.combo-chevron { position: absolute; right: 12px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.combo .combo-clear { position: absolute; right: 34px; top: 50%; width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 0; transform: translateY(-50%); border-color: transparent; background: transparent; }
+.combo .combo-clear:hover { background: var(--surface-hover); }
+.combo-list { position: absolute; z-index: 30; top: calc(100% + 4px); left: 0; right: 0; max-height: 300px; margin: 0; padding: var(--space-1); overflow-y: auto; list-style: none; background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-1); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); }
+.combo-list[hidden] { display: none; }
+.combo-option { display: grid; gap: 2px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-1); cursor: pointer; }
+.combo-option.is-active { background: var(--surface-hover); }
+.combo-option[aria-selected='true'] { box-shadow: inset 3px 0 0 var(--action); }
+.combo-label { font-variant-numeric: tabular-nums; }
+.combo-detail { color: var(--text-muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.combo-empty { padding: var(--space-3); color: var(--text-muted); font-size: var(--fs-sm); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (max-width: 760px) { .compare-slots { grid-template-columns: minmax(0, 1fr); } }
 .compare-picker + .compare-empty { margin-top: var(--space-4); }
 .compare-accession { font-family: var(--mono); font-size: 0.9em; font-variant-numeric: tabular-nums; }

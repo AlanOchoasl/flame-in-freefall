@@ -1,6 +1,8 @@
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { DataState } from '../../components/DataState';
 import { NotAvailable } from '../../components/NotAvailable';
+import type { SearchOption } from '../../components/searchOptions';
+import { SearchSelect } from '../../components/SearchSelect';
 import { PsiLink } from '../../components/PsiLink';
 import { getCatalog, getExperiments, getRankingProfiles, getSummaries } from '../../data/dataAccess';
 import type { CatalogRecord, SummaryEntry } from '../../data/types';
@@ -23,7 +25,14 @@ const MARKER_TEXT: Record<RowMarker, (count: number) => string> = {
 
 const menuLabel = (record: CatalogRecord): string => [record.accession, record.acronym ?? record.title].filter(Boolean).join(' · ');
 
-// Three menus, one per investigation. The third is optional; a menu opens once the one before it has a choice.
+const toOption = (record: CatalogRecord): SearchOption => ({
+  value: record.accession,
+  label: menuLabel(record),
+  detail: record.acronym && record.title ? record.title : undefined,
+  search: [record.accession, record.acronym, record.title].filter(Boolean).join(' '),
+});
+
+// Three searchable menus, one per investigation. The third is optional; a menu opens once the one before it has a choice.
 export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string[] }) {
   const slots = slotsFromIds(ids);
 
@@ -37,27 +46,22 @@ export function Picker({ records, ids }: { records: CatalogRecord[]; ids: string
         {slots.map((value, slot) => {
           const inOtherMenus = new Set(slots.filter((other, index) => index !== slot && other !== ''));
           const id = `compare-slot-${slot + 1}`;
+          const name = `Investigation ${slot + 1}${slot >= MIN_TO_COMPARE ? ' (optional)' : ''}`;
           return (
             <div className="compare-slot" key={id}>
               <label htmlFor={id} className="profile-label">
-                Investigation {slot + 1}
-                {slot >= MIN_TO_COMPARE ? ' (optional)' : ''}
+                {name}
               </label>
-              <select
+              <SearchSelect
                 id={id}
                 value={value}
+                options={records.filter((record) => !inOtherMenus.has(record.accession)).map(toOption)}
+                placeholder="Search by name or PSI number"
+                emptyText="No investigation matches."
+                clearLabel={`Empty ${name}`}
                 disabled={slot > 0 && slots[slot - 1] === ''}
-                onChange={(event) => replaceExplorerState({ ids: chooseInSlot(ids, slot, event.target.value) })}
-              >
-                <option value="">Choose an investigation</option>
-                {records
-                  .filter((record) => !inOtherMenus.has(record.accession))
-                  .map((record) => (
-                    <option key={record.accession} value={record.accession} title={record.title ?? undefined}>
-                      {menuLabel(record)}
-                    </option>
-                  ))}
-              </select>
+                onChange={(accession) => replaceExplorerState({ ids: chooseInSlot(ids, slot, accession) })}
+              />
             </div>
           );
         })}
