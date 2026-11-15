@@ -30,7 +30,10 @@ All data comes from the NASA Physical Sciences Informatics (PSI) Combustion Scie
 - **Licenses of the cited datasets** (checked 2026-11-14, recorded in `experiments.json`): PSI-159 is CC0-1.0. **PSI-10 declares no license**, so its tables are excluded: the app uses no dataset without a verified license (see `data/processed/README.md`, "Excluded datasets").
 
 ## How AI was used
-Plain-language summaries are written beforehand by a Gemini model from each investigation's own PSI text, checked by a script (no invented numbers, length limits), reviewed by a person and shown with the label "AI-generated", the model and the review status. When no summary exists, the app shows NASA's own text, labeled as PSI text. The prompt and scripts are in the repository (`prompts/`, `scripts/`, `docs/AI_SUMMARIES.md`); no API key is stored.
+Two AI tools were used, for different jobs:
+
+- **Claude Code (Anthropic) helped develop the project.** It helped write much of the code, the automated tests, the OpenSpec specifications and the documentation. The team chose what to build, ran the tests and the license checks, and reviewed and merged every change; the commits carry a "Co-Authored-By" line that records it.
+- **Gemini (Google) wrote the summaries.** Plain-language summaries are written beforehand by a Gemini model from each investigation's own PSI text, checked by a script (no invented numbers, length limits), reviewed by a person and shown with the label "AI-generated", the model and the review status. When no summary exists, the app shows NASA's own text, labeled as PSI text. The prompt and scripts are in the repository (`prompts/`, `scripts/`, `docs/AI_SUMMARIES.md`); no API key is stored.
 
 The team-provided project logos in `app/public/branding/` contain C2PA metadata identifying Claude as a creation tool. Dark and light SVG variants are provided for the full logo and icon; the icon is used in the favicon, header and footer according to the selected theme. These are project marks, not the official NASA insignia.
 
