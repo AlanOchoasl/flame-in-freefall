@@ -21,7 +21,7 @@ Depends on `data-pipeline` (`isPlottable`, `inMoonBaseZone`, `pressureIsApproxim
 
 8. **Axes and labels (from the mockup review).** The mockup drew no tick values and put overlay labels over the data. The plot reserves a margin for tick labels and overlay labels; overlays are drawn first so points sit on top; labels use the margin or leader lines. Ticks: O2 every 20 %, pressure at most six ticks with the unit in the axis title.
 9. **Narrow screens.** The plot keeps a 480 px minimum inside a scrollable, focusable region; everything else stacks in one column. Alternative: shrink the plot (the mockup did, and it became unreadable at about 230 px).
-10. **Table paging** is a 50-row slice of the same filtered array; no virtualization library.
+10. **Table paging** is a 10-row slice of the same filtered array with numbered page buttons (changed on 2026-11-15 at the team's request; it was a "show 50 more rows" button). The page logic is pure (`pagination.ts`) and tested; a new filter remounts the table, so it starts on page 1; no virtualization or pagination library.
 
 Data flow: `experiments.json` → filter → chart / table / insight.
 

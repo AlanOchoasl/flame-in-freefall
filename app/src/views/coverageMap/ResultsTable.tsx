@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ExperimentRecord } from '../../data/types';
 import { OUTCOME_SHORT_LABELS } from './filters';
+import { clampPage, pageCount, pageItems, pageRange, pageSlice } from './pagination';
 
-const PAGE = 50;
-
-// The filtered tests as a table (keyboard-friendly alternative to the chart), paged by 50.
+// The filtered tests as a table (keyboard-friendly alternative to the chart), 10 rows per page.
+// The map keys this component by its filters, so a new filter starts again on page 1.
 export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
-  const [shown, setShown] = useState(PAGE);
-  const rows = records.slice(0, shown);
+  const [requested, setRequested] = useState(1);
+  const page = clampPage(requested, records.length);
+  const count = pageCount(records.length);
+  const rows = pageSlice(records, page);
+  const { from, to } = pageRange(page, records.length);
   return (
     <section aria-label="Tests as a table">
       <div className="table-scroll" tabIndex={0} role="region" aria-label="Filtered tests">
@@ -46,13 +50,38 @@ export function ResultsTable({ records }: { records: ExperimentRecord[] }) {
           </tbody>
         </table>
       </div>
-      <p role="status">
-        showing {Math.min(shown, records.length)} of {records.length}
+      <p role="status" className="table-status">
+        showing {from}–{to} of {records.length}
       </p>
-      {shown < records.length ? (
-        <button type="button" onClick={() => setShown(shown + PAGE)}>
-          Show {PAGE} more rows
-        </button>
+      {count > 1 ? (
+        <nav className="table-pager" aria-label="Table pages">
+          <button type="button" className="icon-action" onClick={() => setRequested(page - 1)} disabled={page === 1}>
+            <ChevronLeft className="action-icon" aria-hidden="true" />
+            Previous
+          </button>
+          {pageItems(page, count).map((item, index) =>
+            item === 'gap' ? (
+              <span key={`gap-${index}`} className="table-pager-gap" aria-hidden="true">
+                …
+              </span>
+            ) : (
+              <button
+                key={item}
+                type="button"
+                className="table-pager-page"
+                aria-label={`Page ${item} of ${count}`}
+                aria-current={item === page ? 'page' : undefined}
+                onClick={() => setRequested(item)}
+              >
+                {item}
+              </button>
+            ),
+          )}
+          <button type="button" className="icon-action" onClick={() => setRequested(page + 1)} disabled={page === count}>
+            Next
+            <ChevronRight className="action-icon" aria-hidden="true" />
+          </button>
+        </nav>
       ) : null}
     </section>
   );
