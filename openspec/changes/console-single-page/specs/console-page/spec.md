@@ -45,16 +45,20 @@ Each ranking row SHALL show its score out of the maximum, a "No normalized test 
 - **WHEN** an investigation has no normalized test rows
 - **THEN** its row shows the "No normalized test rows" mark and no map link
 
-### Requirement: The ranking is paged
-The relevance ranking SHALL list 5 investigations per page, with Previous, Next and numbered page buttons, and SHALL put its fuel-phase and topic filters above the list. The caption SHALL read "showing FIRST–LAST of M investigations".
+### Requirement: The full ranking opens in a paged dialog
+The relevance ranking panel SHALL list the top 5 investigations under the caption "Top 5 of N investigations", without filters or page buttons, and SHALL offer a "See all N" button in its header and a "Show all N" button under the rows. Both SHALL open the same modal dialog, which holds the fuel-phase and topic filters, the count "showing FIRST–LAST of M investigations" and Previous, Next and numbered page buttons, 10 investigations per page.
 
-#### Scenario: Paging the ranking
-- **WHEN** the ranking has 26 investigations and the panel is shown
-- **THEN** the panel lists #1 to #5 with "showing 1–5 of 26 investigations" and the page buttons Previous, 1 to 6 and Next; page 6 lists only #26 and Next is unavailable
+#### Scenario: Paging the full ranking
+- **WHEN** the ranking has 26 investigations and a user opens the dialog
+- **THEN** it lists #1 to #10 with "showing 1–10 of 26 investigations" and the page buttons Previous, 1 to 3 and Next; page 3 lists #21 to #26 and Next is unavailable
 
 #### Scenario: Changing the profile or a filter
-- **WHEN** a user is on page 3 and selects another profile or a filter
+- **WHEN** a user is on page 3 of the dialog and selects a filter, or selects another profile
 - **THEN** the list starts again on page 1 of the new result, and the page buttons disappear when the result fits on one page
+
+#### Scenario: Interpreting from the dialog
+- **WHEN** a user activates "Interpret" inside the dialog
+- **THEN** the dialog closes and the interpretation opens with a "Back to the ranking" button that reopens the list on the same page and filters
 
 ### Requirement: Each panel fails alone
 Each panel SHALL load and fail independently, naming the file it could not load, without blocking the others.

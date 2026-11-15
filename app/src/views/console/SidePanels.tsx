@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowUpRight, BookOpen, Map, Plus } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { ArrowUpRight, BookOpen, ListOrdered, Map, Plus } from 'lucide-react';
 import { AiLabel, PsiTextLabel } from '../../components/AiLabel';
 import { NotAvailable } from '../../components/NotAvailable';
 import { ConsoleDialog } from '../../components/Dialog';
@@ -14,7 +14,7 @@ import { findSummary } from '../detailModel';
 import { addToSelection } from '../compare/selection';
 import { Breakdown, HowItWorks } from '../ranking/Ranking';
 import { filterRanked, NO_RANKING_FILTERS, rankingFilterOptions, type RankingFilters } from '../ranking/rankingFilters';
-import { profileDescription, RANKING_PAGE_SIZE } from './consoleModel';
+import { DIALOG_PAGE_SIZE, profileDescription, topRows } from './consoleModel';
 
 interface RankingPanelProps {
   id: string;
@@ -33,7 +33,7 @@ interface RankingPanelProps {
   onProfileChange: (profileId: string) => void;
 }
 
-function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect }: {
+function RankedRow({ item, rank, record, coverage, selected, compareIds, query, onSelect, onAction }: {
   item: RankedInvestigation;
   rank: number;
   record: CatalogRecord;
@@ -42,6 +42,8 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   compareIds: string[];
   query: URLSearchParams;
   onSelect: (accession: string) => void;
+  /** Called when a link of the row moves the page, so a dialog holding the row can close. */
+  onAction?: () => void;
 }) {
   const { accession, curated } = item.investigation;
   const addResult = addToSelection(compareIds, accession);
@@ -81,6 +83,7 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
         <a
           className="icon-action icon-only"
           href={carryExplorerState(`/investigation/${accession}`, query)}
+          onClick={onAction}
           aria-label={`Open the detail of ${accession}`}
           data-tip="Open the investigation detail"
         >
@@ -90,7 +93,8 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
           <a
             className="icon-action icon-only"
             href={explorerHash('/map', mergeExplorerState(parseExplorerQuery(query), { investigation: accession }))}
-              aria-label={`Show the tests of ${accession} on the map`}
+            onClick={onAction}
+            aria-label={`Show the tests of ${accession} on the map`}
             data-tip="Show its tests on the map"
           >
             <Map className="action-icon" aria-hidden="true" />
@@ -106,7 +110,8 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
           <a
             className="icon-action icon-only"
             href={explorerHash('/compare', mergeExplorerState(parseExplorerQuery(query), { ids: addResult.ids }))}
-              aria-label={`Add ${accession} to the comparison`}
+            onClick={onAction}
+            aria-label={`Add ${accession} to the comparison`}
             data-tip="Add to the comparison"
           >
             <Plus className="action-icon" aria-hidden="true" />
@@ -119,24 +124,130 @@ function RankedRow({ item, rank, record, coverage, selected, compareIds, query, 
   );
 }
 
-export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, summaries, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
-  const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
-  const [interpretOpen, setInterpretOpen] = useState(false);
-  // The page belongs to one profile and one set of filters: changing either starts again on page 1.
-  const listKey = `${profile.id}|${filters.fuelPhase}|${filters.topic}`;
-  const [paging, setPaging] = useState({ key: listKey, page: 1 });
-  // A page chosen under another profile or filter is forgotten at once, so it cannot come back later when
-  // that same combination is selected again.
-  if (paging.key !== listKey) setPaging({ key: listKey, page: 1 });
+// The full ranking, in the dialog: the filters, a count and the page buttons. Its state lives in the panel, so the list
+// comes back on the same page and filters after "Back to the ranking".
+interface AllRankedListProps {
+  ranked: RankedInvestigation[];
+  profileLabel: string;
+  renderRow: (row: { item: RankedInvestigation; rank: number }) => ReactNode;
+  onClose: () => void;
+  filters: RankingFilters;
+  onFiltersChange: (filters: RankingFilters) => void;
+  page: number;
+  onPageChange: (page: number) => void;
+}
+
+function AllRankedList({ ranked, profileLabel, renderRow, onClose, filters, onFiltersChange, page, onPageChange }: AllRankedListProps) {
   const options = rankingFilterOptions(ranked);
   const shown = filterRanked(ranked, filters);
-  const page = clampPage(paging.key === listKey ? paging.page : 1, shown.length, RANKING_PAGE_SIZE);
-  const { from, to } = pageRange(page, shown.length, RANKING_PAGE_SIZE);
+  const { from, to } = pageRange(page, shown.length, DIALOG_PAGE_SIZE);
+  return (
+    <div className="ranking-dialog-body">
+      <div className="ranking-dialog-head">
+        <div>
+          <h2 id="ranking-dialog-title">All {ranked.length} investigations, ranked</h2>
+          <p className="ranking-dialog-sub">{profileLabel} · team heuristic, not a NASA safety rating</p>
+        </div>
+        <button type="button" onClick={onClose}>
+          Close
+        </button>
+      </div>
+      <div className="ranking-toolbar">
+        <div className="panel-filters">
+          <label>
+            Fuel phase
+            <select value={filters.fuelPhase ?? ''} onChange={(event) => onFiltersChange({ ...filters, fuelPhase: event.target.value || null })}>
+              <option value="">All</option>
+              {options.fuelPhases.map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Topic
+            <select value={filters.topic ?? ''} onChange={(event) => onFiltersChange({ ...filters, topic: event.target.value || null })}>
+              <option value="">All</option>
+              {options.topics.map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <p role="status" className="result-count">
+          showing {from}–{to} of {shown.length} investigations{shown.length !== ranked.length ? ` (${ranked.length} in total)` : ''}
+        </p>
+      </div>
+      {shown.length === 0 ? (
+        <div role="status">
+          <p>No investigation matches the filters.</p>
+          <button type="button" onClick={() => onFiltersChange(NO_RANKING_FILTERS)}>
+            Clear filters
+          </button>
+        </div>
+      ) : (
+        <ol className="ranked-list">{pageSlice(shown, page, DIALOG_PAGE_SIZE).map(renderRow)}</ol>
+      )}
+      <Pager page={page} count={pageCount(shown.length, DIALOG_PAGE_SIZE)} onChange={onPageChange} label="Ranking pages" />
+    </div>
+  );
+}
+
+export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl, coverage, selected, summaries, compareIds, query, onSelect, onProfileChange }: RankingPanelProps) {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  // "Interpret" opens the summary in a second dialog; when it came from the full list, that list can be reopened from it.
+  const [interpretOpen, setInterpretOpen] = useState(false);
+  const [cameFromList, setCameFromList] = useState(false);
+  // The dialog's filters and page. A page belongs to one profile and one set of filters: changing either starts again on page 1.
+  const [filters, setFilters] = useState<RankingFilters>(NO_RANKING_FILTERS);
+  const listKey = `${profile.id}|${filters.fuelPhase}|${filters.topic}`;
+  const [paging, setPaging] = useState({ key: listKey, page: 1 });
+  if (paging.key !== listKey) setPaging({ key: listKey, page: 1 });
   const interpreted = records.find((record) => record.accession === selected) ?? null;
   const recordOf = (accession: string) => records.find((record) => record.accession === accession)!;
+  const closeDialog = () => setDialogOpen(false);
+  const top = topRows(filterRanked(ranked, NO_RANKING_FILTERS));
+  const shownCount = filterRanked(ranked, filters).length;
+  const page = clampPage(paging.key === listKey ? paging.page : 1, shownCount, DIALOG_PAGE_SIZE);
+
+  const renderRow = (inDialog: boolean) => ({ item, rank }: { item: RankedInvestigation; rank: number }) => (
+    <RankedRow
+      key={item.investigation.accession}
+      item={item}
+      rank={rank}
+      record={recordOf(item.investigation.accession)}
+      coverage={coverage[item.investigation.accession]}
+      selected={item.investigation.accession === selected}
+      compareIds={compareIds}
+      query={query}
+      onSelect={(accession) => {
+        onSelect(accession);
+        setCameFromList(inDialog);
+        if (inDialog) closeDialog();
+        setInterpretOpen(true);
+      }}
+      onAction={inDialog ? closeDialog : undefined}
+    />
+  );
 
   return (
-    <Panel id={id} title="Relevance ranking" subtitle={`${profile.label} · heuristic`}>
+    <Panel
+      id={id}
+      title="Relevance ranking"
+      subtitle={`${profile.label} · heuristic`}
+      action={
+        <button
+          type="button"
+          className="icon-action panel-action"
+          aria-haspopup="dialog"
+          aria-label={`See all ${ranked.length} investigations in the ranking`}
+          data-tip="Open the full ranking"
+          onClick={() => setDialogOpen(true)}
+        >
+          <ListOrdered className="action-icon" aria-hidden="true" />
+          <span className="panel-action-text">See all {ranked.length}</span>
+        </button>
+      }
+    >
       <div className="profile-picker">
         <p id="profile-label" className="profile-label">
           Environment profile
@@ -150,59 +261,43 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
         </div>
         <p className="profile-description">{profileDescription(profile)}</p>
       </div>
-      <div className="panel-filters">
-        <label>
-          Fuel phase
-          <select value={filters.fuelPhase ?? ''} onChange={(event) => setFilters({ ...filters, fuelPhase: event.target.value || null })}>
-            <option value="">All</option>
-            {options.fuelPhases.map((value) => (
-              <option key={value}>{value}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Topic
-          <select value={filters.topic ?? ''} onChange={(event) => setFilters({ ...filters, topic: event.target.value || null })}>
-            <option value="">All</option>
-            {options.topics.map((value) => (
-              <option key={value}>{value}</option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <p role="status" className="ranking-caption">
-        showing {from}–{to} of {shown.length} investigations
+      <p className="ranking-caption">
+        Top {top.length} of {ranked.length} investigations
       </p>
-      {shown.length === 0 ? (
-        <div role="status">
-          <p>No investigation matches the filters.</p>
-          <button type="button" onClick={() => setFilters(NO_RANKING_FILTERS)}>
-            Clear filters
-          </button>
-        </div>
-      ) : (
-        <ol className="ranked-list">
-          {pageSlice(shown, page, RANKING_PAGE_SIZE).map(({ item, rank }) => (
-            <RankedRow
-              key={item.investigation.accession}
-              item={item}
-              rank={rank}
-              record={recordOf(item.investigation.accession)}
-              coverage={coverage[item.investigation.accession]}
-              selected={item.investigation.accession === selected}
-              compareIds={compareIds}
-              query={query}
-              onSelect={(accession) => {
-                onSelect(accession);
-                setInterpretOpen(true);
-              }}
-            />
-          ))}
-        </ol>
-      )}
-      <Pager page={page} count={pageCount(shown.length, RANKING_PAGE_SIZE)} onChange={(next) => setPaging({ key: listKey, page: next })} label="Ranking pages" />
+      <ol className="ranked-list">{top.map(renderRow(false))}</ol>
+      {ranked.length > top.length ? (
+        <button type="button" className="show-all" aria-haspopup="dialog" onClick={() => setDialogOpen(true)}>
+          Show all {ranked.length}
+        </button>
+      ) : null}
+      <ConsoleDialog open={dialogOpen} onClose={closeDialog} titleId="ranking-dialog-title">
+        <AllRankedList
+          ranked={ranked}
+          profileLabel={profile.label}
+          renderRow={renderRow(true)}
+          onClose={closeDialog}
+          filters={filters}
+          onFiltersChange={setFilters}
+          page={page}
+          onPageChange={(next) => setPaging({ key: listKey, page: next })}
+        />
+      </ConsoleDialog>
       {interpreted ? (
-        <InterpretationDialog open={interpretOpen} onClose={() => setInterpretOpen(false)} record={interpreted} entry={findSummary(summaries, interpreted.accession)} query={query} />
+        <InterpretationDialog
+          open={interpretOpen}
+          onClose={() => setInterpretOpen(false)}
+          onBack={
+            cameFromList
+              ? () => {
+                  setInterpretOpen(false);
+                  setDialogOpen(true);
+                }
+              : undefined
+          }
+          record={interpreted}
+          entry={findSummary(summaries, interpreted.accession)}
+          query={query}
+        />
       ) : null}
       <p className="panel-note">Team relevance heuristic — not a NASA safety rating.</p>
       <HowItWorks profile={profile} sourceUrl={sourceUrl} />
@@ -210,7 +305,7 @@ export function RankingPanel({ id, ranked, records, profile, profiles, sourceUrl
   );
 }
 
-export function InterpretationDialog({ open, onClose, record, entry, query }: { open: boolean; onClose: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
+export function InterpretationDialog({ open, onClose, onBack, record, entry, query }: { open: boolean; onClose: () => void; /** Set when the dialog was opened from the full ranking list. */ onBack?: () => void; record: CatalogRecord; entry: SummaryEntry | undefined; query: URLSearchParams }) {
   return (
     <ConsoleDialog open={open} onClose={onClose} titleId="interpretation-title" className="interpret-dialog">
       <div className="ranking-dialog-body">
@@ -223,6 +318,11 @@ export function InterpretationDialog({ open, onClose, record, entry, query }: { 
             <p className="ranking-dialog-sub">{record.accession} · plain-language interpretation</p>
           </div>
           <div className="dialog-buttons">
+            {onBack ? (
+              <button type="button" onClick={onBack}>
+                ← Back to the ranking
+              </button>
+            ) : null}
             <button type="button" onClick={onClose}>
               Close
             </button>
