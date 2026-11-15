@@ -56,7 +56,7 @@ node scripts/catalog/cli.ts   # data/processed/catalog.json
 npm run build:data            # data/processed/experiments.json
 ```
 
-The public site is deployed from `main` on Vercel with `app/vercel.json`.
+The public site is deployed from `main` on Vercel with `app/vercel.json`. The same build is also published to GitHub Pages by `.github/workflows/pages.yml` (https://alanochoasl.github.io/flame-in-freefall/ once Pages is enabled with the source "GitHub Actions"); the app uses relative paths, so it works under either address.
 
 ## More documentation
 - `docs/EXTENDING.md`: add a screen, a ranking profile, a table mapper or an investigation.
